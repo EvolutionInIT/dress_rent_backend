@@ -35,7 +35,7 @@ class DressController
         ]);
 
         foreach ($categoryIds as $category) {
-            $dressCategory = DressCategory::create([
+            $dressCategory = DressCategory::insert([
                 'dress_id' => $dress->dress_id,
                 'category_id' => $category
             ]);
