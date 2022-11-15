@@ -21,39 +21,39 @@ class Dress extends Model
     public $timestamps = false;
 
 
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
 
-    public function category()
+    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this
             ->belongsToMany(Category::class, DressCategory::class,
                 'dress_id', 'category_id');
     }
 
-    public function color()
+    public function color(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this
             ->belongsToMany(Color::class, DressColor::class,
                 'dress_id', 'color_id');
     }
 
-    public function size()
+    public function size(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this
             ->belongsToMany(Size::class, DressSize::class,
                 'dress_id', 'size_id');
     }
 
-    public function photo()
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function photo(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this
-            ->belongsToMany(Photo::class, DressPhoto::class,
-                'dress_id', 'photo_id');
+        return $this->hasMany(Photo::class, 'dress_id');
     }
-
 
 }

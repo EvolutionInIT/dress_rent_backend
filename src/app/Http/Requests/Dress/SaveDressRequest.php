@@ -24,8 +24,8 @@ class SaveDressRequest extends CommonRequest
             'color_id.*' => 'required|integer|exists:App\Models\Color,color_id',
             'size_id' => 'required|array',
             'size_id.*' => 'required|integer|exists:App\Models\Size,size_id',
-            'photo_id' => 'required|array',
-            'photo_id.*' => 'required|integer|exists:App\Models\Photo,photo_id',
+            'photo' => 'required|array',
+            'photo.*' => 'required',
         ];
 
         return $rules;

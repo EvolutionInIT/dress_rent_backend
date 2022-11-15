@@ -17,8 +17,12 @@ return new class extends Migration
             Schema::create('photo', function (Blueprint $table) {
                 $table->increments('photo_id');
 
-                $table->string('image',40);
-                $table->string('image_small', 40); //32 + 1 + 3-4
+                $table->unsignedInteger('dress_id');
+                $table->foreign('dress_id')->references('dress_id')->on('dress');
+
+                $table->string('image',1000);
+                $table->string('image_small', 1110); //32 + 1 + 3-4
+
             });
     }
 

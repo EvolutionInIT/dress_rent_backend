@@ -9,8 +9,8 @@ use App\Http\Resources\Dress\DressResource;
 use App\Models\Dress;
 use App\Models\DressCategory;
 use App\Models\DressColor;
-use App\Models\DressPhoto;
 use App\Models\DressSize;
+use App\Models\Photo;
 use Illuminate\Http\Response;
 
 class DressController
@@ -23,10 +23,11 @@ class DressController
     {
         $requestData = $request->validated();
 
-        $categoryIds = $requestData['category_id'] ?? null;
-        $colorIds = $requestData['color_id'] ?? null;
-        $sizeIds = $requestData['size_id'] ?? null;
-        $photoIds = $requestData['photo_id'] ?? null;
+        $categoryIds = $requestData['category_id'] ?? [];
+        $colorIds = $requestData['color_id'] ?? [];
+        $sizeIds = $requestData['size_id'] ?? [];
+        $photoIds = $requestData['photo'] ?? [];
+
 
         $dress = Dress::create([
             'title' => $requestData['title'],
@@ -35,30 +36,34 @@ class DressController
         ]);
 
         foreach ($categoryIds as $category) {
-            $dressCategory = DressCategory::insert([
+            DressCategory::insert([
                 'dress_id' => $dress->dress_id,
                 'category_id' => $category
             ]);
         }
 
         foreach ($colorIds as $color) {
-            $dressColor = DressColor::create([
+            DressColor::create([
                 'dress_id' => $dress->dress_id,
                 'color_id' => $color
             ]);
         }
 
         foreach ($sizeIds as $size) {
-            $dressSize = DressSize::create([
+            DressSize::create([
                 'dress_id' => $dress->dress_id,
                 'size_id' => $size
             ]);
         }
 
         foreach ($photoIds as $photo) {
-            $dressPhoto = DressPhoto::create([
+            $photoName = $photo->store('dress');
+            $photoName = substr($photoName, 6);
+
+            Photo::create([
                 'dress_id' => $dress->dress_id,
-                'photo_id' => $photo,
+                'image' => $photoName,
+                //'image_small' => $photoName
             ]);
         }
 
