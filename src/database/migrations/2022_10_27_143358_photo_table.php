@@ -20,8 +20,8 @@ return new class extends Migration
                 $table->unsignedInteger('dress_id');
                 $table->foreign('dress_id')->references('dress_id')->on('dress');
 
-                $table->string('image',1000);
-                $table->string('image_small', 1110); //32 + 1 + 3-4
+                $table->string('image',50);
+                $table->string('image_small', 50); //32 + 1 + 3-4
 
             });
     }
