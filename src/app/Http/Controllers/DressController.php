@@ -63,7 +63,7 @@ class DressController
             Photo::create([
                 'dress_id' => $dress->dress_id,
                 'image' => $photoName,
-                //'image_small' => $photoName
+                'image_small' => $photoName
             ]);
         }
 
