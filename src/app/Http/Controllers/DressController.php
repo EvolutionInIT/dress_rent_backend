@@ -35,44 +35,51 @@ class DressController
             'user_id' => $requestData['user_id']
         ]);
 
+        $arrCategory = [];
         foreach ($categoryIds as $category) {
-            DressCategory::insert([
+            $arrCategory[] = [
                 'dress_id' => $dress->dress_id,
                 'category_id' => $category
-            ]);
+            ];
         }
+        DressCategory::insert($arrCategory);
 
+        $arrColor = [];
         foreach ($colorIds as $color) {
-            DressColor::create([
+            $arrColor [] = [
                 'dress_id' => $dress->dress_id,
                 'color_id' => $color
-            ]);
+            ];
         }
+        DressColor::insert($arrColor);
 
+        $arrSize = [];
         foreach ($sizeIds as $size) {
-            DressSize::create([
+            $arrSize [] = [
                 'dress_id' => $dress->dress_id,
                 'size_id' => $size
-            ]);
+            ];
         }
+        DressSize::insert($arrSize);
 
+        $arrPhoto = [];
         foreach ($photoIds as $photo) {
             $photoName = $photo->store('dress');
             $photoName = substr($photoName, 6);
 
-            Photo::create([
+            $arrPhoto [] = [
                 'dress_id' => $dress->dress_id,
                 'image' => $photoName,
                 'image_small' => $photoName
-            ]);
+            ];
         }
+        Photo::insert($arrPhoto);
 
 
         $dress->category;
         $dress->color;
         $dress->size;
         $dress->photo;
-
 
         return new DressResource($dress);
 
@@ -136,9 +143,6 @@ class DressController
             ->with('size:size_id,size')
             ->with('photo')
             ->paginate($perPage, $page);
-
-        //->simplePagination($page);
-
 
         return new DressCollection($dress);
 
