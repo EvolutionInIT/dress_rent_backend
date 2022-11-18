@@ -34,14 +34,17 @@ class DressResource extends JsonResource
                 $this->relationLoaded('category'),
                 ['category' => CategoryResource::collection($this->whenLoaded('category'))]
             ),
+
             $this->mergeWhen(
                 $this->relationLoaded('color'),
                 ['color' => ColorResource::collection($this->whenLoaded('color'))]
             ),
+
             $this->mergeWhen(
                 $this->relationLoaded('size'),
                 ['size' => SizeResource::collection($this->whenLoaded('size'))]
             ),
+
             $this->mergeWhen(
                 $this->relationLoaded('photo'),
                 ['photo' => PhotoResource::collection($this->whenLoaded('photo'))]

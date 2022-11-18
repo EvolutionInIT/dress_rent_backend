@@ -9,8 +9,8 @@ use App\Http\Resources\Dress\DressResource;
 use App\Models\Dress;
 use App\Models\DressCategory;
 use App\Models\DressColor;
-use App\Models\DressPhoto;
 use App\Models\DressSize;
+use App\Models\Photo;
 use Illuminate\Http\Response;
 
 class DressController
@@ -23,10 +23,11 @@ class DressController
     {
         $requestData = $request->validated();
 
-        $categoryIds = $requestData['category_id'] ?? null;
-        $colorIds = $requestData['color_id'] ?? null;
-        $sizeIds = $requestData['size_id'] ?? null;
-        $photoIds = $requestData['photo_id'] ?? null;
+        $categoryIds = $requestData['category_id'] ?? [];
+        $colorIds = $requestData['color_id'] ?? [];
+        $sizeIds = $requestData['size_id'] ?? [];
+        $photoIds = $requestData['photo'] ?? [];
+
 
         $dress = Dress::create([
             'title' => $requestData['title'],
@@ -34,40 +35,51 @@ class DressController
             'user_id' => $requestData['user_id']
         ]);
 
+        $arrCategory = [];
         foreach ($categoryIds as $category) {
-            $dressCategory = DressCategory::create([
+            $arrCategory[] = [
                 'dress_id' => $dress->dress_id,
                 'category_id' => $category
-            ]);
+            ];
         }
+        DressCategory::insert($arrCategory);
 
+        $arrColor = [];
         foreach ($colorIds as $color) {
-            $dressColor = DressColor::create([
+            $arrColor [] = [
                 'dress_id' => $dress->dress_id,
                 'color_id' => $color
-            ]);
+            ];
         }
+        DressColor::insert($arrColor);
 
+        $arrSize = [];
         foreach ($sizeIds as $size) {
-            $dressSize = DressSize::create([
+            $arrSize [] = [
                 'dress_id' => $dress->dress_id,
                 'size_id' => $size
-            ]);
+            ];
         }
+        DressSize::insert($arrSize);
 
+        $arrPhoto = [];
         foreach ($photoIds as $photo) {
-            $dressPhoto = DressPhoto::create([
+            $photoName = $photo->store('dress');
+            $photoName = substr($photoName, 6);
+
+            $arrPhoto [] = [
                 'dress_id' => $dress->dress_id,
-                'photo_id' => $photo,
-            ]);
+                'image' => $photoName,
+                'image_small' => $photoName
+            ];
         }
+        Photo::insert($arrPhoto);
 
 
         $dress->category;
         $dress->color;
         $dress->size;
         $dress->photo;
-
 
         return new DressResource($dress);
 
@@ -131,9 +143,6 @@ class DressController
             ->with('size:size_id,size')
             ->with('photo')
             ->paginate($perPage, $page);
-
-        //->simplePagination($page);
-
 
         return new DressCollection($dress);
 
