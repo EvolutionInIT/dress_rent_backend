@@ -18,10 +18,12 @@ class DressFactory extends Factory
      */
     public function definition()
     {
+        $dressTitles = ['Вдова', 'Охотница', 'Ведьма', 'Модель', 'Лагуна'];
+        $dressDescriptions = ['Класические', 'Вечерние', 'Коктейльные', 'Деловые', 'Повседневные'];
         return [
-            'title' => $this->faker->word,
-            'description' => $this->faker->text(10),
-            'user_id' => User::get()->random()->user_id,
+            'title' => $this->faker->randomElement($dressTitles),
+            'description' => $this->faker->randomElement($dressDescriptions),
+            'user_id' => User::get()->random()->user_id
         ];
     }
 }

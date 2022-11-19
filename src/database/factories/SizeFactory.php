@@ -16,8 +16,9 @@ class SizeFactory extends Factory
      */
     public function definition()
     {
+        $sizeElement = ['S', 'M', 'L', 'XS', 'XM', 'XL'];
         return [
-            'size' => $this->faker->word
+            'size' => $this->faker->randomElement($sizeElement)
         ];
     }
 }
