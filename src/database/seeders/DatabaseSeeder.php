@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $this->generateCategory();
         $this->generateUser();
@@ -68,10 +68,11 @@ class DatabaseSeeder extends Seeder
             'created_at' => now()
         ];
 
-        foreach ($dresses as $dress) {
-            $resultDresses = array_merge($dress, $dressData);
-            Dress::insert($resultDresses);
-        }
+        foreach ($dresses as $dress)
+            $resultDresses [] = array_merge($dress, $dressData);
+
+        Dress::insert($resultDresses);
+
     }
 
     public function generateCategory()
@@ -98,24 +99,29 @@ class DatabaseSeeder extends Seeder
                 'description' => 'сли вы собираетесь посетить шумную вечеринку или провести вечер со своей второй половинкой в ресторане.'
             ]
         ];
+
         $categoryData = [
             'updated_at' => now(),
             'created_at' => now()
         ];
-        foreach ($categories as $category) {
-            $resultCategories = array_merge($category, $categoryData);
-            Category::insert($resultCategories);
-        }
+
+        foreach ($categories as $category)
+            $resultCategories [] = array_merge($category, $categoryData);
+
+        Category::insert($resultCategories);
     }
 
     public function generateDressCategory()
     {
         $dressCategories = [
             ['dress_id' => 1, 'category_id' => 3],
+            ['dress_id' => 1, 'category_id' => 5],
             ['dress_id' => 2, 'category_id' => 5],
+            ['dress_id' => 2, 'category_id' => 2],
             ['dress_id' => 3, 'category_id' => 4],
             ['dress_id' => 4, 'category_id' => 1],
-            ['dress_id' => 5, 'category_id' => 2]
+            ['dress_id' => 5, 'category_id' => 2],
+            ['dress_id' => 5, 'category_id' => 3]
         ];
         DressCategory::insert($dressCategories);
     }
@@ -126,32 +132,27 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Анжела',
                 'email' => 'Anjela@gmail.com',
-                'password' => '123qweasdzxc/.e2hdosaud',
-                'remember_token' => 'LV6OF34fD3',
+                'password' => bcrypt(10)
             ],
             [
                 'name' => 'Виктория',
                 'email' => 'Victorya@gmail.com',
-                'password' => '123qweasaadzxc/.e2hdosaud',
-                'remember_token' => 'NOV6OF34fD3',
+                'password' => bcrypt(10)
             ],
             [
                 'name' => 'Валерия',
                 'email' => 'Valeria@gmail.com',
-                'password' => '123qweafxcsdzxc/.e2hdosaud',
-                'remember_token' => 'KIQ6OF34fD3',
+                'password' => bcrypt(10)
             ],
             [
                 'name' => 'Анастасия',
                 'email' => 'Anastasiya@gmail.com',
-                'password' => '123qweasfadzxc/.e2hdosaud',
-                'remember_token' => 'MAL6OF34fD3',
+                'password' => bcrypt(10)
             ],
             [
                 'name' => 'Алтынай',
                 'email' => 'Altinay@gmail.com',
-                'password' => '123qweaplazxc/.e2hdosaud',
-                'remember_token' => 'MUL6OF34fD3',
+                'password' => bcrypt(10)
             ],
         ];
 
@@ -161,10 +162,10 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => now()
         ];
 
-        foreach ($users as $user) {
-            $resultUsers = array_merge($user, $userData);
-            User::insert($resultUsers);
-        }
+        foreach ($users as $user)
+            $resultUsers [] = array_merge($user, $userData);
+
+        User::insert($resultUsers);
     }
 
     public function generateColor()
@@ -183,10 +184,16 @@ class DatabaseSeeder extends Seeder
     {
         $dressColors = [
             ['dress_id' => 1, 'color_id' => 1],
+            ['dress_id' => 1, 'color_id' => 2],
+            ['dress_id' => 1, 'color_id' => 4],
             ['dress_id' => 2, 'color_id' => 2],
+            ['dress_id' => 2, 'color_id' => 3],
             ['dress_id' => 3, 'color_id' => 5],
+            ['dress_id' => 3, 'color_id' => 2],
             ['dress_id' => 4, 'color_id' => 3],
+            ['dress_id' => 4, 'color_id' => 1],
             ['dress_id' => 5, 'color_id' => 4],
+            ['dress_id' => 5, 'color_id' => 5]
         ];
         DressColor::insert($dressColors);
     }
@@ -207,10 +214,16 @@ class DatabaseSeeder extends Seeder
     {
         $dressSizes = [
             ['dress_id' => 1, 'size_id' => 4],
+            ['dress_id' => 1, 'size_id' => 5],
+            ['dress_id' => 1, 'size_id' => 2],
             ['dress_id' => 2, 'size_id' => 3],
+            ['dress_id' => 2, 'size_id' => 2],
             ['dress_id' => 3, 'size_id' => 5],
+            ['dress_id' => 3, 'size_id' => 4],
             ['dress_id' => 4, 'size_id' => 2],
+            ['dress_id' => 4, 'size_id' => 3],
             ['dress_id' => 5, 'size_id' => 1],
+            ['dress_id' => 5, 'size_id' => 2],
         ];
         DressSize::insert($dressSizes);
     }
@@ -218,22 +231,59 @@ class DatabaseSeeder extends Seeder
     public function generatePhoto()
     {
         $photos = [
-            ['dress_id' => 1],
-            ['dress_id' => 2],
-            ['dress_id' => 3],
-            ['dress_id' => 4],
-            ['dress_id' => 5],
+            [
+                'dress_id' => 1,
+                'image' => 'luxury-2021_850x1122.jpg.pagespeed.ce.QPOnS1cQpX.jpg',
+                'image_small' => 'moda_platya-5-819x1024.jpg'
+            ],
+            [
+                'dress_id' => 1,
+                'image' => '11-10.jpg',
+                'image_small' => '1662166731_1-damion-club-p-neobichnie-fasoni-vechernikh-platev-modnie-1.jpg'
+            ],
+            [
+                'dress_id' => 1,
+                'image' => 'love.jpg',
+                'image_small' => 'luxury-2021_850x1122.jpg.pagespeed.ce.QPOnS1cQpX.jpg'
+            ],
+            [
+                'dress_id' => 2,
+                'image' => 'love.jpg',
+                'image_small' => 'White-.jpg'
+            ],
+            [
+                'dress_id' => 2,
+                'image' => 'love.jpg',
+                'image_small' => 'moda_platya-5-819x1024.jpg'
+            ],
+            [
+                'dress_id' => 3,
+                'image' => 'love.jpg',
+                'image_small' => 'White-.jpg'
+            ],
+            [
+                'dress_id' => 3,
+                'image' => 'love.jpg',
+                'image_small' => 'luxury-2021_850x1122.jpg.pagespeed.ce.QPOnS1cQpX.jpg'
+            ],
+            [
+                'dress_id' => 4,
+                'image' => 'love.jpg',
+                'image_small' => 'images.jpeg'
+            ],
+            [
+                'dress_id' => 4,
+                'image' => 'images.jpeg',
+                'image_small' => 'luxury-2021_850x1122.jpg.pagespeed.ce.QPOnS1cQpX.jpg'
+            ],
+            [
+                'dress_id' => 5,
+                'image' => 'modnye-vechernie-platya-960-540-960x540.jpg',
+                'image_small' => 'luxury-2021_850x1122.jpg.pagespeed.ce.QPOnS1cQpX.jpg'
+            ],
+
         ];
-
-        $images = [
-            'image' => 'ptB5gjttmsiXEFK5dk8saMnHLOMcFqbWncVDsCx3s.jpg',
-            'image_small' => 'ptB5gjttmsiXEFK5dk8saMnHLOMcFqbWncVDsCx3s.png'
-        ];
-
-        foreach ($photos as $photo) {
-            $resultPhoto = array_merge($photo, $images);
-            Photo::insert($resultPhoto);
-        }
-
+        
+        Photo::insert($photos);
     }
 }
