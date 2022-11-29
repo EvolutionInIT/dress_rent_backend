@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -20,8 +19,8 @@ return new class extends Migration
                 $table->unsignedInteger('dress_id');
                 $table->foreign('dress_id')->references('dress_id')->on('dress');
 
-                $table->string('image',50);
-                $table->string('image_small', 50); //32 + 1 + 3-4
+                $table->string('image', 100);
+                $table->string('image_small', 100); //32 + 1 + 3-4
 
             });
     }

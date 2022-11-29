@@ -29,6 +29,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //});
 
 
+//Route::get('/', [MainController::class]);
 
 
 Route::prefix('dress')->name('dress.')->group(function () {
@@ -102,5 +103,3 @@ Route::prefix('photo')->name('photo.')->group(function () {
 });
 
 
-//
-//Route::get('home', [MainController::class, 'get']);
