@@ -54,7 +54,6 @@ class CategoryController
         $page = $requestData['page'] ?? 1;
         $perPage = $requestData['per_page'] ?? 10;
         $dressID = $requestData['dress_id'] ?? null;
-
         $category = Category
             ::select()
             ->when($dressID, function ($q) use ($dressID) {
@@ -78,7 +77,7 @@ class CategoryController
         if ($category)
             return response()->json(['message' => 'deleted'], ResponseAlias::HTTP_OK);
         else
-            return response()->json(['error' => 'catefory_delete_error'], ResponseAlias::HTTP_BAD_GATEWAY);
+            return response()->json(['error' => 'category_delete_error'], ResponseAlias::HTTP_BAD_GATEWAY);
     }
 }
 

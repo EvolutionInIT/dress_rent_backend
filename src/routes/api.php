@@ -76,6 +76,9 @@ Route::prefix('user')->name('user.')->group(function () {
     // api/user/save
     Route::post('save', [UserController::class, 'save'])->name('save');
 
+    // api/user/list
+    Route::get('list', [UserController::class, 'list'])->name('list');
+
     // api/user/delete
     Route::delete('delete', [UserController::class, 'delete'])->name('delete');
 });
