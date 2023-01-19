@@ -1,11 +1,11 @@
 <?php
 
 
-namespace App\Http\Requests\Dress;
+namespace App\Http\Requests\Category;
 
 use App\Http\Requests\CommonRequest;
 
-class ListDressRequest extends CommonRequest
+class ListCategoryRequest extends CommonRequest
 {
     public function authorize(): bool
     {
@@ -24,19 +24,6 @@ class ListDressRequest extends CommonRequest
             'per_page' => 'numeric|between:1,100',
         ];
     }
-
-    public function attributes(): array
-    {
-        return [
-            'Category_id' => 'Категория'
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'Category_id.required' => 'Поле идентификатора категории является обязательным'
-        ];
-    }
-
 }
+
+

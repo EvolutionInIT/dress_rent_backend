@@ -17,7 +17,7 @@ return new class extends Migration {
                 $table->increments('photo_id');
 
                 $table->unsignedInteger('dress_id');
-                $table->foreign('dress_id')->references('dress_id')->on('dress');
+                $table->foreign('dress_id')->references('dress_id')->on('dress')->onDelete('cascade');
 
                 $table->string('image', 100);
                 $table->string('image_small', 100); //32 + 1 + 3-4

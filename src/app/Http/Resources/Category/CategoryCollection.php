@@ -1,22 +1,12 @@
 <?php
 
-namespace App\Http\Resources\Dress;
+namespace App\Http\Resources\Category;
 
-use Illuminate\Contracts\Support\Arrayable;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
-use JsonSerializable;
 
-class DressCollection extends ResourceCollection
+class CategoryCollection extends ResourceCollection
 {
-    /**
-     * Transform the resource collection into an array.
-     *
-     * @param Request $request
-     * @return array|Arrayable|JsonSerializable
-     */
-
-    public $collects = DressResource::class;
+    public $collects = CategoryResource::class;
 
     public function toArray($request): array
     {

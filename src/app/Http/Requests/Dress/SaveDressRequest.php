@@ -32,5 +32,5 @@ class SaveDressRequest extends CommonRequest
     }
 }
 
-;
+
 

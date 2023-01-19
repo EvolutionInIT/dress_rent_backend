@@ -7,6 +7,7 @@ use App\Http\Resources\DataDress\ColorResource;
 use App\Http\Resources\DataDress\PhotoResource;
 use App\Http\Resources\DataDress\SizeResource;
 use App\Http\Resources\User\UserResource;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class DressResource extends JsonResource
@@ -14,11 +15,11 @@ class DressResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
+     * @param Request $request
+     * @return array
      */
 
-    public function toArray($request)
+    public function toArray($request): array
     {
         return [
             'dress_id' => $this->dress_id,

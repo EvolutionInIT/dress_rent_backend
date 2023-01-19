@@ -42,10 +42,10 @@ Route::prefix('dress')->name('dress.')->group(function () {
     // api/dress/save
     Route::post('save', [DressController::class, 'save'])->name('save');
 
-    // api/category/delete
+    // api/dress/delete
     Route::delete('delete', [DressController::class, 'delete'])->name('delete');
 
-//     /api/dress/get
+    // /api/dress/get
     Route::get('get', [DressController::class, 'get'])->name('get');
 
 
@@ -55,20 +55,29 @@ Route::prefix('dress')->name('dress.')->group(function () {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Route::prefix('category')->name('category.')->group(function () {
-    // /api/category?
-    Route::get('', [CategoryController::class, 'get'])->name('save');
+    // /api/category/get
+    Route::get('', [CategoryController::class, 'get'])->name('get');
 
     // api/category/save
     Route::post('save', [CategoryController::class, 'save'])->name('save');
+
+    // api/category/list
+    Route::get('list', [CategoryController::class, 'list'])->name('list');
+
+    // api/category/delete
+    Route::delete('delete', [CategoryController::class, 'delete'])->name('delete');
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Route::prefix('user')->name('user.')->group(function () {
     // /api/user?
-    Route::get('', [UserController::class, 'get'])->name('save');
+    Route::get('', [UserController::class, 'get'])->name('get');
 
     // api/user/save
     Route::post('save', [UserController::class, 'save'])->name('save');
+
+    // api/user/delete
+    Route::delete('delete', [UserController::class, 'delete'])->name('delete');
 });
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 

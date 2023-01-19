@@ -4,10 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Dress extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $table = 'dress';
     protected $primaryKey = 'dress_id';
@@ -21,27 +26,27 @@ class Dress extends Model
     public $timestamps = false;
 
 
-    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
 
-    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function category(): BelongsToMany
     {
         return $this
             ->belongsToMany(Category::class, DressCategory::class,
                 'dress_id', 'category_id');
     }
 
-    public function color(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function color(): BelongsToMany
     {
         return $this
             ->belongsToMany(Color::class, DressColor::class,
                 'dress_id', 'color_id');
     }
 
-    public function size(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function size(): BelongsToMany
     {
         return $this
             ->belongsToMany(Size::class, DressSize::class,
@@ -49,9 +54,9 @@ class Dress extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function photo(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function photo(): HasMany
     {
         return $this->hasMany(Photo::class, 'dress_id');
     }

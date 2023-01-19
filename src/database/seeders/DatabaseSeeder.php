@@ -283,7 +283,7 @@ class DatabaseSeeder extends Seeder
             ],
 
         ];
-        
+
         Photo::insert($photos);
     }
 }
