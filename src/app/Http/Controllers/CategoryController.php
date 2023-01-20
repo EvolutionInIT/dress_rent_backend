@@ -2,36 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Category\CategoryRequest;
+use App\Http\Requests\Category\DeleteCategoryRequest;
 use App\Http\Requests\Category\ListCategoryRequest;
 use App\Http\Requests\Category\SaveCategoryRequest;
 use App\Http\Resources\Category\CategoryCollection;
+use App\Http\Resources\Category\CategoryResource;
 use App\Models\Category;
-use Illuminate\Http\JsonResponse;
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class CategoryController
 {
-    public function get(ListCategoryRequest $request): JsonResponse
+    public function get(CategoryRequest $request): CategoryResource
     {
-        $categoryID = $request->validated()['category_id'] ?? null;
+        $requestData = $request->validated();
 
         $category = Category
-            ::when($categoryID, function ($q) use ($categoryID) {
-                $q->where('category_id', $categoryID);
+            ::when($requestData['category_id'] ?? null, function ($q) use ($requestData) {
+                $q->where('category_id', $requestData['category_id']);
             })
-            ->get();
+            ->first();
 
-        if ($category)
-            return response()->json(['data' => $category->toArray()], ResponseAlias::HTTP_OK);
-        else
-            return response()->json(['error' => 'category_get_error'], ResponseAlias::HTTP_BAD_GATEWAY);
+        return new CategoryResource($category);
     }
 
-    /**
-     * @param SaveCategoryRequest $request
-     * @return JsonResponse
-     */
-    public function save(SaveCategoryRequest $request): JsonResponse
+
+    public function save(SaveCategoryRequest $request): CategoryResource
     {
         $requestData = $request->validated();
 
@@ -40,44 +35,35 @@ class CategoryController
             'description' => $requestData['description'],
         ]);
 
-        if ($category)
-            return response()->json(['date' => $category->toArray()], ResponseAlias::HTTP_OK);
-        else
-            return response()->json(['error' => 'category_save_error'], ResponseAlias::HTTP_BAD_GATEWAY);
-
+        return new CategoryResource($category);
     }
 
 
     public function list(ListCategoryRequest $request): CategoryCollection
     {
         $requestData = $request->validated();
-        $page = $requestData['page'] ?? 1;
-        $perPage = $requestData['per_page'] ?? 10;
-        $dressID = $requestData['dress_id'] ?? null;
+
         $category = Category
             ::select()
-            ->when($dressID, function ($q) use ($dressID) {
-                $q->where('dress_id', $dressID);
+            ->when($requestData['dress_id'] ?? null, function ($q) use ($requestData) {
+                $q->where('dress_id', $requestData['dress_id']);
             })
             ->with('dress:dress_id,title,description')
-            ->paginate($perPage, $page);
+            ->paginate($requestData['per_page'] ?? 10, $requestData['page'] ?? 1);
 
         return new CategoryCollection($category);
     }
 
 
-    public function delete(ListCategoryRequest $request): JsonResponse
+    public function delete(DeleteCategoryRequest $request): CategoryResource
     {
-        $categoryID = $request->validated()['category_id'];
+        $requestData = $request->validated();
 
         $category = Category
-            ::where('category_id', $categoryID)
+            ::where('category_id', $requestData['category_id'])
             ->delete();
 
-        if ($category)
-            return response()->json(['message' => 'deleted'], ResponseAlias::HTTP_OK);
-        else
-            return response()->json(['error' => 'category_delete_error'], ResponseAlias::HTTP_BAD_GATEWAY);
+        return new CategoryResource($category);
     }
 }
 

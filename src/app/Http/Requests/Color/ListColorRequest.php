@@ -14,12 +14,7 @@ class ListColorRequest extends CommonRequest
 
     public function rules(): array
     {
-
-        return [
-            'color_id' => 'sometimes|integer|between:1,4294967296|exists:App\Models\Color,color_id',
-            'page' => 'numeric|min:1',
-            'per_page' => 'numeric|between:1,100',
-        ];
+        return $this->paginationRules();
     }
 }
 

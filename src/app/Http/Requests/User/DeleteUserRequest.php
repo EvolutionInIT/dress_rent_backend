@@ -1,11 +1,10 @@
 <?php
 
-
 namespace App\Http\Requests\User;
 
 use App\Http\Requests\CommonRequest;
 
-class ListUserRequest extends CommonRequest
+class DeleteUserRequest extends CommonRequest
 {
     public function authorize(): bool
     {
@@ -14,8 +13,8 @@ class ListUserRequest extends CommonRequest
 
     public function rules(): array
     {
-        return $this->paginationRules();
+        return [
+            'user_id' => 'required|integer',
+        ];
     }
 }
-
-

@@ -2,8 +2,6 @@
 
 namespace App\Http\Resources\RelationDress;
 
-use Illuminate\Contracts\Support\Arrayable;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class DressSizeResource extends JsonResource

@@ -5,16 +5,11 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
         if (!Schema::hasTable('user'))
             Schema::create('user', function (Blueprint $table) {
-                //$table->id();
                 $table->increments('user_id');
                 $table->string('name');
                 $table->string('email')->unique();
@@ -26,12 +21,7 @@ return new class extends Migration {
             });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('users');
     }

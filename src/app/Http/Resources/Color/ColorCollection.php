@@ -2,21 +2,9 @@
 
 namespace App\Http\Resources\Color;
 
-use Illuminate\Http\Resources\Json\ResourceCollection;
+use App\Http\Resources\CommonCollection;
 
-class ColorCollection extends ResourceCollection
+class ColorCollection extends CommonCollection
 {
     public $collects = ColorResource::class;
-
-    public function toArray($request): array
-    {
-        return [
-            'data' => $this->collection,
-            'pagination' => [
-                'page' => $this->resource->currentPage(),
-                'per_page' => $this->resource->perPage(),
-                'total' => $this->resource->total(),
-            ],
-        ];
-    }
 }

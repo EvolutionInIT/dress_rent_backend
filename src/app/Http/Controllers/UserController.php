@@ -2,81 +2,71 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Dress\ListDressRequest;
+use App\Http\Requests\User\DeleteUserRequest;
 use App\Http\Requests\User\ListUserRequest;
 use App\Http\Requests\User\SaveUserRequest;
+use App\Http\Requests\User\UserRequest;
 use App\Http\Resources\User\UserCollection;
+use App\Http\Resources\User\UserResource;
 use App\Models\User;
-use Illuminate\Http\JsonResponse;
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class UserController extends Controller
 {
-    public function get(listDressRequest $request): JsonResponse
+
+    public function get(UserRequest $request): UserResource
     {
-        $userID = $request->validated()['user_id'] ?? null;
+        $requestData = $request->validated();
 
         $user = User
-            ::when($userID, function ($q) use ($userID) {
-                $q->where('user_id', $userID);
+            ::when($requestData['user_id'] ?? null, function ($q) use ($requestData) {
+                $q->where('user_id', $requestData['user_id']);
             })
-            ->get();
+            ->first();
 
-        if ($user)
-            return response()->json(['data' => $user->toArray()], ResponseAlias::HTTP_OK);
-        else
-            return response()->json(['error' => 'user_get_error'], ResponseAlias::HTTP_BAD_GATEWAY);
-
+        return new UserResource($user);
     }
 
-    public function save(SaveUserRequest $request): JsonResponse
+
+    public function save(SaveUserRequest $request): UserResource
     {
         $requestData = $request->validated();
 
         $user = User::create([
             'name' => $requestData['name'],
             'email' => $requestData['email'],
-            'email_verified_at' => $requestData['email_verified_at'],
+            //'email_verified_at' => $requestData['email_verified_at'],
             'password' => $requestData['password'],
         ]);
 
-        if ($user)
-            return response()->json(['data' => $user->toArray()], ResponseAlias::HTTP_OK);
-        else
-            return response()->json(['error' => 'user_save_error'], ResponseAlias::HTTP_BAD_GATEWAY);
-
+        return new UserResource($user);
     }
+
 
     public function list(ListUserRequest $request): UserCollection
     {
         $requestData = $request->validated();
-        $page = $requestData['page'] ?? 1;
-        $perPage = $requestData['per_page'] ?? 10;
-        $dressID = $requestData['dress_id'] ?? null;
 
         $user = User
             ::select()
-            ->when($dressID, function ($q) use ($dressID) {
-                $q->where('dress_id', $dressID);
+            ->when($requestData['per_page'] ?? 10, function ($q) use ($requestData) {
+                $q->where('dress_id', $requestData['per_page']);
             })
             ->with('dress:dress_id,title,description')
-            ->paginate($perPage, $page);
+            ->paginate($requestData['per_page'] ?? 10, $requestData['page'] ?? 1);
 
         return new UserCollection($user);
     }
 
-    public function delete(ListUserRequest $request): JsonResponse
+
+    public function delete(DeleteUserRequest $request): UserResource
     {
-        $userID = $request->validated()['user_id'];
+        $requestData = $request->validated();
 
         $user = User
-            ::where('user_id', $userID)
+            ::where('user_id', $requestData['user_id'])
             ->delete();
 
-        if ($user)
-            return response()->json(['message' => 'deleted'], ResponseAlias::HTTP_OK);
-        else
-            return response()->json(['error' => 'user_delete_error'], ResponseAlias::HTTP_BAD_GATEWAY);
+        return new UserResource($user);
     }
 
 }
