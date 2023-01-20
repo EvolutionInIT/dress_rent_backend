@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\DataDress;
+namespace App\Http\Resources\RelationDress;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 

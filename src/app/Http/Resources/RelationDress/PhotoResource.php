@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Resources\DataDress;
+namespace App\Http\Resources\RelationDress;
 
+use App\Http\Resources\User\UserResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class DressPhotoSizeResource extends JsonResource
+class PhotoResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,12 +16,11 @@ class DressPhotoSizeResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'dress_photo_size_id' => $this->dress_photo_size_id,
             'photo_id' => $this->photo_id,
-            $this->mergeWhen(
-                $this->photo_size,
-                ['photo_size' => $this->photo_size],
-            ),
+            'dress_id' => $this->dress_id,
+            'image' => $this->image,
+            'image_small' => $this->image_small
+
         ];
     }
 }

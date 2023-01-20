@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Category;
+namespace App\Http\Requests\Color;
 
 use App\Http\Requests\CommonRequest;
 
-class SaveCategoryRequest extends CommonRequest
+class DeleteColorRequest extends CommonRequest
 {
     public function authorize(): bool
     {
@@ -14,10 +14,7 @@ class SaveCategoryRequest extends CommonRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|min:4|max:100',
-            'description' => 'required|min:10|max:500',
+            'color_id' => 'required|integer',
         ];
     }
 }
-
-;

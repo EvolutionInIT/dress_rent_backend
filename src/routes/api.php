@@ -97,11 +97,17 @@ Route::prefix('dress_user')->name('dress_user.')->group(function () {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Route::prefix('color')->name('color.')->group(function () {
-    // /api/category?
-    Route::get('', [CategoryController::class, 'get'])->name('save');
+    // /api/color?
+    Route::get('', [ColorController::class, 'get'])->name('get');
 
-    // api/category/save
+    // api/color/save
     Route::post('save', [ColorController::class, 'save'])->name('save');
+
+    // api/color/list
+    Route::get('list', [ColorController::class, 'list'])->name('list');
+
+    // api/color/delete
+    Route::delete('delete', [ColorController::class, 'delete'])->name('delete');
 });
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////

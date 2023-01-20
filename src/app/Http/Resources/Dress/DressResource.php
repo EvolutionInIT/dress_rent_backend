@@ -3,9 +3,9 @@
 namespace App\Http\Resources\Dress;
 
 use App\Http\Resources\Category\CategoryResource;
-use App\Http\Resources\DataDress\ColorResource;
-use App\Http\Resources\DataDress\PhotoResource;
-use App\Http\Resources\DataDress\SizeResource;
+use App\Http\Resources\Color\ColorResource;
+use App\Http\Resources\RelationDress\PhotoResource;
+use App\Http\Resources\RelationDress\SizeResource;
 use App\Http\Resources\User\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -25,6 +25,7 @@ class DressResource extends JsonResource
             'dress_id' => $this->dress_id,
             'title' => $this->title,
             'description' => $this->description,
+            'deleted' => $this->softDeletes,
 
             $this->mergeWhen(
                 $this->relationLoaded('user'),

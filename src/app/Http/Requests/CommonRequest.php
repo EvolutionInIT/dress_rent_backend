@@ -16,4 +16,5 @@ abstract class CommonRequest extends FormRequest
         $errors = (new ValidationException($validator))->errors();
         throw new HttpResponseException(response()->json(['errors' => $errors], Response::HTTP_BAD_REQUEST));
     }
+
 }
