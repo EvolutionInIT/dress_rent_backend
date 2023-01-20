@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Color\ColorRequest;
 use App\Http\Requests\Color\DeleteColorRequest;
 use App\Http\Requests\Color\ListColorRequest;
-use App\Http\Requests\DataDress\SaveColorRequest;
+use App\Http\Requests\Color\SaveColorRequest;
 use App\Http\Resources\Color\ColorCollection;
 use App\Http\Resources\Color\ColorResource;
 use App\Models\Color;

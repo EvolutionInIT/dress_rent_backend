@@ -5,7 +5,7 @@ use App\Http\Controllers\ColorController;
 use App\Http\Controllers\DressCategoryController;
 use App\Http\Controllers\DressController;
 use App\Http\Controllers\DressUserController;
-use App\Http\Controllers\MainController;
+use App\Http\Controllers\SizeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -119,5 +119,23 @@ Route::prefix('photo')->name('photo.')->group(function () {
     // api/photo/list
     Route::get('list', [DressController::class, 'list'])->name('list');
 });
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Route::prefix('size')->name('size.')->group(function () {
+    // /api/size?
+    Route::get('', [SizeController::class, 'get'])->name('get');
+
+    // api/size/save
+    Route::post('save', [SizeController::class, 'save'])->name('save');
+
+    // api/size/list
+    Route::get('list', [SizeController::class, 'list'])->name('list');
+
+    // api/size/delete
+    Route::delete('delete', [SizeController::class, 'delete'])->name('delete');
+});
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
