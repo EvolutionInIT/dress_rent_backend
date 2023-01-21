@@ -4,8 +4,8 @@ namespace App\Http\Resources\Dress;
 
 use App\Http\Resources\Category\CategoryResource;
 use App\Http\Resources\Color\ColorResource;
-use App\Http\Resources\RelationDress\PhotoResource;
-use App\Http\Resources\RelationDress\SizeResource;
+use App\Http\Resources\Photo\PhotoResource;
+use App\Http\Resources\Size\SizeResource;
 use App\Http\Resources\User\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;

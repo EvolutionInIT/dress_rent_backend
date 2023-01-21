@@ -5,7 +5,8 @@ use App\Http\Controllers\ColorController;
 use App\Http\Controllers\DressCategoryController;
 use App\Http\Controllers\DressController;
 use App\Http\Controllers\DressUserController;
-use App\Http\Controllers\MainController;
+use App\Http\Controllers\PhotoController;
+use App\Http\Controllers\SizeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -114,10 +115,34 @@ Route::prefix('color')->name('color.')->group(function () {
 
 Route::prefix('photo')->name('photo.')->group(function () {
     // /api/photo?
-    Route::get('', [DressController::class, 'get'])->name('get');
+    Route::get('', [PhotoController::class, 'get'])->name('get');
+
+    // api/photo/save
+    Route::post('save', [PhotoController::class, 'save'])->name('save');
 
     // api/photo/list
-    Route::get('list', [DressController::class, 'list'])->name('list');
+    Route::get('list', [PhotoController::class, 'list'])->name('list');
+
+    // api/photo/delete
+    Route::delete('delete', [PhotoController::class, 'delete'])->name('delete');
 });
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Route::prefix('size')->name('size.')->group(function () {
+    // /api/size?
+    Route::get('', [SizeController::class, 'get'])->name('get');
+
+    // api/size/save
+    Route::post('save', [SizeController::class, 'save'])->name('save');
+
+    // api/size/list
+    Route::get('list', [SizeController::class, 'list'])->name('list');
+
+    // api/size/delete
+    Route::delete('delete', [SizeController::class, 'delete'])->name('delete');
+});
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 

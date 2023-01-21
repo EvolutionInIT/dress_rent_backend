@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\User;
+namespace App\Http\Requests\Size;
 
 use App\Http\Requests\CommonRequest;
 
-class DeleteUserRequest extends CommonRequest
+class DeleteSizeRequest extends CommonRequest
 {
     public function authorize(): bool
     {
@@ -14,7 +14,7 @@ class DeleteUserRequest extends CommonRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'required|integer|between:1,4294967296|exists:App\Models\User,user_id',
+            'size_id' => 'required|integer|between:1,4294967296|exists:App\Models\Size,size_id',
         ];
     }
 }

@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Color;
+
+namespace App\Http\Requests\Photo;
 
 use App\Http\Requests\CommonRequest;
 
-class SaveColorRequest extends CommonRequest
+class ListPhotoRequest extends CommonRequest
 {
     public function authorize(): bool
     {
@@ -13,8 +14,6 @@ class SaveColorRequest extends CommonRequest
 
     public function rules(): array
     {
-        return [
-            'color' => 'required|min:3|max:20',
-        ];
+        return $this->paginationRules();
     }
 }

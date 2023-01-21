@@ -48,11 +48,11 @@ class UserController extends Controller
 
         $user = User
             ::select()
-            ->when($requestData['per_page'] ?? 10, function ($q) use ($requestData) {
-                $q->where('dress_id', $requestData['per_page']);
+            ->when($requestData['dress_id'] ?? null, function ($q) use ($requestData) {
+                $q->where('dress_id', $requestData['dress_id']);
             })
             ->with('dress:dress_id,title,description')
-            ->paginate($requestData['per_page'] ?? 10, $requestData['page'] ?? 1);
+            ->paginate(perPage: $requestData['per_page'] ?? 10, page: $requestData['page'] ?? 1);
 
         return new UserCollection($user);
     }

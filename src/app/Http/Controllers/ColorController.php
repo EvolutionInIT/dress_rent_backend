@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Color\ColorRequest;
 use App\Http\Requests\Color\DeleteColorRequest;
 use App\Http\Requests\Color\ListColorRequest;
-use App\Http\Requests\DataDress\SaveColorRequest;
+use App\Http\Requests\Color\SaveColorRequest;
 use App\Http\Resources\Color\ColorCollection;
 use App\Http\Resources\Color\ColorResource;
 use App\Models\Color;
@@ -45,7 +45,7 @@ class ColorController extends Controller
                 $q->where('dress_id', $requestData['dress_id']);
             })
             ->with('dress:dress_id,title,description')
-            ->paginate($requestData['per_page'] ?? 10, $requestData['page'] ?? 1);
+            ->paginate(perPage: $requestData['per_page'] ?? 10, page: $requestData['page'] ?? 1);
 
         return new ColorCollection($color);
     }
