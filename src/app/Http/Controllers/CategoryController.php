@@ -9,6 +9,8 @@ use App\Http\Requests\Category\SaveCategoryRequest;
 use App\Http\Resources\Category\CategoryCollection;
 use App\Http\Resources\Category\CategoryResource;
 use App\Models\Category;
+use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class CategoryController
 {
@@ -26,6 +28,10 @@ class CategoryController
     }
 
 
+    /**
+     * @param SaveCategoryRequest $request
+     * @return CategoryResource
+     */
     public function save(SaveCategoryRequest $request): CategoryResource
     {
         $requestData = $request->validated();
@@ -36,31 +42,29 @@ class CategoryController
     }
 
 
+    /**
+     * @param ListCategoryRequest $request
+     * @return CategoryCollection
+     */
     public function list(ListCategoryRequest $request): CategoryCollection
     {
         $requestData = $request->validated();
 
         $category = Category
             ::select()
-            ->when($requestData['dress_id'] ?? null, function ($q) use ($requestData) {
-                $q->where('dress_id', $requestData['dress_id']);
-            })
-            ->with('dress:dress_id,title,description')
             ->paginate(perPage: $requestData['per_page'] ?? 10, page: $requestData['page'] ?? 1);
 
         return new CategoryCollection($category);
     }
 
 
-    public function delete(DeleteCategoryRequest $request): CategoryResource
+    public function delete(DeleteCategoryRequest $request): JsonResponse
     {
         $requestData = $request->validated();
 
-        $category = Category
-            ::where('category_id', $requestData['category_id'])
-            ->delete();
+        Category::where('category_id', $requestData['category_id'])->delete();
 
-        return new CategoryResource($category);
+        return response()->json(['data' => ['message' => 'success']], Response::HTTP_OK);
     }
 }
 

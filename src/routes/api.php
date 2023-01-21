@@ -20,18 +20,6 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-/*
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});*/
-
-//Route::get('/', function () {
-//    return view('home');
-//});
-
-
-//Route::get('/', [MainController::class]);
-
 
 Route::prefix('dress')->name('dress.')->group(function () {
     // /api/dress?
@@ -45,13 +33,6 @@ Route::prefix('dress')->name('dress.')->group(function () {
 
     // api/dress/delete
     Route::delete('delete', [DressController::class, 'delete'])->name('delete');
-
-    // /api/dress/get
-    Route::get('get', [DressController::class, 'get'])->name('get');
-
-
-    Route::resource('dress', DressController::class);
-
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
