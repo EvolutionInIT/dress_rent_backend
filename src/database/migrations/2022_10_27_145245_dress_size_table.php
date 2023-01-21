@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -18,9 +17,9 @@ return new class extends Migration
                 $table->increments('dress_size_id');
 
                 $table->unsignedInteger('dress_id');
-                $table->foreign('dress_id')->references('dress_id')->on('dress');
+                $table->foreign('dress_id')->references('dress_id')->on('dress')->onDelete('cascade');
                 $table->unsignedInteger('size_id');
-                $table->foreign('size_id')->references('size_id')->on('size');
+                $table->foreign('size_id')->references('size_id')->on('size')->onDelete('cascade');
             });
     }
 

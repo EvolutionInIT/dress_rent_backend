@@ -3,10 +3,11 @@
 namespace App\Http\Resources\Dress;
 
 use App\Http\Resources\Category\CategoryResource;
-use App\Http\Resources\DataDress\ColorResource;
-use App\Http\Resources\DataDress\PhotoResource;
-use App\Http\Resources\DataDress\SizeResource;
+use App\Http\Resources\Color\ColorResource;
+use App\Http\Resources\RelationDress\PhotoResource;
+use App\Http\Resources\RelationDress\SizeResource;
 use App\Http\Resources\User\UserResource;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class DressResource extends JsonResource
@@ -14,16 +15,17 @@ class DressResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
+     * @param Request $request
+     * @return array
      */
 
-    public function toArray($request)
+    public function toArray($request): array
     {
         return [
             'dress_id' => $this->dress_id,
             'title' => $this->title,
             'description' => $this->description,
+            'deleted' => $this->softDeletes,
 
             $this->mergeWhen(
                 $this->relationLoaded('user'),

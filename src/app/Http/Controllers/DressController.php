@@ -11,7 +11,8 @@ use App\Models\DressCategory;
 use App\Models\DressColor;
 use App\Models\DressSize;
 use App\Models\Photo;
-use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class DressController
 {
@@ -85,7 +86,7 @@ class DressController
 
     }
 
-    public function get(ListDressRequest $request): \Illuminate\Http\JsonResponse
+    public function get(ListDressRequest $request): JsonResponse
     {
         $dressID = $request->validated()['dress_id'] ?? null;
 
@@ -96,12 +97,12 @@ class DressController
             ->get();
 
         if ($dress)
-            return response()->json(['data' => $dress->toArray()], Response::HTTP_OK);
+            return response()->json(['data' => $dress->toArray()], ResponseAlias::HTTP_OK);
         else
-            return response()->json(['error' => 'dress_get_error'], Response::HTTP_BAD_GATEWAY);
+            return response()->json(['error' => 'dress_get_error'], ResponseAlias::HTTP_BAD_GATEWAY);
     }
 
-    public function list(ListDressRequest $request)
+    public function list(ListDressRequest $request): DressCollection
     {
         $requestData = $request->validated();
 
@@ -148,19 +149,52 @@ class DressController
 
     }
 
-    public function delete(ListDressRequest $request): \Illuminate\Http\JsonResponse
-    {
-        $dressID = $request->validated()['dress_id'];
+//    public function delete(ListDressRequest $request): JsonResponse
+//    {
+//        $dressID = $request->validated()['dress_id'] ?? null;
+//
+//        $dress = Dress
+//            ::where('dress_id', $dressID)
+//            ->delete();
+//
+//        if ($dress)
+//            return response()->json(['message' => 'ok'], ResponseAlias::HTTP_OK);
+//        else
+//            return response()->json(['error' => 'dress_delete_error'], ResponseAlias::HTTP_BAD_GATEWAY);
+//    }
 
-        $dress = Dress
-            ::where('dress_id', $dressID)
-            ->delete();
+
+    public function delete(): JsonResponse
+    {
+        $dressID = request('dress_id');
+
+        $dress = Dress::where('dress_id', $dressID)->delete();
 
         if ($dress)
-            return response()->json(['message' => 'ok'], Response::HTTP_OK);
+            return response()->json(['message' => 'deleted'], ResponseAlias::HTTP_OK);
         else
-            return response()->json(['error' => 'dress_save_error'], Response::HTTP_BAD_GATEWAY);
+            return response()->json(['error' => 'dress_delete_error'], ResponseAlias::HTTP_BAD_GATEWAY);
     }
 
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

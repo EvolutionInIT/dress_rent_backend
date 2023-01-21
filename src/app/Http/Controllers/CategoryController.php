@@ -2,18 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Category\CategoryRequest;
+use App\Http\Requests\Category\DeleteCategoryRequest;
+use App\Http\Requests\Category\ListCategoryRequest;
 use App\Http\Requests\Category\SaveCategoryRequest;
+use App\Http\Resources\Category\CategoryCollection;
+use App\Http\Resources\Category\CategoryResource;
 use App\Models\Category;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Response;
 
 class CategoryController
 {
-    /**
-     * @param SaveCategoryRequest $request
-     * @return JsonResponse
-     */
-    public function save(SaveCategoryRequest $request): \Illuminate\Http\JsonResponse
+    public function get(CategoryRequest $request): CategoryResource
+    {
+        $requestData = $request->validated();
+
+        $category = Category
+            ::when($requestData['category_id'] ?? null, function ($q) use ($requestData) {
+                $q->where('category_id', $requestData['category_id']);
+            })
+            ->first();
+
+        return new CategoryResource($category);
+    }
+
+
+    public function save(SaveCategoryRequest $request): CategoryResource
     {
         $requestData = $request->validated();
 
@@ -22,11 +35,35 @@ class CategoryController
             'description' => $requestData['description'],
         ]);
 
-        if ($category)
-            return response()->json(['date' => $category->toArray()], Response::HTTP_OK);
-        else
-            return response()->json(['error' => 'category_save_error'], Response::HTTP_BAD_GATEWAY);
+        return new CategoryResource($category);
+    }
 
+
+    public function list(ListCategoryRequest $request): CategoryCollection
+    {
+        $requestData = $request->validated();
+
+        $category = Category
+            ::select()
+            ->when($requestData['dress_id'] ?? null, function ($q) use ($requestData) {
+                $q->where('dress_id', $requestData['dress_id']);
+            })
+            ->with('dress:dress_id,title,description')
+            ->paginate($requestData['per_page'] ?? 10, $requestData['page'] ?? 1);
+
+        return new CategoryCollection($category);
+    }
+
+
+    public function delete(DeleteCategoryRequest $request): CategoryResource
+    {
+        $requestData = $request->validated();
+
+        $category = Category
+            ::where('category_id', $requestData['category_id'])
+            ->delete();
+
+        return new CategoryResource($category);
     }
 }
 

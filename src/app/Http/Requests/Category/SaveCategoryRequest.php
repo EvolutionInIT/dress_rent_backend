@@ -6,17 +6,16 @@ use App\Http\Requests\CommonRequest;
 
 class SaveCategoryRequest extends CommonRequest
 {
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules()
+    public function rules(): array
     {
-        $rules = [
+        return [
             'title' => 'required|min:4|max:100',
             'description' => 'required|min:10|max:500',
         ];
-        return $rules;
     }
-};
+}

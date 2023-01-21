@@ -2,26 +2,21 @@
 
 namespace App\Http\Resources\User;
 
+use App\Http\Resources\Dress\DressResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
-     */
-
-    public $preserveKeys = true;
-
-    public function toArray($request)
+    public function toArray($request): array
     {
         return [
             'user_id' => $this->user_id,
+            'name' => $this->name,
+            'email' => $this->email,
+
             $this->mergeWhen(
-                $this->name,
-                ['name'=>$this->name],
+                $this->relationLoaded('dress'),
+                ['dress' => new DressResource($this->whenLoaded('dress'))]
             ),
         ];
     }

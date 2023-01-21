@@ -13,7 +13,7 @@ class DressUserController extends Controller
      * @param SaveDressUserRequest $request
      * @return JsonResponse
      */
-    public function save(SaveDressUserRequest $request): \Illuminate\Http\JsonResponse
+    public function save(SaveDressUserRequest $request): JsonResponse
     {
         $requestData = $request->validated();
 

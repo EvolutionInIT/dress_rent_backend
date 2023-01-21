@@ -16,4 +16,12 @@ abstract class CommonRequest extends FormRequest
         $errors = (new ValidationException($validator))->errors();
         throw new HttpResponseException(response()->json(['errors' => $errors], Response::HTTP_BAD_REQUEST));
     }
+
+    public function paginationRules(): array
+    {
+        return [
+            'page' => 'numeric|min:1',
+            'per_page' => 'numeric|between:1,100',
+        ];
+    }
 }
