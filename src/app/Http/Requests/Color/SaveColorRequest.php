@@ -14,7 +14,7 @@ class SaveColorRequest extends CommonRequest
     public function rules(): array
     {
         return [
-            'color' => 'required|min:10|max:50',
+            'color' => 'required|min:3|max:20',
         ];
     }
 }

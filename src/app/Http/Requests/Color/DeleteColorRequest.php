@@ -14,7 +14,7 @@ class DeleteColorRequest extends CommonRequest
     public function rules(): array
     {
         return [
-            'color_id' => 'required|integer',
+            'color_id' => 'required|integer|between:1,4294967296|exists:App\Models\Color,color_id',
         ];
     }
 }

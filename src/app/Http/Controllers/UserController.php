@@ -52,7 +52,7 @@ class UserController extends Controller
                 $q->where('dress_id', $requestData['dress_id']);
             })
             ->with('dress:dress_id,title,description')
-            ->paginate($requestData['per_page'] ?? 10, $requestData['page'] ?? 1);
+            ->paginate(perPage: $requestData['per_page'] ?? 10, page: $requestData['page'] ?? 1);
 
         return new UserCollection($user);
     }

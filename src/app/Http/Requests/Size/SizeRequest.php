@@ -15,7 +15,7 @@ class SizeRequest extends CommonRequest
     public function rules(): array
     {
         return [
-            'size_id' => 'sometimes|integer|between:1,4294967296|exists:App\Models\Color,color_id',
+            'size_id' => 'sometimes|integer|between:1,4294967296|exists:App\Models\Size,size_id',
         ];
     }
 }

@@ -2,9 +2,9 @@
 
 namespace App\Http\Resources\Size;
 
-use Illuminate\Http\Resources\Json\ResourceCollection;
+use App\Http\Resources\CommonCollection;
 
-class SizeCollection extends ResourceCollection
+class SizeCollection extends CommonCollection
 {
     public $collects = SizeResource::class;
 }

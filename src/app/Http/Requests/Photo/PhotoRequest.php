@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Size;
+namespace App\Http\Requests\Photo;
 
 use App\Http\Requests\CommonRequest;
 
-class SaveSizeRequest extends CommonRequest
+class PhotoRequest extends CommonRequest
 {
     public function authorize(): bool
     {
@@ -14,7 +14,7 @@ class SaveSizeRequest extends CommonRequest
     public function rules(): array
     {
         return [
-            'size' => 'required|alpha|min:1|max:3',
+            'photo_id' => 'sometimes|integer|between:1,4294967296|exists:App\Models\Photo,photo_id',
         ];
     }
 }

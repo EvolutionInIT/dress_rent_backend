@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Size extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $table = 'size';
     protected $primaryKey = 'size_id';
@@ -21,3 +23,4 @@ class Size extends Model
         return $this->hasOne(Dress::class, 'dress_id');
     }
 }
+

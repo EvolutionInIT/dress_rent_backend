@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Size;
+namespace App\Http\Requests\Photo;
 
 use App\Http\Requests\CommonRequest;
 
-class SaveSizeRequest extends CommonRequest
+class SavePhotoRequest extends CommonRequest
 {
     public function authorize(): bool
     {
@@ -14,7 +14,8 @@ class SaveSizeRequest extends CommonRequest
     public function rules(): array
     {
         return [
-            'size' => 'required|alpha|min:1|max:3',
+            'photo' => 'array',
+            'photo.*' => 'image:png,jpeg,jpg|min:5|max:5000',
         ];
     }
 }

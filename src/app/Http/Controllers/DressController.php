@@ -65,7 +65,7 @@ class DressController
 
         $arrPhoto = [];
         foreach ($photoIds as $photo) {
-            $photoName = $photo->store('dress');
+            $photoName = $photo->store('dresses');
             $photoName = substr($photoName, 6);
 
             $arrPhoto [] = [
@@ -75,7 +75,6 @@ class DressController
             ];
         }
         Photo::insert($arrPhoto);
-
 
         $dress->category;
         $dress->color;

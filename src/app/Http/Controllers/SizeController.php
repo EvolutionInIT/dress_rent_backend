@@ -30,9 +30,7 @@ class SizeController extends Controller
     {
         $requestData = $request->validated();
 
-        $size = Size::create([
-            'size' => $requestData['size']
-        ]);
+        $size = Size::create($requestData);
 
         return new SizeResource($size);
     }
@@ -48,7 +46,7 @@ class SizeController extends Controller
                 $q->where('dress_id', $requestData['dress_id']);
             })
             ->with('dress:dress_id,title,description')
-            ->paginate($requestData['page'] ?? 1, $requestData['per_page'] ?? 10);
+            ->paginate(perPage: $requestData['per_page'] ?? 10, page: $requestData['page'] ?? 1);
 
         return new SizeCollection($size);
     }
