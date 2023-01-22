@@ -6,4 +6,4 @@
 > 
 > git checkout v12.1
 > 
-> cp ../install/laradock/.env .env
+nano .> cp ../_install/laradock/.env .env
