@@ -9,8 +9,10 @@ use App\Http\Requests\User\UserRequest;
 use App\Http\Resources\User\UserCollection;
 use App\Http\Resources\User\UserResource;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
-class UserController extends Controller
+class UserController
 {
 
     public function get(UserRequest $request): UserResource
@@ -48,25 +50,19 @@ class UserController extends Controller
 
         $user = User
             ::select()
-            ->when($requestData['dress_id'] ?? null, function ($q) use ($requestData) {
-                $q->where('dress_id', $requestData['dress_id']);
-            })
-            ->with('dress:dress_id,title,description')
             ->paginate(perPage: $requestData['per_page'] ?? 10, page: $requestData['page'] ?? 1);
 
         return new UserCollection($user);
     }
 
 
-    public function delete(DeleteUserRequest $request): UserResource
+    public function delete(DeleteUserRequest $request): JsonResponse
     {
         $requestData = $request->validated();
 
-        $user = User
-            ::where('user_id', $requestData['user_id'])
-            ->delete();
+        User::where('user_id', $requestData['user_id'])->delete();
 
-        return new UserResource($user);
+        return response()->json(['data' => ['message' => 'success']], ResponseAlias::HTTP_OK);
     }
 
 }

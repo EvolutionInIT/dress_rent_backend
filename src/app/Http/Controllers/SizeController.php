@@ -9,8 +9,10 @@ use App\Http\Requests\Size\SizeRequest;
 use App\Http\Resources\Size\SizeCollection;
 use App\Http\Resources\Size\SizeResource;
 use App\Models\Size;
+use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
-class SizeController extends Controller
+class SizeController
 {
 
     public function get(SizeRequest $request): SizeResource
@@ -42,25 +44,19 @@ class SizeController extends Controller
 
         $size = Size
             ::select()
-            ->when($requestData['dress_id'] ?? null, function ($q) use ($requestData) {
-                $q->where('dress_id', $requestData['dress_id']);
-            })
-            ->with('dress:dress_id,title,description')
             ->paginate(perPage: $requestData['per_page'] ?? 10, page: $requestData['page'] ?? 1);
 
         return new SizeCollection($size);
     }
 
 
-    public function delete(DeleteSizeRequest $request): SizeResource
+    public function delete(DeleteSizeRequest $request): JsonResponse
     {
         $requestData = $request->validated();
 
-        $size = Size
-            ::where('size_id', $requestData['size_id'])
-            ->delete();
+        Size::where('size_id', $requestData['size_id'])->delete();
 
-        return new SizeResource($size);
+        return response()->json(['data' => ['message' => 'success']], ResponseAlias::HTTP_OK);
     }
 }
 

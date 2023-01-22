@@ -9,8 +9,10 @@ use App\Http\Requests\Color\SaveColorRequest;
 use App\Http\Resources\Color\ColorCollection;
 use App\Http\Resources\Color\ColorResource;
 use App\Models\Color;
+use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
-class ColorController extends Controller
+class ColorController
 {
     public function get(ColorRequest $request): ColorResource
     {
@@ -41,24 +43,18 @@ class ColorController extends Controller
 
         $color = Color
             ::select()
-            ->when($requestData['dress_id'] ?? null, function ($q) use ($requestData) {
-                $q->where('dress_id', $requestData['dress_id']);
-            })
-            ->with('dress:dress_id,title,description')
             ->paginate(perPage: $requestData['per_page'] ?? 10, page: $requestData['page'] ?? 1);
 
         return new ColorCollection($color);
     }
 
-    public function delete(DeleteColorRequest $request): ColorResource
+    public function delete(DeleteColorRequest $request): JsonResponse
     {
         $requestData = $request->validated();
 
-        $color = Color
-            ::where('color_id', $requestData['color_id'])
-            ->delete();
+        Color::where('color_id', $requestData['color_id'])->delete();
 
-        return new ColorResource($color);
+        return response()->json(['data' => ['message' => 'success']], ResponseAlias::HTTP_OK);
 
     }
 }
