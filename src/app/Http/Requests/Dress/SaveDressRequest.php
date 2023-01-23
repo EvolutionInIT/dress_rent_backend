@@ -15,8 +15,8 @@ class SaveDressRequest extends CommonRequest
     public function rules()
     {
         $rules = [
-            'title' => 'required|min:4|max:100',
-            'description' => 'required|min:10|max:500',
+            'title' => 'present|min:1|max:100',
+            'description' => 'present|min:0|max:5000',
             'user_id' => 'required|integer|exists:App\Models\User,user_id',
             'category_id' => 'required|array',
             'category_id.*' => 'required|integer|exists:App\Models\Category,category_id',
