@@ -6,6 +6,7 @@ use App\Http\Requests\Dress\DeleteDressRequest;
 use App\Http\Requests\Dress\DressRequest;
 use App\Http\Requests\Dress\ListDressRequest;
 use App\Http\Requests\Dress\SaveDressRequest;
+use App\Http\Requests\Dress\UpdateDressRequest;
 use App\Http\Resources\Dress\DressCollection;
 use App\Http\Resources\Dress\DressResource;
 use App\Models\Dress;
@@ -90,6 +91,21 @@ class DressController
         $dress->photo;
 
         return new DressResource($dress);
+
+    }
+
+
+    public function update(UpdateDressRequest $request): JsonResponse
+    {
+        $requestData = $request->validated();
+
+        Dress::where('dress_id', $requestData['dress_id'])
+            ->update([
+                'title' => $requestData['title'],
+                'description' => $requestData['description']
+            ]);
+
+        return response()->json(['data' => ['message' => 'updeted']], Response::HTTP_OK);
 
     }
 
