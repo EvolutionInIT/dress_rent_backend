@@ -100,10 +100,7 @@ class DressController
         $requestData = $request->validated();
 
         Dress::where('dress_id', $requestData['dress_id'])
-            ->update([
-                'title' => $requestData['title'],
-                'description' => $requestData['description']
-            ]);
+            ->update($requestData);
 
         return response()->json(['data' => ['message' => 'updeted']], Response::HTTP_OK);
 

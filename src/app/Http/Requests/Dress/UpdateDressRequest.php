@@ -2,9 +2,7 @@
 
 namespace App\Http\Requests\Dress;
 
-use App\Http\Requests\CommonRequest;
-
-class UpdateDressRequest extends CommonRequest
+class UpdateDressRequest extends SaveDressRequest
 {
     public function authorize(): bool
     {
@@ -15,8 +13,7 @@ class UpdateDressRequest extends CommonRequest
     {
         return [
             'dress_id' => 'sometimes|integer|between:1,4294967296|exists:App\Models\Dress,dress_id',
-            'title' => 'present|min:1|max:100',
-            'description' => 'present|min:0|max:5000',
+            ...$this->saveRules()
         ];
     }
 }
