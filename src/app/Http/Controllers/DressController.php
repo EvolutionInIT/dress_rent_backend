@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Dress\DeleteDressRequest;
 use App\Http\Requests\Dress\DressRequest;
 use App\Http\Requests\Dress\ListDressRequest;
 use App\Http\Requests\Dress\SaveDressRequest;
@@ -131,11 +132,11 @@ class DressController
         return new DressCollection($dress);
     }
 
-    public function delete(): JsonResponse
+    public function delete(DeleteDressRequest $request): JsonResponse
     {
-        $dressID = request('dress_id');
+        $requestData = $request->validated();
 
-        Dress::where('dress_id', $dressID)->delete();
+        Dress::where('dress_id', $requestData['dress_id'])->delete();
 
         return response()->json(['data' => ['message' => 'success']], Response::HTTP_OK);
     }
