@@ -95,14 +95,16 @@ class DressController
     }
 
 
-    public function update(UpdateDressRequest $request): JsonResponse
+    public function update(UpdateDressRequest $request): DressResource
     {
         $requestData = $request->validated();
 
-        Dress::where('dress_id', $requestData['dress_id'])
-            ->update($requestData);
+        $dress =
+            Dress
+                ::where('dress_id', $requestData['dress_id'])
+                ->update($requestData);
 
-        return response()->json(['data' => ['message' => 'updeted']], Response::HTTP_OK);
+        return new DressResource($dress);
 
     }
 
@@ -149,7 +151,9 @@ class DressController
     {
         $requestData = $request->validated();
 
-        Dress::where('dress_id', $requestData['dress_id'])->delete();
+        Dress
+            ::where('dress_id', $requestData['dress_id'])
+            ->delete();
 
         return response()->json(['data' => ['message' => 'success']], Response::HTTP_OK);
     }

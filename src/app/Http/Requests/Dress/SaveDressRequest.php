@@ -15,6 +15,8 @@ class SaveDressRequest extends CommonRequest
     public function rules()
     {
         return [
+            'title' => 'present|min:1|max:100',
+            'description' => 'present|min:0|max:5000',
             'user_id' => 'required|integer|exists:App\Models\User,user_id',
             'category_id' => 'required|array',
             'category_id.*' => 'required|integer|exists:App\Models\Category,category_id',
@@ -24,15 +26,7 @@ class SaveDressRequest extends CommonRequest
             'size_id.*' => 'required|integer|exists:App\Models\Size,size_id',
             'photo' => 'array',
             'photo.*' => 'image:png,jpeg,jpg|min:5|max:5000',
-            ...$this->saveRules()
-        ];
-    }
 
-    public function saveRules()
-    {
-        return [
-            'title' => 'present|min:1|max:100',
-            'description' => 'present|min:0|max:5000',
         ];
     }
 }
