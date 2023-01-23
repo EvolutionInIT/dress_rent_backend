@@ -6,6 +6,7 @@ use App\Http\Requests\Dress\DeleteDressRequest;
 use App\Http\Requests\Dress\DressRequest;
 use App\Http\Requests\Dress\ListDressRequest;
 use App\Http\Requests\Dress\SaveDressRequest;
+use App\Http\Requests\Dress\UpdateDressRequest;
 use App\Http\Resources\Dress\DressCollection;
 use App\Http\Resources\Dress\DressResource;
 use App\Models\Dress;
@@ -94,6 +95,20 @@ class DressController
     }
 
 
+    public function update(UpdateDressRequest $request): DressResource
+    {
+        $requestData = $request->validated();
+
+        $dress =
+            Dress
+                ::where('dress_id', $requestData['dress_id'])
+                ->update($requestData);
+
+        return new DressResource($dress);
+
+    }
+
+
     /**
      * @param ListDressRequest $request
      * @return DressCollection
@@ -136,7 +151,9 @@ class DressController
     {
         $requestData = $request->validated();
 
-        Dress::where('dress_id', $requestData['dress_id'])->delete();
+        Dress
+            ::where('dress_id', $requestData['dress_id'])
+            ->delete();
 
         return response()->json(['data' => ['message' => 'success']], Response::HTTP_OK);
     }

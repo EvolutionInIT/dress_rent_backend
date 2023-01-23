@@ -33,6 +33,9 @@ Route::prefix('dress')->name('dress.')->group(function () {
 
     // api/dress/delete
     Route::delete('delete', [DressController::class, 'delete'])->name('delete');
+
+    // api/dress/update
+    Route::patch('update', [DressController::class, 'update'])->name('update');
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
