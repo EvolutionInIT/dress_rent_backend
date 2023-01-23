@@ -18,8 +18,7 @@ class Dress extends Model
     protected $primaryKey = 'dress_id';
     protected $fillable =
         [
-            'title', 'description', 'category_id', 'user_id', 'color_id',
-            'size_id', 'photo_id', 'image', 'image_small', 'dress_id'
+            'title', 'description', 'user_id'
         ];
 
 
@@ -32,11 +31,15 @@ class Dress extends Model
     }
 
 
+    /**
+     * @return BelongsToMany
+     */
     public function category(): BelongsToMany
     {
         return $this
             ->belongsToMany(Category::class, DressCategory::class,
-                'dress_id', 'category_id');
+                'dress_id', 'category_id', 'dress_id', 'category_id')
+            ->orderBy('category_id');
     }
 
     public function color(): BelongsToMany

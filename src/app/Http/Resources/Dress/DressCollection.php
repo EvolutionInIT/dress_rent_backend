@@ -7,5 +7,4 @@ use App\Http\Resources\CommonCollection;
 class DressCollection extends CommonCollection
 {
     public $collects = DressResource::class;
-
 }

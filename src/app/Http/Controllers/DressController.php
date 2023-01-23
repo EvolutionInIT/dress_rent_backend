@@ -41,11 +41,7 @@ class DressController
     {
         $requestData = $request->validated();
 
-        $dress = Dress::create([
-            'title' => $requestData['title'],
-            'description' => $requestData['description'],
-            'user_id' => $requestData['user_id']
-        ]);
+        $dress = Dress::create($requestData);
 
         $arrCategory = [];
         foreach ($requestData['category_id'] ?? [] as $category) {
@@ -97,33 +93,34 @@ class DressController
     }
 
 
+    /**
+     * @param ListDressRequest $request
+     * @return DressCollection
+     */
     public function list(ListDressRequest $request): DressCollection
     {
         $requestData = $request->validated();
 
         $dress = Dress
             ::select()
-//            ->when($requestData['category_id'] ?? null, function ($q) use ($requestData) {
-//
-//                $q->whereHas('category', function ($q) use ($requestData) {
-//                    $q->where('dress_category.category_id', $requestData['category_id']);
-//                });
-//            })
-//            ->when($requestData['color_id'] ?? null, function ($q) use ($requestData) {
-//
-//                $q->whereHas('color', function ($q) use ($requestData) {
-//                    $q->where('dress_color.color_id', $requestData['color_id']);
-//                });
-//            })
-//            ->when($requestData['size_id'] ?? null, function ($q) use ($requestData) {
-//
-//                $q->whereHas('size', function ($q) use ($requestData) {
-//                    $q->where('dress_size.size_id', $requestData['size_id']);
-//                });
-//            })
-//            ->when($requestData['user_id'] ?? null, function ($q) use ($requestData) {
-//                $q->where('user_id', $requestData['user_id']);
-//            })
+            ->when($requestData['category_id'] ?? null, function ($q) use ($requestData) {
+                $q->whereHas('category', function ($q) use ($requestData) {
+                    $q->where('category.category_id', $requestData['category_id']);
+                });
+            })
+            ->when($requestData['color_id'] ?? null, function ($q) use ($requestData) {
+                $q->whereHas('color', function ($q) use ($requestData) {
+                    $q->where('color.color_id', $requestData['color_id']);
+                });
+            })
+            ->when($requestData['size_id'] ?? null, function ($q) use ($requestData) {
+                $q->whereHas('size', function ($q) use ($requestData) {
+                    $q->where('size.size_id', $requestData['size_id']);
+                });
+            })
+            ->when($requestData['user_id'] ?? null, function ($q) use ($requestData) {
+                $q->where('user_id', $requestData['user_id']);
+            })
             ->with('category:category_id,title,description')
             ->with('color:color_id,color')
             ->with('size:size_id,size')
@@ -132,7 +129,6 @@ class DressController
             ->paginate(perPage: $requestData['per_page'] ?? 10, page: $requestData['page'] ?? 1);
 
         return new DressCollection($dress);
-
     }
 
     public function delete(): JsonResponse
