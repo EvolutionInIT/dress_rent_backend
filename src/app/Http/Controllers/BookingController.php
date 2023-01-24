@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Booking\CancelBookingRequest;
 use App\Http\Requests\Booking\ListBookingRequest;
 use App\Http\Requests\Booking\SaveBookingRequest;
 use App\Http\Resources\Booking\BookingCollection;
 use App\Http\Resources\Booking\BookingResource;
 use App\Models\Booking;
+use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class BookingController
 {
@@ -21,6 +24,7 @@ class BookingController
         return new BookingCollection($booking);
     }
 
+
     public function save(SaveBookingRequest $request): BookingResource
     {
         $requestData = $request->validated();
@@ -32,5 +36,19 @@ class BookingController
         ]);
 
         return new BookingResource($booking);
+    }
+
+
+    public function cancel(CancelBookingRequest $request): JsonResponse
+    {
+        $requestData = $request->validated();
+
+        Booking
+            ::where('booking_id', $requestData['booking_id'])
+            ->update([
+                'status' => Booking::CANCELED_BOOKING
+            ]);
+
+        return response()->json(['data' => ['message' => 'booking canceled']], Response::HTTP_OK);
     }
 }

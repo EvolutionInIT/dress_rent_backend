@@ -13,6 +13,7 @@ class Booking extends Model
     use SoftDeletes;
 
     const NEW_BOOKING = 'new';
+    const CANCELED_BOOKING = 'canceled';
 
     protected $table = 'booking';
     protected $primaryKey = 'booking_id';
