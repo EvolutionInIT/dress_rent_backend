@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Dress;
 
+use App\Http\Resources\Booking\BookingResource;
 use App\Http\Resources\Category\CategoryResource;
 use App\Http\Resources\Color\ColorResource;
 use App\Http\Resources\Photo\PhotoResource;
@@ -50,6 +51,11 @@ class DressResource extends JsonResource
             $this->mergeWhen(
                 $this->relationLoaded('photo'),
                 ['photo' => PhotoResource::collection($this->whenLoaded('photo'))]
+            ),
+
+            $this->mergeWhen(
+                $this->relationLoaded('booking'),
+                ['booking' => BookingResource::collection($this->whenLoaded('booking'))]
             ),
         ];
     }

@@ -12,6 +12,8 @@ class Booking extends Model
     use HasFactory;
     use SoftDeletes;
 
+    const NEW_BOOKING = 'new';
+
     protected $table = 'booking';
     protected $primaryKey = 'booking_id';
     protected $fillable = ['dress_id', 'date', 'status'];

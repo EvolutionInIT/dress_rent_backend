@@ -64,4 +64,12 @@ class Dress extends Model
         return $this->hasMany(Photo::class, 'dress_id');
     }
 
+    /**
+     * @return HasMany
+     */
+    public function booking(): HasMany
+    {
+        return $this->hasMany(Booking::class, 'dress_id');
+    }
+
 }
