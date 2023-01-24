@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Booking;
 use App\Models\Category;
 use App\Models\Color;
 use App\Models\Dress;
@@ -31,6 +32,7 @@ class DatabaseSeeder extends Seeder
         $this->generateSize();
         $this->generateDressSize();
         $this->generatePhoto();
+        $this->generateBooking();
     }
 
     public function generateDress()
@@ -285,5 +287,37 @@ class DatabaseSeeder extends Seeder
         ];
 
         Photo::insert($photos);
+    }
+
+    public function generateBooking()
+    {
+        $booking = [
+            [
+                'dress_id' => '1',
+                'date' => '23.01.2023',
+                'status' => 'new'
+            ],
+            [
+                'dress_id' => '2',
+                'date' => '25.01.2023',
+                'status' => 'unapproved'
+            ],
+            [
+                'dress_id' => '3',
+                'date' => '23.02.2023',
+                'status' => 'canceled'
+            ],
+            [
+                'dress_id' => '4',
+                'date' => '07.01.2023',
+                'status' => 'new'
+            ],
+            [
+                'dress_id' => '5',
+                'date' => '14.01.2023',
+                'status' => 'new'
+            ],
+        ];
+        Booking::insert($booking);
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\DressCategoryController;
@@ -127,6 +128,13 @@ Route::prefix('size')->name('size.')->group(function () {
     Route::delete('delete', [SizeController::class, 'delete'])->name('delete');
 });
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Route::prefix('booking')->name('booking.')->group(function () {
+
+    // api/booking/list
+    Route::get('list', [BookingController::class, 'list'])->name('list');
+});
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
