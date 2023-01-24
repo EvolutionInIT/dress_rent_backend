@@ -17,6 +17,8 @@ class SaveBookingRequest extends CommonRequest
             'booking_id' => 'sometimes|integer|between:1,4294967296|exists:App\Models\Booking,booking_id',
             'dress_id' => 'sometimes|integer|between:1,4294967296|exists:App\Models\Dress,dress_id',
             'date' => 'sometimes|date|min:5|max:10',
+            'start_date' => 'sometimes|date|min:5|max:10',
+            'end_date' => 'sometimes|date|min:5|max:10',
         ];
     }
 }

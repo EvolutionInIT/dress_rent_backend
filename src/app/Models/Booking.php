@@ -14,10 +14,12 @@ class Booking extends Model
 
     const NEW_BOOKING = 'new';
     const CANCELED_BOOKING = 'canceled';
+    const APPROVED_BOOKING = 'approved';
+    const UNAPPROVED_BOOKING = 'unapproved';
 
     protected $table = 'booking';
     protected $primaryKey = 'booking_id';
-    protected $fillable = ['dress_id', 'date', 'status'];
+    protected $fillable = ['dress_id', 'date', 'status', 'start_date', 'end_date'];
 
     public $timestamps = false;
 

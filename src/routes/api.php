@@ -140,6 +140,9 @@ Route::prefix('booking')->name('booking.')->group(function () {
 
     // api/booking/cancel
     Route::patch('cancel', [BookingController::class, 'cancel'])->name('cancel');
+
+    // api/booking/status
+    Route::get('status', [BookingController::class, 'status'])->name('status');
 });
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
