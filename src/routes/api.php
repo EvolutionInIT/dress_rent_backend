@@ -137,6 +137,9 @@ Route::prefix('booking')->name('booking.')->group(function () {
 
     // api/booking/save
     Route::post('save', [BookingController::class, 'save'])->name('save');
+
+    // api/booking/cancel
+    Route::patch('cancel', [BookingController::class, 'cancel'])->name('cancel');
 });
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
