@@ -17,9 +17,18 @@ class Booking extends Model
     const APPROVED_BOOKING = 'approved';
     const UNAPPROVED_BOOKING = 'unapproved';
 
+
+    const AVAILABLE_DRESS = 'available';
+    const UNAVAILABLE_DRESS = 'unavailable';
+
+
     protected $table = 'booking';
     protected $primaryKey = 'booking_id';
-    protected $fillable = ['dress_id', 'date', 'status', 'start_date', 'end_date'];
+    protected $fillable = ['dress_id', 'date', 'status'];
+
+    protected $hidden = [
+        'deleted_at'
+    ];
 
     public $timestamps = false;
 

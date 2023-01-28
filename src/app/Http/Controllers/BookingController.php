@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Booking\CancelBookingRequest;
 use App\Http\Requests\Booking\ListBookingRequest;
 use App\Http\Requests\Booking\SaveBookingRequest;
+use App\Http\Requests\Booking\StatusBookingRequest;
 use App\Http\Resources\Booking\BookingCollection;
 use App\Http\Resources\Booking\BookingResource;
 use App\Models\Booking;
-use Carbon\CarbonPeriod;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Carbon\Carbon;
@@ -34,51 +34,53 @@ class BookingController
         $booking = Booking::create([
             'dress_id' => $requestData['dress_id'],
             'date' => $requestData['date'],
-            'status' => Booking::NEW_BOOKING,
-
-            'start_date' => $requestData['start_date'],
-            'end_date' => $requestData['end_date']
+            'status' => Booking::AVAILABLE_DRESS,
         ]);
-
 
         return new BookingResource($booking);
     }
+
 
     public function cancel(CancelBookingRequest $request): JsonResponse
     {
         $requestData = $request->validated();
 
         Booking
-            ::where('booking_id', $requestData['booking_id'])
+            ::where('dress_id', $requestData['dress_id'])
             ->update([
-                'status' => Booking::CANCELED_BOOKING
+                'status' => Booking::UNAVAILABLE_DRESS
             ]);
 
         return response()->json(['data' => ['message' => 'booking canceled']], Response::HTTP_OK);
     }
 
-    public function status(CancelBookingRequest $request): array
+
+    public function status(StatusBookingRequest $request): array
     {
         $requestData = $request->validated();
 
-        $startDate = Carbon::now();
-        $endDate = Carbon::now()->addWeeks(2);
+        $twoWeeksAgo = Carbon::now()->subWeeks(2);
+        $today = Carbon::now();
 
-        $bookings = Booking::where('dress_id', $requestData['dress_id'])->whereBetween('start_date', [$startDate, $endDate])->get();
-        $bookedDates = $bookings->pluck('start_date')->toArray();
-
-        $dateRange = CarbonPeriod::create($startDate, $endDate);
         $dates = [];
-        foreach ($dateRange as $date) {
-            $dates[] = [
-                'dress_id' => $requestData['dress_id'],
-                'date' => $date->toDateString(),
-                'status' => in_array($date->toDateString(), $bookedDates) ? 'booked' : 'available'
-            ];
+        for ($date = $twoWeeksAgo; $date->lte($today); $date->addDay()) {
+            $dates[] = $date->toDateString();
         }
 
-        return $dates;
+        $datesStatus = [];
+        foreach ($dates as $date) {
+            $status = Booking
+                ::whereIn('dress_id', $requestData['dress_id'])
+                ->where('date', $date)
+                ->get();
+            if (!$status->isEmpty())
+                $datesStatus[$date] = $status;
+            else
+                $datesStatus[$date] = 'available';
+        }
+        return $datesStatus;
 
     }
+
 
 }

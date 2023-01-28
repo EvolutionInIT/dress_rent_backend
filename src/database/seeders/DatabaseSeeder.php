@@ -293,39 +293,64 @@ class DatabaseSeeder extends Seeder
     {
         $booking = [
             [
-                'start_date' => '19.01.2023',
-                'end_date' => '22.01.2023',
                 'dress_id' => '1',
-                'date' => '23.01.2023',
-                'status' => 'new'
+                'date' => '2023-01-23',
+                'status' => Booking::UNAVAILABLE_DRESS,
             ],
             [
-                'start_date' => '19.01.2023',
-                'end_date' => '22.01.2023',
                 'dress_id' => '2',
-                'date' => '25.01.2023',
-                'status' => 'unapproved'
+                'date' => '2023-01-22',
+                'status' => Booking::UNAVAILABLE_DRESS,
             ],
             [
-                'start_date' => '19.01.2023',
-                'end_date' => '22.01.2023',
+                'dress_id' => '2',
+                'date' => '2023-01-14',
+                'status' => Booking::UNAVAILABLE_DRESS,
+            ],
+            [
+                'dress_id' => '2',
+                'date' => '2023-01-16',
+                'status' => Booking::UNAVAILABLE_DRESS,
+            ],
+            [
+                'dress_id' => '2',
+                'date' => '2023-01-29',
+                'status' => Booking::UNAVAILABLE_DRESS,
+            ],
+            [
                 'dress_id' => '3',
-                'date' => '23.02.2023',
-                'status' => 'canceled'
+                'date' => '2023-01-16',
+                'status' => Booking::UNAVAILABLE_DRESS,
             ],
             [
-                'start_date' => '19.01.2023',
-                'end_date' => '22.01.2023',
                 'dress_id' => '4',
-                'date' => '07.01.2023',
-                'status' => 'new'
+                'date' => '2023-01-30',
+                'status' => Booking::UNAVAILABLE_DRESS,
             ],
             [
-                'start_date' => '19.01.2023',
-                'end_date' => '22.01.2023',
                 'dress_id' => '5',
-                'date' => '14.01.2023',
-                'status' => 'new'
+                'date' => '2023-01-13',
+                'status' => Booking::UNAVAILABLE_DRESS,
+            ],
+            [
+                'dress_id' => '5',
+                'date' => '2023-01-16',
+                'status' => Booking::UNAVAILABLE_DRESS,
+            ],
+            [
+                'dress_id' => '5',
+                'date' => '2023-01-20',
+                'status' => Booking::UNAVAILABLE_DRESS,
+            ],
+            [
+                'dress_id' => '5',
+                'date' => '2023-01-23',
+                'status' => Booking::UNAVAILABLE_DRESS,
+            ],
+            [
+                'dress_id' => '5',
+                'date' => '2023-01-22',
+                'status' => Booking::UNAVAILABLE_DRESS,
             ],
         ];
         Booking::insert($booking);
