@@ -142,7 +142,6 @@ class DressController
             ->with('size:size_id,size')
             ->with('photo')
             ->with('user:user_id,name')
-            ->with('booking')
             ->paginate(perPage: $requestData['per_page'] ?? 10, page: $requestData['page'] ?? 1);
 
         return new DressCollection($dress);

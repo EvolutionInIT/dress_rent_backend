@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Booking;
 
-class CancelBookingRequest extends SaveBookingRequest
+use App\Http\Requests\CommonRequest;
+
+class CancelBookingRequest extends CommonRequest
 {
     public function authorize(): bool
     {
@@ -12,7 +14,8 @@ class CancelBookingRequest extends SaveBookingRequest
     public function rules(): array
     {
         return [
-            ...parent::rules()
+            'dress_id' => 'sometimes|integer|between:1,4294967296|exists:App\Models\Dress,dress_id',
+            ...$this::paginationDates()
         ];
     }
 }

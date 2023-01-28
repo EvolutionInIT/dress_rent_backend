@@ -10,7 +10,6 @@ use App\Http\Resources\Booking\BookingCollection;
 use App\Http\Resources\Booking\BookingResource;
 use App\Models\Booking;
 use Illuminate\Http\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
 use Carbon\Carbon;
 
 class BookingController
@@ -27,31 +26,31 @@ class BookingController
     }
 
 
-    public function save(SaveBookingRequest $request): BookingResource
+    public function save(SaveBookingRequest $request): array|BookingResource
     {
         $requestData = $request->validated();
 
-        $booking = Booking::create([
-            'dress_id' => $requestData['dress_id'],
-            'date' => $requestData['date'],
-            'status' => Booking::AVAILABLE_DRESS,
-        ]);
+        $booking = Booking::firstOrCreate($requestData, ['status' => Booking::UNAVAILABLE_DRESS,]);
 
         return new BookingResource($booking);
     }
 
 
-    public function cancel(CancelBookingRequest $request): JsonResponse
+    public function cancel(CancelBookingRequest $request): BookingResource|JsonResponse
     {
         $requestData = $request->validated();
 
-        Booking
+        $booking = Booking
             ::where('dress_id', $requestData['dress_id'])
-            ->update([
-                'status' => Booking::UNAVAILABLE_DRESS
-            ]);
+            ->where('date', $requestData['date'])
+            ->first();
 
-        return response()->json(['data' => ['message' => 'booking canceled']], Response::HTTP_OK);
+        if ($booking) {
+            $booking->status = Booking::AVAILABLE_DRESS;
+            $booking->save();
+            return new BookingResource($booking);
+        } else
+            return response()->json(['message' => 'Booking not found'], 404);
     }
 
 
@@ -59,11 +58,11 @@ class BookingController
     {
         $requestData = $request->validated();
 
-        $twoWeeksAgo = Carbon::now()->subWeeks(2);
         $today = Carbon::now();
+        $twoWeeksLater = Carbon::now()->addWeeks(2);
 
         $dates = [];
-        for ($date = $twoWeeksAgo; $date->lte($today); $date->addDay()) {
+        for ($date = $today; $date->lte($twoWeeksLater); $date->addDay()) {
             $dates[] = $date->toDateString();
         }
 
@@ -71,6 +70,7 @@ class BookingController
         foreach ($dates as $date) {
             $status = Booking
                 ::whereIn('dress_id', $requestData['dress_id'])
+                ->where('status', 'unavailable')
                 ->where('date', $date)
                 ->get();
             if (!$status->isEmpty())

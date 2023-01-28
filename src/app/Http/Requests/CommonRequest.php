@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -22,6 +23,14 @@ abstract class CommonRequest extends FormRequest
         return [
             'page' => 'numeric|min:1',
             'per_page' => 'numeric|between:1,100',
+        ];
+    }
+
+    public function paginationDates(): array
+    {
+        $weeksTwo = Carbon::now()->addWeeks(2);
+        return [
+            'date' => 'required|date|after_or_equal:' . Carbon::now()->toDateString() . '|before_or_equal:' . $weeksTwo->toDateString()
         ];
     }
 }

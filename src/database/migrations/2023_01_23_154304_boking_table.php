@@ -19,12 +19,8 @@ return new class extends Migration {
                 $table->unsignedInteger('dress_id');
                 $table->foreign('dress_id')->references('dress_id')->on('dress');
 
-
-                $table->string('start_date');
-                $table->string('end_date');
-
-                $table->string('date'); // нужно поискать варианты ещё
-                $table->string('status')->default('unapproved');
+                $table->date('date');
+                $table->string('status');
 
                 $table->softDeletes();
             });
