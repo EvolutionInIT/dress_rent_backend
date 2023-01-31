@@ -19,8 +19,8 @@ return new class extends Migration {
                 $table->unsignedInteger('dress_id');
                 $table->foreign('dress_id')->references('dress_id')->on('dress');
 
-                $table->date('date');
-                $table->string('status');
+                $table->date('date')->default(null);
+                $table->string('status')->default('new');
 
                 $table->softDeletes();
             });

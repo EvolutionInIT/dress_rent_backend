@@ -7,10 +7,12 @@ use App\Http\Requests\Booking\ListBookingRequest;
 use App\Http\Requests\Booking\SaveBookingRequest;
 use App\Http\Requests\Booking\StatusBookingRequest;
 use App\Http\Resources\Booking\BookingCollection;
+use App\Http\Resources\Booking\BookingDateResource;
 use App\Http\Resources\Booking\BookingResource;
 use App\Models\Booking;
 use Illuminate\Http\JsonResponse;
 use Carbon\Carbon;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class BookingController
 {
@@ -30,7 +32,7 @@ class BookingController
     {
         $requestData = $request->validated();
 
-        $booking = Booking::firstOrCreate($requestData, ['status' => Booking::UNAVAILABLE_DRESS,]);
+        $booking = Booking::firstOrCreate($requestData, ['status' => Booking::STATUSES['NEW']]);
 
         return new BookingResource($booking);
     }
@@ -46,7 +48,7 @@ class BookingController
             ->first();
 
         if ($booking) {
-            $booking->status = Booking::AVAILABLE_DRESS;
+            $booking->status = Booking::STATUSES['CANCELED'];
             $booking->save();
             return new BookingResource($booking);
         } else
@@ -54,33 +56,33 @@ class BookingController
     }
 
 
-    public function status(StatusBookingRequest $request): array
+    public function status(StatusBookingRequest $request): AnonymousResourceCollection
     {
         $requestData = $request->validated();
 
-        $today = Carbon::now();
-        $twoWeeksLater = Carbon::now()->addWeeks(2);
-
         $dates = [];
-        for ($date = $today; $date->lte($twoWeeksLater); $date->addDay()) {
+        for (
+            $date = Carbon::now();
+            $date->lte(Carbon::now()->addWeeks(2));
+            $date->addDay()
+        ) {
             $dates[] = $date->toDateString();
         }
 
         $datesStatus = [];
+        $status = Booking::whereIn('dress_id', $requestData['dress_id'])
+            ->whereNotIn('status', ['canceled'])
+            ->whereIn('date', $dates)
+            ->get();
+
         foreach ($dates as $date) {
-            $status = Booking
-                ::whereIn('dress_id', $requestData['dress_id'])
-                ->where('status', 'unavailable')
-                ->where('date', $date)
-                ->get();
-            if (!$status->isEmpty())
-                $datesStatus[$date] = $status;
-            else
-                $datesStatus[$date] = 'available';
+
+            $datesStatus[] = [
+                'date' => $date,
+                'booking' => $status->where('date', $date)
+            ];
         }
-        return $datesStatus;
 
+        return BookingDateResource::collection($datesStatus);
     }
-
-
 }

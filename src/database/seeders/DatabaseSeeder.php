@@ -294,39 +294,29 @@ class DatabaseSeeder extends Seeder
     {
         $booking = [
             [
-                'start_date' => '19.01.2023',
-                'end_date' => '22.01.2023',
                 'dress_id' => '1',
                 'date' => today(),
-                'status' => Booking::UNAVAILABLE_DRESS,
+                'status' => Booking::STATUSES['NEW'],
             ],
             [
-                'start_date' => '19.01.2023',
-                'end_date' => '22.01.2023',
                 'dress_id' => '2',
                 'date' => today(),
-                'status' => Booking::UNAVAILABLE_DRESS,
+                'status' => Booking::STATUSES['NEW'],
             ],
             [
-                'start_date' => '19.01.2023',
-                'end_date' => '22.01.2023',
                 'dress_id' => '3',
                 'date' => today(),
-                'status' => Booking::UNAVAILABLE_DRESS,
+                'status' => Booking::STATUSES['NEW'],
             ],
             [
-                'start_date' => '19.01.2023',
-                'end_date' => '22.01.2023',
                 'dress_id' => '4',
                 'date' => today(),
-                'status' => Booking::UNAVAILABLE_DRESS,
+                'status' => Booking::STATUSES['NEW'],
             ],
             [
-                'start_date' => '19.01.2023',
-                'end_date' => '22.01.2023',
                 'dress_id' => '5',
                 'date' => today(),
-                'status' => Booking::UNAVAILABLE_DRESS,
+                'status' => Booking::STATUSES['NEW'],
             ],
 
         ];

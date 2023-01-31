@@ -14,8 +14,17 @@ class StatusBookingRequest extends CommonRequest
     public function rules(): array
     {
         return [
-            'dress_id' => 'required|array',
-            'dress_id.*' => 'required|integer|exists:App\Models\Dress,dress_id',
+            'dress_id' => [
+                'required',
+                'array'
+            ],
+            'dress_id.*' => [
+                'required',
+                'integer',
+                'distinct',
+                'between:1,4294967296',
+                'exists:App\Models\Dress,dress_id'
+            ]
         ];
     }
 }

@@ -25,12 +25,4 @@ abstract class CommonRequest extends FormRequest
             'per_page' => 'numeric|between:1,100',
         ];
     }
-
-    public function paginationDates(): array
-    {
-        $weeksTwo = Carbon::now()->addWeeks(2);
-        return [
-            'date' => 'required|date|after_or_equal:' . Carbon::now()->toDateString() . '|before_or_equal:' . $weeksTwo->toDateString()
-        ];
-    }
 }
