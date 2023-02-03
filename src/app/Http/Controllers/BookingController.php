@@ -5,11 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Booking\ListBookingRequest;
 use App\Http\Resources\Booking\BookingCollection;
 use App\Models\Booking;
-use Illuminate\Http\Request;
 
 class BookingController
 {
-   
+
 
     public function list(ListBookingRequest $request): BookingCollection
     {
