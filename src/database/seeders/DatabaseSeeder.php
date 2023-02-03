@@ -12,6 +12,7 @@ use App\Models\DressSize;
 use App\Models\Photo;
 use App\Models\Size;
 use App\Models\User;
+use DateTime;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -294,29 +295,30 @@ class DatabaseSeeder extends Seeder
         $booking = [
             [
                 'dress_id' => '1',
-                'date' => '23.01.2023',
-                'status' => 'new'
+                'date' => today(),
+                'status' => Booking::STATUSES['NEW'],
             ],
             [
                 'dress_id' => '2',
-                'date' => '25.01.2023',
-                'status' => 'unapproved'
+                'date' => today(),
+                'status' => Booking::STATUSES['NEW'],
             ],
             [
                 'dress_id' => '3',
-                'date' => '23.02.2023',
-                'status' => 'canceled'
+                'date' => today(),
+                'status' => Booking::STATUSES['NEW'],
             ],
             [
                 'dress_id' => '4',
-                'date' => '07.01.2023',
-                'status' => 'new'
+                'date' => today(),
+                'status' => Booking::STATUSES['NEW'],
             ],
             [
                 'dress_id' => '5',
-                'date' => '14.01.2023',
-                'status' => 'new'
+                'date' => today(),
+                'status' => Booking::STATUSES['NEW'],
             ],
+
         ];
         Booking::insert($booking);
     }
