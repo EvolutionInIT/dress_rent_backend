@@ -16,6 +16,8 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class BookingController
 {
+
+
     public function list(ListBookingRequest $request): BookingCollection
     {
         $requestData = $request->validated();

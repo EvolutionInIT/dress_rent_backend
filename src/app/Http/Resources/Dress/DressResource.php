@@ -25,7 +25,7 @@ class DressResource extends JsonResource
             'dress_id' => $this->dress_id,
             'title' => $this->title,
             'description' => $this->description,
-            'deleted' => $this->softDeletes,
+            'quantity' => $this->quantity,
 
             $this->mergeWhen(
                 $this->relationLoaded('user'),
