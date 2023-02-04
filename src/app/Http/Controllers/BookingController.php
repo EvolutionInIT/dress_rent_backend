@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Booking\AvailableBookingRequest;
 use App\Http\Requests\Booking\CancelBookingRequest;
 use App\Http\Requests\Booking\ListBookingRequest;
 use App\Http\Requests\Booking\SaveBookingRequest;
@@ -23,8 +24,7 @@ class BookingController
         $requestData = $request->validated();
 
         $booking = Booking
-            ::select()
-            ->paginate(perPage: $requestData['per_page'] ?? 10, page: $requestData['page'] ?? 1);
+            ::paginate(perPage: $requestData['per_page'] ?? 10, page: $requestData['page'] ?? 1);
 
         return new BookingCollection($booking);
     }
@@ -35,6 +35,11 @@ class BookingController
         $requestData = $request->validated();
 
         $booking = Booking::firstOrCreate($requestData, ['status' => Booking::STATUSES['NEW']]);
+
+//        if ($booking->dress) {
+//            $booking->dress->decrement('quantity');
+//            $booking->dress->save();
+//        }
 
         return new BookingResource($booking);
     }
@@ -72,7 +77,9 @@ class BookingController
         }
 
         $datesStatus = [];
-        $status = Booking::whereIn('dress_id', $requestData['dress_id'])
+
+        $status = Booking
+            ::whereIn('booking.dress_id', $requestData['dress_id'])
             ->whereNotIn('status', ['canceled'])
             ->whereIn('date', $dates)
             ->get();
@@ -87,4 +94,45 @@ class BookingController
 
         return BookingDateResource::collection($datesStatus);
     }
+
+
+    public function available(AvailableBookingRequest $request): AnonymousResourceCollection
+    {
+        $requestData = $request->validated();
+
+        $dates = [];
+        for (
+            $date = Carbon::now();
+            $date->lte(Carbon::now()->addWeeks(2));
+            $date->addDay()
+        ) {
+            $dates[] = $date->toDateString();
+        }
+
+        $datesStatus = [];
+        if (empty($requestData['dress_id']))
+            $status = Booking::get();
+        else
+            $status = Booking
+                ::whereIn('booking.dress_id', $requestData['dress_id'])
+                ->whereIn('date', $dates)
+                ->join('dress', function ($q) {
+                    $q
+                        ->on('booking.dress_id', '=', 'dress.dress_id')
+                        ->where('quantity', '>', 0);
+                })
+                ->get();
+
+        foreach ($dates as $date) {
+
+            $datesStatus[] = [
+                'date' => $date,
+                'booking' => $status->where('date', $date)
+            ];
+        }
+
+        return BookingDateResource::collection($datesStatus);
+    }
+
+
 }

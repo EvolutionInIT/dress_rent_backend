@@ -49,13 +49,13 @@ class DatabaseSeeder extends Seeder
                 'title' => 'Шифт',
                 'description' => 'воё название оно получило в годы молодёжной революции в Америке в конце 50-х годов.',
                 'user_id' => 2,
-                'quantity' => 4
+                'quantity' => 0
             ],
             [
                 'title' => 'Труба',
                 'description' => 'Платье труба превосходно подойдёт к типу фигуры песочные часы, а также фигуре с тонкой талией.',
                 'user_id' => 3,
-                'quantity' => 12
+                'quantity' => 1
             ],
             [
                 'title' => 'Шемиз',
@@ -67,7 +67,7 @@ class DatabaseSeeder extends Seeder
                 'title' => 'Футляр',
                 'description' => 'Пожалуй, самая незаменимая вещь в гардеробе каждой женщины. Дамы вы понимаете о чём я?!',
                 'user_id' => 5,
-                'quantity' => 21
+                'quantity' => 12
             ]
         ];
 
