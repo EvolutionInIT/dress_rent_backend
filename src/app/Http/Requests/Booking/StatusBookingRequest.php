@@ -15,11 +15,11 @@ class StatusBookingRequest extends CommonRequest
     {
         return [
             'dress_id' => [
-                'required',
+                //'required',
                 'array'
             ],
             'dress_id.*' => [
-                'required',
+                //'required',
                 'integer',
                 'distinct',
                 'between:1,4294967296',

@@ -44,7 +44,9 @@ class BookingController
     {
         $requestData = $request->validated();
 
-        $booking = Booking::firstOrCreate($requestData, ['status' => Booking::STATUSES['NEW']]);
+        $booking =
+            Booking
+                ::create($requestData, ['status' => Booking::STATUSES['NEW']]);
 
         return new BookingResource($booking);
     }
@@ -87,50 +89,26 @@ class BookingController
         }
 
         $datesStatus = [];
-        $status = Booking
-            ::whereIn('dress_id', $requestData['dress_id'])
-            ->whereNotIn('status', [BOOKING::STATUSES['CANCELED']])
-            ->whereIn('date', $dates)
-            ->with('dress:dress_id,title')
-            ->get();
-
-        foreach ($dates as $date) {
-
-            $datesStatus[] = [
-                'date' => $date,
-                'booking' => $status->where('date', $date)
-            ];
-        }
-
-        return BookingDateResource::collection($datesStatus);
-    }
-
-
-    public function available(AvailableBookingRequest $request): AnonymousResourceCollection
-    {
-        $requestData = $request->validated();
-
-        $dates = [];
-        for (
-            $date = Carbon::now();
-            $date->lte(Carbon::now()->addWeeks(2));
-            $date->addDay()
-        ) {
-            $dates[] = $date->toDateString();
-        }
-
-        $datesStatus = [];
         if (empty($requestData['dress_id']))
-            $status = Booking::get();
+            $status = Booking
+                ::join('dress', function ($q) {
+                    $q
+                        ->on('booking.dress_id', '=', 'dress.dress_id')
+                        ->where('quantity', '>', 0);
+                })
+                ->with('dress:dress_id,title')
+                ->get();
         else
             $status = Booking
                 ::whereIn('booking.dress_id', $requestData['dress_id'])
+                ->whereNotIn('status', [BOOKING::STATUSES['CANCELED']])
                 ->whereIn('date', $dates)
                 ->join('dress', function ($q) {
                     $q
                         ->on('booking.dress_id', '=', 'dress.dress_id')
                         ->where('quantity', '>', 0);
                 })
+                ->with('dress:dress_id,title')
                 ->get();
 
         foreach ($dates as $date) {
@@ -143,6 +121,45 @@ class BookingController
 
         return BookingDateResource::collection($datesStatus);
     }
+
+
+//    public function available(AvailableBookingRequest $request): AnonymousResourceCollection
+//    {
+//        $requestData = $request->validated();
+//
+//        $dates = [];
+//        for (
+//            $date = Carbon::now();
+//            $date->lte(Carbon::now()->addWeeks(2));
+//            $date->addDay()
+//        ) {
+//            $dates[] = $date->toDateString();
+//        }
+//
+//        $datesStatus = [];
+//        if (empty($requestData['dress_id']))
+//            $status = Booking::get();
+//        else
+//            $status = Booking
+//                ::whereIn('booking.dress_id', $requestData['dress_id'])
+//                ->whereIn('date', $dates)
+//                ->join('dress', function ($q) {
+//                    $q
+//                        ->on('booking.dress_id', '=', 'dress.dress_id')
+//                        ->where('quantity', '>', 0);
+//                })
+//                ->get();
+//
+//        foreach ($dates as $date) {
+//
+//            $datesStatus[] = [
+//                'date' => $date,
+//                'booking' => $status->where('date', $date)
+//            ];
+//        }
+//
+//        return BookingDateResource::collection($datesStatus);
+//    }
 
 
 }

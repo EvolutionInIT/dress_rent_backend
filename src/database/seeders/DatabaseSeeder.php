@@ -43,7 +43,7 @@ class DatabaseSeeder extends Seeder
                 'title' => 'Смок',
                 'description' => 'Оборки в платье такой модели начинаются под грудью и заканчиваются выше колена.',
                 'user_id' => 1,
-                'quantity' => 6
+                'quantity' => 3
             ],
             [
                 'title' => 'Шифт',
