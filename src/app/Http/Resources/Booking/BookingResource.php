@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Booking;
 
+use App\Http\Resources\Dress\DressResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class BookingResource extends JsonResource
@@ -13,6 +14,12 @@ class BookingResource extends JsonResource
             'dress_id' => $this->dress_id,
             'date' => $this->date,
             'status' => $this->status,
+
+            $this->mergeWhen(
+                $this->relationLoaded('dress'),
+                ['dress' => new DressResource($this->dress)]
+            ),
+
         ];
     }
 }

@@ -10,25 +10,36 @@ use App\Http\Resources\Booking\BookingCollection;
 use App\Http\Resources\Booking\BookingDateResource;
 use App\Http\Resources\Booking\BookingResource;
 use App\Models\Booking;
-use Illuminate\Http\JsonResponse;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class BookingController
 {
+    /**
+     * @param ListBookingRequest $request
+     * @return BookingCollection
+     */
     public function list(ListBookingRequest $request): BookingCollection
     {
         $requestData = $request->validated();
 
-        $booking = Booking
-            ::select()
-            ->paginate(perPage: $requestData['per_page'] ?? 10, page: $requestData['page'] ?? 1);
+        $booking =
+            Booking
+                ::select()
+                ->paginate(
+                    perPage: $requestData['per_page'] ?? 10,
+                    page: $requestData['page'] ?? 1
+                );
 
         return new BookingCollection($booking);
     }
 
 
-    public function save(SaveBookingRequest $request): array|BookingResource
+    /**
+     * @param SaveBookingRequest $request
+     * @return BookingResource
+     */
+    public function save(SaveBookingRequest $request): BookingResource
     {
         $requestData = $request->validated();
 
@@ -38,7 +49,11 @@ class BookingController
     }
 
 
-    public function cancel(CancelBookingRequest $request): BookingResource|JsonResponse
+    /**
+     * @param CancelBookingRequest $request
+     * @return BookingResource
+     */
+    public function cancel(CancelBookingRequest $request): BookingResource
     {
         $requestData = $request->validated();
 
@@ -47,15 +62,16 @@ class BookingController
             ->where('date', $requestData['date'])
             ->first();
 
-        if ($booking) {
-            $booking->status = Booking::STATUSES['CANCELED'];
-            $booking->save();
-            return new BookingResource($booking);
-        } else
-            return response()->json(['message' => 'Booking not found'], 404);
+        $booking->status = Booking::STATUSES['CANCELED'];
+        $booking->save();
+        return new BookingResource($booking);
     }
 
 
+    /**
+     * @param StatusBookingRequest $request
+     * @return AnonymousResourceCollection
+     */
     public function status(StatusBookingRequest $request): AnonymousResourceCollection
     {
         $requestData = $request->validated();
@@ -70,9 +86,11 @@ class BookingController
         }
 
         $datesStatus = [];
-        $status = Booking::whereIn('dress_id', $requestData['dress_id'])
-            ->whereNotIn('status', ['canceled'])
+        $status = Booking
+            ::whereIn('dress_id', $requestData['dress_id'])
+            ->whereNotIn('status', BOOKING::STATUSES['CANCELED'])
             ->whereIn('date', $dates)
+            ->with('dress:dress_id,title')
             ->get();
 
         foreach ($dates as $date) {
