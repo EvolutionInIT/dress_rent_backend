@@ -89,7 +89,7 @@ class BookingController
         $datesStatus = [];
         $status = Booking
             ::whereIn('dress_id', $requestData['dress_id'])
-            ->whereNotIn('status', BOOKING::STATUSES['CANCELED'])
+            ->whereNotIn('status', [BOOKING::STATUSES['CANCELED']])
             ->whereIn('date', $dates)
             ->with('dress:dress_id,title')
             ->get();
