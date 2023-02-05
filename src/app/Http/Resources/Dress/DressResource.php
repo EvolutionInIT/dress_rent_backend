@@ -23,9 +23,21 @@ class DressResource extends JsonResource
     {
         return [
             'dress_id' => $this->dress_id,
-            'title' => $this->title,
-            'description' => $this->description,
-            'quantity' => $this->quantity,
+
+            $this->mergeWhen(
+                isset($this->title),
+                ['title' => $this->title]
+            ),
+
+            $this->mergeWhen(
+                isset($this->description),
+                ['description' => $this->description]
+            ),
+
+            $this->mergeWhen(
+                isset($this->quantity),
+                ['quantity' => $this->quantity]
+            ),
 
             $this->mergeWhen(
                 $this->relationLoaded('user'),

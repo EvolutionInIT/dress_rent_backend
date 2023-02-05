@@ -28,5 +28,13 @@ class Booking extends Model
 
     public $timestamps = false;
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function dress(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(Dress::class, 'dress_id', 'dress_id');
+    }
+
 
 }
