@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Booking\AvailableBookingRequest;
 use App\Http\Requests\Booking\CancelBookingRequest;
 use App\Http\Requests\Booking\ListBookingRequest;
 use App\Http\Requests\Booking\SaveBookingRequest;
@@ -11,7 +10,9 @@ use App\Http\Resources\Booking\BookingCollection;
 use App\Http\Resources\Booking\BookingDateResource;
 use App\Http\Resources\Booking\BookingResource;
 use App\Models\Booking;
+use App\Models\Dress;
 use Carbon\Carbon;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class BookingController
@@ -38,11 +39,19 @@ class BookingController
 
     /**
      * @param SaveBookingRequest $request
-     * @return BookingResource
+     * @return BookingResource|JsonResponse
      */
-    public function save(SaveBookingRequest $request): BookingResource
+    public function save(SaveBookingRequest $request): BookingResource|JsonResponse
     {
         $requestData = $request->validated();
+
+        $dress =
+            Dress
+                ::where('dress_id', $requestData['dress_id'])
+                ->first();
+
+        if ($dress->quantity <= $dress->booking()->count())
+            return response()->json(['error' => 'Dress not available for booking'], 400);
 
         $booking =
             Booking
@@ -88,28 +97,29 @@ class BookingController
             $dates[] = $date->toDateString();
         }
 
+        $dress = Dress
+            ::when(!empty($requestData['dress_id']), function ($q) use ($requestData) {
+                $q->whereIn('dress_id', $requestData['dress_id']);
+            })
+            ->withCount('booking')
+            ->get()
+            ->filter(function ($dress) {
+                return $dress->booking_count < $dress->quantity;
+            })->values();
+
+        $dressFilter = [];
+        foreach ($dress as $dr) {
+            $dressFilter [] = [
+                'dress_id' => $dr->dress_id
+            ];
+        }
+
         $datesStatus = [];
-        if (empty($requestData['dress_id']))
-            $status = Booking
-                ::join('dress', function ($q) {
-                    $q
-                        ->on('booking.dress_id', '=', 'dress.dress_id')
-                        ->where('quantity', '>', 0);
-                })
-                ->with('dress:dress_id,title')
-                ->get();
-        else
-            $status = Booking
-                ::whereIn('booking.dress_id', $requestData['dress_id'])
-                ->whereNotIn('status', [BOOKING::STATUSES['CANCELED']])
-                ->whereIn('date', $dates)
-                ->join('dress', function ($q) {
-                    $q
-                        ->on('booking.dress_id', '=', 'dress.dress_id')
-                        ->where('quantity', '>', 0);
-                })
-                ->with('dress:dress_id,title')
-                ->get();
+        $status = Booking
+            ::whereIn('dress_id', $dressFilter)
+            ->whereIn('date', $dates)
+            ->with('dress:dress_id,title,quantity')
+            ->get();
 
         foreach ($dates as $date) {
 
@@ -120,46 +130,7 @@ class BookingController
         }
 
         return BookingDateResource::collection($datesStatus);
+
     }
-
-
-//    public function available(AvailableBookingRequest $request): AnonymousResourceCollection
-//    {
-//        $requestData = $request->validated();
-//
-//        $dates = [];
-//        for (
-//            $date = Carbon::now();
-//            $date->lte(Carbon::now()->addWeeks(2));
-//            $date->addDay()
-//        ) {
-//            $dates[] = $date->toDateString();
-//        }
-//
-//        $datesStatus = [];
-//        if (empty($requestData['dress_id']))
-//            $status = Booking::get();
-//        else
-//            $status = Booking
-//                ::whereIn('booking.dress_id', $requestData['dress_id'])
-//                ->whereIn('date', $dates)
-//                ->join('dress', function ($q) {
-//                    $q
-//                        ->on('booking.dress_id', '=', 'dress.dress_id')
-//                        ->where('quantity', '>', 0);
-//                })
-//                ->get();
-//
-//        foreach ($dates as $date) {
-//
-//            $datesStatus[] = [
-//                'date' => $date,
-//                'booking' => $status->where('date', $date)
-//            ];
-//        }
-//
-//        return BookingDateResource::collection($datesStatus);
-//    }
-
 
 }

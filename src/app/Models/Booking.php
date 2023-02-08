@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Booking extends Model
@@ -29,9 +30,9 @@ class Booking extends Model
     public $timestamps = false;
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
-    public function dress(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function dress(): HasOne
     {
         return $this->hasOne(Dress::class, 'dress_id', 'dress_id');
     }
