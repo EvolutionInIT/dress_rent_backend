@@ -20,9 +20,10 @@ return new class extends Migration {
                 $table->foreign('dress_id')->references('dress_id')->on('dress');
 
                 $table->date('date')->default(null);
-                $table->string('status')->default('new');
+                $table->string('status', 10)->default('new');
 
                 $table->softDeletes();
+
             });
     }
 

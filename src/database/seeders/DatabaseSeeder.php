@@ -12,7 +12,6 @@ use App\Models\DressSize;
 use App\Models\Photo;
 use App\Models\Size;
 use App\Models\User;
-use DateTime;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -43,31 +42,36 @@ class DatabaseSeeder extends Seeder
                 'title' => 'Смок',
                 'description' => 'Оборки в платье такой модели начинаются под грудью и заканчиваются выше колена.',
                 'user_id' => 1,
-                'quantity' => 3
+                'quantity' => 3,
+                'num_booking' => 3
             ],
             [
                 'title' => 'Шифт',
                 'description' => 'воё название оно получило в годы молодёжной революции в Америке в конце 50-х годов.',
                 'user_id' => 2,
-                'quantity' => 0
+                'quantity' => 0,
+                'num_booking' => 0
             ],
             [
                 'title' => 'Труба',
                 'description' => 'Платье труба превосходно подойдёт к типу фигуры песочные часы, а также фигуре с тонкой талией.',
                 'user_id' => 3,
-                'quantity' => 1
+                'quantity' => 1,
+                'num_booking' => 1
             ],
             [
                 'title' => 'Шемиз',
                 'description' => 'Платье данного типа берёт свои корни из далёкого средневековья, когда оно ещё не было платьем.',
                 'user_id' => 4,
-                'quantity' => 7
+                'quantity' => 7,
+                'num_booking' => 1
             ],
             [
                 'title' => 'Футляр',
                 'description' => 'Пожалуй, самая незаменимая вещь в гардеробе каждой женщины. Дамы вы понимаете о чём я?!',
                 'user_id' => 5,
-                'quantity' => 12
+                'quantity' => 12,
+                'num_booking' => 1
             ]
         ];
 
@@ -304,6 +308,16 @@ class DatabaseSeeder extends Seeder
                 'status' => Booking::STATUSES['NEW'],
             ],
             [
+                'dress_id' => '1',
+                'date' => '2023-03-19',
+                'status' => Booking::STATUSES['NEW'],
+            ],
+            [
+                'dress_id' => '1',
+                'date' => '2023-03-20',
+                'status' => Booking::STATUSES['NEW'],
+            ],
+            [
                 'dress_id' => '2',
                 'date' => today(),
                 'status' => Booking::STATUSES['NEW'],
@@ -323,7 +337,6 @@ class DatabaseSeeder extends Seeder
                 'date' => today(),
                 'status' => Booking::STATUSES['NEW'],
             ],
-
         ];
         Booking::insert($booking);
     }

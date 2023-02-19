@@ -23,7 +23,7 @@ class StatusBookingRequest extends CommonRequest
                 'integer',
                 'distinct',
                 'between:1,4294967296',
-                'exists:App\Models\Dress,dress_id'
+                'exists:App\Models\Dress,dress_id',
             ]
         ];
     }

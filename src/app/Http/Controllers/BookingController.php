@@ -12,8 +12,8 @@ use App\Http\Resources\Booking\BookingResource;
 use App\Models\Booking;
 use App\Models\Dress;
 use Carbon\Carbon;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Facades\DB;
 
 class BookingController
 {
@@ -39,23 +39,17 @@ class BookingController
 
     /**
      * @param SaveBookingRequest $request
-     * @return BookingResource|JsonResponse
+     * @return BookingResource
      */
-    public function save(SaveBookingRequest $request): BookingResource|JsonResponse
+    public function save(SaveBookingRequest $request): BookingResource
     {
         $requestData = $request->validated();
 
-        $dress =
-            Dress
-                ::where('dress_id', $requestData['dress_id'])
-                ->first();
+        $dress = Dress::where('dress_id', $requestData['dress_id']);
+        $dress->increment('num_booking');
 
-        if ($dress->quantity <= $dress->booking()->count())
-            return response()->json(['error' => 'Dress not available for booking'], 400);
-
-        $booking =
-            Booking
-                ::create($requestData, ['status' => Booking::STATUSES['NEW']]);
+        $requestData['status'] = Booking::STATUSES['NEW'];
+        $booking = Booking::create($requestData);
 
         return new BookingResource($booking);
     }
@@ -93,36 +87,25 @@ class BookingController
             $date = Carbon::now();
             $date->lte(Carbon::now()->addWeeks(2));
             $date->addDay()
-        ) {
+        )
             $dates[] = $date->toDateString();
-        }
 
-        $dress = Dress
+        $datesStatus = [];
+
+        $status = Booking
             ::when(!empty($requestData['dress_id']), function ($q) use ($requestData) {
                 $q->whereIn('dress_id', $requestData['dress_id']);
             })
-            ->withCount('booking')
-            ->get()
-            ->filter(function ($dress) {
-                return $dress->booking_count < $dress->quantity;
-            })->values();
-
-        $dressFilter = [];
-        foreach ($dress as $dr) {
-            $dressFilter [] = [
-                'dress_id' => $dr->dress_id
-            ];
-        }
-
-        $datesStatus = [];
-        $status = Booking
-            ::whereIn('dress_id', $dressFilter)
             ->whereIn('date', $dates)
-            ->with('dress:dress_id,title,quantity')
+            ->whereBetween('date', [Carbon::today(), Carbon::today()->addDays(14)])
+            ->join('dress', 'booking.dress_id', '=', 'dress.dress_id')
+            ->select('booking.booking_id', 'booking.dress_id', 'booking.date', 'dress.quantity', DB::raw('SUM(dress.num_booking) as num_booking'))
+            ->with('dress:dress_id,title,quantity,num_booking')
+            ->groupBy('booking.booking_id', 'booking.dress_id', 'booking.date', 'dress.quantity')
+            ->havingRaw('dress.quantity > num_booking')
             ->get();
 
-        foreach ($dates as $date) {
-
+        foreach ($dates as &$date) {
             $datesStatus[] = [
                 'date' => $date,
                 'booking' => $status->where('date', $date)
@@ -130,7 +113,6 @@ class BookingController
         }
 
         return BookingDateResource::collection($datesStatus);
-
     }
 
 }

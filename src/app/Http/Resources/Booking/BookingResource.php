@@ -13,7 +13,7 @@ class BookingResource extends JsonResource
             'booking_id' => $this->booking_id,
             'dress_id' => $this->dress_id,
             'date' => $this->date,
-            //'status' => $this->status,
+            'status' => $this->status,
 
             $this->mergeWhen(
                 $this->relationLoaded('dress'),
