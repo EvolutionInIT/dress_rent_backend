@@ -38,14 +38,7 @@ class DressResource extends JsonResource
                 isset($this->quantity),
                 ['quantity' => $this->quantity]
             ),
-
-            // Добавлено для теста
-            $this->mergeWhen(
-                isset($this->num_booking),
-                ['num_booking' => $this->num_booking]
-            ),
-            ////////////////
-
+            
             $this->mergeWhen(
                 $this->relationLoaded('user'),
                 ['user' => new UserResource($this->whenLoaded('user'))]
