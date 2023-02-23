@@ -39,32 +39,32 @@ class DatabaseSeeder extends Seeder
     {
         $dresses = [
             [
-                'title' => 'Смок',
-                'description' => 'Оборки в платье такой модели начинаются под грудью и заканчиваются выше колена.',
+                'title' => 'Вечернее платье Allison',
+                'description' => 'Вечернее платье длиной в пол из пайеточной ткани чёрного цвета. Топ без рукавов с вырезом в виде капли. Закрытая спина на молнии. Юбка длиной в пол, без шлейфа',
                 'user_id' => 1,
                 'quantity' => 3,
             ],
             [
-                'title' => 'Шифт',
-                'description' => 'воё название оно получило в годы молодёжной революции в Америке в конце 50-х годов.',
+                'title' => 'Вечернее платье плиссе Penelope Powder Pink',
+                'description' => 'Длинное вечернее платье пепельно-розового цвета. Выполнено из плиссированной ткани. Топ в стиле американская пройма с вырезом на груди и открытыми плечами. Спинка полностью закрыта. На юбке небольшой разрез под левую ножку.',
                 'user_id' => 2,
                 'quantity' => 0,
             ],
             [
-                'title' => 'Труба',
-                'description' => 'Платье труба превосходно подойдёт к типу фигуры песочные часы, а также фигуре с тонкой талией.',
+                'title' => 'Шуба Круэллы Cruella Coat',
+                'description' => 'Шубка-макси из искусственного меха чёрно-белой расцветки под далматинца. Массивный воротник. Приталенная. Застёгивается на пуговицу.',
                 'user_id' => 3,
                 'quantity' => 1,
             ],
             [
-                'title' => 'Шемиз',
-                'description' => 'Платье данного типа берёт свои корни из далёкого средневековья, когда оно ещё не было платьем.',
+                'title' => 'Fashion Hunter',
+                'description' => 'Эффектное белое платье с длинными рукавами, декорированными перьями. Глубокий V-образный вырез декольте. На груди и бедре нашита прозрачная сетка со стразами. Талию украшает пояс. Длинная юбка с небольшим шлейфом и высоким разрезом по ножке. Спина закрыта, застегивается на молнию.',
                 'user_id' => 4,
                 'quantity' => 7,
             ],
             [
-                'title' => 'Футляр',
-                'description' => 'Пожалуй, самая незаменимая вещь в гардеробе каждой женщины. Дамы вы понимаете о чём я?!',
+                'title' => 'Накидка из перьев со шлейфом Feather Cape Discount',
+                'description' => 'Накидка из белых гусиных перьев. Спина и плечи декорированы кристаллами. Длина от верха до конца шлейфа: 3 м. 15 см. Не застегивается.',
                 'user_id' => 5,
                 'quantity' => 12,
             ]
@@ -86,24 +86,24 @@ class DatabaseSeeder extends Seeder
     {
         $categories = [
             [
-                'title' => 'Зимние',
-                'description' => 'Светлая кожа контрастирует с темными волосами и глазами зачастую тоже темными.'
+                'title' => 'Платья Блэк Тай',
+                'description' => 'Строгий дресс код под названием Блэк Тай принято соблюдать на торжествах, которые проводятся вечером. На столичных мероприятиях он приобретает все большую популярность. Для женщин в прокате StoryDress представлены вечерние платья, украшенные кружевом, кристаллами и вышивкой. В цветовой гамме – калейдоскоп всех цветов радуги. Лидерство черного цвета неоспоримо.'
             ],
             [
-                'title' => 'Летние',
-                'description' => 'Несмотря на летнее название цветотип «лето» довольно холодный. У него нет такого яркого контраста.'
+                'title' => 'Вечерние платья на свадьбу',
+                'description' => 'В гардеробе любой женщины должны быть наряды на все случае жизни, и в их число непременно должно входить симпатичное, модное вечернее платье на свадьбу, которое, в ряде случаев, окажется просто незаменимым. Вы приглашены на банкет, фуршет, корпоратив, любое другое светское мероприятие – поводов надеть такое платье, помимо бракосочетания сестры или подруги, великое множество.'
             ],
             [
-                'title' => 'Весенние',
-                'description' => 'Во всем облике девушки «весны» чувствуется мягкость и нежность: светлые шатенки и натуральные блондинки.'
+                'title' => 'Платья для фотосессии',
+                'description' => 'Разные виды платьев для фотосессий'
             ],
             [
-                'title' => 'Осенние',
-                'description' => 'Яркие краски осени отражаются в этом цветотипе.Глаза яркие – синие, зеленые, серые, шоколадные.'
+                'title' => 'Свадебные платья',
+                'description' => 'Свадебные платья простые, но со вкусом'
             ],
             [
-                'title' => 'Коктейльные',
-                'description' => 'сли вы собираетесь посетить шумную вечеринку или провести вечер со своей второй половинкой в ресторане.'
+                'title' => 'Платья с перьями',
+                'description' => 'Платья с перьями'
             ]
         ];
 
@@ -121,14 +121,16 @@ class DatabaseSeeder extends Seeder
     public function generateDressCategory()
     {
         $dressCategories = [
-            ['dress_id' => 1, 'category_id' => 3],
-            ['dress_id' => 1, 'category_id' => 5],
-            ['dress_id' => 2, 'category_id' => 5],
+            ['dress_id' => 1, 'category_id' => 1],
+            ['dress_id' => 1, 'category_id' => 2],
+            ['dress_id' => 2, 'category_id' => 1],
             ['dress_id' => 2, 'category_id' => 2],
-            ['dress_id' => 3, 'category_id' => 4],
-            ['dress_id' => 4, 'category_id' => 1],
-            ['dress_id' => 5, 'category_id' => 2],
-            ['dress_id' => 5, 'category_id' => 3]
+            ['dress_id' => 3, 'category_id' => 3],
+            ['dress_id' => 4, 'category_id' => 4],
+            ['dress_id' => 4, 'category_id' => 5],
+            ['dress_id' => 5, 'category_id' => 4],
+            ['dress_id' => 5, 'category_id' => 5],
+
         ];
         DressCategory::insert($dressCategories);
     }
@@ -240,53 +242,28 @@ class DatabaseSeeder extends Seeder
         $photos = [
             [
                 'dress_id' => 1,
-                'image' => 'luxury-2021_850x1122.jpg.pagespeed.ce.QPOnS1cQpX.jpg',
-                'image_small' => 'moda_platya-5-819x1024.jpg'
-            ],
-            [
-                'dress_id' => 1,
-                'image' => '11-10.jpg',
-                'image_small' => '1662166731_1-damion-club-p-neobichnie-fasoni-vechernikh-platev-modnie-1.jpg'
-            ],
-            [
-                'dress_id' => 1,
-                'image' => 'love.jpg',
-                'image_small' => 'luxury-2021_850x1122.jpg.pagespeed.ce.QPOnS1cQpX.jpg'
+                'image' => 'evening-dress-panther-03.jpg',
+                'image_small' => 'evening-dress-panther-08.jpg'
             ],
             [
                 'dress_id' => 2,
-                'image' => 'love.jpg',
-                'image_small' => 'White-.jpg'
-            ],
-            [
-                'dress_id' => 2,
-                'image' => 'love.jpg',
-                'image_small' => 'moda_platya-5-819x1024.jpg'
+                'image' => 'evening-pleated-dress-penelope-powder-pink-09.jpg',
+                'image_small' => 'evening-pleated-dress-penelope-powder-pink-03.jpg'
             ],
             [
                 'dress_id' => 3,
-                'image' => 'love.jpg',
-                'image_small' => 'White-.jpg'
-            ],
-            [
-                'dress_id' => 3,
-                'image' => 'love.jpg',
-                'image_small' => 'luxury-2021_850x1122.jpg.pagespeed.ce.QPOnS1cQpX.jpg'
+                'image' => 'shuba-cruella-coat-10.jpg',
+                'image_small' => 'shuba-cruella-coat-13.jpg'
             ],
             [
                 'dress_id' => 4,
-                'image' => 'love.jpg',
-                'image_small' => 'images.jpeg'
-            ],
-            [
-                'dress_id' => 4,
-                'image' => 'images.jpeg',
-                'image_small' => 'luxury-2021_850x1122.jpg.pagespeed.ce.QPOnS1cQpX.jpg'
+                'image' => 'prokat-platya-fashion-hunter-02.jpg',
+                'image_small' => 'prokat-platya-fashion-hunter-08.jpg'
             ],
             [
                 'dress_id' => 5,
-                'image' => 'modnye-vechernie-platya-960-540-960x540.jpg',
-                'image_small' => 'luxury-2021_850x1122.jpg.pagespeed.ce.QPOnS1cQpX.jpg'
+                'image' => 'feather-cape-with-train-02.jpg',
+                'image_small' => 'feather-cape-with-train-06.jpg'
             ],
 
         ];
