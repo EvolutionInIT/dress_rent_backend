@@ -14,7 +14,6 @@ return new class extends Migration {
                 $table->string('title', 255);
                 $table->text('description', 5000);
                 $table->unsignedTinyInteger('quantity')->default(1);
-                //$table->unsignedTinyInteger('num_booking')->default(1); // Добавлен для теста
 
                 $table->unsignedInteger('user_id');
                 $table->foreign('user_id')->references('user_id')->on('user');
