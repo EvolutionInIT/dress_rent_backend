@@ -15,8 +15,7 @@ class BookingDateResource extends JsonResource
                 $this->resource['booking'],
                 ['booking' => BookingResource::collection($this->resource['booking'])]
             ),
+
         ];
-
-
     }
 }

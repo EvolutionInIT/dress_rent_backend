@@ -35,10 +35,10 @@ class DressResource extends JsonResource
             ),
 
             $this->mergeWhen(
-                isset($this->deleted),
-                ['deleted' => $this->deleted]
+                isset($this->quantity),
+                ['quantity' => $this->quantity]
             ),
-
+            
             $this->mergeWhen(
                 $this->relationLoaded('user'),
                 ['user' => new UserResource($this->whenLoaded('user'))]

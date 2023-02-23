@@ -13,6 +13,7 @@ return new class extends Migration {
                 $table->increments('dress_id');
                 $table->string('title', 255);
                 $table->text('description', 5000);
+                $table->unsignedTinyInteger('quantity')->default(1);
 
                 $table->unsignedInteger('user_id');
                 $table->foreign('user_id')->references('user_id')->on('user');
