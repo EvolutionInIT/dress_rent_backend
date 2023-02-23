@@ -28,6 +28,9 @@ class DressController
             ::when($dressID, function ($q) use ($dressID) {
                 $q->where('dress_id', $dressID);
             })
+            ->with('category')
+            ->with('photo')
+            ->with('size')
             ->first();
 
         return new DressResource($dress);

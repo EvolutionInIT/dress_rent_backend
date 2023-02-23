@@ -35,8 +35,19 @@ class DressResource extends JsonResource
             ),
 
             $this->mergeWhen(
+                isset($this->price),
+                ['price' => $this->price]
+            ),
+            
+            $this->mergeWhen(
                 isset($this->quantity),
                 ['quantity' => $this->quantity]
+            ),
+
+            $this->mergeWhen(
+                isset($this->deleted),
+                ['deleted' => $this->deleted]
+
             ),
             
             $this->mergeWhen(
@@ -63,6 +74,7 @@ class DressResource extends JsonResource
                 $this->relationLoaded('photo'),
                 ['photo' => PhotoResource::collection($this->whenLoaded('photo'))]
             ),
+
         ];
     }
 }
