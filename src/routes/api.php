@@ -143,6 +143,9 @@ Route::prefix('booking')->name('booking.')->group(function () {
 
     // api/booking/status
     Route::get('status', [BookingController::class, 'status'])->name('status');
+
+    // api/booking/available
+    Route::get('available', [BookingController::class, 'available'])->name('available');
 });
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 

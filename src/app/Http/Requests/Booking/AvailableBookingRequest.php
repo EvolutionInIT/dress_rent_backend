@@ -4,7 +4,7 @@ namespace App\Http\Requests\Booking;
 
 use App\Http\Requests\CommonRequest;
 
-class StatusBookingRequest extends CommonRequest
+class AvailableBookingRequest extends CommonRequest
 {
     public function authorize(): bool
     {
@@ -15,15 +15,13 @@ class StatusBookingRequest extends CommonRequest
     {
         return [
             'dress_id' => [
-                //'required',
                 'array'
             ],
             'dress_id.*' => [
-                //'required',
                 'integer',
                 'distinct',
                 'between:1,4294967296',
-                'exists:App\Models\Dress,dress_id',
+                'exists:App\Models\Dress,dress_id'
             ]
         ];
     }

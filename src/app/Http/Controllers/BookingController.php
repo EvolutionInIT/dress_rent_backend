@@ -12,6 +12,7 @@ use App\Http\Resources\Booking\BookingResource;
 use App\Models\Booking;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Facades\DB;
 
 class BookingController
 {
@@ -43,7 +44,8 @@ class BookingController
     {
         $requestData = $request->validated();
 
-        $booking = Booking::firstOrCreate($requestData, ['status' => Booking::STATUSES['NEW']]);
+        $requestData['status'] = Booking::STATUSES['NEW'];
+        $booking = Booking::create($requestData);
 
         return new BookingResource($booking);
     }
@@ -81,20 +83,29 @@ class BookingController
             $date = Carbon::now();
             $date->lte(Carbon::now()->addWeeks(2));
             $date->addDay()
-        ) {
+        )
             $dates[] = $date->toDateString();
-        }
 
         $datesStatus = [];
+
         $status = Booking
-            ::whereIn('dress_id', $requestData['dress_id'])
-            ->whereNotIn('status', BOOKING::STATUSES['CANCELED'])
+            ::when(!empty($requestData['dress_id']), function ($q) use ($requestData) {
+                $q->whereIn('dress_id', $requestData['dress_id']);
+            })
             ->whereIn('date', $dates)
-            ->with('dress:dress_id,title')
+            ->whereBetween('date', [Carbon::today(), Carbon::today()->addDays(14)])
+            ->select('booking_id', 'dress_id', 'date', 'status', DB::raw('COUNT(*) as booking_count'))
+            ->with(['dress' => function ($q) {
+                $q->select('dress_id', 'quantity');
+            }])
+            ->groupBy('booking_id', 'dress_id', 'date', 'status')
+            ->havingRaw('booking_count < (SELECT quantity FROM dress
+                            WHERE dress.dress_id = booking.dress_id AND quantity >
+                            (SELECT COUNT(*) FROM booking WHERE booking.dress_id = dress.dress_id AND date BETWEEN ? AND ?))'
+                , [Carbon::today(), Carbon::today()->addDays(14)])
             ->get();
 
-        foreach ($dates as $date) {
-
+        foreach ($dates as &$date) {
             $datesStatus[] = [
                 'date' => $date,
                 'booking' => $status->where('date', $date)
@@ -103,4 +114,5 @@ class BookingController
 
         return BookingDateResource::collection($datesStatus);
     }
+
 }

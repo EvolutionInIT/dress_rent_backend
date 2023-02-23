@@ -18,7 +18,7 @@ class Dress extends Model
     protected $primaryKey = 'dress_id';
     protected $fillable =
         [
-            'title', 'description', 'user_id'
+            'title', 'description', 'user_id', 'quantity'
         ];
 
 

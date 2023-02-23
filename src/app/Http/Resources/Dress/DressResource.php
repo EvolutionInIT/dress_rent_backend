@@ -38,12 +38,18 @@ class DressResource extends JsonResource
                 isset($this->price),
                 ['price' => $this->price]
             ),
+            
+            $this->mergeWhen(
+                isset($this->quantity),
+                ['quantity' => $this->quantity]
+            ),
 
             $this->mergeWhen(
                 isset($this->deleted),
                 ['deleted' => $this->deleted]
-            ),
 
+            ),
+            
             $this->mergeWhen(
                 $this->relationLoaded('user'),
                 ['user' => new UserResource($this->whenLoaded('user'))]
