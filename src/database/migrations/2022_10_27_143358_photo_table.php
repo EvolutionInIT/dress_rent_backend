@@ -19,8 +19,8 @@ return new class extends Migration {
                 $table->unsignedInteger('dress_id')->nullable();
                 $table->foreign('dress_id')->references('dress_id')->on('dress');
 
-                $table->string('image', 100);
-                $table->string('image_small', 100); //32 + 1 + 3-4
+                $table->string('image', 50)->default('');
+                $table->string('image_small', 50)->default(''); //32 + 1 + 3-4
 
                 $table->softDeletes();
 
