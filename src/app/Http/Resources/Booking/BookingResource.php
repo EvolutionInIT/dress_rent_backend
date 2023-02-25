@@ -10,10 +10,11 @@ class BookingResource extends JsonResource
     public function toArray($request): array
     {
         return [
-            'booking_id' => $this->booking_id,
+            //'booking_id' => $this->booking_id,
             'dress_id' => $this->dress_id,
-            'date' => $this->date,
+            //'date' => $this->date,
             'status' => $this->status,
+            'title' => $this->title,
 
             $this->mergeWhen(
                 $this->relationLoaded('dress'),

@@ -10,6 +10,7 @@ use App\Http\Resources\Booking\BookingCollection;
 use App\Http\Resources\Booking\BookingDateResource;
 use App\Http\Resources\Booking\BookingResource;
 use App\Models\Booking;
+use App\Models\Dress;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\DB;
@@ -70,10 +71,6 @@ class BookingController
     }
 
 
-    /**
-     * @param StatusBookingRequest $request
-     * @return AnonymousResourceCollection
-     */
     public function status(StatusBookingRequest $request): AnonymousResourceCollection
     {
         $requestData = $request->validated();
@@ -83,32 +80,33 @@ class BookingController
             $date = Carbon::now();
             $date->lte(Carbon::now()->addWeeks(2));
             $date->addDay()
-        )
+        ) {
             $dates[] = $date->toDateString();
+        }
+
+        $status =
+            Dress
+                ::when(!empty($requestData['dress_id']), function ($q) use ($requestData) {
+                    $q->whereIn('dress_id', $requestData['dress_id']);
+                })
+                ->leftJoin('booking', function ($join) {
+                    $join->on('dress.dress_id', '=', 'booking.dress_id')
+                        ->where('booking.date', '>=', DB::raw('CURDATE()'))
+                        ->where('booking.date', '<=', DB::raw('DATE_ADD(CURDATE(), INTERVAL 2 WEEK)'));
+                })
+                ->select('dress.*', DB::raw('COUNT(booking.dress_id) as num_booking'))
+                ->groupBy('dress.dress_id', 'dress.title', 'dress.description', 'dress.quantity', 'dress.user_id',
+                    'dress.price', 'dress.created_at', 'dress.deleted_at', 'dress.updated_at')
+                ->havingRaw('dress.quantity > num_booking OR num_booking IS NULL')
+                ->get();
 
         $datesStatus = [];
 
-        $status = Booking
-            ::when(!empty($requestData['dress_id']), function ($q) use ($requestData) {
-                $q->whereIn('dress_id', $requestData['dress_id']);
-            })
-            ->whereIn('date', $dates)
-            ->whereBetween('date', [Carbon::today(), Carbon::today()->addDays(14)])
-            ->select('booking_id', 'dress_id', 'date', 'status', DB::raw('COUNT(*) as booking_count'))
-            ->with(['dress' => function ($q) {
-                $q->select('dress_id', 'quantity');
-            }])
-            ->groupBy('booking_id', 'dress_id', 'date', 'status')
-            ->havingRaw('booking_count < (SELECT quantity FROM dress
-                            WHERE dress.dress_id = booking.dress_id AND quantity >
-                            (SELECT COUNT(*) FROM booking WHERE booking.dress_id = dress.dress_id AND date BETWEEN ? AND ?))'
-                , [Carbon::today(), Carbon::today()->addDays(14)])
-            ->get();
+        foreach ($dates as $date) {
 
-        foreach ($dates as &$date) {
             $datesStatus[] = [
                 'date' => $date,
-                'booking' => $status->where('date', $date)
+                'booking' => $status
             ];
         }
 

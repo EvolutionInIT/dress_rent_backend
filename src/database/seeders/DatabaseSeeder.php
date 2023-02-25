@@ -54,7 +54,7 @@ class DatabaseSeeder extends Seeder
                 'title' => 'Шуба Круэллы Cruella Coat',
                 'description' => 'Шубка-макси из искусственного меха чёрно-белой расцветки под далматинца. Массивный воротник. Приталенная. Застёгивается на пуговицу.',
                 'user_id' => 3,
-                'quantity' => 1,
+                'quantity' => 5,
             ],
             [
                 'title' => 'Fashion Hunter',
@@ -289,11 +289,11 @@ class DatabaseSeeder extends Seeder
                 'date' => today(),
                 'status' => Booking::STATUSES['NEW'],
             ],
-            [
-                'dress_id' => '3',
-                'date' => today(),
-                'status' => Booking::STATUSES['NEW'],
-            ],
+//            [
+//                'dress_id' => '3',
+//                'date' => today(),
+//                'status' => Booking::STATUSES['NEW'],
+//            ],
             [
                 'dress_id' => '4',
                 'date' => today(),

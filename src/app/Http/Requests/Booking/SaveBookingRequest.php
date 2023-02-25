@@ -6,6 +6,7 @@ use App\Http\Requests\CommonRequest;
 use App\Models\Booking;
 use App\Models\Dress;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class SaveBookingRequest extends CommonRequest
 {
@@ -45,11 +46,25 @@ class SaveBookingRequest extends CommonRequest
 //                        $fail("dress_save_dress_quantity_enought");
 //                },
                 function ($attribute, $value, $fail) {
-                    $dress = Dress
-                        ::withCount('booking')
-                        ->find($value);
-                    if ($dress->quantity <= $dress->booking()->count()) {
-                        $fail("The dress you have selected is not available ");
+                    //$date = $this->input('date');
+                    $date = date('Y-m-d', strtotime($this->input('date')));
+                    $dress =
+                        Dress
+                            ::leftJoin('booking', function ($join) use ($date) {
+                                $join->on('dress.dress_id', '=', 'booking.dress_id')
+                                    ->where('booking.date', '>=', $date)
+                                    ->where('booking.date', '<=', DB::raw('DATE_ADD(CURDATE(), INTERVAL 2 WEEK)'));
+                            })
+                            ->withCount(['booking' => function ($query) use ($date) {
+                                $query->where('date', '>=', $date);
+                            }])
+//                            ->when('booking_count', '<', 'quantity', function ($q) use ($fail) {
+//                                $q->$fail("dress_save_dress_quantity_enought");
+//                            })
+                            ->find($value);
+
+                    if ($dress->quantity <= $dress->booking_count) {
+                        $fail("dress_save_dress_quantity_enought");
                     }
                 },
             ],
