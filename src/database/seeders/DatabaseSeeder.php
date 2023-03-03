@@ -4,11 +4,13 @@ namespace Database\Seeders;
 
 use App\Models\Booking;
 use App\Models\Category;
+use App\Models\CategoryTranslation;
 use App\Models\Color;
 use App\Models\Dress;
 use App\Models\DressCategory;
 use App\Models\DressColor;
 use App\Models\DressSize;
+use App\Models\DressTranslation;
 use App\Models\Photo;
 use App\Models\Size;
 use App\Models\User;
@@ -33,6 +35,8 @@ class DatabaseSeeder extends Seeder
         $this->generateDressSize();
         $this->generatePhoto();
         $this->generateBooking();
+        $this->generateCategoryTranslation();
+        $this->generateDressTranslation();
     }
 
     public function generateDress()
@@ -46,7 +50,8 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'title' => 'Вечернее платье плиссе Penelope Powder Pink',
-                'description' => 'Длинное вечернее платье пепельно-розового цвета. Выполнено из плиссированной ткани. Топ в стиле американская пройма с вырезом на груди и открытыми плечами. Спинка полностью закрыта. На юбке небольшой разрез под левую ножку.',
+                'description' => 'Длинное вечернее платье пепельно-розового цвета. Выполнено из плиссированной ткани. Топ в стиле американская пройма с вырезом на груди и открытыми плечами.
+                Спинка полностью закрыта. На юбке небольшой разрез под левую ножку.',
                 'user_id' => 2,
                 'quantity' => 0,
             ],
@@ -103,7 +108,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'title' => 'Платья для подружки невесты',
-                'description' => 'Разные виды платьев для фотосессий'
+                'description' => 'Разные виды платьев для невесты'
             ],
             [
                 'title' => 'Национальные этно-костюмы',
@@ -311,4 +316,187 @@ class DatabaseSeeder extends Seeder
         ];
         Booking::insert($booking);
     }
+
+    public function generateCategoryTranslation()
+    {
+        $categoryTransaction = [
+            [
+                'category_id' => 1,
+                'language' => 'ru',
+                'title' => 'Вечерние платья',
+                'description' => 'Аренда вечерних платьев для фотосессией. Аренда платьев на фотосессии, в том числе и вечерних, является одним из самых популярных видов услуг. Фотографы часто ищут для своих съемок не только одежду в прокате, но и людей с соответствующим образом, поэтому аренда платьев часто нужна. В нашей студии вы можете арендовать вечерние платья на любую тематику и для любого мероприятия. При необходимости можно даже заказать пошив вечернего платья по вашему индивидуальному эскизу.',
+            ],
+            [
+                'category_id' => 1,
+                'language' => 'en',
+                'title' => 'Evening dresses',
+                'description' => 'Rent of evening dresses for a photo session. Renting dresses for photo shoots, including evening ones, is one of the most popular types of services. Photographers often look for not only rental clothes for their shoots, but also people with the appropriate look, so renting dresses is often needed. In our studio you can rent evening dresses for any theme and for any event. If necessary, you can even order tailoring of an evening dress according to your individual sketch.',
+            ],
+            [
+                'category_id' => 1,
+                'language' => 'kk',
+                'title' => 'Кешкі көйлек',
+                'description' => 'Фотосессияға кешкі көйлектерді жалға алу. Фотосессияларға, соның ішінде кешкі көйлектерді жалға алу - ең танымал қызмет түрлерінің бірі. Фотографтар көбінесе өз түсірілімдері үшін жалдамалы киімдерді ғана емес, сонымен қатар сәйкес келбеті бар адамдарды да іздейді, сондықтан көйлектерді жалға алу жиі қажет. Біздің студияда сіз кез келген тақырыпқа және кез келген іс-шараға арналған кешкі көйлектерді жалға ала аласыз. Қажет болса, сіз өзіңіздің жеке эскизіңізге сәйкес кешкі көйлекті тігуге тапсырыс бере аласыз.',
+            ],
+            [
+                'category_id' => 2,
+                'language' => 'ru',
+                'title' => 'Платья для фотосессий',
+                'description' => 'Шикарные и стильные платья, аксессуары и обувь в аренду для фотосессий.'
+            ],
+            [
+                'category_id' => 2,
+                'language' => 'en',
+                'title' => 'Dresses for photo shoots',
+                'description' => 'Chic and stylish dresses, accessories and shoes for rent for photo shoots.'
+            ],
+            [
+                'category_id' => 2,
+                'language' => 'kk',
+                'title' => 'Фотосессияға арналған көйлектер',
+                'description' => 'Сәнді және сәнді көйлектер, аксессуарлар және фотосессиялар үшін жалға берілетін аяқ киім.'
+            ],
+            [
+                'category_id' => 3,
+                'language' => 'ru',
+                'title' => 'Свадебные платья',
+                'description' => 'Свадебные платья простые, но со вкусом'
+            ],
+            [
+                'category_id' => 3,
+                'language' => 'en',
+                'title' => 'Wedding Dresses',
+                'description' => 'Wedding dresses are simple but tasteful'
+            ],
+            [
+                'category_id' => 3,
+                'language' => 'kk',
+                'title' => 'Үйлену көйлегі',
+                'description' => 'Үйлену көйлектері қарапайым, бірақ талғампаз'
+            ],
+            [
+                'category_id' => 4,
+                'language' => 'ru',
+                'title' => 'Платья на узату',
+                'description' => 'Платья на узату'
+            ],
+            [
+                'category_id' => 4,
+                'language' => 'en',
+                'title' => 'Dresses with knots',
+                'description' => 'Dresses with knots'
+            ],
+            [
+                'category_id' => 4,
+                'language' => 'kk',
+                'title' => 'Түйіндері бар көйлектер',
+                'description' => 'Түйіндері бар көйлектер'
+            ],
+            [
+                'category_id' => 5,
+                'language' => 'ru',
+                'title' => 'Платья для подружки невесты',
+                'description' => 'Разные виды платьев для невесты'
+            ],
+            [
+                'category_id' => 5,
+                'language' => 'en',
+                'title' => 'Bridesmaid Dresses',
+                'description' => 'Different types of dresses for the bride'
+            ],
+            [
+                'category_id' => 5,
+                'language' => 'kk',
+                'title' => 'Қалыңдық көйлектері',
+                'description' => 'Қалыңдыққа арналған көйлектердің әртүрлі түрлері'
+            ],
+            [
+                'category_id' => 6,
+                'language' => 'ru',
+                'title' => 'Национальные этно-костюмы',
+                'description' => 'Разные виды национальных этно-костюмов'
+            ],
+            [
+                'category_id' => 6,
+                'language' => 'en',
+                'title' => 'National ethnic costumes',
+                'description' => 'Different types of national ethnic costumes'
+            ],
+            [
+                'category_id' => 6,
+                'language' => 'kk',
+                'title' => 'Ұлттық этникалық киімдер',
+                'description' => 'Ұлттық этникалық киімдердің әртүрлі түрлері'
+            ],
+        ];
+
+        CategoryTranslation::insert($categoryTransaction);
+    }
+
+
+    public function generateDressTranslation()
+    {
+        $dressTranslation = [
+            [
+                'dress_id' => 1,
+                'title' => 'Вечернее платье Allison',
+                'description' => 'Вечернее платье длиной в пол из пайеточной ткани чёрного цвета. Топ без рукавов с вырезом в виде капли. Закрытая спина на молнии. Юбка длиной в пол, без шлейфа',
+                'language' => 'ru'
+//                'user_id' => 1,
+//                'quantity' => 3,
+            ],
+            [
+                'dress_id' => 1,
+                'title' => 'Allison evening dress',
+                'description' => 'Floor-length evening dress in black sequin fabric. Sleeveless top with teardrop neckline. Closed back with zipper. Floor-length skirt, no train',
+                'language' => 'en'
+//                'user_id' => 1,
+//                'quantity' => 3,
+            ],
+            [
+                'dress_id' => 1,
+                'title' => 'Allison кешкі көйлегі',
+                'description' => 'Қара блестки матадан тігілген еденге арналған кешкі көйлек. Жеңі жоқ үстіңгі белдемше. Артқы жағы найзағаймен жабылған. Еденге жететін юбка, пойыз жоқ',
+                'language' => 'kk'
+//                'user_id' => 1,
+//                'quantity' => 3,
+            ],
+            [
+                'dress_id' => 2,
+                'title' => 'Вечернее платье плиссе Penelope Powder Pink',
+                'description' => 'Длинное вечернее платье пепельно-розового цвета. Выполнено из плиссированной ткани. Топ в стиле американская пройма с вырезом на груди и открытыми плечами.
+                Спинка полностью закрыта. На юбке небольшой разрез под левую ножку.',
+                'language' => 'kk',
+//                'user_id' => 2,
+//                'quantity' => 0,
+            ],
+            [
+                'dress_id' => 3,
+                'title' => 'Шуба Круэллы Cruella Coat',
+                'description' => 'Шубка-макси из искусственного меха чёрно-белой расцветки под далматинца. Массивный воротник. Приталенная. Застёгивается на пуговицу.',
+                'language' => 'kk',
+                //'user_id' => 3,
+                //'quantity' => 1,
+            ],
+            [
+                'dress_id' => 4,
+                'title' => 'Fashion Hunter',
+                'description' => 'Эффектное белое платье с длинными рукавами, декорированными перьями. Глубокий V-образный вырез декольте. На груди и бедре нашита прозрачная сетка со стразами. Талию украшает пояс. Длинная юбка с небольшим шлейфом и высоким разрезом по ножке. Спина закрыта, застегивается на молнию.',
+                'language' => 'kk',
+                //'user_id' => 4,
+                //'quantity' => 7,
+            ],
+            [
+                'dress_id' => 5,
+                'title' => 'Накидка из перьев со шлейфом Feather Cape Discount',
+                'description' => 'Накидка из белых гусиных перьев. Спина и плечи декорированы кристаллами. Длина от верха до конца шлейфа: 3 м. 15 см. Не застегивается.',
+                'language' => 'kk',
+                //'user_id' => 5,
+                //'quantity' => 12,
+            ],
+        ];
+
+        DressTranslation::insert($dressTranslation);
+    }
+
 }

@@ -23,6 +23,7 @@ abstract class CommonRequest extends FormRequest
         return [
             'page' => 'numeric|min:1',
             'per_page' => 'numeric|between:1,100',
+            'language' => 'min:2,max:2'
         ];
     }
 }
