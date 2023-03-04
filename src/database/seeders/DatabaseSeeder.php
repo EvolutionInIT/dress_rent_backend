@@ -442,57 +442,90 @@ class DatabaseSeeder extends Seeder
                 'title' => 'Вечернее платье Allison',
                 'description' => 'Вечернее платье длиной в пол из пайеточной ткани чёрного цвета. Топ без рукавов с вырезом в виде капли. Закрытая спина на молнии. Юбка длиной в пол, без шлейфа',
                 'language' => 'ru'
-//                'user_id' => 1,
-//                'quantity' => 3,
             ],
             [
                 'dress_id' => 1,
                 'title' => 'Allison evening dress',
                 'description' => 'Floor-length evening dress in black sequin fabric. Sleeveless top with teardrop neckline. Closed back with zipper. Floor-length skirt, no train',
                 'language' => 'en'
-//                'user_id' => 1,
-//                'quantity' => 3,
             ],
             [
                 'dress_id' => 1,
                 'title' => 'Allison кешкі көйлегі',
                 'description' => 'Қара блестки матадан тігілген еденге арналған кешкі көйлек. Жеңі жоқ үстіңгі белдемше. Артқы жағы найзағаймен жабылған. Еденге жететін юбка, пойыз жоқ',
                 'language' => 'kk'
-//                'user_id' => 1,
-//                'quantity' => 3,
             ],
             [
                 'dress_id' => 2,
                 'title' => 'Вечернее платье плиссе Penelope Powder Pink',
-                'description' => 'Длинное вечернее платье пепельно-розового цвета. Выполнено из плиссированной ткани. Топ в стиле американская пройма с вырезом на груди и открытыми плечами.
-                Спинка полностью закрыта. На юбке небольшой разрез под левую ножку.',
+                'description' => 'Длинное вечернее платье пепельно-розового цвета. Выполнено из плиссированной ткани. Топ в стиле американская пройма с вырезом на груди и открытыми плечами.Спинка полностью закрыта. На юбке небольшой разрез под левую ножку.',
+                'language' => 'ru',
+            ],
+            [
+                'dress_id' => 2,
+                'title' => 'Pleated evening dress Penelope Powder Pink',
+                'description' => 'Long evening dress in ash-pink color. Made from pleated fabric. American armhole style top with a cutout at the bust and bare shoulders.The back is completely closed. The skirt has a small slit for the left leg.',
+                'language' => 'en',
+            ],
+            [
+                'dress_id' => 2,
+                'title' => 'Бүктелген кешкі көйлек Penelope Powder Pink',
+                'description' => 'Күлді қызғылт түсті кешкі ұзын көйлек. Бүктелген матадан жасалған. Кеуде және жалаң иықтары бар американдық қолтық стиліндегі топ.Артқы жағы толығымен жабылған. Юбканың сол аяққа арналған кішкене тесігі бар.',
                 'language' => 'kk',
-//                'user_id' => 2,
-//                'quantity' => 0,
             ],
             [
                 'dress_id' => 3,
                 'title' => 'Шуба Круэллы Cruella Coat',
                 'description' => 'Шубка-макси из искусственного меха чёрно-белой расцветки под далматинца. Массивный воротник. Приталенная. Застёгивается на пуговицу.',
+                'language' => 'ru',
+            ],
+            [
+                'dress_id' => 3,
+                'title' => 'Cruella Coat',
+                'description' => 'Black and white Dalmatian faux fur maxi coat. Massive collar. Fitted. Fastens with a button.',
+                'language' => 'en',
+            ],
+            [
+                'dress_id' => 3,
+                'title' => 'Cruella тон Cruella Coat',
+                'description' => 'Қара және ақ далматиялық жасанды үлбір макси пальто. Жаппай жаға. Орнатылған. Түймемен бекітіледі.',
                 'language' => 'kk',
-                //'user_id' => 3,
-                //'quantity' => 1,
             ],
             [
                 'dress_id' => 4,
                 'title' => 'Fashion Hunter',
-                'description' => 'Эффектное белое платье с длинными рукавами, декорированными перьями. Глубокий V-образный вырез декольте. На груди и бедре нашита прозрачная сетка со стразами. Талию украшает пояс. Длинная юбка с небольшим шлейфом и высоким разрезом по ножке. Спина закрыта, застегивается на молнию.',
+                'description' => 'Эффектное белое платье с длинными рукавами, декорированными перьями. Глубокий V-образный вырез декольте.На груди и бедре нашита прозрачная сетка со стразами. Талию украшает пояс. Длинная юбка с небольшим шлейфом и высоким разрезом по ножке.Спина закрыта, застегивается на молнию.',
+                'language' => 'ru',
+            ],
+            [
+                'dress_id' => 4,
+                'title' => 'Fashion Hunter',
+                'description' => 'Spectacular white dress with long sleeves decorated with feathers. Deep V neckline.A transparent mesh with rhinestones is sewn on the chest and thigh. The waist is decorated with a belt. Long skirt with a small train and a high leg slit.The back is closed, fastened with a zipper.',
+                'language' => 'en',
+            ],
+            [
+                'dress_id' => 4,
+                'title' => 'Fashion Hunter',
+                'description' => 'Қауырсынмен безендірілген ұзын жеңі бар керемет ақ көйлек. Терең V мойын сызығы.Кеуде мен жамбасқа ринстондар бар мөлдір тор тігіледі. Белі белдікпен безендірілген. Ұзын юбка шағын пойыз және жоғары аяғы тесігі бар.Артқы жағы жабық, найзағаймен бекітілген.',
                 'language' => 'kk',
-                //'user_id' => 4,
-                //'quantity' => 7,
             ],
             [
                 'dress_id' => 5,
                 'title' => 'Накидка из перьев со шлейфом Feather Cape Discount',
-                'description' => 'Накидка из белых гусиных перьев. Спина и плечи декорированы кристаллами. Длина от верха до конца шлейфа: 3 м. 15 см. Не застегивается.',
+                'description' => 'Накидка из белых гусиных перьев. Спина и плечи декорированы кристаллами.Длина от верха до конца шлейфа: 3 м. 15 см. Не застегивается.',
+                'language' => 'ru',
+            ],
+            [
+                'dress_id' => 5,
+                'title' => 'Feather Cape Discount',
+                'description' => 'Cape of white goose feathers. The back and shoulders are decorated with crystals.Length from the top to the end of the train: 3 m. 15 cm. Does not fasten.',
+                'language' => 'en',
+            ],
+            [
+                'dress_id' => 5,
+                'title' => 'Feather Cape жеңілдік',
+                'description' => 'Ақ қаз қауырсынының мүйісі. Арқасы мен иығы кристалдармен безендірілген.Пойыздың басынан аяғына дейінгі ұзындығы: 3м.15см.Бекімейді.',
                 'language' => 'kk',
-                //'user_id' => 5,
-                //'quantity' => 12,
             ],
         ];
 

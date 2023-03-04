@@ -2,16 +2,38 @@
 
 namespace App\Models\Relations;
 
-use App\Models\CategoryTranslation;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 trait translation
 {
+
     /**
+     * @param string $relatedModel
+     * @param string $foreignKey
      * @return HasMany
      */
-    public function translation(): HasMany
+    public function translation(string $relatedModel, string $foreignKey): HasMany
     {
-        return $this->hasMany(CategoryTranslation::class, 'category_id');
+        return $this->hasMany($relatedModel, $foreignKey);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

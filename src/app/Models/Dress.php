@@ -25,9 +25,12 @@ class Dress extends Model
             'title', 'description', 'user_id', 'quantity'
         ];
 
-
     public $timestamps = false;
 
+    public function translations(): HasMany
+    {
+        return $this->translation(DressTranslation::class, 'dress_id');
+    }
 
     /**
      * @return BelongsTo

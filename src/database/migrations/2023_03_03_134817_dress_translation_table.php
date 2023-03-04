@@ -12,12 +12,12 @@ return new class extends Migration {
      */
     public function up()
     {
-        if (!Schema::hasTable('category_translation'))
-            Schema::create('category_translation', function (Blueprint $table) {
-                $table->increments('category_translation_id');
+        if (!Schema::hasTable('dress_translation'))
+            Schema::create('dress_translation', function (Blueprint $table) {
+                $table->increments('dress_translation_id');
 
-                $table->unsignedInteger('category_id');
-                $table->foreign('category_id')->references('category_id')->on('category')->onDelete('cascade');
+                $table->unsignedInteger('dress_id');
+                $table->foreign('dress_id')->references('dress_id')->on('dress')->onDelete('cascade');
 
                 $table->char('language', 2);
 
@@ -36,6 +36,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('category_translation');
+        Schema::dropIfExists('dress_translation');
     }
 };

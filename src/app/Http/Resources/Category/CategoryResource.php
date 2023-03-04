@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources\Category;
 
-use App\Http\Resources\CategoryTranslation\CategoryTranslationResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CategoryResource extends JsonResource
@@ -14,13 +13,14 @@ class CategoryResource extends JsonResource
 
         $title = $this->title;
         $description = $this->description;
-        if ($this->relationLoaded('translation') && $translation = $this->translation->firstWhere('language', $request->language)) {
+        if ($this->relationLoaded('translations') && $translation = $this->translations->firstWhere('language', $request->language)) {
             $title = $translation->title;
             $description = $translation->description;
         }
 
         return [
             'category_id' => $this->category_id,
+            'language' => $this->language, // Возможно не будет нужен, добавлен для теста
             'title' => $title,
             'description' => $description,
         ];

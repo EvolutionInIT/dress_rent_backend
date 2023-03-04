@@ -9,7 +9,6 @@ use App\Http\Requests\Category\SaveCategoryRequest;
 use App\Http\Resources\Category\CategoryCollection;
 use App\Http\Resources\Category\CategoryResource;
 use App\Models\Category;
-use App\Models\CategoryTranslation;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -21,8 +20,7 @@ class CategoryController
     {
         $requestData = $request->validated();
 
-
-        $category = CategoryTranslation
+        $category = Category
             ::when($requestData['category_id'] ?? null, function ($q) use ($requestData) {
                 $q->where('category_id', $requestData['category_id']);
             })
@@ -57,7 +55,7 @@ class CategoryController
         $category =
             Category
                 ::select()
-                ->with('translation:category_id,language,title,description')
+                ->with('translations:category_id,language,title,description')
                 ->paginate(perPage: $requestData['per_page'] ?? 10, page: $requestData['page'] ?? 1);
 
         return new CategoryCollection($category);
