@@ -9,7 +9,7 @@
 > 
 > git checkout v12.1
 > 
->cp -R ../_install/laradock/* .
+>cp -R ../_install/laradock ../.
 >
 
 > _start docker (laradock) containers:
