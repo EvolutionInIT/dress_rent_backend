@@ -40,19 +40,19 @@ Route::prefix('dress')->name('dress.')->group(function () {
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//Route::prefix('category')->name('category.')->group(function () {
+Route::prefix('category')->name('category.')->group(function () {
 //    // /api/category/get
 //    Route::get('', [CategoryController::class, 'get'])->name('get');
 //
 //    // api/category/save
 //    Route::post('save', [CategoryController::class, 'save'])->name('save');
 //
-//    // api/category/list
-//    Route::get('list', [CategoryController::class, 'list'])->name('list');
+    // api/category/list
+    Route::get('list', [CategoryController::class, 'list'])->name('list');
 //
 //    // api/category/delete
 //    Route::delete('delete', [CategoryController::class, 'delete'])->name('delete');
-//});
+});
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 //Route::prefix('user')->name('user.')->group(function () {
