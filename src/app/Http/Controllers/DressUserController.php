@@ -7,7 +7,7 @@ use App\Models\DressUser;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
-class DressUserController extends Controller
+class DressUserController
 {
     /**
      * @param SaveDressUserRequest $request

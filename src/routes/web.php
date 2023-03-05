@@ -14,20 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-//Route::get('/', 'App\Http\Controllers\MainController@home');
-
-Route::get('/', 'App\Http\Controllers\MainController@home');
-
-
-//Route::get('/', function () {
-//    return 'Hello World';
-//});
-
-//Route::get('/', function () {
-//    return 'asdsdadsd';
-//});
-
-//Route::get('/', function () {
-//    return view('home');
-//});
+Route::get('/', function () {
+    return view('home');
+});
