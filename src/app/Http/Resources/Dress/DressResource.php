@@ -22,26 +22,16 @@ class DressResource extends JsonResource
     public function toArray($request): array
     {
 
-
-        $title = $this->title;
-        $description = $this->description;
-        if ($this->relationLoaded('translations') && $translation = $this->translations->firstWhere('language', $request->language)) {
-            $title = $translation->title;
-            $description = $translation->description;
-        }
-
         return [
             'dress_id' => $this->dress_id,
             'language' => $request->language, // Возможно не будет нужен, добавлен для теста
 
             $this->mergeWhen(
-                isset($this->title),
-                ['title' => $title]
-            ),
-
-            $this->mergeWhen(
-                isset($this->description),
-                ['description' => $description]
+                $this->relationLoaded('translation'),
+                [
+                    'title' => $this->translation->title ?? '',
+                    'description' => $this->translation->description ?? '',
+                ]
             ),
 
             $this->mergeWhen(

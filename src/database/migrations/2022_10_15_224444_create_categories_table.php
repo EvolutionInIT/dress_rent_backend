@@ -11,8 +11,6 @@ return new class extends Migration {
         if (!Schema::hasTable('category'))
             Schema::create('category', function (Blueprint $table) {
                 $table->increments('category_id');
-                $table->string('title', 255);
-                $table->text('description', 5000);
                 $table->timestamps();
                 $table->softDeletes();
             });
