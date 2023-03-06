@@ -8,9 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\App;
 
-class Language
+class LangMiddleware
 {
-
     /**
      * Handle an incoming request.
      *
@@ -20,11 +19,11 @@ class Language
      */
     public function handle(Request $request, Closure $next)
     {
+        //=>validate
         $langPrefix = ltrim($request->route()->getPrefix(), '/');
         if ($langPrefix) {
-            App::language($langPrefix);
+            App::setLocale($langPrefix);
         }
-
         return $next($request);
     }
 }

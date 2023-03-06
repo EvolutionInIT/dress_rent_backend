@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Relations\TranslationTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -15,7 +16,7 @@ class Dress extends Model
     use SoftDeletes;
 
     // Traits
-    use Relations\translation;
+    use TranslationTrait;
 
 
     protected $table = 'dress';
@@ -26,11 +27,6 @@ class Dress extends Model
         ];
 
     public $timestamps = false;
-
-    public function translations(): HasMany
-    {
-        return $this->translation(DressTranslation::class, 'dress_id');
-    }
 
     /**
      * @return BelongsTo

@@ -19,7 +19,7 @@ return new class extends Migration {
                 $table->unsignedInteger('category_id');
                 $table->foreign('category_id')->references('category_id')->on('category')->onDelete('cascade');
 
-                $table->char('language', 2);
+                $table->char('language', 2); // Нужно сделать index а не char
 
                 $table->string('title', 255);
                 $table->text('description', 5000);

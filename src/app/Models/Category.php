@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Relations\TranslationTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends Model
@@ -13,7 +13,7 @@ class Category extends Model
     use SoftDeletes;
 
     // Traits
-    use Relations\translation;
+    use TranslationTrait;
 
     protected $table = 'category';
     protected $primaryKey = 'category_id';
@@ -21,8 +21,4 @@ class Category extends Model
 
     public $timestamps = false;
 
-    public function translations(): HasMany
-    {
-        return $this->translation(CategoryTranslation::class, 'category_id');
-    }
 }
