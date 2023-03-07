@@ -25,6 +25,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $ls = new LanguageSeeder();
+        $ls->generateLanguages();
         $this->generateCategory();
         $this->generateUser();
         $this->generateDress();

@@ -15,6 +15,8 @@ class ApoltiSeeder extends Seeder
      */
     public function run(): void
     {
+        $ls = new LanguageSeeder();
+        $ls->generateLanguages();
         $ds = new DatabaseSeeder();
         $ds->generateCategory();
         $ds->generateUser();
