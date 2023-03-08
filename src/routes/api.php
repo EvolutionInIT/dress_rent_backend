@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('dress')->name('dress.')->group(function () {
+Route::middleware('language')->prefix('dress')->name('dress.')->group(function () {
     // /api/dress?
     Route::get('', [DressController::class, 'get'])->name('get');
 
@@ -40,7 +40,7 @@ Route::prefix('dress')->name('dress.')->group(function () {
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Route::prefix('category')->name('category.')->group(function () {
+Route::middleware('language')->prefix('category')->name('category.')->group(function () {
     // /api/category/get
     Route::get('', [CategoryController::class, 'get'])->name('get');
 
