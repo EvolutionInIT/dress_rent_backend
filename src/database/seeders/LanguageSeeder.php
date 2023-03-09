@@ -91,6 +91,13 @@ class LanguageSeeder extends Seeder
 
         Language::insert($languages);
 
-        Language::whereIn('code', ['ru', 'kk', 'en'])->update(['show' => true]);
+        $defaultLanguages =
+            env('INSTALL_LANGUAGE_CODES_SHOW',)
+                ? explode(',', env('INSTALL_LANGUAGE_CODES_SHOW', 'en'))
+                : ['ru', 'kk', 'en'];
+
+        Language
+            ::whereIn('code', $defaultLanguages)
+            ->update(['show' => true]);
     }
 }

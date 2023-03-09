@@ -140,18 +140,12 @@ class DressController
             ->when($requestData['user_id'] ?? null, function ($q) use ($requestData) {
                 $q->where('user_id', $requestData['user_id']);
             })
-            ->with('color:color_id,color')
+            ->with('category.translation:category_id,title,description')
+            ->with('translation:dress_id,title,description')
+            ->with('color.translation:color_id,color')
             ->with('size:size_id,size')
             ->with('photo')
             ->with('user:user_id,name')
-            ->with('category.translation', function ($q) use ($requestData) {
-                $q->select(['category_id', 'language', 'title', 'description'])
-                    ->where('language', $requestData['language']);
-            })
-            ->with('translation', function ($q) use ($requestData) {
-                $q->select(['dress_id', 'language', 'title', 'description'])
-                    ->where('language', $requestData['language']);
-            })
             ->paginate(perPage: $requestData['per_page'] ?? 10, page: $requestData['page'] ?? 1);
 
         return new DressCollection($dress);

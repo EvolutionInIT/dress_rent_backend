@@ -17,7 +17,7 @@ return new class extends Migration {
                 $table->increments('dress_translation_id');
 
                 $table->unsignedInteger('dress_id');
-                $table->foreign('dress_id')->references('dress_id')->on('dress')->onDelete('cascade');
+                $table->foreign('dress_id')->references('dress_id')->on('dress');
 
                 $table->char('language', 2);
 

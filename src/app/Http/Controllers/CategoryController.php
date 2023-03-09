@@ -55,10 +55,7 @@ class CategoryController
         $category =
             Category
                 ::select()
-                ->with('translation', function ($q) use ($requestData) {
-                    $q->select(['category_id', 'language', 'title', 'description'])
-                        ->where('language', $requestData['language']);
-                })
+                ->with('translation:category_id,title,description')
                 ->paginate(perPage: $requestData['per_page'] ?? 10, page: $requestData['page'] ?? 1);
         return new CategoryCollection($category);
     }

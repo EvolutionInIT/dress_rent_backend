@@ -12,7 +12,6 @@ class CategoryResource extends JsonResource
     {
         return [
             'category_id' => $this->category_id,
-            'language' => $this->language, // Возможно не будет нужен, добавлен для теста
 
             $this->mergeWhen(
                 $this->relationLoaded('translation'),

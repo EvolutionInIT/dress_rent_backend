@@ -3,10 +3,10 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Validator;
 
 class LangMiddleware
 {
@@ -15,15 +15,25 @@ class LangMiddleware
      *
      * @param Request $request
      * @param Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
-     * @return Response|RedirectResponse
+     * @return JsonResponse
      */
     public function handle(Request $request, Closure $next)
     {
-        //=>validate
-        $langPrefix = ltrim($request->route()->getPrefix(), '/');
-        if ($langPrefix) {
-            App::setLocale($langPrefix);
-        }
+        $v = Validator::make($request->all(), [
+            'lang' => [
+                'required',
+                'string',
+                'size:2',
+                'exists:App\Models\Language,code,show,1',
+            ],
+        ]);
+
+        $code =
+            $v->passes()
+                ? $request->input('lang')
+                : env('DEFAULT_LANGUAGE_CODE', "en");;
+
+        Config::set('app.language_code', $code);
         return $next($request);
     }
 }

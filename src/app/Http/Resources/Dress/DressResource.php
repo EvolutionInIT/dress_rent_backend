@@ -24,7 +24,6 @@ class DressResource extends JsonResource
 
         return [
             'dress_id' => $this->dress_id,
-            'language' => $request->language, // Возможно не будет нужен, добавлен для теста
 
             $this->mergeWhen(
                 $this->relationLoaded('translation'),

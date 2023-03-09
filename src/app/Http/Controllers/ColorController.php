@@ -43,6 +43,7 @@ class ColorController
 
         $color = Color
             ::select()
+            ->with('translation:color_id,color')
             ->paginate(perPage: $requestData['per_page'] ?? 10, page: $requestData['page'] ?? 1);
 
         return new ColorCollection($color);
