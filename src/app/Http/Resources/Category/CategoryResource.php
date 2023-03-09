@@ -12,8 +12,14 @@ class CategoryResource extends JsonResource
     {
         return [
             'category_id' => $this->category_id,
-            'title' => $this->title,
-            'description' => $this->description,
+
+            $this->mergeWhen(
+                $this->relationLoaded('translation'),
+                [
+                    'title' => $this->translation->title ?? '',
+                    'description' => $this->translation->description ?? '',
+                ]
+            )
         ];
     }
 }

@@ -21,24 +21,23 @@ class DressResource extends JsonResource
 
     public function toArray($request): array
     {
+
         return [
             'dress_id' => $this->dress_id,
 
             $this->mergeWhen(
-                isset($this->title),
-                ['title' => $this->title]
-            ),
-
-            $this->mergeWhen(
-                isset($this->description),
-                ['description' => $this->description]
+                $this->relationLoaded('translation'),
+                [
+                    'title' => $this->translation->title ?? '',
+                    'description' => $this->translation->description ?? '',
+                ]
             ),
 
             $this->mergeWhen(
                 isset($this->price),
                 ['price' => $this->price]
             ),
-            
+
             $this->mergeWhen(
                 isset($this->quantity),
                 ['quantity' => $this->quantity]
@@ -49,7 +48,7 @@ class DressResource extends JsonResource
                 ['deleted' => $this->deleted]
 
             ),
-            
+
             $this->mergeWhen(
                 $this->relationLoaded('user'),
                 ['user' => new UserResource($this->whenLoaded('user'))]

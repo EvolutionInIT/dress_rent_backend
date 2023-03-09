@@ -2,22 +2,21 @@
 
 namespace App\Models;
 
-use App\Models\Traits\TranslationTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Color extends Model
+class CategoryTranslation extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
-    // Traits
-    use TranslationTrait;
-
-    protected $table = 'color';
-    protected $primaryKey = 'color_id';
-    protected $fillable = ['color_id', 'color'];
+    protected $table = 'category_translation';
+    protected $primaryKey = 'category_translation_id';
+    protected $fillable =
+        [
+            'category_id', 'title', 'description', 'language'
+        ];
 
     public $timestamps = false;
 }

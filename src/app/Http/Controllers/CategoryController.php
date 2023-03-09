@@ -14,6 +14,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CategoryController
 {
+
+
     public function get(CategoryRequest $request): CategoryResource
     {
         $requestData = $request->validated();
@@ -50,10 +52,11 @@ class CategoryController
     {
         $requestData = $request->validated();
 
-        $category = Category
-            ::select()
-            ->paginate(perPage: $requestData['per_page'] ?? 10, page: $requestData['page'] ?? 1);
-
+        $category =
+            Category
+                ::select()
+                ->with('translation:category_id,title,description')
+                ->paginate(perPage: $requestData['per_page'] ?? 10, page: $requestData['page'] ?? 1);
         return new CategoryCollection($category);
     }
 

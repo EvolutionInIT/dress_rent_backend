@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\TranslationTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -14,6 +15,10 @@ class Dress extends Model
     use HasFactory;
     use SoftDeletes;
 
+    // Traits
+    use TranslationTrait;
+
+
     protected $table = 'dress';
     protected $primaryKey = 'dress_id';
     protected $fillable =
@@ -21,15 +26,15 @@ class Dress extends Model
             'title', 'description', 'user_id', 'quantity'
         ];
 
-
     public $timestamps = false;
 
-
+    /**
+     * @return BelongsTo
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-
 
     /**
      * @return BelongsToMany
@@ -42,18 +47,34 @@ class Dress extends Model
             ->orderBy('category_id');
     }
 
+    /**
+     * @return BelongsToMany
+     */
     public function color(): BelongsToMany
     {
         return $this
             ->belongsToMany(Color::class, DressColor::class,
-                'dress_id', 'color_id');
+                'dress_id', 'color_id', 'dress_id', 'color_id')
+            ->orderBy('color_id');
     }
 
+    /**
+     * @return BelongsToMany
+     */
     public function size(): BelongsToMany
     {
         return $this
             ->belongsToMany(Size::class, DressSize::class,
-                'dress_id', 'size_id');
+                'dress_id', 'size_id', 'dress_id', 'size_id')
+            ->orderBy('size_id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function booking(): HasMany
+    {
+        return $this->hasMany(Booking::class, 'dress_id');
     }
 
     /**
@@ -64,12 +85,5 @@ class Dress extends Model
         return $this->hasMany(Photo::class, 'dress_id');
     }
 
-    /**
-     * @return HasMany
-     */
-    public function booking(): HasMany
-    {
-        return $this->hasMany(Booking::class, 'dress_id');
-    }
 
 }

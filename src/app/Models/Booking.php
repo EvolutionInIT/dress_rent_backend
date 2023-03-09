@@ -29,6 +29,7 @@ class Booking extends Model
 
     public $timestamps = false;
 
+
     /**
      * @return HasOne
      */
@@ -36,6 +37,4 @@ class Booking extends Model
     {
         return $this->hasOne(Dress::class, 'dress_id', 'dress_id');
     }
-
-
 }

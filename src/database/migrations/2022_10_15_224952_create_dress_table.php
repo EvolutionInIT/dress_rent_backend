@@ -11,8 +11,6 @@ return new class extends Migration {
         if (!Schema::hasTable('dress'))
             Schema::create('dress', function (Blueprint $table) {
                 $table->increments('dress_id');
-                $table->string('title', 255);
-                $table->text('description', 5000);
                 $table->unsignedTinyInteger('quantity')->default(1);
 
                 $table->unsignedInteger('user_id');

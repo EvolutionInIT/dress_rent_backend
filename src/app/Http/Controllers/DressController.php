@@ -140,8 +140,9 @@ class DressController
             ->when($requestData['user_id'] ?? null, function ($q) use ($requestData) {
                 $q->where('user_id', $requestData['user_id']);
             })
-            ->with('category:category_id,title,description')
-            ->with('color:color_id,color')
+            ->with('category.translation:category_id,title,description')
+            ->with('translation:dress_id,title,description')
+            ->with('color.translation:color_id,color')
             ->with('size:size_id,size')
             ->with('photo')
             ->with('user:user_id,name')
@@ -149,6 +150,7 @@ class DressController
 
         return new DressCollection($dress);
     }
+
 
     public function delete(DeleteDressRequest $request): JsonResponse
     {
