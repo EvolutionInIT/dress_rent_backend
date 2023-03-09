@@ -1,9 +1,28 @@
 >git clone repository https://github.com/EvolutionInIT/dress_rent_backend.git
 
->git submodule update --init --recursive
+>
+> cp _install/laravel/.env src/.env
 > 
+>git submodule update --init --recursive
+>
+>cp -R _install/laradock .
+>
 > cd laradock
 > 
 > git checkout v12.1
-> 
-nano .> cp ../_install/laradock/.env .env
+>
+> _start docker (laradock) containers:
+>> docker compose up -d workspace nginx php-fpm mariadb
+>> 
+>> docker-compose exec workspace bash
+>>
+>> _in workspace container exec:
+>>> composer install
+>>>
+>>> php artisan key:generate
+>>>
+>>> fresh --seed
+>>>
+>>> _or better:
+>>>
+>>> fresh && php artisan db:seed --class=ApoltiSeeder
