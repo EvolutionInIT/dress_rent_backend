@@ -91,10 +91,9 @@ class LanguageSeeder extends Seeder
 
         Language::insert($languages);
 
-        $languageCodes = env('INSTALL_LANGUAGE_CODES_SHOW');
         $defaultLanguages =
-            $languageCodes
-                ? explode(',', $languageCodes)
+            env('INSTALL_LANGUAGE_CODES_SHOW',)
+                ? explode(',', env('INSTALL_LANGUAGE_CODES_SHOW', 'en'))
                 : ['ru', 'kk', 'en'];
 
         Language
