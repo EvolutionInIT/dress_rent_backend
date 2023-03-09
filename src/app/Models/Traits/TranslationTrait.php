@@ -15,7 +15,7 @@ trait TranslationTrait
     public function translation(): HasOne
     {
         return $this->hasOne(get_class($this) . 'Translation', $this->primaryKey)
-            ->where('language', config('app.current_language'));
+            ->where('language', config('app.language_code'));
     }
 
     /**
@@ -24,7 +24,7 @@ trait TranslationTrait
     public function translations(): HasMany
     {
         return $this->hasMany(get_class($this) . 'Translation', $this->primaryKey)
-            ->where('language', config('app.current_language'));
+            ->where('language', config('app.language_code'));
     }
 }
 

@@ -6,6 +6,7 @@ use App\Models\Booking;
 use App\Models\Category;
 use App\Models\CategoryTranslation;
 use App\Models\Color;
+use App\Models\ColorTranslation;
 use App\Models\Dress;
 use App\Models\DressCategory;
 use App\Models\DressColor;
@@ -39,6 +40,7 @@ class DatabaseSeeder extends Seeder
         $this->generateBooking();
         $this->generateCategoryTranslation();
         $this->generateDressTranslation();
+        $this->generateColorTranslation();
     }
 
     public function generateDress()
@@ -97,7 +99,7 @@ class DatabaseSeeder extends Seeder
 
     public function generateDressCategory()
     {
-        $dressCategories = [
+        $dressesCategories = [
             ['dress_id' => 1, 'category_id' => 1],
             ['dress_id' => 1, 'category_id' => 2],
             ['dress_id' => 2, 'category_id' => 1],
@@ -109,7 +111,7 @@ class DatabaseSeeder extends Seeder
             ['dress_id' => 5, 'category_id' => 5],
 
         ];
-        DressCategory::insert($dressCategories);
+        DressCategory::insert($dressesCategories);
     }
 
     public function generateUser()
@@ -157,18 +159,14 @@ class DatabaseSeeder extends Seeder
     public function generateColor()
     {
         $colors = [
-            ['color' => 'Blue'],
-            ['color' => 'Black'],
-            ['color' => 'Red'],
-            ['color' => 'Purple'],
-            ['color' => 'White'],
+            [], [], [], [], [],
         ];
         Color::insert($colors);
     }
 
     public function generateDressColor()
     {
-        $dressColors = [
+        $dressesColors = [
             ['dress_id' => 1, 'color_id' => 1],
             ['dress_id' => 1, 'color_id' => 2],
             ['dress_id' => 1, 'color_id' => 4],
@@ -181,7 +179,7 @@ class DatabaseSeeder extends Seeder
             ['dress_id' => 5, 'color_id' => 4],
             ['dress_id' => 5, 'color_id' => 5]
         ];
-        DressColor::insert($dressColors);
+        DressColor::insert($dressesColors);
     }
 
     public function generateSize()
@@ -198,7 +196,7 @@ class DatabaseSeeder extends Seeder
 
     public function generateDressSize()
     {
-        $dressSizes = [
+        $dressesSizes = [
             ['dress_id' => 1, 'size_id' => 4],
             ['dress_id' => 1, 'size_id' => 5],
             ['dress_id' => 1, 'size_id' => 2],
@@ -211,7 +209,7 @@ class DatabaseSeeder extends Seeder
             ['dress_id' => 5, 'size_id' => 1],
             ['dress_id' => 5, 'size_id' => 2],
         ];
-        DressSize::insert($dressSizes);
+        DressSize::insert($dressesSizes);
     }
 
     public function generatePhoto()
@@ -250,7 +248,7 @@ class DatabaseSeeder extends Seeder
 
     public function generateBooking()
     {
-        $booking = [
+        $bookings = [
             [
                 'dress_id' => '1',
                 'date' => today(),
@@ -282,12 +280,12 @@ class DatabaseSeeder extends Seeder
                 'status' => Booking::STATUSES['NEW'],
             ],
         ];
-        Booking::insert($booking);
+        Booking::insert($bookings);
     }
 
     public function generateCategoryTranslation()
     {
-        $categoryTransaction = [
+        $categoriesTransactions = [
             [
                 'category_id' => 1,
                 'language' => 'ru',
@@ -398,13 +396,12 @@ class DatabaseSeeder extends Seeder
             ],
         ];
 
-        CategoryTranslation::insert($categoryTransaction);
+        CategoryTranslation::insert($categoriesTransactions);
     }
-
 
     public function generateDressTranslation()
     {
-        $dressTranslation = [
+        $dressesTranslations = [
             [
                 'dress_id' => 1,
                 'title' => 'Вечернее платье Allison',
@@ -497,7 +494,89 @@ class DatabaseSeeder extends Seeder
             ],
         ];
 
-        DressTranslation::insert($dressTranslation);
+        DressTranslation::insert($dressesTranslations);
+    }
+
+    public function generateColorTranslation()
+    {
+        $colorsTranslations = [
+            [
+                'color_id' => 1,
+                'language' => 'en',
+                'color' => 'Blue',
+            ],
+            [
+                'color_id' => 1,
+                'language' => 'ru',
+                'color' => 'Голубой',
+            ],
+            [
+                'color_id' => 1,
+                'language' => 'kk',
+                'color' => 'Көк',
+            ],
+            [
+                'color_id' => 2,
+                'language' => 'en',
+                'color' => 'Black',
+            ],
+            [
+                'color_id' => 2,
+                'language' => 'ru',
+                'color' => 'Черный',
+            ],
+            [
+                'color_id' => 2,
+                'language' => 'kk',
+                'color' => 'Қара',
+            ],
+            [
+                'color_id' => 3,
+                'language' => 'en',
+                'color' => 'Red',
+            ],
+            [
+                'color_id' => 3,
+                'language' => 'ru',
+                'color' => 'Красный',
+            ],
+            [
+                'color_id' => 3,
+                'language' => 'kk',
+                'color' => 'Қызыл',
+            ],
+            [
+                'color_id' => 4,
+                'language' => 'en',
+                'color' => 'Purple',
+            ],
+            [
+                'color_id' => 4,
+                'language' => 'ru',
+                'color' => 'Фиолетовый',
+            ],
+            [
+                'color_id' => 4,
+                'language' => 'kk',
+                'color' => 'Kүлгін',
+            ],
+            [
+                'color_id' => 5,
+                'language' => 'en',
+                'color' => 'White',
+            ],
+            [
+                'color_id' => 5,
+                'language' => 'ru',
+                'color' => 'Белый',
+            ],
+            [
+                'color_id' => 5,
+                'language' => 'kk',
+                'color' => 'Ақ',
+            ],
+        ];
+        ColorTranslation::insert($colorsTranslations);
     }
 
 }

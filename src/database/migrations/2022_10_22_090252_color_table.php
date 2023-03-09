@@ -10,7 +10,6 @@ return new class extends Migration {
         if (!Schema::hasTable('color'))
             Schema::create('color', function (Blueprint $table) {
                 $table->increments('color_id');
-                $table->string('color', 20);
                 $table->softDeletes();
             });
     }
