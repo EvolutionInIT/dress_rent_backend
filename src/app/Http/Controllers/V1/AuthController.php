@@ -4,9 +4,9 @@ namespace App\Http\Controllers\V1;
 
 use App\Http\Requests\V1\Auth\RefreshRequest;
 use App\Http\Requests\V1\Auth\LoginRequest;
-use App\Http\Resources\V1\AuthUserResource;
-use App\Models\V1\User;
-use App\Models\V1\UserRefreshToken;
+use App\Http\Resources\V1\Common\AuthUserResource;
+use App\Models\V1\User\User;
+use App\Models\V1\User\UserRefreshToken;
 use App\Services\V1\AuthService;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -27,7 +27,7 @@ class AuthController
         $user =
             User
                 ::where('email', $requestData['email'])
-                //->with('permissions')
+                ->with('permissions')
                 ->first();
 
         if ($user) {
@@ -91,7 +91,7 @@ class AuthController
      * @param Request $request
      * @return AuthUserResource|Response
      */
-    public function getAuthUser(Request $request)
+    public function getAuthUser(Request $request): AuthUserResource|Response
     {
 
         if ($request->bearerToken()) {

@@ -32,8 +32,6 @@ class AuthService
         $data = [
             'accessToken' => $jwt,
             'refreshToken' => $refreshToken,
-            'status' => 'SUCCESS',
-            'message' => 'User is authenticated successfully'
         ];
 
         return $data;
