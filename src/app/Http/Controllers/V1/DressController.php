@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\V1;
 
 use App\Http\Requests\Dress\DeleteDressRequest;
 use App\Http\Requests\Dress\DressRequest;
@@ -145,7 +145,6 @@ class DressController
             ->with('color.translation:color_id,color')
             ->with('size:size_id,size')
             ->with('photo')
-            ->with('user:user_id,name')
             ->paginate(perPage: $requestData['per_page'] ?? 10, page: $requestData['page'] ?? 1);
 
         return new DressCollection($dress);

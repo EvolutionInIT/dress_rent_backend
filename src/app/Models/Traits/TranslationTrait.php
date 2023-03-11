@@ -5,7 +5,6 @@ namespace App\Models\Traits;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-
 trait TranslationTrait
 {
 

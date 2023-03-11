@@ -19,7 +19,9 @@
 >> _in workspace container exec:
 >>> composer install
 >>>
->>> php artisan key:generate
+>>>php artisan key:generate
+>>>
+>>>php artisan jwt:secret
 >>>
 >>> fresh --seed
 >>>
