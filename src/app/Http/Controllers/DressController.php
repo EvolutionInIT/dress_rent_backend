@@ -140,7 +140,7 @@ class DressController
             ->when($requestData['user_id'] ?? null, function ($q) use ($requestData) {
                 $q->where('user_id', $requestData['user_id']);
             })
-            ->with('category.translation:category_id,title,description')
+            ->with('category.translation:category_id,title')
             ->with('translation:dress_id,title,description')
             ->with('color.translation:color_id,color')
             ->with('size:size_id,size')
