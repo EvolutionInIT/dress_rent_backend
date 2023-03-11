@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Dress;
 
+use App\Http\Resources\Category\CategoryNotDescriptionResource;
 use App\Http\Resources\Category\CategoryResource;
 use App\Http\Resources\Color\ColorResource;
 use App\Http\Resources\Photo\PhotoResource;
@@ -19,7 +20,8 @@ class DressResource extends JsonResource
      * @return array
      */
 
-    public function toArray($request): array
+
+    public function toArray(Request $request): array
     {
 
         return [

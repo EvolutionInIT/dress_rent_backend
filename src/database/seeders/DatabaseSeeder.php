@@ -26,20 +26,25 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+
+
         $ls = new LanguageSeeder();
         $ls->generateLanguages();
-        $this->generateCategory();
         $this->generateUser();
-        $this->generateDress();
-        $this->generateDressCategory();
+        $this->generateCategory();
+        $as = new ApoltiSeeder();
+        $as->generateDress();
+        //$this->generateDress();
+        //$this->generateDressCategory();
         $this->generateColor();
         $this->generateDressColor();
         $this->generateSize();
         $this->generateDressSize();
-        $this->generatePhoto();
-        $this->generateBooking();
+        //$this->generatePhoto();
+        //$this->generateBooking();
         $this->generateCategoryTranslation();
-        $this->generateDressTranslation();
+        $as->generateDressTranslation();
+        //$this->generateDressTranslation();
         $this->generateColorTranslation();
     }
 
@@ -68,22 +73,61 @@ class DatabaseSeeder extends Seeder
             ],
         ];
 
-        $dressData = [
-            'updated_at' => now(),
-            'created_at' => now()
-        ];
+        $dressesPhoto = [];
+        foreach ($dresses as $dress) {
+            $photos = $dress['photos'] ?? [];
+            $categories = $dress['categories'] ?? [];
+            unset($dress['photos']);
+            unset($dress['categories']);
 
-        foreach ($dresses as $dress)
-            $resultDresses [] = array_merge($dress, $dressData);
+            $newDress = Dress::create(
+                [
+                    ...$dress,
+                    ...[
+                        'updated_at' => now(),
+                        'created_at' => now(),
+                    ],
+                ]
+            );
 
-        Dress::insert($resultDresses);
+            $newDress->category()->attach($categories);
+
+            foreach ($photos as $photo)
+                $dressesPhoto[] = [
+                    'dress_id' => $newDress->dress_id,
+                    'image' => $photo
+                ];
+
+
+        }
+
+        if (count($dressesPhoto))
+            Photo::insert($dressesPhoto);
+
+
+//        $dressData = [
+//            'updated_at' => now(),
+//            'created_at' => now()
+//        ];
+//
+//
+//        foreach ($dresses as $dress)
+//            $resultDresses [] = array_merge($dress, $dressData);
+//
+//        Dress::insert($resultDresses);
+
 
     }
 
     public function generateCategory()
     {
         $categories = [
-            [], [], [], [], [], [],
+            ['category_id' => 1],
+            ['category_id' => 2],
+            ['category_id' => 3],
+            ['category_id' => 4],
+            ['category_id' => 5],
+            ['category_id' => 6],
         ];
 
         $categoryData = [
@@ -118,26 +162,31 @@ class DatabaseSeeder extends Seeder
     {
         $users = [
             [
+                'user_id' => 1,
                 'name' => 'Анжела',
                 'email' => 'Anjela@gmail.com',
                 'password' => bcrypt(10)
             ],
             [
+                'user_id' => 2,
                 'name' => 'Виктория',
                 'email' => 'Victorya@gmail.com',
                 'password' => bcrypt(10)
             ],
             [
+                'user_id' => 3,
                 'name' => 'Валерия',
                 'email' => 'Valeria@gmail.com',
                 'password' => bcrypt(10)
             ],
             [
+                'user_id' => 4,
                 'name' => 'Анастасия',
                 'email' => 'Anastasiya@gmail.com',
                 'password' => bcrypt(10)
             ],
             [
+                'user_id' => 5,
                 'name' => 'Алтынай',
                 'email' => 'Altinay@gmail.com',
                 'password' => bcrypt(10)
