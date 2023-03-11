@@ -2,8 +2,7 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\LangMiddleware;
-use App\Models\Language;
+use App\Http\Middleware\V1\LangMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel

@@ -1,10 +1,11 @@
 <?php
 
+use App\Http\Controllers\V1\AuthController;
 use App\Http\Controllers\BookingController;
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\DressCategoryController;
-use App\Http\Controllers\DressController;
+use App\Http\Controllers\V1\CategoryController;
+use App\Http\Controllers\V1\DressController;
 use App\Http\Controllers\DressUserController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\SizeController;
@@ -22,12 +23,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('dress')->name('dress.')->group(function () {
-    // /api/dress?
-    Route::get('', [DressController::class, 'get'])->name('get');
+Route::prefix('auth')->name('auth.')->group(function () {
+    Route::post('login', [AuthController::class, 'login'])->name('login');
+    Route::post('token/alive', [AuthController::class, 'alive'])->name('token.alive');
+});
 
-    // api/dress/list
+Route::prefix('dress')->name('dress.')->group(function () {
     Route::get('list', [DressController::class, 'list'])->name('list');
+    Route::get('', [DressController::class, 'get'])->name('get');
+});
+
+Route::prefix('category')->name('category.')->group(function () {
+    Route::get('list', [CategoryController::class, 'list'])->name('list');
+});
+
+Route::middleware('auth:api')->group(function () {
+
+    Route::prefix('auth')->name('auth.')->group(function () {
+        Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+    });
+
+    Route::prefix('dress')->name('dress.')->group(function () {
 
 //    // api/dress/save
 //    Route::post('save', [DressController::class, 'save'])->name('save');
@@ -37,22 +53,20 @@ Route::prefix('dress')->name('dress.')->group(function () {
 //
 //    // api/dress/update
 //    Route::patch('update', [DressController::class, 'update'])->name('update');
-});
+    });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Route::prefix('category')->name('category.')->group(function () {
+    Route::prefix('category')->name('category.')->group(function () {
 //    // /api/category/get
 //    Route::get('', [CategoryController::class, 'get'])->name('get');
 //
 //    // api/category/save
 //    Route::post('save', [CategoryController::class, 'save'])->name('save');
 //
-    // api/category/list
-    Route::get('list', [CategoryController::class, 'list'])->name('list');
 //
 //    // api/category/delete
 //    Route::delete('delete', [CategoryController::class, 'delete'])->name('delete');
-});
+    });
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 //Route::prefix('user')->name('user.')->group(function () {
@@ -148,5 +162,5 @@ Route::prefix('category')->name('category.')->group(function () {
 //    Route::get('available', [BookingController::class, 'available'])->name('available');
 //});
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+});
 
