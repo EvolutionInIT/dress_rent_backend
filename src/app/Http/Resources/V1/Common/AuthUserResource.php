@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\V1;
+namespace App\Http\Resources\V1\Common;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -20,7 +20,7 @@ class AuthUserResource extends JsonResource
             'firstname' => $this->firstname,
             'lastname' => $this->lastname,
             'email' => $this->email,
-            'roles' => []
+            'permissions' => UserPermissionResource::collection($this->permissions),
         ];
     }
 }

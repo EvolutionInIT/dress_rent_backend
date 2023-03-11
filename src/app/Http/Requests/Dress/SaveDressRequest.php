@@ -17,7 +17,7 @@ class SaveDressRequest extends CommonRequest
         return [
             'title' => 'present|min:1|max:100',
             'description' => 'present|min:0|max:5000',
-            'user_id' => 'required|integer|exists:App\Models\User,user_id',
+            'user_id' => 'required|integer|exists:App\Models\V1\User\User,user_id',
             'quantity' => 'required|integer',
             'category_id' => 'required|array',
             'category_id.*' => 'required|integer|exists:App\Models\Category,category_id',

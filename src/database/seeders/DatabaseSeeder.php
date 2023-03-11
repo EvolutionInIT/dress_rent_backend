@@ -14,8 +14,10 @@ use App\Models\DressSize;
 use App\Models\DressTranslation;
 use App\Models\Photo;
 use App\Models\Size;
-use App\Models\V1\User;
+use App\Models\V1\User\Permission;
+use App\Models\V1\User\User;
 use App\Helpers\V1\Helper;
+use App\Models\V1\User\UserPermission;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -29,6 +31,7 @@ class DatabaseSeeder extends Seeder
     {
         $ls = new LanguageSeeder();
         $ls->generateLanguages();
+        $this->generatePermissions();
         $this->generateUser();
         $this->generateCategory();
         $this->generateDress();
@@ -175,12 +178,40 @@ class DatabaseSeeder extends Seeder
 
         foreach ($users as $user) {
             $password = Helper::getRandomString(20);
-            $user['password'] =  bcrypt($password);
+            $user['password'] = bcrypt($password);
             $resultUsers [] = array_merge($user, $userData);
             echo sprintf('Add User %s (email: %s, password: %s)', $user['firstname'], $user['email'], $password) . "\n";
         }
 
         User::insert($resultUsers);
+
+        $user = User::where('firstname', 'Admin')->first();
+        $permission = Permission::where('permission', 'ADMIN')->first();
+
+        UserPermission::create(
+            [
+                'user_id' => $user->user_id,
+                'permission_id' => $permission->permission_id
+            ]
+        );
+    }
+
+    public function generatePermissions()
+    {
+        $permissions = [
+            'ADMIN',
+            'SHOP_OWNER',
+            'CLIENT',
+        ];
+        $permissionsCreate = [];
+        foreach ($permissions as $permission) {
+            $permissionsCreate[] = [
+                'permission' => $permission,
+                'created_at' => now(),
+                'updated_at' => now()
+            ];
+        }
+        Permission::insert($permissionsCreate);
     }
 
     public function generateColor()
