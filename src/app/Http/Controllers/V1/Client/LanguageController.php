@@ -2,22 +2,25 @@
 
 namespace App\Http\Controllers\V1\Client;
 
+use App\Http\Resources\V1\Client\Language\LanguageResource;
 use App\Models\Language;
 use App\Http\Resources\V1\Client\Language\LanguageCollection;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 
 class LanguageController
 {
     /**
-     * @return LanguageCollection
+     * @return AnonymousResourceCollection
      */
-    public function list(): LanguageCollection
+    public function list(): AnonymousResourceCollection
     {
         $language =
             Language
-                ::where('show', true)
+                ::select('language_id', 'title', 'code')
+                ->where('show', true)
                 ->get();
 
-        return new LanguageCollection($language);
+        return LanguageResource::collection($language);
     }
 }

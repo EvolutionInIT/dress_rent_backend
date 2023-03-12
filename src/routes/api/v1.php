@@ -6,6 +6,7 @@ use App\Http\Controllers\ColorController;
 use App\Http\Controllers\DressCategoryController;
 use App\Http\Controllers\V1\CategoryController;
 use App\Http\Controllers\V1\DressController;
+use App\Http\Controllers\V1\Client\LanguageController;
 use App\Http\Controllers\DressUserController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\SizeController;
@@ -38,6 +39,14 @@ Route
     ->withoutMiddleware('auth.role')
     ->group(function () {
         Route::get('list', [CategoryController::class, 'list'])->name('list');
+    });
+
+Route
+    ::prefix('language')
+    ->name('language.')
+    ->withoutMiddleware('auth.role')
+    ->group(function () {
+        Route::get('list', [LanguageController::class, 'list'])->name('list');
     });
 
 
