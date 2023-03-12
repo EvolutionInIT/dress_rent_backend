@@ -14,7 +14,10 @@ use App\Models\DressSize;
 use App\Models\DressTranslation;
 use App\Models\Photo;
 use App\Models\Size;
-use App\Models\User;
+use App\Models\V1\User\Permission;
+use App\Models\V1\User\User;
+use App\Helpers\V1\Helper;
+use App\Models\V1\User\UserPermission;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -26,15 +29,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-
-
         $ls = new LanguageSeeder();
         $ls->generateLanguages();
+        $this->generatePermissions();
         $this->generateUser();
         $this->generateCategory();
-        $as = new ApoltiSeeder();
-        $as->generateDress();
-        //$this->generateDress();
+        $this->generateDress();
         //$this->generateDressCategory();
         $this->generateColor();
         $this->generateDressColor();
@@ -43,8 +43,7 @@ class DatabaseSeeder extends Seeder
         //$this->generatePhoto();
         //$this->generateBooking();
         $this->generateCategoryTranslation();
-        $as->generateDressTranslation();
-        //$this->generateDressTranslation();
+        $this->generateDressTranslation();
         $this->generateColorTranslation();
     }
 
@@ -52,7 +51,7 @@ class DatabaseSeeder extends Seeder
     {
         $dresses = [
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'quantity' => 3,
             ],
             [
@@ -60,15 +59,15 @@ class DatabaseSeeder extends Seeder
                 'quantity' => 0,
             ],
             [
-                'user_id' => 3,
+                'user_id' => 2,
                 'quantity' => 1,
             ],
             [
-                'user_id' => 4,
+                'user_id' => 2,
                 'quantity' => 7,
             ],
             [
-                'user_id' => 5,
+                'user_id' => 2,
                 'quantity' => 12,
             ],
         ];
@@ -162,34 +161,12 @@ class DatabaseSeeder extends Seeder
     {
         $users = [
             [
-                'user_id' => 1,
-                'name' => 'Анжела',
-                'email' => 'Anjela@gmail.com',
-                'password' => bcrypt(10)
+                'firstname' => 'Admin',
+                'email' => 'admin@admin.com',
             ],
             [
-                'user_id' => 2,
-                'name' => 'Виктория',
-                'email' => 'Victorya@gmail.com',
-                'password' => bcrypt(10)
-            ],
-            [
-                'user_id' => 3,
-                'name' => 'Валерия',
-                'email' => 'Valeria@gmail.com',
-                'password' => bcrypt(10)
-            ],
-            [
-                'user_id' => 4,
-                'name' => 'Анастасия',
-                'email' => 'Anastasiya@gmail.com',
-                'password' => bcrypt(10)
-            ],
-            [
-                'user_id' => 5,
-                'name' => 'Алтынай',
-                'email' => 'Altinay@gmail.com',
-                'password' => bcrypt(10)
+                'firstname' => 'user',
+                'email' => 'user@admin.com',
             ],
         ];
 
@@ -199,10 +176,42 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => now()
         ];
 
-        foreach ($users as $user)
+        foreach ($users as $user) {
+            $password = Helper::getRandomString(20);
+            $user['password'] = bcrypt($password);
             $resultUsers [] = array_merge($user, $userData);
+            echo sprintf('Add User %s (email: %s, password: %s)', $user['firstname'], $user['email'], $password) . "\n";
+        }
 
         User::insert($resultUsers);
+
+        $user = User::where('firstname', 'Admin')->first();
+        $permission = Permission::where('permission', 'ADMIN')->first();
+
+        UserPermission::create(
+            [
+                'user_id' => $user->user_id,
+                'permission_id' => $permission->permission_id
+            ]
+        );
+    }
+
+    public function generatePermissions()
+    {
+        $permissions = [
+            'ADMIN',
+            'SHOP_OWNER',
+            'CLIENT',
+        ];
+        $permissionsCreate = [];
+        foreach ($permissions as $permission) {
+            $permissionsCreate[] = [
+                'permission' => $permission,
+                'created_at' => now(),
+                'updated_at' => now()
+            ];
+        }
+        Permission::insert($permissionsCreate);
     }
 
     public function generateColor()
@@ -299,32 +308,32 @@ class DatabaseSeeder extends Seeder
     {
         $bookings = [
             [
-                'dress_id' => '1',
+                'dress_id' => 1,
                 'date' => today(),
                 'status' => Booking::STATUSES['NEW'],
             ],
             [
-                'dress_id' => '1',
+                'dress_id' => 1,
                 'date' => '2023-02-22',
                 'status' => Booking::STATUSES['APPROVED'],
             ],
             [
-                'dress_id' => '2',
+                'dress_id' => 1,
                 'date' => today(),
                 'status' => Booking::STATUSES['NEW'],
             ],
             [
-                'dress_id' => '3',
+                'dress_id' => 1,
                 'date' => today(),
                 'status' => Booking::STATUSES['NEW'],
             ],
             [
-                'dress_id' => '4',
+                'dress_id' => 1,
                 'date' => today(),
                 'status' => Booking::STATUSES['NEW'],
             ],
             [
-                'dress_id' => '5',
+                'dress_id' => 1,
                 'date' => today(),
                 'status' => Booking::STATUSES['NEW'],
             ],

@@ -20,6 +20,7 @@ class ApoltiSeeder extends Seeder
         $ls->generateLanguages();
         $ds = new DatabaseSeeder();
         $ds->generateCategory();
+        $ds->generatePermissions();
         $ds->generateUser();
         $ds->generateColor();
         $ds->generateSize();
