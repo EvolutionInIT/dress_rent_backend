@@ -9,6 +9,7 @@ use App\Http\Controllers\DressUserController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\SizeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\V1\Client\LanguageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,12 +49,22 @@ Route::prefix('category')->name('category.')->group(function () {
 //    Route::post('save', [CategoryController::class, 'save'])->name('save');
 //
     // api/category/list
-    Route::get('list', [CategoryController::class, 'list'])->name('list');
+    Route::get('list', [CategoryController::class, 'list'])->name('list.V1');
 //
 //    // api/category/delete
 //    Route::delete('delete', [CategoryController::class, 'delete'])->name('delete');
 });
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Route::prefix('language')->name('language.')->group(function () {
+
+    // api/language/list
+    Route::get('list', [LanguageController::class, 'list'])->name('list');
+
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 //
 //Route::prefix('user')->name('user.')->group(function () {
 //    // /api/user?
