@@ -21,8 +21,12 @@
 >>>
 >>> php artisan key:generate
 >>>
+>>> php artisan jwt:secret
+> 
 >>> fresh --seed
 >>>
+>>> 
+> 
 >>> _or better:
 >>>
 >>> fresh && php artisan db:seed --class=ApoltiSeeder

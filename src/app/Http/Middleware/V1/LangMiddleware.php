@@ -24,7 +24,7 @@ class LangMiddleware
                 'required',
                 'string',
                 'size:2',
-                'exists:App\Models\Language,code,show,1',
+                'exists:App\Models\V1\Language,code,show,1',
             ],
         ]);
 
