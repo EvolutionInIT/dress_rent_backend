@@ -88,6 +88,38 @@ class BookingController
             $dates[] = $date->toDateString();
         }
 
+//        $status =
+//            Dress
+//                ::when(!empty($requestData['dress_id']), function ($q) use ($requestData) {
+//                    $q->whereIn('dress_id', $requestData['dress_id']);
+//                })
+//                ->leftJoin('booking', function ($join) {
+//                    $join->on('dress.dress_id', '=', 'booking.dress_id')
+//                        ->where('booking.date', '>=', DB::raw('CURDATE()'))
+//                        ->where('booking.date', '<=', DB::raw('DATE_ADD(CURDATE(), INTERVAL 2 WEEK)'));
+//                })
+//                ->select('dress.*', DB::raw('COUNT(booking.dress_id) as num_booking'))
+//                ->groupBy('dress.dress_id', 'dress.quantity', 'dress.user_id',
+//                    'dress.price', 'dress.created_at', 'dress.deleted_at', 'dress.updated_at')
+//                ->havingRaw('dress.quantity > num_booking OR num_booking IS NULL')
+//                ->get();
+
+//        $status =
+//            Dress
+//                ::when(!empty($requestData['dress_id']), function ($q) use ($requestData) {
+//                    $q->whereIn('dress_id', $requestData['dress_id']);
+//                })
+//                ->leftJoin('booking', function ($join) {
+//                    $join->on('dress.dress_id', '=', 'booking.dress_id')
+//                        ->where('booking.date', '>=', DB::raw('CURDATE()'))
+//                        ->where('booking.date', '<=', DB::raw('DATE_ADD(CURDATE(), INTERVAL 2 WEEK)'));
+//                })
+//                ->leftJoin('component', 'dress.dress_id', '=', 'component.dress_id')
+//                ->select('dress.*', 'component.quantity as num_component', DB::raw('COUNT(booking.dress_id) as num_booking'))
+//                ->groupBy('dress.dress_id', 'dress.quantity', 'dress.user_id', 'dress.price', 'dress.created_at', 'dress.deleted_at', 'dress.updated_at', 'component.quantity')
+//                ->havingRaw('(dress.quantity - num_component) > num_booking OR num_booking IS NULL')
+//                ->get();
+
         $status =
             Dress
                 ::when(!empty($requestData['dress_id']), function ($q) use ($requestData) {
@@ -113,6 +145,12 @@ class BookingController
                 'booking' => $status
             ];
         }
+
+//        return [
+//            'date' => $this->date,
+//            'booking' => DressResource::collection($this->booking),
+//            'components' => ComponentResource::collection($this->booking->components)->with('dress'),
+//        ];
 
         return BookingDateResource::collection($datesStatus);
     }

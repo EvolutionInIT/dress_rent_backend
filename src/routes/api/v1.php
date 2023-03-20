@@ -10,6 +10,7 @@ use App\Http\Controllers\V1\Admin\UserController;
 use App\Http\Controllers\V1\AuthController;
 use App\Http\Controllers\V1\Client\CategoryControllerClient;
 use App\Http\Controllers\V1\Client\LanguageControllerClient;
+use App\Http\Controllers\V1\Admin\ComponentController;
 use Illuminate\Support\Facades\Route;
 
 Route
@@ -108,6 +109,16 @@ Route
         Route::post('save', [UserController::class, 'save'])->name('save');
         Route::get('list', [UserController::class, 'list'])->name('list');
         Route::post('delete', [UserController::class, 'delete'])->name('delete');
+    });
+
+Route
+    ::prefix('component')
+    ->name('component.')
+    ->withoutMiddleware('auth.role')
+    ->group(function () {
+        Route::post('save', [ComponentController::class, 'save'])->name('save');
+        Route::get('list', [ComponentController::class, 'list'])->name('list');
+        Route::post('update', [ComponentController::class, 'update'])->name('update');
     });
 
 //default with auth.role middleware

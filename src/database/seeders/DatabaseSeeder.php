@@ -8,16 +8,15 @@ use App\Models\V1\Category;
 use App\Models\V1\CategoryTranslation;
 use App\Models\V1\Color;
 use App\Models\V1\ColorTranslation;
+use App\Models\V1\ComponentTranslation;
 use App\Models\V1\Dress;
-use App\Models\V1\DressCategory;
-use App\Models\V1\DressColor;
-use App\Models\V1\DressSize;
 use App\Models\V1\DressTranslation;
 use App\Models\V1\Photo;
 use App\Models\V1\Size;
 use App\Models\V1\User\Permission;
 use App\Models\V1\User\User;
 use App\Models\V1\User\UserPermission;
+use App\Models\V1\Component;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -34,17 +33,12 @@ class DatabaseSeeder extends Seeder
         $this->generatePermissions();
         $this->generateUser();
         $this->generateCategory();
-        $this->generateDress();
-        $this->generateDressCategory();
+        $this->generateComponent();
         $this->generateColor();
-        $this->generateDressColor();
         $this->generateSize();
-        $this->generateDressSize();
+        $this->generateDress();
         $this->generatePhoto();
         $this->generateBooking();
-        //$this->generateCategoryTranslation();
-        //$this->generateDressTranslation();
-        //$this->generateColorTranslation();
     }
 
     public function generateDress()
@@ -53,261 +47,203 @@ class DatabaseSeeder extends Seeder
             [
                 'user_id' => 2,
                 'quantity' => 3,
+                'components' => [1],
+                'categories' => [1],
+                'colors' => [1, 2, 4],
+                'sizes' => [2, 4, 5],
             ],
             [
                 'user_id' => 2,
                 'quantity' => 0,
+                'components' => [2],
+                'categories' => [1],
+                'colors' => [2, 3],
+                'sizes' => [2, 3],
             ],
             [
                 'user_id' => 2,
                 'quantity' => 1,
+                'components' => [3],
+                'categories' => [1],
+                'colors' => [5, 2],
+                'sizes' => [4, 5],
             ],
             [
                 'user_id' => 2,
                 'quantity' => 7,
+                'components' => [4],
+                'categories' => [1],
+                'colors' => [3, 1],
+                'sizes' => [2, 3],
             ],
             [
                 'user_id' => 2,
                 'quantity' => 12,
+                'components' => [1],
+                'categories' => [1],
+                'colors' => [4, 5],
+                'sizes' => [1, 5],
             ],
         ];
 
-        $dressData = [
-            'updated_at' => now(),
-            'created_at' => now()
+        $dressesPhoto = [];
+        foreach ($dresses as $dress) {
+            $photos = $dress['photos'] ?? [];
+            $categories = $dress['categories'] ?? [];
+            $components = $dress['components'] ?? [];
+            $colors = $dress['colors'] ?? [];
+            $sizes = $dress['sizes'] ?? [];
+            unset($dress['photos']);
+            unset($dress['categories']);
+            unset($dress['components']);
+            unset($dress['colors']);
+            unset($dress['sizes']);
+
+            $newDress = Dress::create(
+                [
+                    ...$dress,
+                    ...[
+                        'updated_at' => now(),
+                        'created_at' => now(),
+                    ],
+                ]
+            );
+
+            $newDress->category()->attach($categories);
+            $newDress->component()->attach($components);
+            $newDress->color()->attach($colors);
+            $newDress->size()->attach($sizes);
+
+            foreach ($photos as $photo)
+                $dressesPhoto[] = [
+                    'dress_id' => $newDress->dress_id,
+                    'image' => $photo
+                ];
+        }
+
+        if (count($dressesPhoto))
+            Photo::insert($dressesPhoto);
+
+        $this->generateDressTranslation();
+    }
+
+    public function generateDressTranslation()
+    {
+        $dressesTranslations = [
+            [
+                'dress_id' => 1,
+                'title' => 'Вечернее платье Allison',
+                'description' => 'Вечернее платье длиной в пол из пайеточной ткани чёрного цвета. Топ без рукавов с вырезом в виде капли. Закрытая спина на молнии. Юбка длиной в пол, без шлейфа',
+                'language' => 'ru'
+            ],
+            [
+                'dress_id' => 1,
+                'title' => 'Allison evening dress',
+                'description' => 'Floor-length evening dress in black sequin fabric. Sleeveless top with teardrop neckline. Closed back with zipper. Floor-length skirt, no train',
+                'language' => 'en'
+            ],
+            [
+                'dress_id' => 1,
+                'title' => 'Allison кешкі көйлегі',
+                'description' => 'Қара блестки матадан тігілген еденге арналған кешкі көйлек. Жеңі жоқ үстіңгі белдемше. Артқы жағы найзағаймен жабылған. Еденге жететін юбка, пойыз жоқ',
+                'language' => 'kk'
+            ],
+            [
+                'dress_id' => 2,
+                'title' => 'Вечернее платье плиссе Penelope Powder Pink',
+                'description' => 'Длинное вечернее платье пепельно-розового цвета. Выполнено из плиссированной ткани. Топ в стиле американская пройма с вырезом на груди и открытыми плечами.Спинка полностью закрыта. На юбке небольшой разрез под левую ножку.',
+                'language' => 'ru',
+            ],
+            [
+                'dress_id' => 2,
+                'title' => 'Pleated evening dress Penelope Powder Pink',
+                'description' => 'Long evening dress in ash-pink color. Made from pleated fabric. American armhole style top with a cutout at the bust and bare shoulders.The back is completely closed. The skirt has a small slit for the left leg.',
+                'language' => 'en',
+            ],
+            [
+                'dress_id' => 2,
+                'title' => 'Бүктелген кешкі көйлек Penelope Powder Pink',
+                'description' => 'Күлді қызғылт түсті кешкі ұзын көйлек. Бүктелген матадан жасалған. Кеуде және жалаң иықтары бар американдық қолтық стиліндегі топ.Артқы жағы толығымен жабылған. Юбканың сол аяққа арналған кішкене тесігі бар.',
+                'language' => 'kk',
+            ],
+            [
+                'dress_id' => 3,
+                'title' => 'Шуба Круэллы Cruella Coat',
+                'description' => 'Шубка-макси из искусственного меха чёрно-белой расцветки под далматинца. Массивный воротник. Приталенная. Застёгивается на пуговицу.',
+                'language' => 'ru',
+            ],
+            [
+                'dress_id' => 3,
+                'title' => 'Cruella Coat',
+                'description' => 'Black and white Dalmatian faux fur maxi coat. Massive collar. Fitted. Fastens with a button.',
+                'language' => 'en',
+            ],
+            [
+                'dress_id' => 3,
+                'title' => 'Cruella тон Cruella Coat',
+                'description' => 'Қара және ақ далматиялық жасанды үлбір макси пальто. Жаппай жаға. Орнатылған. Түймемен бекітіледі.',
+                'language' => 'kk',
+            ],
+            [
+                'dress_id' => 4,
+                'title' => 'Fashion Hunter',
+                'description' => 'Эффектное белое платье с длинными рукавами, декорированными перьями. Глубокий V-образный вырез декольте.На груди и бедре нашита прозрачная сетка со стразами. Талию украшает пояс. Длинная юбка с небольшим шлейфом и высоким разрезом по ножке.Спина закрыта, застегивается на молнию.',
+                'language' => 'ru',
+            ],
+            [
+                'dress_id' => 4,
+                'title' => 'Fashion Hunter',
+                'description' => 'Spectacular white dress with long sleeves decorated with feathers. Deep V neckline.A transparent mesh with rhinestones is sewn on the chest and thigh. The waist is decorated with a belt. Long skirt with a small train and a high leg slit.The back is closed, fastened with a zipper.',
+                'language' => 'en',
+            ],
+            [
+                'dress_id' => 4,
+                'title' => 'Fashion Hunter',
+                'description' => 'Қауырсынмен безендірілген ұзын жеңі бар керемет ақ көйлек. Терең V мойын сызығы.Кеуде мен жамбасқа ринстондар бар мөлдір тор тігіледі. Белі белдікпен безендірілген. Ұзын юбка шағын пойыз және жоғары аяғы тесігі бар.Артқы жағы жабық, найзағаймен бекітілген.',
+                'language' => 'kk',
+            ],
+            [
+                'dress_id' => 5,
+                'title' => 'Накидка из перьев со шлейфом Feather Cape Discount',
+                'description' => 'Накидка из белых гусиных перьев. Спина и плечи декорированы кристаллами.Длина от верха до конца шлейфа: 3 м. 15 см. Не застегивается.',
+                'language' => 'ru',
+            ],
+            [
+                'dress_id' => 5,
+                'title' => 'Feather Cape Discount',
+                'description' => 'Cape of white goose feathers. The back and shoulders are decorated with crystals.Length from the top to the end of the train: 3 m. 15 cm. Does not fasten.',
+                'language' => 'en',
+            ],
+            [
+                'dress_id' => 5,
+                'title' => 'Feather Cape жеңілдік',
+                'description' => 'Ақ қаз қауырсынының мүйісі. Арқасы мен иығы кристалдармен безендірілген.Пойыздың басынан аяғына дейінгі ұзындығы: 3м.15см.Бекімейді.',
+                'language' => 'kk',
+            ],
         ];
 
-
-        foreach ($dresses as $dress)
-            $resultDresses [] = array_merge($dress, $dressData);
-
-        Dress::insert($resultDresses);
-        $this->generateDressTranslation();
+        DressTranslation::insert($dressesTranslations);
     }
 
     public function generateCategory()
     {
         $categories = [
-            ['category_id' => 1],
-            ['category_id' => 2],
-            ['category_id' => 3],
-            ['category_id' => 4],
-            ['category_id' => 5],
-            ['category_id' => 6],
+            [], [], [], [], [], [],
         ];
 
-        $categoryData = [
-            'updated_at' => now(),
-            'created_at' => now()
-        ];
+        foreach ($categories as $category) {
+            Category::create(
+                [
+                    ...$category,
+                    ...[
+                        'updated_at' => now(),
+                        'created_at' => now(),
+                    ]
+                ]
+            );
+        }
 
-        foreach ($categories as $category)
-            $resultCategories [] = array_merge($category, $categoryData);
-
-        Category::insert($resultCategories);
         $this->generateCategoryTranslation();
-    }
-
-    public function generateDressCategory()
-    {
-        $dressesCategories = [
-            ['dress_id' => 1, 'category_id' => 1],
-            ['dress_id' => 1, 'category_id' => 2],
-            ['dress_id' => 2, 'category_id' => 1],
-            ['dress_id' => 2, 'category_id' => 2],
-            ['dress_id' => 3, 'category_id' => 3],
-            ['dress_id' => 4, 'category_id' => 4],
-            ['dress_id' => 4, 'category_id' => 5],
-            ['dress_id' => 5, 'category_id' => 4],
-            ['dress_id' => 5, 'category_id' => 5],
-
-        ];
-        DressCategory::insert($dressesCategories);
-    }
-
-    public function generateUser()
-    {
-        $users = [
-            [
-                'firstname' => 'Admin',
-                'email' => 'admin@admin.com',
-            ],
-            [
-                'firstname' => 'user',
-                'email' => 'user@admin.com',
-            ],
-        ];
-
-        $userData = [
-            'updated_at' => now(),
-            'created_at' => now(),
-            'email_verified_at' => now()
-        ];
-
-        foreach ($users as $user) {
-            $password = Helper::getRandomString(20);
-            $user['password'] = bcrypt($password);
-            $resultUsers [] = array_merge($user, $userData);
-            echo sprintf('Add User %s (email: %s, password: %s)', $user['firstname'], $user['email'], $password) . "\n";
-        }
-
-        User::insert($resultUsers);
-
-        $user = User::where('firstname', 'Admin')->first();
-        $permission = Permission::where('permission', 'ADMIN')->first();
-
-        UserPermission::create(
-            [
-                'user_id' => $user->user_id,
-                'permission_id' => $permission->permission_id
-            ]
-        );
-    }
-
-    public function generatePermissions()
-    {
-        $permissions = [
-            'ADMIN',
-            'SHOP_OWNER',
-            'CLIENT',
-        ];
-        $permissionsCreate = [];
-        foreach ($permissions as $permission) {
-            $permissionsCreate[] = [
-                'permission' => $permission,
-                'created_at' => now(),
-                'updated_at' => now()
-            ];
-        }
-        Permission::insert($permissionsCreate);
-    }
-
-    public function generateColor()
-    {
-        $colors = [
-            [], [], [], [], [],
-        ];
-        Color::insert($colors);
-        $this->generateColorTranslation();
-    }
-
-    public function generateDressColor()
-    {
-        $dressesColors = [
-            ['dress_id' => 1, 'color_id' => 1],
-            ['dress_id' => 1, 'color_id' => 2],
-            ['dress_id' => 1, 'color_id' => 4],
-            ['dress_id' => 2, 'color_id' => 2],
-            ['dress_id' => 2, 'color_id' => 3],
-            ['dress_id' => 3, 'color_id' => 5],
-            ['dress_id' => 3, 'color_id' => 2],
-            ['dress_id' => 4, 'color_id' => 3],
-            ['dress_id' => 4, 'color_id' => 1],
-            ['dress_id' => 5, 'color_id' => 4],
-            ['dress_id' => 5, 'color_id' => 5]
-        ];
-        DressColor::insert($dressesColors);
-    }
-
-    public function generateSize()
-    {
-        $sizes = [
-            ['size' => 'S'],
-            ['size' => 'M'],
-            ['size' => 'L'],
-            ['size' => 'XS'],
-            ['size' => 'XM']
-        ];
-        Size::insert($sizes);
-    }
-
-    public function generateDressSize()
-    {
-        $dressesSizes = [
-            ['dress_id' => 1, 'size_id' => 4],
-            ['dress_id' => 1, 'size_id' => 5],
-            ['dress_id' => 1, 'size_id' => 2],
-            ['dress_id' => 2, 'size_id' => 3],
-            ['dress_id' => 2, 'size_id' => 2],
-            ['dress_id' => 3, 'size_id' => 5],
-            ['dress_id' => 3, 'size_id' => 4],
-            ['dress_id' => 4, 'size_id' => 2],
-            ['dress_id' => 4, 'size_id' => 3],
-            ['dress_id' => 5, 'size_id' => 1],
-            ['dress_id' => 5, 'size_id' => 2],
-        ];
-        DressSize::insert($dressesSizes);
-    }
-
-    public function generatePhoto()
-    {
-        $photos = [
-            [
-                'dress_id' => 1,
-                'image' => 'evening-dress-panther-03.jpg',
-                'image_small' => 'evening-dress-panther-08.jpg'
-            ],
-            [
-                'dress_id' => 2,
-                'image' => 'evening-pleated-dress-penelope-powder-pink-09.jpg',
-                'image_small' => 'evening-pleated-dress-penelope-powder-pink-03.jpg'
-            ],
-            [
-                'dress_id' => 3,
-                'image' => 'shuba-cruella-coat-10.jpg',
-                'image_small' => 'shuba-cruella-coat-13.jpg'
-            ],
-            [
-                'dress_id' => 4,
-                'image' => 'prokat-platya-fashion-hunter-02.jpg',
-                'image_small' => 'prokat-platya-fashion-hunter-08.jpg'
-            ],
-            [
-                'dress_id' => 5,
-                'image' => 'feather-cape-with-train-02.jpg',
-                'image_small' => 'feather-cape-with-train-06.jpg'
-            ],
-
-        ];
-
-        Photo::insert($photos);
-    }
-
-    public function generateBooking()
-    {
-        $bookings = [
-            [
-                'dress_id' => 1,
-                'date' => today(),
-                'status' => Booking::STATUSES['NEW'],
-            ],
-            [
-                'dress_id' => 1,
-                'date' => '2023-03-14',
-                'status' => Booking::STATUSES['APPROVED'],
-            ],
-            [
-                'dress_id' => 1,
-                'date' => today(),
-                'status' => Booking::STATUSES['NEW'],
-            ],
-            [
-                'dress_id' => 1,
-                'date' => today(),
-                'status' => Booking::STATUSES['NEW'],
-            ],
-            [
-                'dress_id' => 1,
-                'date' => today(),
-                'status' => Booking::STATUSES['NEW'],
-            ],
-            [
-                'dress_id' => 1,
-                'date' => today(),
-                'status' => Booking::STATUSES['NEW'],
-            ],
-        ];
-        Booking::insert($bookings);
     }
 
     public function generateCategoryTranslation()
@@ -426,102 +362,70 @@ class DatabaseSeeder extends Seeder
         CategoryTranslation::insert($categoriesTransactions);
     }
 
-    public function generateDressTranslation()
+    public function generateUser()
     {
-        $dressesTranslations = [
+        $users = [
             [
-                'dress_id' => 1,
-                'title' => 'Вечернее платье Allison',
-                'description' => 'Вечернее платье длиной в пол из пайеточной ткани чёрного цвета. Топ без рукавов с вырезом в виде капли. Закрытая спина на молнии. Юбка длиной в пол, без шлейфа',
-                'language' => 'ru'
+                'firstname' => 'Admin',
+                'email' => 'admin@admin.com',
             ],
             [
-                'dress_id' => 1,
-                'title' => 'Allison evening dress',
-                'description' => 'Floor-length evening dress in black sequin fabric. Sleeveless top with teardrop neckline. Closed back with zipper. Floor-length skirt, no train',
-                'language' => 'en'
-            ],
-            [
-                'dress_id' => 1,
-                'title' => 'Allison кешкі көйлегі',
-                'description' => 'Қара блестки матадан тігілген еденге арналған кешкі көйлек. Жеңі жоқ үстіңгі белдемше. Артқы жағы найзағаймен жабылған. Еденге жететін юбка, пойыз жоқ',
-                'language' => 'kk'
-            ],
-            [
-                'dress_id' => 2,
-                'title' => 'Вечернее платье плиссе Penelope Powder Pink',
-                'description' => 'Длинное вечернее платье пепельно-розового цвета. Выполнено из плиссированной ткани. Топ в стиле американская пройма с вырезом на груди и открытыми плечами.Спинка полностью закрыта. На юбке небольшой разрез под левую ножку.',
-                'language' => 'ru',
-            ],
-            [
-                'dress_id' => 2,
-                'title' => 'Pleated evening dress Penelope Powder Pink',
-                'description' => 'Long evening dress in ash-pink color. Made from pleated fabric. American armhole style top with a cutout at the bust and bare shoulders.The back is completely closed. The skirt has a small slit for the left leg.',
-                'language' => 'en',
-            ],
-            [
-                'dress_id' => 2,
-                'title' => 'Бүктелген кешкі көйлек Penelope Powder Pink',
-                'description' => 'Күлді қызғылт түсті кешкі ұзын көйлек. Бүктелген матадан жасалған. Кеуде және жалаң иықтары бар американдық қолтық стиліндегі топ.Артқы жағы толығымен жабылған. Юбканың сол аяққа арналған кішкене тесігі бар.',
-                'language' => 'kk',
-            ],
-            [
-                'dress_id' => 3,
-                'title' => 'Шуба Круэллы Cruella Coat',
-                'description' => 'Шубка-макси из искусственного меха чёрно-белой расцветки под далматинца. Массивный воротник. Приталенная. Застёгивается на пуговицу.',
-                'language' => 'ru',
-            ],
-            [
-                'dress_id' => 3,
-                'title' => 'Cruella Coat',
-                'description' => 'Black and white Dalmatian faux fur maxi coat. Massive collar. Fitted. Fastens with a button.',
-                'language' => 'en',
-            ],
-            [
-                'dress_id' => 3,
-                'title' => 'Cruella тон Cruella Coat',
-                'description' => 'Қара және ақ далматиялық жасанды үлбір макси пальто. Жаппай жаға. Орнатылған. Түймемен бекітіледі.',
-                'language' => 'kk',
-            ],
-            [
-                'dress_id' => 4,
-                'title' => 'Fashion Hunter',
-                'description' => 'Эффектное белое платье с длинными рукавами, декорированными перьями. Глубокий V-образный вырез декольте.На груди и бедре нашита прозрачная сетка со стразами. Талию украшает пояс. Длинная юбка с небольшим шлейфом и высоким разрезом по ножке.Спина закрыта, застегивается на молнию.',
-                'language' => 'ru',
-            ],
-            [
-                'dress_id' => 4,
-                'title' => 'Fashion Hunter',
-                'description' => 'Spectacular white dress with long sleeves decorated with feathers. Deep V neckline.A transparent mesh with rhinestones is sewn on the chest and thigh. The waist is decorated with a belt. Long skirt with a small train and a high leg slit.The back is closed, fastened with a zipper.',
-                'language' => 'en',
-            ],
-            [
-                'dress_id' => 4,
-                'title' => 'Fashion Hunter',
-                'description' => 'Қауырсынмен безендірілген ұзын жеңі бар керемет ақ көйлек. Терең V мойын сызығы.Кеуде мен жамбасқа ринстондар бар мөлдір тор тігіледі. Белі белдікпен безендірілген. Ұзын юбка шағын пойыз және жоғары аяғы тесігі бар.Артқы жағы жабық, найзағаймен бекітілген.',
-                'language' => 'kk',
-            ],
-            [
-                'dress_id' => 5,
-                'title' => 'Накидка из перьев со шлейфом Feather Cape Discount',
-                'description' => 'Накидка из белых гусиных перьев. Спина и плечи декорированы кристаллами.Длина от верха до конца шлейфа: 3 м. 15 см. Не застегивается.',
-                'language' => 'ru',
-            ],
-            [
-                'dress_id' => 5,
-                'title' => 'Feather Cape Discount',
-                'description' => 'Cape of white goose feathers. The back and shoulders are decorated with crystals.Length from the top to the end of the train: 3 m. 15 cm. Does not fasten.',
-                'language' => 'en',
-            ],
-            [
-                'dress_id' => 5,
-                'title' => 'Feather Cape жеңілдік',
-                'description' => 'Ақ қаз қауырсынының мүйісі. Арқасы мен иығы кристалдармен безендірілген.Пойыздың басынан аяғына дейінгі ұзындығы: 3м.15см.Бекімейді.',
-                'language' => 'kk',
+                'firstname' => 'user',
+                'email' => 'user@admin.com',
             ],
         ];
 
-        DressTranslation::insert($dressesTranslations);
+        $userData = [
+            'updated_at' => now(),
+            'created_at' => now(),
+            'email_verified_at' => now()
+        ];
+
+        foreach ($users as $user) {
+            $password = Helper::getRandomString(20);
+            $user['password'] = bcrypt($password);
+            $resultUsers [] = array_merge($user, $userData);
+            echo sprintf('Add User %s (email: %s, password: %s)', $user['firstname'], $user['email'], $password) . "\n";
+        }
+
+        User::insert($resultUsers);
+
+        $user = User::where('firstname', 'Admin')->first();
+        $permission = Permission::where('permission', 'ADMIN')->first();
+
+        UserPermission::create(
+            [
+                'user_id' => $user->user_id,
+                'permission_id' => $permission->permission_id
+            ]
+        );
+    }
+
+    public function generatePermissions()
+    {
+        $permissions = [
+            'ADMIN',
+            'SHOP_OWNER',
+            'CLIENT',
+        ];
+        $permissionsCreate = [];
+        foreach ($permissions as $permission) {
+            $permissionsCreate[] = [
+                'permission' => $permission,
+                'created_at' => now(),
+                'updated_at' => now()
+            ];
+        }
+        Permission::insert($permissionsCreate);
+    }
+
+    public function generateColor()
+    {
+        $colors = [
+            [], [], [], [], [],
+        ];
+        Color::insert($colors);
+        $this->generateColorTranslation();
     }
 
     public function generateColorTranslation()
@@ -606,4 +510,189 @@ class DatabaseSeeder extends Seeder
         ColorTranslation::insert($colorsTranslations);
     }
 
+    public function generateSize()
+    {
+        $sizes = [
+            ['size' => 'S'],
+            ['size' => 'M'],
+            ['size' => 'L'],
+            ['size' => 'XS'],
+            ['size' => 'XM']
+        ];
+        Size::insert($sizes);
+    }
+
+    public function generatePhoto()
+    {
+        $photos = [
+            [
+                'dress_id' => 1,
+                'image' => 'evening-dress-panther-03.jpg',
+                'image_small' => 'evening-dress-panther-08.jpg'
+            ],
+            [
+                'dress_id' => 2,
+                'image' => 'evening-pleated-dress-penelope-powder-pink-09.jpg',
+                'image_small' => 'evening-pleated-dress-penelope-powder-pink-03.jpg'
+            ],
+            [
+                'dress_id' => 3,
+                'image' => 'shuba-cruella-coat-10.jpg',
+                'image_small' => 'shuba-cruella-coat-13.jpg'
+            ],
+            [
+                'dress_id' => 4,
+                'image' => 'prokat-platya-fashion-hunter-02.jpg',
+                'image_small' => 'prokat-platya-fashion-hunter-08.jpg'
+            ],
+            [
+                'dress_id' => 5,
+                'image' => 'feather-cape-with-train-02.jpg',
+                'image_small' => 'feather-cape-with-train-06.jpg'
+            ],
+
+        ];
+
+        Photo::insert($photos);
+    }
+
+    public function generateBooking()
+    {
+        $bookings = [
+            [
+                'dress_id' => 1,
+                'date' => today(),
+                'status' => Booking::STATUSES['NEW'],
+            ],
+            [
+                'dress_id' => 1,
+                'date' => '2023-03-16',
+                'status' => Booking::STATUSES['APPROVED'],
+            ],
+            [
+                'dress_id' => 3,
+                'date' => today(),
+                'status' => Booking::STATUSES['NEW'],
+            ],
+            [
+                'dress_id' => 4,
+                'date' => today(),
+                'status' => Booking::STATUSES['NEW'],
+            ],
+            [
+                'dress_id' => 5,
+                'date' => today(),
+                'status' => Booking::STATUSES['NEW'],
+            ],
+            [
+                'dress_id' => 5,
+                'date' => today(),
+                'status' => Booking::STATUSES['NEW'],
+            ],
+        ];
+        Booking::insert($bookings);
+    }
+
+    public function generateComponent()
+    {
+        $components = [
+            [
+                'quantity' => 2,
+                'price' => 3000,
+            ],
+            [
+                'quantity' => 10,
+                'price' => 4000,
+            ],
+            [
+                'quantity' => 15,
+                'price' => 2000,
+            ],
+            [
+                'quantity' => 6,
+                'price' => 7000,
+            ],
+        ];
+        Component::insert($components);
+        $this->generateComponentTranslation();
+    }
+
+    public function generateComponentTranslation()
+    {
+        $componentsTranslations = [
+            [
+                'component_id' => 1,
+                'language' => 'en',
+                'title' => 'Short camisole',
+                'description' => "Short camisoles with handmade author's embroidery. The design and patterns of each camisole are developed by fashion designer Aliya Musayeva from ApoltiStore, Saukele&Kamzol. Size: 42-44. Colors: purple, turquoise, black, pink.",
+            ],
+            [
+                'component_id' => 1,
+                'language' => 'ru',
+                'title' => 'Короткий камзол',
+                'description' => 'Короткие камзолы с ручной авторской вышивкой. Дизайн и узоры каждого камзола разрабатываются модельером Алией Мусаевой из ApoltiStore, Saukele&Kamzol. Размер: 42-44. Цвета: фиолетовый, бирюзовый, черный, розовый.',
+            ],
+            [
+                'component_id' => 1,
+                'language' => 'kk',
+                'title' => 'Қысқа камзол',
+                'description' => 'Қолмен тігілген авторлық кестелі қысқа камзолдар. Әр камзолдың дизайны мен өрнектерін ApoltiStore, Saukele&Kamzol дүкендерінің сәнгері Әлия Мұсаева әзірлеген. Өлшемі: 42-44. Түстер: күлгін, көгілдір, қара, қызғылт.',
+            ],
+            [
+                'component_id' => 2,
+                'language' => 'en',
+                'title' => 'Veil and uki feathers',
+                'description' => 'Veil and uki for the bride',
+            ],
+            [
+                'component_id' => 2,
+                'language' => 'ru',
+                'title' => 'Фата и перья уки',
+                'description' => 'Фата и перья уки для невесты',
+            ],
+            [
+                'component_id' => 2,
+                'language' => 'kk',
+                'title' => 'Фата және уки қауырсындары',
+                'description' => 'Келінге арналған орамал мен уки',
+            ],
+            [
+                'component_id' => 3,
+                'language' => 'en',
+                'title' => 'Saukele on uzatu',
+                'description' => 'Our craftsmen make light and beautiful saukeles. The design and patterns of each saukele are developed by fashion designer Aliya Musaeva from ApoltiStore',
+            ],
+            [
+                'component_id' => 3,
+                'language' => 'ru',
+                'title' => 'Саукеле на узату',
+                'description' => 'Наши мастера делают легкие и красивые саукеле. Дизайн и узоры каждого саукеле разрабатываются модельером Алией Мусаевой из ApoltiStore',
+            ],
+            [
+                'component_id' => 3,
+                'language' => 'kk',
+                'title' => 'Сәукеле ұзату',
+                'description' => 'Біздің шеберлер жеңіл әрі әдемі сәукеле жасайды. Әр сәукеленің дизайны мен өрнектерін ApoltiStore дүкенінен сәнгер Әлия Мұсаева әзірлеген',
+            ],
+            [
+                'component_id' => 4,
+                'language' => 'en',
+                'title' => 'National ornaments for uzat',
+                'description' => 'We have sets of national decorations that you can rent. There are earrings, besbilezik, bracelets and a necklace (alqa)',
+            ],
+            [
+                'component_id' => 4,
+                'language' => 'ru',
+                'title' => 'Национальные украшения на узату',
+                'description' => 'У нас есть комплекты национальных украшений, которые можно взять напрокат. Есть серьги, бесбилезик, браслеты и ожерелье (алқа)',
+            ],
+            [
+                'component_id' => 4,
+                'language' => 'kk',
+                'title' => 'Ұзатуға арналған ұлттық ою-өрнектер',
+                'description' => 'Бізде ұлттық әшекейлер жиынтығы бар, оларды жалға алуға болады. Сырға, бесбілезік, білезік және алқа (алқа) бар.',
+            ],
+        ];
+        ComponentTranslation::insert($componentsTranslations);
+    }
 }

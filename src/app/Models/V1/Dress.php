@@ -2,6 +2,7 @@
 
 namespace App\Models\V1;
 
+use App\Models\Traits\V1\HelperTrait;
 use App\Models\Traits\V1\TranslationTrait;
 use App\Models\V1\User\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,6 +19,7 @@ class Dress extends Model
 
     // Traits
     use TranslationTrait;
+    use HelperTrait;
 
 
     protected $table = 'dress';
@@ -46,6 +48,17 @@ class Dress extends Model
             ->belongsToMany(Category::class, DressCategory::class,
                 'dress_id', 'category_id', 'dress_id', 'category_id')
             ->orderBy('category_id');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function component(): BelongsToMany
+    {
+        return $this
+            ->belongsToMany(Component::class, DressComponent::class,
+                'dress_id', 'component_id', 'dress_id', 'component_id')
+            ->orderBy('component_id');
     }
 
     /**
