@@ -19,12 +19,13 @@
 >> _in workspace container exec:
 >>> composer install
 >>>
->>>php artisan key:generate
->>>
->>>php artisan jwt:secret
+>>> php artisan key:generate
 >>>
 >>> fresh --seed
 >>>
 >>> _or better:
 >>>
 >>> fresh && php artisan db:seed --class=ApoltiSeeder
+> 
+> >> Когда хрень какая-то выходит там, при переносе папок и с путями, это может помочь нам
+composer du
