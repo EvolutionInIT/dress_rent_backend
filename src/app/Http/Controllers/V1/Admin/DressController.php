@@ -9,7 +9,6 @@ use App\Http\Requests\V1\Admin\Dress\SaveDressRequest;
 use App\Http\Requests\V1\Admin\Dress\UpdateDressRequest;
 use App\Http\Resources\V1\Admin\Dress\DressCollection;
 use App\Http\Resources\V1\Admin\Dress\DressResource;
-use App\Http\Services\V1\MultiChange;
 use App\Http\Services\V1\MultiKit;
 use App\Models\V1\Dress;
 use App\Models\V1\DressCategory;
@@ -30,6 +29,7 @@ class DressController
             ::when($dressID, function ($q) use ($dressID) {
                 $q->where('dress_id', $dressID);
             })
+            ->with('translation')
             ->with('category')
             ->with('photo')
             ->with('size')

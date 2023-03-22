@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\V1\Client;
+namespace App\Http\Controllers\V1\Client\Rent;
 
 use App\Http\Resources\V1\Client\Category\CategoryResourceClient;
 use App\Models\V1\Category;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
-class CategoryControllerClient
+class CategoryController
 {
     /**
      * @return AnonymousResourceCollection

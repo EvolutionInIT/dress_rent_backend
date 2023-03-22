@@ -17,7 +17,7 @@ class LanguageResource extends JsonResource
         return [
             'language_id' => $this->language_id,
             'title' => $this->title,
-            'code' => $this->code,
+            'locale' => $this->code,
         ];
     }
 }
