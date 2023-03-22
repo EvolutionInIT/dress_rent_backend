@@ -28,6 +28,7 @@ class DressController
             ::when($dressID, function ($q) use ($dressID) {
                 $q->where('dress_id', $dressID);
             })
+            ->with('translation')
             ->with('category')
             ->with('photo')
             ->with('size')
