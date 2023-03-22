@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Dress;
-use App\Models\Photo;
+use App\Models\V1\Dress;
+use App\Models\V1\DressTranslation;
+use App\Models\V1\Photo;
 use Illuminate\Database\Seeder;
-use App\Models\DressTranslation;
 
 class ApoltiSeeder extends Seeder
 {

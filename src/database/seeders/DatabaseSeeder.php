@@ -2,21 +2,21 @@
 
 namespace Database\Seeders;
 
-use App\Models\Booking;
-use App\Models\Category;
-use App\Models\CategoryTranslation;
-use App\Models\Color;
-use App\Models\ColorTranslation;
-use App\Models\Dress;
-use App\Models\DressCategory;
-use App\Models\DressColor;
-use App\Models\DressSize;
-use App\Models\DressTranslation;
-use App\Models\Photo;
-use App\Models\Size;
+use App\Helpers\V1\Helper;
+use App\Models\V1\Booking;
+use App\Models\V1\Category;
+use App\Models\V1\CategoryTranslation;
+use App\Models\V1\Color;
+use App\Models\V1\ColorTranslation;
+use App\Models\V1\Dress;
+use App\Models\V1\DressCategory;
+use App\Models\V1\DressColor;
+use App\Models\V1\DressSize;
+use App\Models\V1\DressTranslation;
+use App\Models\V1\Photo;
+use App\Models\V1\Size;
 use App\Models\V1\User\Permission;
 use App\Models\V1\User\User;
-use App\Helpers\V1\Helper;
 use App\Models\V1\User\UserPermission;
 use Illuminate\Database\Seeder;
 
@@ -35,16 +35,16 @@ class DatabaseSeeder extends Seeder
         $this->generateUser();
         $this->generateCategory();
         $this->generateDress();
-        //$this->generateDressCategory();
+        $this->generateDressCategory();
         $this->generateColor();
         $this->generateDressColor();
         $this->generateSize();
         $this->generateDressSize();
-        //$this->generatePhoto();
-        //$this->generateBooking();
-        $this->generateCategoryTranslation();
-        $this->generateDressTranslation();
-        $this->generateColorTranslation();
+        $this->generatePhoto();
+        $this->generateBooking();
+        //$this->generateCategoryTranslation();
+        //$this->generateDressTranslation();
+        //$this->generateColorTranslation();
     }
 
     public function generateDress()
@@ -72,50 +72,17 @@ class DatabaseSeeder extends Seeder
             ],
         ];
 
-        $dressesPhoto = [];
-        foreach ($dresses as $dress) {
-            $photos = $dress['photos'] ?? [];
-            $categories = $dress['categories'] ?? [];
-            unset($dress['photos']);
-            unset($dress['categories']);
-
-            $newDress = Dress::create(
-                [
-                    ...$dress,
-                    ...[
-                        'updated_at' => now(),
-                        'created_at' => now(),
-                    ],
-                ]
-            );
-
-            $newDress->category()->attach($categories);
-
-            foreach ($photos as $photo)
-                $dressesPhoto[] = [
-                    'dress_id' => $newDress->dress_id,
-                    'image' => $photo
-                ];
+        $dressData = [
+            'updated_at' => now(),
+            'created_at' => now()
+        ];
 
 
-        }
+        foreach ($dresses as $dress)
+            $resultDresses [] = array_merge($dress, $dressData);
 
-        if (count($dressesPhoto))
-            Photo::insert($dressesPhoto);
-
-
-//        $dressData = [
-//            'updated_at' => now(),
-//            'created_at' => now()
-//        ];
-//
-//
-//        foreach ($dresses as $dress)
-//            $resultDresses [] = array_merge($dress, $dressData);
-//
-//        Dress::insert($resultDresses);
-
-
+        Dress::insert($resultDresses);
+        $this->generateDressTranslation();
     }
 
     public function generateCategory()
@@ -138,6 +105,7 @@ class DatabaseSeeder extends Seeder
             $resultCategories [] = array_merge($category, $categoryData);
 
         Category::insert($resultCategories);
+        $this->generateCategoryTranslation();
     }
 
     public function generateDressCategory()
@@ -220,6 +188,7 @@ class DatabaseSeeder extends Seeder
             [], [], [], [], [],
         ];
         Color::insert($colors);
+        $this->generateColorTranslation();
     }
 
     public function generateDressColor()
@@ -314,7 +283,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'dress_id' => 1,
-                'date' => '2023-02-22',
+                'date' => '2023-03-14',
                 'status' => Booking::STATUSES['APPROVED'],
             ],
             [
