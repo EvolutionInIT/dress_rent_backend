@@ -8,8 +8,9 @@ use App\Http\Controllers\V1\Admin\PhotoController;
 use App\Http\Controllers\V1\Admin\SizeController;
 use App\Http\Controllers\V1\Admin\UserController;
 use App\Http\Controllers\V1\AuthController;
-use App\Http\Controllers\V1\Client\CategoryController as CategoryControllerClientRent;
+use App\Http\Controllers\V1\Client\Rent\CategoryController as CategoryControllerClientRent;
 use App\Http\Controllers\V1\Client\LanguageControllerClient;
+use App\Http\Controllers\V1\Admin\ComponentController;
 use App\Http\Controllers\V1\Client\Rent\Catalog\DressCatalogController;
 use App\Http\Controllers\V1\Client\Rent\Catalog\ListDressCatalogController;
 use Illuminate\Support\Facades\Route;
@@ -74,6 +75,16 @@ Route::prefix('admin')->name('admin.')->group(function () {
                 Route::post('save', [DressController::class, 'save'])->name('save');
                 Route::post('delete', [DressController::class, 'delete'])->name('delete');
                 Route::post('update', [DressController::class, 'update'])->name('update');
+            });
+
+        Route
+            ::prefix('component')
+            ->name('component.')
+            ->withoutMiddleware('auth.role')
+            ->group(function () {
+                Route::post('save', [ComponentController::class, 'save'])->name('save');
+                Route::get('list', [ComponentController::class, 'list'])->name('list');
+                Route::post('update', [ComponentController::class, 'update'])->name('update');
             });
 
         Route

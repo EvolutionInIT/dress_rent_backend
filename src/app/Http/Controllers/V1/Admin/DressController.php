@@ -9,6 +9,7 @@ use App\Http\Requests\V1\Admin\Dress\SaveDressRequest;
 use App\Http\Requests\V1\Admin\Dress\UpdateDressRequest;
 use App\Http\Resources\V1\Admin\Dress\DressCollection;
 use App\Http\Resources\V1\Admin\Dress\DressResource;
+use App\Http\Services\V1\MultiKit;
 use App\Models\V1\Dress;
 use App\Models\V1\DressCategory;
 use App\Models\V1\DressColor;
@@ -35,7 +36,6 @@ class DressController
             ->first();
 
         return new DressResource($dress);
-
     }
 
 
@@ -47,7 +47,9 @@ class DressController
     {
         $requestData = $request->validated();
 
-        $dress = Dress::create($requestData);
+        $dress =
+            MultiKit
+                ::multiCreate(Dress::class, $requestData);
 
         $arrCategory = [];
         foreach ($requestData['category_id'] ?? [] as $category) {
@@ -95,21 +97,20 @@ class DressController
         $dress->photo;
 
         return new DressResource($dress);
-
     }
 
 
+    /**
+     * @param UpdateDressRequest $request
+     * @return DressResource
+     */
     public function update(UpdateDressRequest $request): DressResource
     {
-        $requestData = $request->validated();
-
         $dress =
-            Dress
-                ::where('dress_id', $requestData['dress_id'])
-                ->update($requestData);
+            MultiKit
+                ::multiUpdate(Dress::class, $request->validated());
 
         return new DressResource($dress);
-
     }
 
 
@@ -141,6 +142,7 @@ class DressController
             ->when($requestData['user_id'] ?? null, function ($q) use ($requestData) {
                 $q->where('user_id', $requestData['user_id']);
             })
+            ->with('component.translation:component_id,title,description')
             ->with('category.translation:category_id,title')
             ->with('translation:dress_id,title,description')
             ->with('color.translation:color_id,color')

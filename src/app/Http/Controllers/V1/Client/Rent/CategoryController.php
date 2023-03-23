@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\V1\Client;
+namespace App\Http\Controllers\V1\Client\Rent;
 
 use App\Http\Resources\V1\Client\Category\CategoryResourceClient;
 use App\Models\V1\Category;
