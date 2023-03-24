@@ -44,9 +44,11 @@ class BookingController
     public function save(SaveBookingRequest $request): BookingResource
     {
         $requestData = $request->validated();
+        $requestData['date'] = Carbon::parse($requestData['date']);
 
         $requestData['status'] = Booking::STATUSES['NEW'];
         $booking = Booking::create($requestData);
+        $booking->dress->translation;
 
         return new BookingResource($booking);
     }

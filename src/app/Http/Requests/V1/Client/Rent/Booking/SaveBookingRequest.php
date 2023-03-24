@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\V1\Admin\Booking;
+namespace App\Http\Requests\V1\Client\Rent\Booking;
 
 use App\Http\Requests\CommonRequest;
 use App\Models\V1\Booking;
