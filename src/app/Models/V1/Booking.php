@@ -27,6 +27,10 @@ class Booking extends Model
         'deleted_at'
     ];
 
+    protected $cast = [
+        'dress_id' => 'integer',
+    ];
+
     public $timestamps = false;
 
 
