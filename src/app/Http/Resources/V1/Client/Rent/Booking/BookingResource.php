@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\V1\Admin\Booking;
+namespace App\Http\Resources\V1\Client\Rent\Booking;
 
 use App\Http\Resources\V1\Admin\Dress\DressResource;
 use Illuminate\Http\Resources\Json\JsonResource;

@@ -4,6 +4,7 @@ namespace App\Http\Requests\V1\Client\Rent\Booking;
 
 use App\Http\Requests\CommonRequest;
 use App\Models\V1\Booking;
+use App\Models\V1\Dress;
 use Carbon\Carbon;
 
 class SaveBookingRequest extends CommonRequest
@@ -29,8 +30,8 @@ class SaveBookingRequest extends CommonRequest
                 'integer',
                 'between:1,4294967296',
                 'exists:App\Models\V1\Dress,dress_id',
-                function ($attribute, $value, $fail) {
 
+                function ($attribute, $value, $fail) {
                     $date = $this->input('date');
                     $bookingDress =
                         Booking
@@ -39,13 +40,16 @@ class SaveBookingRequest extends CommonRequest
                             ->with('dress:dress_id,quantity')
                             ->get();
 
-                    //dd($bookingDress->toArray());
+                    $dress = Dress::find($value);
 
-                    if (count($bookingDress) && count($bookingDress) >= $bookingDress[0]->quantity)
+                    if (count($bookingDress) + $this->input('quantity') > $dress->quantity) {
                         $fail("booking_save_dress_quantity_less_then_needed");
-                },
+                    }
+                }
             ],
+            'email' => 'required|email:rfc,dns',
+            'phone_number' => 'required|regex:/^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/',
+            'quantity' => 'integer',
         ];
     }
-
 }

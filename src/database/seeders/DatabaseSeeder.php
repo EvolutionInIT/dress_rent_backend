@@ -563,31 +563,43 @@ class DatabaseSeeder extends Seeder
                 'dress_id' => 1,
                 'date' => today(),
                 'status' => Booking::STATUSES['NEW'],
+                'email' => 'anastasya@test.com',
+                'phone_number' => +77052332233,
             ],
             [
                 'dress_id' => 1,
                 'date' => '2023-03-16',
                 'status' => Booking::STATUSES['APPROVED'],
+                'email' => 'anelya@test.com',
+                'phone_number' => +77052332222,
             ],
             [
                 'dress_id' => 3,
                 'date' => today(),
                 'status' => Booking::STATUSES['NEW'],
+                'email' => 'karligash@test.com',
+                'phone_number' => +77052332255,
             ],
             [
                 'dress_id' => 4,
                 'date' => today(),
                 'status' => Booking::STATUSES['NEW'],
+                'email' => 'cvetlana@test.com',
+                'phone_number' => +77052332244,
             ],
             [
                 'dress_id' => 5,
                 'date' => today(),
                 'status' => Booking::STATUSES['NEW'],
+                'email' => 'alena@test.com',
+                'phone_number' => +77052332277,
             ],
             [
                 'dress_id' => 5,
                 'date' => today(),
                 'status' => Booking::STATUSES['NEW'],
+                'email' => 'margarita@test.com',
+                'phone_number' => +77052332288,
             ],
         ];
         Booking::insert($bookings);

@@ -21,13 +21,16 @@ class Booking extends Model
 
     protected $table = 'booking';
     protected $primaryKey = 'booking_id';
-    protected $fillable = ['dress_id', 'date', 'status'];
+    protected $fillable =
+        [
+            'dress_id', 'date', 'status', 'email', 'phone_number', 'quantity'
+        ];
 
     protected $hidden = [
         'deleted_at'
     ];
 
-    protected $cast = [
+    protected $casts = [
         'dress_id' => 'integer',
     ];
 
