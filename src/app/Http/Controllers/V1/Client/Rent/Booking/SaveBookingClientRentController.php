@@ -8,7 +8,7 @@ use App\Models\V1\Booking;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Carbon;
 
-class SaveBookingController
+class SaveBookingClientRentController
 {
     /**
      * @param SaveBookingRequest $request

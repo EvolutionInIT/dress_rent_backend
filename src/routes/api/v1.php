@@ -9,7 +9,7 @@ use App\Http\Controllers\V1\Admin\SizeController;
 use App\Http\Controllers\V1\Admin\UserController;
 use App\Http\Controllers\V1\AuthController;
 use App\Http\Controllers\V1\Client\Rent\CategoryController as CategoryControllerClientRent;
-use App\Http\Controllers\V1\Client\Rent\Booking\SaveBookingController as SaveBookingControllerClientRent;
+use App\Http\Controllers\V1\Client\Rent\Booking\SaveBookingClientRentController;
 use App\Http\Controllers\V1\Client\LanguageControllerClient;
 use App\Http\Controllers\V1\Admin\ComponentController;
 use App\Http\Controllers\V1\Client\Rent\Catalog\DressCatalogController;
@@ -58,7 +58,7 @@ Route
             });
 
             Route::prefix('booking')->name('booking.')->group(function () {
-                Route::post('save', [SaveBookingControllerClientRent::class, 'save'])->name('save');
+                Route::post('save', [SaveBookingClientRentController::class, 'save'])->name('save');
             });
 
         });
