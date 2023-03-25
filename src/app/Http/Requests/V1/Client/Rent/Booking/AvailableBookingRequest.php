@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\V1\Admin\Booking;
+namespace App\Http\Requests\V1\Client\Rent\Booking;
 
 use App\Http\Requests\CommonRequest;
 
-class StatusBookingRequest extends CommonRequest
+class AvailableBookingRequest extends CommonRequest
 {
     public function authorize(): bool
     {
@@ -14,10 +14,9 @@ class StatusBookingRequest extends CommonRequest
     public function rules(): array
     {
         return [
-            'dress_id' => ['required', 'array'],
-            'dress_id.*' =>
+            'dress_id' =>
                 [
-                    'required', 'integer', 'distinct', 'between:1,4294967296',
+                    'required', 'integer', 'between:1,4294967296',
                     'exists:App\Models\V1\Dress,dress_id',
                 ]
         ];
