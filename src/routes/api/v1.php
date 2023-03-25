@@ -8,6 +8,7 @@ use App\Http\Controllers\V1\Admin\PhotoController;
 use App\Http\Controllers\V1\Admin\SizeController;
 use App\Http\Controllers\V1\Admin\UserController;
 use App\Http\Controllers\V1\AuthController;
+use App\Http\Controllers\V1\Client\Rent\Booking\AvailableBookingClientRentController;
 use App\Http\Controllers\V1\Client\Rent\CategoryController as CategoryControllerClientRent;
 use App\Http\Controllers\V1\Client\Rent\Booking\SaveBookingController as SaveBookingControllerClientRent;
 use App\Http\Controllers\V1\Client\LanguageControllerClient;
@@ -59,6 +60,7 @@ Route
 
             Route::prefix('booking')->name('booking.')->group(function () {
                 Route::post('save', [SaveBookingControllerClientRent::class, 'save'])->name('save');
+                Route::get('available', [AvailableBookingClientRentController::class, 'available'])->name('available');
             });
 
         });
