@@ -41,13 +41,15 @@ class SaveBookingRequest extends CommonRequest
                     $bookingDress =
                         Dress
                             ::where('dress_id', $value)
-                            ->with('booking', function ($q) use ($date) {
-                                $q
-                                    ->where('booking.date', $date);
-                            })
+                            ->withSum(
+                                ['booking' => function ($q) use ($date) {
+                                    $q->where('date', $date);
+                                }],
+                                'quantity'
+                            )
                             ->first();
 
-                    if ($bookingDress->booking->sum('quantity') + $this->input('quantity') > $bookingDress->quantity) {
+                    if ($bookingDress->booking_sum_quantity + $this->input('quantity') > $bookingDress->quantity) {
                         $fail("booking_save_dress_quantity_less_then_needed");
                     }
                     if ($this->input('quantity') > $bookingDress->quantity) {

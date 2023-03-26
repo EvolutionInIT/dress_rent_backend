@@ -589,7 +589,7 @@ class DatabaseSeeder extends Seeder
                 'status' => Booking::STATUSES['NEW'],
                 'email' => 'cvetlana@test.com',
                 'phone_number' => +77052332244,
-                'quantity' => 1,
+                'quantity' => 0,
             ],
             [
                 'dress_id' => 5,
