@@ -48,7 +48,7 @@ class AvailableBookingClientRentController
                         ->where('booking.date', '>=', Carbon::now()->toDateString())
                         ->where('booking.date', '<=', Carbon::now()->addWeeks(2)->toDateString());
                 })
-                ->select(['dress.dress_id', 'booking.date', DB::raw('COUNT(booking.dress_id) as booked')])
+                ->select(['dress.dress_id', 'booking.date', DB::raw('SUM(booking.quantity) as booked')])
                 ->groupBy(['dress.dress_id', 'booking.date'])
                 //->havingRaw('dress.quantity > booked OR booked IS NULL')
                 ->orderBy('dress.dress_id')
@@ -78,7 +78,7 @@ class AvailableBookingClientRentController
                     $dayDressBooking = $dayBookings->where('dress_id', $dress->dress_id)->values();
                     if (count($dayDressBooking) === 1) {
 //                        $tmp->booked = $dayDressBooking[0]->booked;
-                        $tmp->free = $dress->quantity - $dayDressBooking[0]->booked;
+                        $tmp->free = $dress->quantity - ($dayDressBooking[0]->booked ?? 0);
                     }
                 }
 
