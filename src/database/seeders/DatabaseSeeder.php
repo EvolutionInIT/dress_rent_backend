@@ -17,6 +17,7 @@ use App\Models\V1\User\Permission;
 use App\Models\V1\User\User;
 use App\Models\V1\User\UserPermission;
 use App\Models\V1\Component;
+use App\Models\V1\BookingComponent;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -39,6 +40,7 @@ class DatabaseSeeder extends Seeder
         $this->generateDress();
         $this->generatePhoto();
         $this->generateBooking();
+        $this->generateBookingComponent();
     }
 
     public function generateDress()
@@ -633,6 +635,29 @@ class DatabaseSeeder extends Seeder
         ];
         Component::insert($components);
         $this->generateComponentTranslation();
+    }
+
+    public function generateBookingComponent()
+    {
+        $bookingsComponents = [
+            [
+                'booking_component_id' => 1,
+                'component_id' => 2
+            ],
+            [
+                'booking_component_id' => 2,
+                'component_id' => 1
+            ],
+            [
+                'booking_component_id' => 4,
+                'component_id' => 3
+            ],
+            [
+                'booking_component_id' => 3,
+                'component_id' => 4
+            ],
+        ];
+        BookingComponent::insert($bookingsComponents);
     }
 
     public function generateComponentTranslation()
