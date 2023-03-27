@@ -73,7 +73,7 @@ class DatabaseSeeder extends Seeder
             [
                 'user_id' => 2,
                 'quantity' => 7,
-                'components' => [4],
+                'components' => [4, 5],
                 'categories' => [1],
                 'colors' => [3, 1],
                 'sizes' => [2, 3],
@@ -632,6 +632,10 @@ class DatabaseSeeder extends Seeder
                 'quantity' => 6,
                 'price' => 7000,
             ],
+            [
+                'quantity' => 7,
+                'price' => 7000,
+            ],
         ];
         Component::insert($components);
         $this->generateComponentTranslation();
@@ -641,19 +645,19 @@ class DatabaseSeeder extends Seeder
     {
         $bookingsComponents = [
             [
-                'booking_component_id' => 1,
+                'booking_id' => 1,
                 'component_id' => 2
             ],
             [
-                'booking_component_id' => 2,
+                'booking_id' => 2,
                 'component_id' => 1
             ],
             [
-                'booking_component_id' => 4,
+                'booking_id' => 4,
                 'component_id' => 3
             ],
             [
-                'booking_component_id' => 3,
+                'booking_id' => 3,
                 'component_id' => 4
             ],
         ];
@@ -734,6 +738,24 @@ class DatabaseSeeder extends Seeder
                 'language' => 'kk',
                 'title' => 'Ұзатуға арналған ұлттық ою-өрнектер',
                 'description' => 'Бізде ұлттық әшекейлер жиынтығы бар, оларды жалға алуға болады. Сырға, бесбілезік, білезік және алқа (алқа) бар.',
+            ],
+            [
+                'component_id' => 5,
+                'language' => 'en',
+                'title' => 'Handkerchief',
+                'description' => "Handkerchief with handmade author's embroidery. The design and patterns of each camisole are developed by fashion designer Aliya Musayeva from ApoltiStore, Saukele&Kamzol. Size: 42-44. Colors: purple, turquoise, black, pink.",
+            ],
+            [
+                'component_id' => 5,
+                'language' => 'ru',
+                'title' => 'Платок',
+                'description' => 'Платок с ручной авторской вышивкой. Дизайн и узоры каждого камзола разрабатываются модельером Алией Мусаевой из ApoltiStore, Saukele&Kamzol. Размер: 42-44. Цвета: фиолетовый, бирюзовый, черный, розовый.',
+            ],
+            [
+                'component_id' => 5,
+                'language' => 'kk',
+                'title' => 'Орамал',
+                'description' => 'Орамал авторлық кестелі қысқа камзолдар. Әр камзолдың дизайны мен өрнектерін ApoltiStore, Saukele&Kamzol дүкендерінің сәнгері Әлия Мұсаева әзірлеген. Өлшемі: 42-44. Түстер: күлгін, көгілдір, қара, қызғылт.',
             ],
         ];
         ComponentTranslation::insert($componentsTranslations);

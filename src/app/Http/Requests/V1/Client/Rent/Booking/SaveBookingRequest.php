@@ -4,6 +4,7 @@ namespace App\Http\Requests\V1\Client\Rent\Booking;
 
 use App\Http\Requests\CommonRequest;
 use App\Models\V1\Dress;
+use App\Models\V1\DressComponent;
 use Carbon\Carbon;
 
 class SaveBookingRequest extends CommonRequest
@@ -60,6 +61,20 @@ class SaveBookingRequest extends CommonRequest
             'email' => 'required|email:rfc,dns',
             'phone_number' => 'required|regex:/^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/',
             'quantity' => 'integer|between:1, 1000',
+
+            'component_id' => 'sometimes|array',
+            'component_id.*' => [
+                'required',
+                'integer',
+                'between:1,4294967296',
+                function ($attribute, $value, $fail) {
+                    $component = DressComponent::find($value);
+
+                    if (!$component || $component->dress_id != $this->input('dress_id')) {
+                        $fail("invalid_component_for_dress");
+                    }
+                },
+            ],
         ];
     }
 }
