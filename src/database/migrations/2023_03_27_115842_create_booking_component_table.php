@@ -14,10 +14,11 @@ return new class extends Migration {
             Schema::create('booking_component', function (Blueprint $table) {
                 $table->increments('booking_component_id');
 
+                $table->unsignedInteger('booking_id');
+                $table->foreign('booking_id')->references('booking_id')->on('booking');
+
                 $table->unsignedInteger('component_id');
                 $table->foreign('component_id')->references('component_id')->on('component');
-
-                //$table->date('date')->default(null);
 
                 $table->timestamps();
                 $table->softDeletes();
