@@ -5,6 +5,7 @@ namespace App\Http\Requests\V1\Client\Rent\Booking;
 use App\Http\Requests\CommonRequest;
 use App\Models\V1\Dress;
 use App\Models\V1\DressComponent;
+use App\Models\V1\Component;
 use Carbon\Carbon;
 
 class SaveBookingRequest extends CommonRequest
@@ -62,7 +63,35 @@ class SaveBookingRequest extends CommonRequest
             'phone_number' => 'required|regex:/^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/',
             'quantity' => 'integer|between:1, 1000',
 
-            'component_id' => 'sometimes|array',
+            'component_id' => [
+                'sometimes',
+                'array',
+                function ($attribute, $value, $fail) {
+                    $date = $this->input('date');
+                    foreach ($value as $val) {
+
+                        $bookingComponent =
+                            Component
+                                ::where('component_id', $val)
+                                ->withSum(
+                                    ['booking_component' => function ($q) use ($date) {
+                                        //$q->where('date', $date);
+                                    }],
+                                    'quantity'
+                                )
+                                ->first();
+
+                        foreach ($this->input('component_quantity') as $quantity) {
+                            if ($bookingComponent->booking_component_sum_quantity + $quantity > $bookingComponent->quantity) {
+                                $fail("booking_to_keep_the_number_of_components_less_than_necessary");
+                            }
+                            if ($quantity > $bookingComponent->quantity) {
+                                $fail("invalid_component_quantity");
+                            }
+                        }
+                    }
+                },
+            ],
             'component_id.*' => [
                 'required',
                 'integer',
@@ -74,6 +103,12 @@ class SaveBookingRequest extends CommonRequest
                         $fail("invalid_component_for_dress");
                     }
                 },
+            ],
+            'component_quantity' => 'sometimes|array',
+            'component_quantity.*' => [
+                'required',
+                'integer',
+                'between:1,4294967296',
             ],
         ];
     }

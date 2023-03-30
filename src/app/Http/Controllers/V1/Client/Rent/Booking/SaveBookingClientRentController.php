@@ -39,16 +39,17 @@ class SaveBookingClientRentController
 
         } else {
             $arrComponent = [];
-            foreach ($requestData['component_id'] ?? [] as $component_id) {
+            foreach ($requestData['component_id'] ?? [] as $key => $component_id) {
                 $arrComponent[] = [
                     'booking_id' => $booking->booking_id,
                     'component_id' => $component_id,
+                    'quantity' => $requestData['component_quantity'][$key],
                 ];
             }
         }
         BookingComponent::insert($arrComponent);
 
-        $booking->component_booking;
+        $booking->booking_component;
         $booking->dress->translation;
 
         return new BookingResource($booking);

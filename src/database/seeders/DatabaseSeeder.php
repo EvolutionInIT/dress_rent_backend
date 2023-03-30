@@ -625,11 +625,11 @@ class DatabaseSeeder extends Seeder
                 'price' => 4000,
             ],
             [
-                'quantity' => 15,
+                'quantity' => 8,
                 'price' => 2000,
             ],
             [
-                'quantity' => 6,
+                'quantity' => 8,
                 'price' => 7000,
             ],
             [
