@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\Size;
+namespace App\Http\Resources\V1\Admin\Size;
 
 use App\Http\Resources\CommonCollection;
 

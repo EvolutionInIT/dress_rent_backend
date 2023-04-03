@@ -17,9 +17,13 @@ return new class extends Migration {
                 $table->increments('dress_size_id');
 
                 $table->unsignedInteger('dress_id');
-                $table->foreign('dress_id')->references('dress_id')->on('dress')->onDelete('cascade');
+                $table->foreign('dress_id')->references('dress_id')->on('dress');
+
                 $table->unsignedInteger('size_id');
-                $table->foreign('size_id')->references('size_id')->on('size')->onDelete('cascade');
+                $table->foreign('size_id')->references('size_id')->on('size');
+
+                $table->timestamps();
+                $table->softDeletes();
             });
     }
 

@@ -18,6 +18,7 @@ use App\Models\V1\User\User;
 use App\Models\V1\User\UserPermission;
 use App\Models\V1\Component;
 use App\Models\V1\BookingComponent;
+use App\Models\V2\BookingColorSize;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -41,6 +42,7 @@ class DatabaseSeeder extends Seeder
         $this->generatePhoto();
         $this->generateBooking();
         $this->generateBookingComponent();
+        $this->generateBookingColorSize();
     }
 
     public function generateDress()
@@ -611,6 +613,38 @@ class DatabaseSeeder extends Seeder
             ],
         ];
         Booking::insert($bookings);
+    }
+
+    public function generateBookingColorSize()
+    {
+        $bokingsColorsSizes = [
+            [
+                'booking_id' => 1,
+                'color_id' => 1,
+                'size_id' => 2,
+            ],
+            [
+                'booking_id' => 1,
+                'color_id' => 2,
+                'size_id' => 4,
+            ],
+            [
+                'booking_id' => 3,
+                'color_id' => 5,
+                'size_id' => 5,
+            ],
+            [
+                'booking_id' => 5,
+                'color_id' => 4,
+                'size_id' => 1,
+            ],
+            [
+                'booking_id' => 5,
+                'color_id' => 5,
+                'size_id' => 5,
+            ],
+        ];
+        BookingColorSize::insert($bokingsColorsSizes);
     }
 
     public function generateComponent()
