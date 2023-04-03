@@ -34,6 +34,7 @@ class SaveBookingClientRentController
                 $arrComponent[] = [
                     'booking_id' => $booking->booking_id,
                     'component_id' => $component_id,
+                    'date' => $requestData['date'],
                 ];
             }
 
@@ -44,6 +45,7 @@ class SaveBookingClientRentController
                     'booking_id' => $booking->booking_id,
                     'component_id' => $component_id,
                     'quantity' => $requestData['component_quantity'][$key],
+                    'date' => $requestData['date'],
                 ];
             }
         }

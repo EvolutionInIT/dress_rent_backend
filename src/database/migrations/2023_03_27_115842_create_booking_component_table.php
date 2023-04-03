@@ -21,6 +21,7 @@ return new class extends Migration {
                 $table->foreign('component_id')->references('component_id')->on('component');
 
                 $table->unsignedTinyInteger('quantity')->default(1);
+                $table->date('date')->default(null);
 
                 $table->timestamps();
                 $table->softDeletes();

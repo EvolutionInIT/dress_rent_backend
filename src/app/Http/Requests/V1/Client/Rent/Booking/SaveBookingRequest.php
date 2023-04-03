@@ -75,7 +75,7 @@ class SaveBookingRequest extends CommonRequest
                                 ::where('component_id', $val)
                                 ->withSum(
                                     ['booking_component' => function ($q) use ($date) {
-                                        //$q->where('date', $date);
+                                        $q->where('date', $date);
                                     }],
                                     'quantity'
                                 )

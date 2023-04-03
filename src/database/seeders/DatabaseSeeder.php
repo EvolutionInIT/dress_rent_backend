@@ -646,19 +646,23 @@ class DatabaseSeeder extends Seeder
         $bookingsComponents = [
             [
                 'booking_id' => 1,
-                'component_id' => 2
+                'component_id' => 2,
+                'date' => today(),
             ],
             [
                 'booking_id' => 2,
-                'component_id' => 1
+                'component_id' => 1,
+                'date' => today(),
             ],
             [
                 'booking_id' => 4,
-                'component_id' => 3
+                'component_id' => 3,
+                'date' => today(),
             ],
             [
                 'booking_id' => 3,
-                'component_id' => 4
+                'component_id' => 4,
+                'date' => today(),
             ],
         ];
         BookingComponent::insert($bookingsComponents);

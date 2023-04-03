@@ -13,6 +13,7 @@ class BookingComponentResource extends JsonResource
             'quantity' => $this->quantity,
             'price' => $this->price,
             'title' => $this->translation->title ?? '',
+            'date' => $request->date,
         ];
     }
 }
