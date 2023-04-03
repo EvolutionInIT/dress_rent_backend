@@ -21,12 +21,8 @@ class SaveBookingClientRentController
 
         $booking = Booking::create($requestData);
 
-        BookingColorSize
-            ::create([
-                'booking_id' => $booking->booking_id,
-                'color_id' => $requestData['color_id'],
-                'size_id' => $requestData['size_id'],
-            ]);
+        $requestData['booking_id'] = $booking->booking_id;
+        BookingColorSize::create($requestData);
 
         if (!isset($requestData['component_id'])) {
 
