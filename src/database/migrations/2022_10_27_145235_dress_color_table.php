@@ -22,6 +22,8 @@ return new class extends Migration {
                 $table->unsignedInteger('color_id');
                 $table->foreign('color_id')->references('color_id')->on('color');
 
+                $table->unsignedTinyInteger('quantity')->default(1);
+
                 $table->timestamps();
                 $table->softDeletes();
             });

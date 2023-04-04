@@ -20,7 +20,7 @@ class BookingColorSize extends Model
 
     protected $table = 'booking_color_size';
     protected $primaryKey = 'booking_color_size_id';
-    protected $fillable = ['booking_id', 'color_id', 'size_id'];
+    protected $fillable = ['booking_id', 'color_id', 'size_id', 'date', 'quantity'];
 
     public $timestamps = false;
 
@@ -40,4 +40,5 @@ class BookingColorSize extends Model
     {
         return $this->hasOne(Size::class, 'size_id', 'size_id');
     }
+
 }

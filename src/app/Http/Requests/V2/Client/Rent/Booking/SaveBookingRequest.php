@@ -133,6 +133,28 @@ class SaveBookingRequest extends CommonRequest
                         $fail("invalid_color_for_dress");
                     }
                 },
+
+                function ($attribute, $value, $fail) {
+                    $date = $this->input('date');
+
+                    $dressColor =
+                        DressColor
+                            ::where('color_id', $value)
+                            ->withSum(
+                                ['booking_color_size' => function ($q) use ($date) {
+                                    $q->where('date', $date);
+                                }],
+                                'quantity'
+                            )
+                            ->first();
+
+                    if ($dressColor->booking_color_size_sum_quantity + $this->input('quantity') > $dressColor->quantity) {
+                        $fail("booking_to_keep_the_number_of_color_less_than_necessary");
+                    }
+                    if ($this->input('quantity') > $dressColor->quantity) {
+                        $fail("invalid_quantity");
+                    }
+                },
             ],
             'size_id' => [
                 'required',
@@ -155,6 +177,30 @@ class SaveBookingRequest extends CommonRequest
                         $fail("invalid_size_for_dress");
                     }
                 },
+
+                function ($attribute, $value, $fail) {
+                    $date = $this->input('date');
+
+                    $dressSize =
+                        DressSize
+                            ::where('size_id', $value)
+                            ->withSum(
+                                ['booking_color_size' => function ($q) use ($date) {
+                                    $q->where('date', $date);
+                                }],
+                                'quantity'
+                            )
+                            ->first();
+
+                    if ($dressSize->booking_color_size_sum_quantity + $this->input('quantity') > $dressSize->quantity) {
+                        $fail("booking_to_keep_the_number_of_size_less_than_necessary");
+                    }
+                    if ($this->input('quantity') > $dressSize->quantity) {
+                        $fail("invalid_quantity");
+                    }
+                },
+
+
             ],
         ];
     }
