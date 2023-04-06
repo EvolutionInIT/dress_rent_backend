@@ -16,6 +16,7 @@ use App\Models\V1\DressColor;
 use App\Models\V1\DressSize;
 use App\Models\V1\Photo;
 use Illuminate\Http\JsonResponse;
+use Intervention\Image\Facades\Image;
 use Symfony\Component\HttpFoundation\Response;
 
 class DressController
@@ -79,10 +80,26 @@ class DressController
         DressSize::insert($arrSize);
 
         $arrPhoto = [];
-        foreach ($requestData['photo'] ?? [] as $photo) {
+        $widths = $requestData['width'] ?? [];
+        foreach ($requestData['photo'] ?? [] as $index => $photo) {
             $photoName = $photo->store('dresses');
-            $photoName = substr($photoName, 6);
 
+            $image = Image::make('/var/www/storage/app/public/' . $photoName);
+
+            if (isset($widths[$index])) {
+                $image->resize($widths[$index], null, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+            } else {
+                $image->resize(300, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+            }
+
+            $image->encode('jpg', 80);
+            $image->save();
+
+            $photoName = substr($photoName, 6);
             $arrPhoto [] = [
                 'dress_id' => $dress->dress_id,
                 'image' => $photoName,
