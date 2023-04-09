@@ -55,7 +55,7 @@ class DatabaseSeeder extends Seeder
             [
                 'user_id' => 2,
                 'quantity' => 9,
-                'components' => [1],
+                'components' => [1, 2],
                 'categories' => [1],
             ],
             [
@@ -679,7 +679,8 @@ class DatabaseSeeder extends Seeder
         $bookings = [
             [
                 'dress_id' => 1,
-                'date' => today(),
+                'date_start' => date('Y-m-d'),
+                'date_end' => date('Y-m-d', strtotime('+2 days')),
                 'status' => Booking::STATUSES['NEW'],
                 'email' => 'anastasya@test.com',
                 'phone_number' => +77052332233,
@@ -687,7 +688,8 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'dress_id' => 1,
-                'date' => '2023-03-16',
+                'date_start' => date('Y-m-d'),
+                'date_end' => date('Y-m-d', strtotime('+2 days')),
                 'status' => Booking::STATUSES['APPROVED'],
                 'email' => 'anelya@test.com',
                 'phone_number' => +77052332222,
@@ -695,7 +697,8 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'dress_id' => 3,
-                'date' => today(),
+                'date_start' => date('Y-m-d'),
+                'date_end' => date('Y-m-d', strtotime('+2 days')),
                 'status' => Booking::STATUSES['NEW'],
                 'email' => 'karligash@test.com',
                 'phone_number' => +77052332255,
@@ -703,7 +706,8 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'dress_id' => 4,
-                'date' => today(),
+                'date_start' => date('Y-m-d'),
+                'date_end' => date('Y-m-d', strtotime('+2 days')),
                 'status' => Booking::STATUSES['NEW'],
                 'email' => 'cvetlana@test.com',
                 'phone_number' => +77052332244,
@@ -711,7 +715,8 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'dress_id' => 5,
-                'date' => today(),
+                'date_start' => date('Y-m-d'),
+                'date_end' => date('Y-m-d', strtotime('+2 days')),
                 'status' => Booking::STATUSES['NEW'],
                 'email' => 'alena@test.com',
                 'phone_number' => +77052332277,
@@ -719,7 +724,8 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'dress_id' => 5,
-                'date' => today(),
+                'date_start' => date('Y-m-d'),
+                'date_end' => date('Y-m-d', strtotime('+2 days')),
                 'status' => Booking::STATUSES['NEW'],
                 'email' => 'margarita@test.com',
                 'phone_number' => +77052332288,
@@ -736,31 +742,36 @@ class DatabaseSeeder extends Seeder
                 'booking_id' => 1,
                 'color_id' => 1,
                 'size_id' => 2,
-                'date' => today(),
+                'date_start' => date('Y-m-d'),
+                'date_end' => date('Y-m-d', strtotime('+2 days')),
             ],
             [
                 'booking_id' => 1,
                 'color_id' => 2,
                 'size_id' => 4,
-                'date' => today(),
+                'date_start' => date('Y-m-d'),
+                'date_end' => date('Y-m-d', strtotime('+2 days')),
             ],
             [
                 'booking_id' => 3,
                 'color_id' => 5,
                 'size_id' => 5,
-                'date' => today(),
+                'date_start' => date('Y-m-d'),
+                'date_end' => date('Y-m-d', strtotime('+2 days')),
             ],
             [
                 'booking_id' => 5,
                 'color_id' => 4,
                 'size_id' => 1,
-                'date' => today(),
+                'date_start' => date('Y-m-d'),
+                'date_end' => date('Y-m-d', strtotime('+2 days')),
             ],
             [
                 'booking_id' => 5,
                 'color_id' => 5,
                 'size_id' => 5,
-                'date' => today(),
+                'date_start' => date('Y-m-d'),
+                'date_end' => date('Y-m-d', strtotime('+2 days')),
             ],
         ];
         BookingColorSize::insert($bokingsColorsSizes);
@@ -800,22 +811,26 @@ class DatabaseSeeder extends Seeder
             [
                 'booking_id' => 1,
                 'component_id' => 2,
-                'date' => today(),
+                'date_start' => date('Y-m-d'),
+                'date_end' => date('Y-m-d', strtotime('+2 days')),
             ],
             [
                 'booking_id' => 2,
                 'component_id' => 1,
-                'date' => today(),
+                'date_start' => date('Y-m-d'),
+                'date_end' => date('Y-m-d', strtotime('+2 days')),
             ],
             [
                 'booking_id' => 4,
                 'component_id' => 3,
-                'date' => today(),
+                'date_start' => date('Y-m-d'),
+                'date_end' => date('Y-m-d', strtotime('+2 days')),
             ],
             [
                 'booking_id' => 3,
                 'component_id' => 4,
-                'date' => today(),
+                'date_start' => date('Y-m-d'),
+                'date_end' => date('Y-m-d', strtotime('+2 days')),
             ],
         ];
         BookingComponent::insert($bookingsComponents);

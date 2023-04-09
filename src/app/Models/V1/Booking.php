@@ -25,7 +25,7 @@ class Booking extends Model
     protected $primaryKey = 'booking_id';
     protected $fillable =
         [
-            'dress_id', 'date', 'status', 'email', 'phone_number', 'quantity'
+            'dress_id', 'status', 'email', 'phone_number', 'quantity', 'date_start', 'date_end'
         ];
 
     protected $hidden = [

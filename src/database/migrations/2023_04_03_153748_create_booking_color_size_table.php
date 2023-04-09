@@ -24,7 +24,9 @@ return new class extends Migration {
                 $table->foreign('size_id')->references('size_id')->on('size');
 
                 $table->unsignedTinyInteger('quantity')->default(1);
-                $table->date('date')->default(null);
+
+                $table->date('date_start')->default(null);
+                $table->date('date_end')->default(null);
 
                 $table->timestamps();
                 $table->softDeletes();

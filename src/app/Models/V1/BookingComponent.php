@@ -19,7 +19,9 @@ class BookingComponent extends Model
 
     protected $table = 'booking_component';
     protected $primaryKey = 'booking_component_id';
-    protected $fillable = ['booking_id', 'component_id'];
+    protected $fillable = [
+        'booking_id', 'component_id', 'date_start', 'date_end'
+    ];
 
     public $timestamps = false;
 

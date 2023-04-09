@@ -20,7 +20,9 @@ class BookingColorSize extends Model
 
     protected $table = 'booking_color_size';
     protected $primaryKey = 'booking_color_size_id';
-    protected $fillable = ['booking_id', 'color_id', 'size_id', 'date', 'quantity'];
+    protected $fillable = [
+        'booking_id', 'color_id', 'size_id', 'quantity', 'date_start', 'date_end'
+    ];
 
     public $timestamps = false;
 
