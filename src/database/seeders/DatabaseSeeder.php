@@ -10,6 +10,7 @@ use App\Models\V1\Color;
 use App\Models\V1\ColorTranslation;
 use App\Models\V1\ComponentTranslation;
 use App\Models\V1\Dress;
+use App\Models\V1\DressPrice;
 use App\Models\V1\DressTranslation;
 use App\Models\V1\Photo;
 use App\Models\V1\Size;
@@ -30,6 +31,8 @@ class DatabaseSeeder extends Seeder
     {
         $ls = new LanguageSeeder();
         $ls->generateLanguages();
+        $cs = new CurrencySeeder();
+        $cs->generateCurrency();
         $this->generatePermissions();
         $this->generateUser();
         $this->generateCategory();
@@ -39,6 +42,7 @@ class DatabaseSeeder extends Seeder
         $this->generateDress();
         $this->generatePhoto();
         $this->generateBooking();
+        //$this->generateDressPrice();
     }
 
     public function generateDress()
@@ -51,6 +55,7 @@ class DatabaseSeeder extends Seeder
                 'categories' => [1],
                 'colors' => [1, 2, 4],
                 'sizes' => [2, 4, 5],
+                //'price' => 5000,
             ],
             [
                 'user_id' => 2,
@@ -59,6 +64,7 @@ class DatabaseSeeder extends Seeder
                 'categories' => [1],
                 'colors' => [2, 3],
                 'sizes' => [2, 3],
+                //'price' => 6000,
             ],
             [
                 'user_id' => 2,
@@ -67,6 +73,7 @@ class DatabaseSeeder extends Seeder
                 'categories' => [1],
                 'colors' => [5, 2],
                 'sizes' => [4, 5],
+                //'price' => 2000,
             ],
             [
                 'user_id' => 2,
@@ -75,6 +82,7 @@ class DatabaseSeeder extends Seeder
                 'categories' => [1],
                 'colors' => [3, 1],
                 'sizes' => [2, 3],
+                //'price' => 8000,
             ],
             [
                 'user_id' => 2,
@@ -83,6 +91,7 @@ class DatabaseSeeder extends Seeder
                 'categories' => [1],
                 'colors' => [4, 5],
                 'sizes' => [1, 5],
+                //'price' => 15000,
             ],
         ];
 
@@ -93,11 +102,13 @@ class DatabaseSeeder extends Seeder
             $components = $dress['components'] ?? [];
             $colors = $dress['colors'] ?? [];
             $sizes = $dress['sizes'] ?? [];
+            //$prices = $dress['prices'] ?? [];
             unset($dress['photos']);
             unset($dress['categories']);
             unset($dress['components']);
             unset($dress['colors']);
             unset($dress['sizes']);
+            //unset($dress['prices']);
 
             $newDress = Dress::create(
                 [
@@ -113,6 +124,7 @@ class DatabaseSeeder extends Seeder
             $newDress->component()->attach($components);
             $newDress->color()->attach($colors);
             $newDress->size()->attach($sizes);
+            //$newDress->price()->attach($prices);
 
             foreach ($photos as $photo)
                 $dressesPhoto[] = [
@@ -125,6 +137,7 @@ class DatabaseSeeder extends Seeder
             Photo::insert($dressesPhoto);
 
         $this->generateDressTranslation();
+        $this->generateDressPrice();
     }
 
     public function generateDressTranslation()
@@ -694,5 +707,86 @@ class DatabaseSeeder extends Seeder
             ],
         ];
         ComponentTranslation::insert($componentsTranslations);
+    }
+
+    public function generateDressPrice() {
+        $dressesPrices = [
+            [
+                'dress_id' => 1,
+                'code' => 'KZT',
+                'price' => 3000,
+            ],
+            [
+                'dress_id' => 1,
+                'code' => 'RUB',
+                'price' => 517.55,
+            ],
+            [
+                'dress_id' => 1,
+                'code' => 'USD',
+                'price' => 6.74,
+            ],
+            [
+                'dress_id' => 2,
+                'code' => 'KZT',
+                'price' => 7000,
+            ],
+            [
+                'dress_id' => 2,
+                'code' => 'RUB',
+                'price' => 1207.63,
+            ],
+            [
+                'dress_id' => 2,
+                'code' => 'USD',
+                'price' => 15.72,
+            ],
+            [
+                'dress_id' => 3,
+                'code' => 'KZT',
+                'price' => 12000,
+            ],
+            [
+                'dress_id' => 3,
+                'code' => 'RUB',
+                'price' => 2070.22,
+            ],
+            [
+                'dress_id' => 3,
+                'code' => 'USD',
+                'price' => 26.95,
+            ],
+            [
+                'dress_id' => 4,
+                'code' => 'KZT',
+                'price' => 9800,
+            ],
+            [
+                'dress_id' => 4,
+                'code' => 'RUB',
+                'price' => 1690.68,
+            ],
+            [
+                'dress_id' => 4,
+                'code' => 'USD',
+                'price' => 22.01,
+            ],
+            [
+                'dress_id' => 5,
+                'code' => 'KZT',
+                'price' => 15000,
+            ],
+            [
+                'dress_id' => 5,
+                'code' => 'RUB',
+                'price' => 2587.77,
+            ],
+            [
+                'dress_id' => 5,
+                'code' => 'USD',
+                'price' => 33.69,
+            ],
+        ];
+        DressPrice::insert($dressesPrices);
     }
 }

@@ -8,6 +8,7 @@ use App\Http\Controllers\V1\Admin\PhotoController;
 use App\Http\Controllers\V1\Admin\SizeController;
 use App\Http\Controllers\V1\Admin\UserController;
 use App\Http\Controllers\V1\AuthController;
+use App\Http\Controllers\V1\Client\CurrencyControllerClient;
 use App\Http\Controllers\V1\Client\Rent\Booking\AvailableBookingClientRentController;
 use App\Http\Controllers\V1\Client\Rent\CategoryController as CategoryControllerClientRent;
 use App\Http\Controllers\V1\Client\Rent\Booking\SaveBookingController as SaveBookingControllerClientRent;
@@ -22,6 +23,13 @@ Route
     ->withoutMiddleware('auth.role')
     ->group(function () {
         Route::get('list', [LanguageControllerClient::class, 'list'])->name('list');
+    });
+
+Route
+    ::prefix('currency')->name('currency.')
+    ->withoutMiddleware('auth.role')
+    ->group(function () {
+        Route::get('list', [CurrencyControllerClient::class, 'list'])->name('list');
     });
 
 Route

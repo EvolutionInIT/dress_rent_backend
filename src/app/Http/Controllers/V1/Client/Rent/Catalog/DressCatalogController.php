@@ -23,6 +23,7 @@ class DressCatalogController
             ->with('category')
             ->with('photo')
             ->with('size')
+            //->with('price')
             ->first();
 
         return new DressCatalogResource($dress);

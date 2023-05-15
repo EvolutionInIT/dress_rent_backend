@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\V1\Client\Rent\Catalog;
 
+use App\Http\Resources\V1\Client\Price\PriceResource;
 use App\Http\Resources\Size\SizeResource;
 use App\Http\Resources\User\UserResource;
 use App\Http\Resources\V1\Admin\Color\ColorResource;
@@ -35,8 +36,10 @@ class DressCatalogResource extends JsonResource
             ),
 
             $this->mergeWhen(
-                isset($this->price),
-                ['price' => $this->price]
+                $this->relationLoaded('price'),
+                [
+                    'price' => $this->price->price ?? '',
+                ]
             ),
 
             $this->mergeWhen(

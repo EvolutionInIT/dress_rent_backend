@@ -4,6 +4,7 @@ namespace App\Models\V1;
 
 use App\Models\Traits\V1\HelperTrait;
 use App\Models\Traits\V1\TranslationTrait;
+use App\Models\Traits\V1\PriceTrait;
 use App\Models\V1\User\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -19,6 +20,7 @@ class Dress extends Model
 
     // Traits
     use TranslationTrait;
+    use PriceTrait;
     use HelperTrait;
 
 
@@ -26,7 +28,7 @@ class Dress extends Model
     protected $primaryKey = 'dress_id';
     protected $fillable =
         [
-            'title', 'description', 'user_id', 'quantity'
+            'title', 'description', 'user_id', 'quantity', 'price'
         ];
 
     public $timestamps = false;
@@ -98,6 +100,5 @@ class Dress extends Model
     {
         return $this->hasMany(Photo::class, 'dress_id');
     }
-
 
 }

@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\V1\LangMiddleware;
+use App\Http\Middleware\V1\PriceMiddleware;
 use App\Http\Middleware\V1\RoleAuthorization;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -45,6 +46,7 @@ class Kernel extends HttpKernel
             'throttle:api',
             RoleAuthorization::class,
             LangMiddleware::class,
+            PriceMiddleware::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
 
         ],
