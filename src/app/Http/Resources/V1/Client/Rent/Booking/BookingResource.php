@@ -2,8 +2,8 @@
 
 namespace App\Http\Resources\V1\Client\Rent\Booking;
 
-use App\Http\Resources\V1\Admin\Dress\DressResource;
 use App\Http\Resources\V1\Admin\Booking\BookingComponentResource;
+use App\Http\Resources\V1\Client\Rent\Dress\DressResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class BookingResource extends JsonResource
@@ -13,7 +13,7 @@ class BookingResource extends JsonResource
         return [
             'booking_id' => $this->booking_id,
             'dress_id' => $this->dress_id,
-            'date' => $this->date,
+            'date' => date('Y-m-d', strtotime($this->date)),
             'email' => $this->email,
             'phone_number' => $this->phone_number,
             'quantity' => $this->quantity,
