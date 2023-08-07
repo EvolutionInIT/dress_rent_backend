@@ -6,6 +6,7 @@ use App\Models\Traits\V1\HelperTrait;
 use App\Models\Traits\V1\TranslationTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Component extends Model
@@ -25,5 +26,13 @@ class Component extends Model
         ];
 
     public $timestamps = false;
+
+    /**
+     * @return HasMany
+     */
+    public function booking_component(): HasMany
+    {
+        return $this->hasMany(BookingComponent::class, 'component_id');
+    }
 
 }

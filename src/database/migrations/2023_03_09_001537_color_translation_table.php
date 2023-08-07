@@ -21,7 +21,7 @@ return new class extends Migration {
 
                 $table->char('language', 2);
 
-                $table->string('color', 20);
+                $table->string('title', 20);
                 $table->softDeletes();
             });
     }

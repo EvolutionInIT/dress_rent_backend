@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\V1\Dress;
 use App\Models\V1\DressTranslation;
 use App\Models\V1\Photo;
+use App\Models\V1\Size;
 use Illuminate\Database\Seeder;
 
 class ApoltiSeeder extends Seeder
@@ -23,10 +24,21 @@ class ApoltiSeeder extends Seeder
         $ds->generatePermissions();
         $ds->generateUser();
         $ds->generateColor();
-        $ds->generateSize();
+        $this->generateSize();
 
         $this->generateDress();
         $this->generateDressTranslation();
+
+        $ds->generateBooking();
+    }
+
+    public function generateSize()
+    {
+        $sizes = [
+            ['size' => '42-44'],
+            ['size' => '46'],
+        ];
+        Size::insert($sizes);
     }
 
     public function generateDress()
@@ -36,17 +48,21 @@ class ApoltiSeeder extends Seeder
                 'user_id' => 1,
                 'photos' => ['evening/4-2.jpg', 'evening/4-1.jpg', 'evening/4-3.jpg', 'evening/4-4.jpg'],
                 'categories' => [1],
+                'sizes' => [1],
+                'colors' => [2],
                 'price' => 10000,
             ],
             [
                 'user_id' => 1,
                 'photos' => ['evening/16-2.jpg', 'evening/16-1.jpg', 'evening/16-3.jpg'],
                 'categories' => [1],
+                'sizes' => [1, 2],
+                'colors' => [2, 4, 5],
                 'price' => 15000,
             ],
             [
                 'user_id' => 1,
-                'photos' => ['evening/5-1.jpg', 'evening/5-2.jpg', 'evening/5-3.jpg', 'evening/5-4.jpg', 'evening/5-5.jpg',],
+                'photos' => ['evening/5-1.jpg', 'evening/5-2.jpg', 'evening/5-3.jpg', 'evening/5-4.jpg', 'evening/5-5.jpg'],
                 'categories' => [1],
                 'price' => 15000,
             ],
@@ -141,8 +157,13 @@ class ApoltiSeeder extends Seeder
         foreach ($dresses as $dress) {
             $photos = $dress['photos'] ?? [];
             $categories = $dress['categories'] ?? [];
+            $sizes = $dress['sizes'] ?? [];
+            $colors = $dress['colors'] ?? [];
             unset($dress['photos']);
             unset($dress['categories']);
+            unset($dress['sizes']);
+            unset($dress['colors']);
+
 
             $newDress = Dress::create(
                 [
@@ -155,6 +176,8 @@ class ApoltiSeeder extends Seeder
             );
 
             $newDress->category()->attach($categories);
+            $newDress->size()->attach($sizes);
+            $newDress->color()->attach($colors);
 
             foreach ($photos as $photo)
                 $dressesPhoto[] = [

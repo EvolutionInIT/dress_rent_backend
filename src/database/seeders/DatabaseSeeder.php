@@ -17,6 +17,7 @@ use App\Models\V1\User\Permission;
 use App\Models\V1\User\User;
 use App\Models\V1\User\UserPermission;
 use App\Models\V1\Component;
+use App\Models\V1\BookingComponent;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -39,6 +40,7 @@ class DatabaseSeeder extends Seeder
         $this->generateDress();
         $this->generatePhoto();
         $this->generateBooking();
+        $this->generateBookingComponent();
     }
 
     public function generateDress()
@@ -71,7 +73,7 @@ class DatabaseSeeder extends Seeder
             [
                 'user_id' => 2,
                 'quantity' => 7,
-                'components' => [4],
+                'components' => [4, 5],
                 'categories' => [1],
                 'colors' => [3, 1],
                 'sizes' => [2, 3],
@@ -368,10 +370,12 @@ class DatabaseSeeder extends Seeder
             [
                 'firstname' => 'Admin',
                 'email' => 'admin@admin.com',
+                'phone' => '77772082140',
             ],
             [
                 'firstname' => 'user',
                 'email' => 'user@admin.com',
+                'phone' => '77772082141',
             ],
         ];
 
@@ -422,7 +426,11 @@ class DatabaseSeeder extends Seeder
     public function generateColor()
     {
         $colors = [
-            [], [], [], [], [],
+            ['color' => 'blue'],
+            ['color' => 'black'],
+            ['color' => 'red'],
+            ['color' => 'purple'],
+            ['color' => 'white'],
         ];
         Color::insert($colors);
         $this->generateColorTranslation();
@@ -434,77 +442,77 @@ class DatabaseSeeder extends Seeder
             [
                 'color_id' => 1,
                 'language' => 'en',
-                'color' => 'Blue',
+                'title' => 'Blue',
             ],
             [
                 'color_id' => 1,
                 'language' => 'ru',
-                'color' => 'Голубой',
+                'title' => 'Голубой',
             ],
             [
                 'color_id' => 1,
                 'language' => 'kk',
-                'color' => 'Көк',
+                'title' => 'Көк',
             ],
             [
                 'color_id' => 2,
                 'language' => 'en',
-                'color' => 'Black',
+                'title' => 'Black',
             ],
             [
                 'color_id' => 2,
                 'language' => 'ru',
-                'color' => 'Черный',
+                'title' => 'Черный',
             ],
             [
                 'color_id' => 2,
                 'language' => 'kk',
-                'color' => 'Қара',
+                'title' => 'Қара',
             ],
             [
                 'color_id' => 3,
                 'language' => 'en',
-                'color' => 'Red',
+                'title' => 'Red',
             ],
             [
                 'color_id' => 3,
                 'language' => 'ru',
-                'color' => 'Красный',
+                'title' => 'Красный',
             ],
             [
                 'color_id' => 3,
                 'language' => 'kk',
-                'color' => 'Қызыл',
+                'title' => 'Қызыл',
             ],
             [
                 'color_id' => 4,
                 'language' => 'en',
-                'color' => 'Purple',
+                'title' => 'Purple',
             ],
             [
                 'color_id' => 4,
                 'language' => 'ru',
-                'color' => 'Фиолетовый',
+                'title' => 'Фиолетовый',
             ],
             [
                 'color_id' => 4,
                 'language' => 'kk',
-                'color' => 'Kүлгін',
+                'title' => 'Kүлгін',
             ],
             [
                 'color_id' => 5,
                 'language' => 'en',
-                'color' => 'White',
+                'title' => 'White',
             ],
             [
                 'color_id' => 5,
                 'language' => 'ru',
-                'color' => 'Белый',
+                'title' => 'Белый',
             ],
             [
                 'color_id' => 5,
                 'language' => 'kk',
-                'color' => 'Ақ',
+                'title' => 'Ақ',
             ],
         ];
         ColorTranslation::insert($colorsTranslations);
@@ -563,31 +571,49 @@ class DatabaseSeeder extends Seeder
                 'dress_id' => 1,
                 'date' => today(),
                 'status' => Booking::STATUSES['NEW'],
+                'email' => 'anastasya@test.com',
+                'phone_number' => +77052332233,
+                'quantity' => 1,
             ],
             [
                 'dress_id' => 1,
                 'date' => '2023-03-16',
                 'status' => Booking::STATUSES['APPROVED'],
+                'email' => 'anelya@test.com',
+                'phone_number' => +77052332222,
+                'quantity' => 1,
             ],
             [
                 'dress_id' => 3,
                 'date' => today(),
                 'status' => Booking::STATUSES['NEW'],
+                'email' => 'karligash@test.com',
+                'phone_number' => +77052332255,
+                'quantity' => 1,
             ],
             [
                 'dress_id' => 4,
                 'date' => today(),
                 'status' => Booking::STATUSES['NEW'],
+                'email' => 'cvetlana@test.com',
+                'phone_number' => +77052332244,
+                'quantity' => 0,
             ],
             [
                 'dress_id' => 5,
                 'date' => today(),
                 'status' => Booking::STATUSES['NEW'],
+                'email' => 'alena@test.com',
+                'phone_number' => +77052332277,
+                'quantity' => 1,
             ],
             [
                 'dress_id' => 5,
                 'date' => today(),
                 'status' => Booking::STATUSES['NEW'],
+                'email' => 'margarita@test.com',
+                'phone_number' => +77052332288,
+                'quantity' => 3,
             ],
         ];
         Booking::insert($bookings);
@@ -605,16 +631,47 @@ class DatabaseSeeder extends Seeder
                 'price' => 4000,
             ],
             [
-                'quantity' => 15,
+                'quantity' => 8,
                 'price' => 2000,
             ],
             [
-                'quantity' => 6,
+                'quantity' => 8,
+                'price' => 7000,
+            ],
+            [
+                'quantity' => 7,
                 'price' => 7000,
             ],
         ];
         Component::insert($components);
         $this->generateComponentTranslation();
+    }
+
+    public function generateBookingComponent()
+    {
+        $bookingsComponents = [
+            [
+                'booking_id' => 1,
+                'component_id' => 2,
+                'date' => today(),
+            ],
+            [
+                'booking_id' => 2,
+                'component_id' => 1,
+                'date' => today(),
+            ],
+            [
+                'booking_id' => 4,
+                'component_id' => 3,
+                'date' => today(),
+            ],
+            [
+                'booking_id' => 3,
+                'component_id' => 4,
+                'date' => today(),
+            ],
+        ];
+        BookingComponent::insert($bookingsComponents);
     }
 
     public function generateComponentTranslation()
@@ -691,6 +748,24 @@ class DatabaseSeeder extends Seeder
                 'language' => 'kk',
                 'title' => 'Ұзатуға арналған ұлттық ою-өрнектер',
                 'description' => 'Бізде ұлттық әшекейлер жиынтығы бар, оларды жалға алуға болады. Сырға, бесбілезік, білезік және алқа (алқа) бар.',
+            ],
+            [
+                'component_id' => 5,
+                'language' => 'en',
+                'title' => 'Handkerchief',
+                'description' => "Handkerchief with handmade author's embroidery. The design and patterns of each camisole are developed by fashion designer Aliya Musayeva from ApoltiStore, Saukele&Kamzol. Size: 42-44. Colors: purple, turquoise, black, pink.",
+            ],
+            [
+                'component_id' => 5,
+                'language' => 'ru',
+                'title' => 'Платок',
+                'description' => 'Платок с ручной авторской вышивкой. Дизайн и узоры каждого камзола разрабатываются модельером Алией Мусаевой из ApoltiStore, Saukele&Kamzol. Размер: 42-44. Цвета: фиолетовый, бирюзовый, черный, розовый.',
+            ],
+            [
+                'component_id' => 5,
+                'language' => 'kk',
+                'title' => 'Орамал',
+                'description' => 'Орамал авторлық кестелі қысқа камзолдар. Әр камзолдың дизайны мен өрнектерін ApoltiStore, Saukele&Kamzol дүкендерінің сәнгері Әлия Мұсаева әзірлеген. Өлшемі: 42-44. Түстер: күлгін, көгілдір, қара, қызғылт.',
             ],
         ];
         ComponentTranslation::insert($componentsTranslations);

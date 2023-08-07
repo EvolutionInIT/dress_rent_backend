@@ -3,18 +3,18 @@
 use App\Http\Controllers\V1\Admin\BookingController;
 use App\Http\Controllers\V1\Admin\CategoryController;
 use App\Http\Controllers\V1\Admin\ColorController;
+use App\Http\Controllers\V1\Admin\ComponentController;
 use App\Http\Controllers\V1\Admin\DressController;
 use App\Http\Controllers\V1\Admin\PhotoController;
 use App\Http\Controllers\V1\Admin\SizeController;
 use App\Http\Controllers\V1\Admin\UserController;
 use App\Http\Controllers\V1\AuthController;
-use App\Http\Controllers\V1\Client\Rent\Booking\AvailableBookingClientRentController;
-use App\Http\Controllers\V1\Client\Rent\CategoryController as CategoryControllerClientRent;
-use App\Http\Controllers\V1\Client\Rent\Booking\SaveBookingController as SaveBookingControllerClientRent;
 use App\Http\Controllers\V1\Client\LanguageControllerClient;
-use App\Http\Controllers\V1\Admin\ComponentController;
+use App\Http\Controllers\V1\Client\Rent\Booking\AvailableBookingClientRentController;
+use App\Http\Controllers\V1\Client\Rent\Booking\SaveBookingClientRentController;
 use App\Http\Controllers\V1\Client\Rent\Catalog\DressCatalogController;
 use App\Http\Controllers\V1\Client\Rent\Catalog\ListDressCatalogController;
+use App\Http\Controllers\V1\Client\Rent\Category\CategoryClientRentController;
 use Illuminate\Support\Facades\Route;
 
 Route
@@ -55,11 +55,11 @@ Route
             });
 
             Route::prefix('category')->name('category.')->group(function () {
-                Route::get('list', [CategoryControllerClientRent::class, 'list'])->name('list');
+                Route::get('list', [CategoryClientRentController::class, 'list'])->name('list');
             });
 
             Route::prefix('booking')->name('booking.')->group(function () {
-                Route::post('save', [SaveBookingControllerClientRent::class, 'save'])->name('save');
+                Route::post('save', [SaveBookingClientRentController::class, 'save'])->name('save');
                 Route::get('available', [AvailableBookingClientRentController::class, 'available'])->name('available');
             });
 
