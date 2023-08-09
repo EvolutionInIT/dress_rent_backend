@@ -19,6 +19,8 @@ class SaveBookingClientRentController
     {
         $requestData = $request->validated();
         $requestData['date'] = Carbon::parse($requestData['date']);
+        $requestData['date_start'] = $requestData['date'];
+        $requestData['date_end'] = $requestData['date'];
 
         $requestData['status'] = Booking::STATUSES['NEW'];
 

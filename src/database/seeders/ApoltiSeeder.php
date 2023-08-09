@@ -31,7 +31,7 @@ class ApoltiSeeder extends Seeder
         $this->generateDress();
         $this->generateDressTranslation();
 
-        $ds->generateBooking();
+        //$ds->generateBooking();
     }
 
     public function generateSize()

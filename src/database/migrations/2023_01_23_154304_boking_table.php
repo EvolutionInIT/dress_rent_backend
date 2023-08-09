@@ -21,6 +21,7 @@ return new class extends Migration {
 
                 $table->unsignedTinyInteger('quantity')->default(1);
 
+                $table->date('date')->default(null);
                 $table->date('date_start')->default(null);
                 $table->date('date_end')->default(null);
 
