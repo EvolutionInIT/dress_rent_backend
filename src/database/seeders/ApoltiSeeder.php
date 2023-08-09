@@ -2,9 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\V1\Color;
+use App\Models\V1\ColorTranslation;
 use App\Models\V1\Dress;
 use App\Models\V1\DressTranslation;
 use App\Models\V1\Photo;
+use App\Models\V1\Size;
 use Illuminate\Database\Seeder;
 
 class ApoltiSeeder extends Seeder
@@ -22,14 +25,221 @@ class ApoltiSeeder extends Seeder
         $ds->generateCategory();
         $ds->generatePermissions();
         $ds->generateUser();
-        $ds->generateColor();
-        $ds->generateSize();
+        $this->generateColor();
+        $this->generateSize();
 
         $this->generateDress();
         $this->generateDressTranslation();
 
         $ds->generateBooking();
     }
+
+    public function generateSize()
+    {
+        $sizes = [
+            ['size' => '42-44'],
+            ['size' => '42-46'],
+            ['size' => '42-48'],
+            ['size' => '42-50'],
+            ['size' => '42-52'],
+        ];
+        Size::insert($sizes);
+    }
+
+    public function generateColor()
+    {
+        $colors = [
+            ['color' => 'black'],
+            ['color' => 'white'],
+            ['color' => '#D1C6E6'],
+            ['color' => '#E5589C'],
+            ['color' => 'purple'],
+            ['color' => 'yellow'],
+            ['color' => '#6CB5BC'],
+            ['color' => 'pink'],
+            ['color' => '#8EB1B5'],
+            ['color' => '#01676C'],
+            ['color' => 'red'],
+        ];
+        Color::insert($colors);
+        $this->generateColorTranslation();
+    }
+
+    public function generateColorTranslation()
+    {
+        $colorsTranslations = [
+            [
+                'color_id' => 1,
+                'language' => 'en',
+                'title' => 'black',
+            ],
+            [
+                'color_id' => 1,
+                'language' => 'ru',
+                'title' => 'черный',
+            ],
+            [
+                'color_id' => 1,
+                'language' => 'kk',
+                'title' => 'Қара',
+            ],
+
+            [
+                'color_id' => 2,
+                'language' => 'en',
+                'title' => 'white',
+            ],
+            [
+                'color_id' => 2,
+                'language' => 'ru',
+                'title' => 'Белый',
+            ],
+            [
+                'color_id' => 2,
+                'language' => 'kk',
+                'title' => 'ақ',
+            ],
+
+            [
+                'color_id' => 3,
+                'language' => 'en',
+                'title' => 'light purple',
+            ],
+            [
+                'color_id' => 3,
+                'language' => 'ru',
+                'title' => 'светло-фиолетовый',
+            ],
+            [
+                'color_id' => 3,
+                'language' => 'kk',
+                'title' => 'ашық күлгін',
+            ],
+
+            [
+                'color_id' => 4,
+                'language' => 'en',
+                'title' => 'fuchsia (Hollywood light cherry)',
+            ],
+            [
+                'color_id' => 4,
+                'language' => 'ru',
+                'title' => 'фуксия (голливудский светло-вишнёвый)',
+            ],
+            [
+                'color_id' => 4,
+                'language' => 'kk',
+                'title' => 'фуксия (Голливудтың жеңіл шие)',
+            ],
+            [
+                'color_id' => 5,
+                'language' => 'en',
+                'title' => 'purple',
+            ],
+            [
+                'color_id' => 5,
+                'language' => 'ru',
+                'title' => 'фиолетовый',
+            ],
+            [
+                'color_id' => 5,
+                'language' => 'kk',
+                'title' => 'күлгін',
+            ],
+            [
+                'color_id' => 6,
+                'language' => 'en',
+                'title' => 'yellow',
+            ],
+            [
+                'color_id' => 6,
+                'language' => 'ru',
+                'title' => 'жёлтый',
+            ],
+            [
+                'color_id' => 6,
+                'language' => 'kk',
+                'title' => 'сары',
+            ],
+            [
+                'color_id' => 7,
+                'language' => 'en',
+                'title' => 'turquoise',
+            ],
+            [
+                'color_id' => 7,
+                'language' => 'ru',
+                'title' => 'бирюзовый',
+            ],
+            [
+                'color_id' => 7,
+                'language' => 'kk',
+                'title' => 'көгілдір',
+            ],
+            [
+                'color_id' => 8,
+                'language' => 'en',
+                'title' => 'pink',
+            ],
+            [
+                'color_id' => 8,
+                'language' => 'ru',
+                'title' => 'розовый',
+            ],
+            [
+                'color_id' => 8,
+                'language' => 'kk',
+                'title' => 'қызғылт',
+            ],
+            [
+                'color_id' => 9,
+                'language' => 'en',
+                'title' => 'light blue',
+            ],
+            [
+                'color_id' => 9,
+                'language' => 'ru',
+                'title' => 'светло-голубое',
+            ],
+            [
+                'color_id' => 9,
+                'language' => 'kk',
+                'title' => 'ашық көк',
+            ],
+            [
+                'color_id' => 10,
+                'language' => 'en',
+                'title' => 'dark green',
+            ],
+            [
+                'color_id' => 10,
+                'language' => 'ru',
+                'title' => 'темно-зеленый',
+            ],
+            [
+                'color_id' => 10,
+                'language' => 'kk',
+                'title' => 'қою жасыл',
+            ],
+            [
+                'color_id' => 11,
+                'language' => 'en',
+                'title' => 'red',
+            ],
+            [
+                'color_id' => 11,
+                'language' => 'ru',
+                'title' => 'красный',
+            ],
+            [
+                'color_id' => 11,
+                'language' => 'kk',
+                'title' => 'Қызыл',
+            ],
+        ];
+        ColorTranslation::insert($colorsTranslations);
+    }
+
 
     public function generateDress()
     {
@@ -38,103 +248,139 @@ class ApoltiSeeder extends Seeder
                 'user_id' => 1,
                 'photos' => ['evening/4-2.jpg', 'evening/4-1.jpg', 'evening/4-3.jpg', 'evening/4-4.jpg'],
                 'categories' => [1],
+                'sizes' => [1],
+                'colors' => [1],
                 'price' => 10000,
             ],
             [
                 'user_id' => 1,
-                'photos' => ['evening/16-2.jpg', 'evening/16-1.jpg', 'evening/16-3.jpg'],
+                'photos' => ['evening/16-2.jpg', 'evening/16-1.jpg', 'evening/16-3.jpg', 'evening/16-4.jpg', 'evening/16-5.jpg', 'evening/16-6.jpg'],
                 'categories' => [1],
+                'sizes' => [2],
+                'colors' => [1, 2, 3, 4],
+                'quantity' => 3,
                 'price' => 15000,
             ],
             [
                 'user_id' => 1,
-                'photos' => ['evening/5-1.jpg', 'evening/5-2.jpg', 'evening/5-3.jpg', 'evening/5-4.jpg', 'evening/5-5.jpg',],
+                'photos' => ['evening/5-1.jpg', 'evening/5-2.jpg', 'evening/5-3.jpg', 'evening/5-4.jpg', 'evening/5-5.jpg'],
                 'categories' => [1],
-                'price' => 15000,
+                'sizes' => [1],
+                'colors' => [5],
+                'price' => 17000,
             ],
             [
                 'user_id' => 1,
                 'photos' => ['photosession/1-1.jpg', 'photosession/1-2.jpg', 'photosession/1-2.jpg', 'photosession/1-4.jpg', 'photosession/1-5.jpg'],
                 'categories' => [1],
-                'price' => 30000,
+                'sizes' => [1],
+                'colors' => [6],
+                'price' => 25000,
             ],
             [
                 'user_id' => 1,
                 'photos' => ['photosession/6-1.jpg', 'photosession/6-2.jpg', 'photosession/6-3.jpeg', 'photosession/6-4.jpg', 'photosession/6-5.jpg'],
                 'categories' => [2],
+                'sizes' => [3],
+                'colors' => [7],
                 'price' => 35000,
             ],
             [
                 'user_id' => 1,
                 'photos' => ['uzatu/2-1.jpg', 'uzatu/2-2.jpg', 'uzatu/2-3.jpg', 'uzatu/2-4.jpg', 'uzatu/2-5.jpg'],
                 'categories' => [4],
+                'sizes' => [2],
+                'colors' => [8],
                 'price' => 80000,
             ],
             [
                 'user_id' => 1,
                 'photos' => ['uzatu/3-1.jpg', 'uzatu/3-2.jpg', 'uzatu/3-3.jpg', 'uzatu/3-4.jpg'],
                 'categories' => [4],
+                'sizes' => [2],
+                'colors' => [9],
                 'price' => 80000,
             ],
             [
                 'user_id' => 1,
                 'photos' => ['uzatu/8-4.jpg', 'uzatu/8-1.jpg', 'uzatu/8-2.jpg', 'uzatu/8-3.jpg', 'uzatu/8-5.jpg'],
                 'categories' => [4],
+                'sizes' => [1],
+                'colors' => [10],
                 'price' => 80000,
             ],
             [
                 'user_id' => 1,
-                'price' => 50000,
                 'photos' => ['uzatu/11-1.jpg', 'uzatu/11-2.jpg', 'uzatu/11-3.jpg'],
                 'categories' => [4],
+                'sizes' => [2],
+                'colors' => [11],
+                'price' => 50000,
             ],
             [
                 'user_id' => 1,
-                'price' => 50000,
                 'photos' => ['uzatu/12-1.jpg', 'uzatu/12-2.jpg', 'uzatu/12-3.jpg'],
                 'categories' => [4],
+                'sizes' => [2],
+                'colors' => [11],
+                'price' => 50000,
             ],
             [
                 'user_id' => 1,
                 'price' => 10000,
                 'photos' => ['uzatu/13-3.jpg', 'uzatu/13-2.jpg', 'uzatu/13-1.jpg'],
                 'categories' => [4, 6],
+                'sizes' => [1],
+                'colors' => [5, 7],
+                'price' => 10000,
             ],
             [
                 'user_id' => 1,
-                'price' => 4000,
                 'photos' => ['uzatu/20-2.jpg', 'uzatu/19-2.jpg', 'uzatu/19-1.jpg', 'uzatu/19-3.jpg', 'uzatu/20-1.jpg', 'uzatu/20-3.jpg',],
                 'categories' => [4],
+                'sizes' => [],
+                'colors' => [2],
+                'price' => 4000,
             ],
             [
                 'user_id' => 1,
-                'price' => 10000,
                 'photos' => ['uzatu/12-3.jpg', 'uzatu/3-4.jpg', 'uzatu/11-1.jpg',],
                 'categories' => [4],
+                'sizes' => [],
+                'price' => 10000,
+                'colors' => [11],
             ],
             [
                 'user_id' => 1,
                 'price' => 3000,
                 'photos' => ['uzatu/21-2.jpg', 'uzatu/21-1.jpg'],
                 'categories' => [4, 6],
+                'quantity' => 5,
             ],
             [
                 'user_id' => 1,
                 'price' => 15000,
                 'photos' => ['national/kazakh/17-1.jpg', 'national/kazakh/17-2.jpg', 'national/kazakh/17-3.jpg'],
                 'categories' => [6],
+                'quantity' => 3,
+                'sizes' => [2],
+                'colors' => [4, 10],
             ],
             [
                 'user_id' => 1,
                 'price' => 15000,
                 'photos' => ['national/kazakh/22-1.jpg', 'national/kazakh/22-2.jpg', 'national/kazakh/22-3.jpg'],
                 'categories' => [6],
+                'sizes' => [5],
+                'colors' => [7],
             ],
             [
                 'user_id' => 1,
-                'price' => 15000,
+                'price' => 20000,
                 'photos' => ['national/kazakh/23-1.jpg', 'national/kazakh/23-2.jpg', 'national/kazakh/23-3.jpg'],
                 'categories' => [6],
+                'sizes' => [2],
+                'colors' => [10],
             ],
 
         ];
@@ -143,8 +389,13 @@ class ApoltiSeeder extends Seeder
         foreach ($dresses as $dress) {
             $photos = $dress['photos'] ?? [];
             $categories = $dress['categories'] ?? [];
+            $sizes = $dress['sizes'] ?? [];
+            $colors = $dress['colors'] ?? [];
             unset($dress['photos']);
             unset($dress['categories']);
+            unset($dress['sizes']);
+            unset($dress['colors']);
+
 
             $newDress = Dress::create(
                 [
@@ -157,6 +408,8 @@ class ApoltiSeeder extends Seeder
             );
 
             $newDress->category()->attach($categories);
+            $newDress->size()->attach($sizes);
+            $newDress->color()->attach($colors);
 
             foreach ($photos as $photo)
                 $dressesPhoto[] = [
@@ -196,19 +449,19 @@ class ApoltiSeeder extends Seeder
                 'dress_id' => 2,
                 'language' => 'en',
                 'title' => 'Evening corset dress for hire (different colors) in Almaty',
-                'description' => 'Our famous tulle corset dresses fit perfectly. Lightweight and fluffy. Available in black, white, beige, purple, pink, raspberry (fuchsia) colors. The design was developed by fashion designer Aliya Musayeva from ApoltiStore. Size: 42-44, 46 size is available in black, raspberry (fuchsia), purple. Rental period: days.',
+                'description' => 'Our famous tulle corset dresses fit perfectly. Lightweight and fluffy. Available in black, white, beige, purple, pink, raspberry (fuchsia) colors. The design was developed by fashion designer Aliya Musayeva from ApoltiStore. Size: 42-46 size is available in black, white, raspberry (fuchsia), light purple. Rental period: days.',
             ],
             [
                 'dress_id' => 2,
                 'language' => 'ru',
                 'title' => 'Вечернее платье-корсет на прокат (разные цвета) в Алматы',
-                'description' => 'Наши знаменитые фатиновые платья-корсеты идеально сидят по фигуре. Легкие и пышные. Есть в черном, белое, бежевом, фиолетовом, розовом, малиновом (фуксия) цветах. Дизайн разработан модельером Алией Мусаевой из ApoltiStore. Размер: 42-44, 46 размер есть в черном, малиновом (фуксия), фиолетовом цвете. Срок проката: сутки.',
+                'description' => 'Наши знаменитые фатиновые платья-корсеты идеально сидят по фигуре. Легкие и пышные. Дизайн разработан модельером Алией Мусаевой из ApoltiStore. Размер: 42-46 размер есть в черном, белом, малиновом (фуксия), светло-фиолетовом цвете. Срок проката: сутки.',
             ],
             [
                 'dress_id' => 2,
                 'language' => 'kk',
                 'title' => 'Алматыда кешкі корсет көйлек жалға беріледі (түрлі түсті).',
-                'description' => 'Біздің атақты тюль корсет көйлектеріміз тамаша жарасады. Жеңіл және жұмсақ. Қара, ақ, бежевый, күлгін, қызғылт, таңқурай (фуксия) түстері бар. Дизайнды ApoltiStore дүкенінен сәнгер Әлия Мұсаева жасаған. Өлшемі: 42-44, 46 размер қара, таңқурай (фуксия), күлгін түсті. Жалдау мерзімі: күн.',
+                'description' => 'Біздің атақты тюль корсет көйлектеріміз тамаша жарасады. Жеңіл және жұмсақ. Қара, ақ, бежевый, күлгін, қызғылт, таңқурай (фуксия) түстері бар. Дизайнды ApoltiStore дүкенінен сәнгер Әлия Мұсаева жасаған. Өлшемі: 42-46 өлшемдері қара, ақ, таңқурай (фуксия), ашық күлгін түсті. Жалдау мерзімі: күн.',
             ],
             [
                 'dress_id' => 3,
@@ -249,20 +502,20 @@ class ApoltiSeeder extends Seeder
             [
                 'dress_id' => 5,
                 'language' => 'en',
-                'title' => 'Фэмили лук Family look для мамы и дочки платья на фотосессию на прокат в Алматы',
-                'description' => 'Фатиновые платья для мамы и дочки предназначены для создания семейных луков, праздничных фотосессией. Дизайн разработан модельером Алией Мусаевой из ApoltiStore. Размер: взрослое - 42-46, детское - для ростовки 98-110 см.',
+                'title' => 'Family look Family look for mom and daughter dresses for a photo shoot for rent in Almaty',
+                'description' => 'Tulle dresses for mother and daughter are designed to create family bows, festive photo shoots. The design was developed by fashion designer Aliya Musayeva from ApoltiStore. Size: adult - 42-48, child - for size 98-116 cm.',
             ],
             [
                 'dress_id' => 5,
                 'language' => 'ru',
                 'title' => 'Фэмили лук Family look для мамы и дочки платья на фотосессию на прокат в Алматы',
-                'description' => 'Фатиновые платья для мамы и дочки предназначены для создания семейных луков, праздничных фотосессией. Дизайн разработан модельером Алией Мусаевой из ApoltiStore. Размер: взрослое - 42-46, детское - для ростовки 98-110 см.',
+                'description' => 'Фатиновые платья для мамы и дочки предназначены для создания семейных луков, праздничных фотосессией. Дизайн разработан модельером Алией Мусаевой из ApoltiStore. Размер: взрослое - 42-48, детское - для ростовки 98-116 см.',
             ],
             [
                 'dress_id' => 5,
                 'language' => 'kk',
-                'title' => 'Фэмили лук Family look для мамы и дочки платья на фотосессию на прокат в Алматы',
-                'description' => 'Фатиновые платья для мамы и дочки предназначены для создания семейных луков, праздничных фотосессией. Дизайн разработан модельером Алией Мусаевой из ApoltiStore. Размер: взрослое - 42-46, детское - для ростовки 98-110 см.',
+                'title' => 'Отбасылық көрініс Алматыда фотосессияға анасы мен қызына арналған көйлектер жалға беріледі',
+                'description' => 'Анасы мен қызына арналған тюль көйлектері отбасылық садақтарды, мерекелік фотосессияларды жасауға арналған. Дизайнды ApoltiStore дүкенінен сәнгер Әлия Мұсаева жасаған. Өлшемі: ересек - 42-48, бала - 98-116 см өлшемі үшін.',
             ],
             [
                 'dress_id' => 6,
@@ -448,19 +701,19 @@ class ApoltiSeeder extends Seeder
                 'dress_id' => 16,
                 'language' => 'en',
                 'title' => "Women's national blue ethnic costume for rent in Almaty",
-                'description' => "Light women's ethno-sets in different colors. There is blue, dark turquoise, fuchsia and dark green. Includes base dress, hat and takiya. The design was developed by fashion designer Aliya Musayeva from ApoltiStore. Size: 42-46. Rental period: day",
+                'description' => "Light women's ethno-sets in different colors. There is blue, dark turquoise, fuchsia and dark green. Includes base dress, hat and takiya. The design was developed by fashion designer Aliya Musayeva from ApoltiStore. Size: 42-52. Rental period: day",
             ],
             [
                 'dress_id' => 16,
                 'language' => 'ru',
                 'title' => 'Женский национальный голубой этно-костюм на прокат в Алматы',
-                'description' => 'Легкие женские этно-комплекты в разных цветах. Есть голубой, темно-бирюзовый, в цвете фуксии и тёмно-зелёный. В комплект входит базовое платье, шапан и такия. Дизайн разработан модельером Алией Мусаевой из ApoltiStore. Размер: 42-46. Срок проката: сутки',
+                'description' => 'Легкие женские этно-комплекты в разных цветах. Есть голубой, темно-бирюзовый, в цвете фуксии и тёмно-зелёный. В комплект входит базовое платье, шапан и такия. Дизайн разработан модельером Алией Мусаевой из ApoltiStore. Размер: 42-52. Срок проката: сутки',
             ],
             [
                 'dress_id' => 16,
                 'language' => 'kk',
                 'title' => 'Алматыда әйелдерге арналған ұлттық көгілдір этникалық киім жалға беріледі',
-                'description' => 'Түрлі түстердегі жеңіл әйелдер этно-жиынтықтары. Көк, қара көгілдір, фуксия және қою жасыл түсті. Негізгі көйлек, қалпақ және такия кіреді. Дизайнды ApoltiStore дүкенінен сәнгер Әлия Мұсаева жасаған. Өлшемі: 42-46. Жалдау мерзімі: күн',
+                'description' => 'Түрлі түстердегі жеңіл әйелдер этно-жиынтықтары. Көк, қара көгілдір, фуксия және қою жасыл түсті. Негізгі көйлек, қалпақ және такия кіреді. Дизайнды ApoltiStore дүкенінен сәнгер Әлия Мұсаева жасаған. Өлшемі: 42-52. Жалдау мерзімі: күн',
             ],
             [
                 'dress_id' => 17,

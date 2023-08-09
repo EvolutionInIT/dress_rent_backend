@@ -486,10 +486,12 @@ class DatabaseSeeder extends Seeder
             [
                 'firstname' => 'Admin',
                 'email' => 'admin@admin.com',
+                'phone' => '77772082140',
             ],
             [
                 'firstname' => 'user',
                 'email' => 'user@admin.com',
+                'phone' => '77772082141',
             ],
         ];
 
@@ -540,7 +542,11 @@ class DatabaseSeeder extends Seeder
     public function generateColor()
     {
         $colors = [
-            [], [], [], [], [],
+            ['color' => 'blue'],
+            ['color' => 'black'],
+            ['color' => 'red'],
+            ['color' => 'purple'],
+            ['color' => 'white'],
         ];
         Color::insert($colors);
         $this->generateColorTranslation();
@@ -552,77 +558,77 @@ class DatabaseSeeder extends Seeder
             [
                 'color_id' => 1,
                 'language' => 'en',
-                'color' => 'Blue',
+                'title' => 'Blue',
             ],
             [
                 'color_id' => 1,
                 'language' => 'ru',
-                'color' => 'Голубой',
+                'title' => 'Голубой',
             ],
             [
                 'color_id' => 1,
                 'language' => 'kk',
-                'color' => 'Көк',
+                'title' => 'Көк',
             ],
             [
                 'color_id' => 2,
                 'language' => 'en',
-                'color' => 'Black',
+                'title' => 'Black',
             ],
             [
                 'color_id' => 2,
                 'language' => 'ru',
-                'color' => 'Черный',
+                'title' => 'Черный',
             ],
             [
                 'color_id' => 2,
                 'language' => 'kk',
-                'color' => 'Қара',
+                'title' => 'Қара',
             ],
             [
                 'color_id' => 3,
                 'language' => 'en',
-                'color' => 'Red',
+                'title' => 'Red',
             ],
             [
                 'color_id' => 3,
                 'language' => 'ru',
-                'color' => 'Красный',
+                'title' => 'Красный',
             ],
             [
                 'color_id' => 3,
                 'language' => 'kk',
-                'color' => 'Қызыл',
+                'title' => 'Қызыл',
             ],
             [
                 'color_id' => 4,
                 'language' => 'en',
-                'color' => 'Purple',
+                'title' => 'Purple',
             ],
             [
                 'color_id' => 4,
                 'language' => 'ru',
-                'color' => 'Фиолетовый',
+                'title' => 'Фиолетовый',
             ],
             [
                 'color_id' => 4,
                 'language' => 'kk',
-                'color' => 'Kүлгін',
+                'title' => 'Kүлгін',
             ],
             [
                 'color_id' => 5,
                 'language' => 'en',
-                'color' => 'White',
+                'title' => 'White',
             ],
             [
                 'color_id' => 5,
                 'language' => 'ru',
-                'color' => 'Белый',
+                'title' => 'Белый',
             ],
             [
                 'color_id' => 5,
                 'language' => 'kk',
-                'color' => 'Ақ',
+                'title' => 'Ақ',
             ],
         ];
         ColorTranslation::insert($colorsTranslations);

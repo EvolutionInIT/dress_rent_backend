@@ -14,7 +14,7 @@ class DressCatalogRequest extends CommonRequest
     public function rules(): array
     {
         return [
-            'dress_id' => 'required|integer|between:1,4294967296|exists:App\Models\V1\Dress,dress_id',
+            'dress_id' => 'bail|required|integer|between:1,4294967296|exists:App\Models\V1\Dress,dress_id',
         ];
     }
 }
