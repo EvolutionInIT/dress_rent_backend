@@ -21,7 +21,9 @@ return new class extends Migration {
 
                 $table->unsignedTinyInteger('quantity')->default(1);
 
-                $table->date('date')->default(null);
+                $table->date('date_start')->default(null);
+                $table->date('date_end')->default(null);
+
                 $table->string('status', 10)->default('new');
 
                 $table->string('email');
@@ -39,6 +41,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('booking');
     }
 };

@@ -13,7 +13,8 @@ class BookingResource extends JsonResource
         return [
             'booking_id' => $this->booking_id,
             'dress_id' => $this->dress_id,
-            'date' => $this->date,
+            'date_start' => $this->date_start,
+            'date_end' => $this->date_end,
             'email' => $this->email,
             'phone_number' => $this->phone_number,
             'quantity' => $this->quantity,
