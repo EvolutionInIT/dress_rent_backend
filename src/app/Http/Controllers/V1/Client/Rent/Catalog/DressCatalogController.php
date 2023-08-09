@@ -14,18 +14,18 @@ class DressCatalogController
      */
     public function dress(DressCatalogRequest $request): DressCatalogResource
     {
-        $dressID = $request->validated()['dress_id'] ?? null;
+        $requestData = $request->validated();
 
         $dress = Dress
             ::select()
-            ->where('dress_id', $dressID)
+            ->where('dress_id', $requestData['dress_id'])
             ->with('translation')
-            ->with('category')
+            ->with('category.translation')
             ->with('photo')
             ->with('size')
+            ->with('color.translation')
             ->first();
 
         return new DressCatalogResource($dress);
-
     }
 }

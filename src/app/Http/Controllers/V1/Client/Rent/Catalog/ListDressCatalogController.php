@@ -38,7 +38,7 @@ class ListDressCatalogController
 //            })
             ->with('category.translation:category_id,title')
             ->with('translation:dress_id,title')
-            ->with('color.translation:color_id,color')
+            ->with('color.translation')
             ->with('size:size_id,size')
             ->with('photo')
             ->paginate(

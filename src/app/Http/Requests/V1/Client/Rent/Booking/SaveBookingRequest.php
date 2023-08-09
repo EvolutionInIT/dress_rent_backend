@@ -12,13 +12,22 @@ class SaveBookingRequest extends CommonRequest
 {
     public function authorize(): bool
     {
+        $this->stopOnFirstFailure = true;
         return true;
     }
 
     public function rules(): array
     {
         return [
+            'dress_id' => [
+                'bail',
+                'required',
+                'integer',
+                'between:1,4294967296',
+                'exists:App\Models\V1\Dress,dress_id',
+            ],
             'date' => [
+                'bail',
                 'required',
                 'date_format:Y-m-d',
                 function ($attribute, $value, $fail) {
@@ -31,18 +40,15 @@ class SaveBookingRequest extends CommonRequest
                 'after_or_equal:today',
                 'before_or_equal:' . now()->addWeeks(2)->toDateString(),
             ],
-            'dress_id' => [
-                'bail',
-                'required',
-                'integer',
-                'between:1,4294967296',
-                'exists:App\Models\V1\Dress,dress_id',
+            'quantity' => [
+                'bail', 'required', 'integer', 'between:1,100',
                 function ($attribute, $value, $fail) {
                     $date = $this->input('date');
+                    $dressId = $this->input('dress_id');
 
                     $bookingDress =
                         Dress
-                            ::where('dress_id', $value)
+                            ::where('dress_id', $dressId)
                             ->withSum(
                                 ['booking' => function ($q) use ($date) {
                                     $q->where('date', $date);
@@ -51,19 +57,16 @@ class SaveBookingRequest extends CommonRequest
                             )
                             ->first();
 
-                    if ($bookingDress->booking_sum_quantity + $this->input('quantity') > $bookingDress->quantity) {
-                        $fail("booking_save_dress_quantity_less_then_needed");
-                    }
-                    if ($this->input('quantity') > $bookingDress->quantity) {
-                        $fail("invalid_quantity");
+                    if ($bookingDress->booking_sum_quantity + $value > $bookingDress->quantity) {
+                        $fail("dress_booking_save_dress_quantity_less_then_needed");
                     }
                 },
+
             ],
             'email' => 'required|email:rfc,dns',
             'phone_number' => 'required|regex:/^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/',
-            'quantity' => 'integer|between:1, 1000',
-
             'component_id' => [
+                'bail',
                 'sometimes',
                 'array',
                 function ($attribute, $value, $fail) {
@@ -93,6 +96,7 @@ class SaveBookingRequest extends CommonRequest
                 },
             ],
             'component_id.*' => [
+                'bail',
                 'required',
                 'integer',
                 'between:1,4294967296',

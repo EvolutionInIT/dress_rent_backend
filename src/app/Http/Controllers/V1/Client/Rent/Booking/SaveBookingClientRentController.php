@@ -11,6 +11,10 @@ use Illuminate\Support\Carbon;
 
 class SaveBookingClientRentController
 {
+    /**
+     * @param SaveBookingRequest $request
+     * @return BookingResource
+     */
     public function save(SaveBookingRequest $request): BookingResource
     {
         $requestData = $request->validated();
@@ -53,6 +57,7 @@ class SaveBookingClientRentController
 
         $booking->booking_component;
         $booking->dress->translation;
+        $booking->dress->user;
 
         return new BookingResource($booking);
     }
