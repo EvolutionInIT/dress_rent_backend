@@ -5,9 +5,9 @@ namespace App\Models\V1;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\V2\BookingColorSize;
 
 class Booking extends Model
 {
@@ -58,4 +58,14 @@ class Booking extends Model
                 'booking_id', 'component_id', 'booking_id', 'component_id')
             ->orderBy('component_id');
     }
+
+
+    /**
+     * @return HasOne
+     */
+    public function booking_color_size(): HasOne
+    {
+        return $this->hasOne(BookingColorSize::class, 'booking_id', 'booking_id');
+    }
+
 }

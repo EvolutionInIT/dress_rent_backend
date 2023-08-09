@@ -10,6 +10,8 @@ use App\Models\V1\Color;
 use App\Models\V1\ColorTranslation;
 use App\Models\V1\ComponentTranslation;
 use App\Models\V1\Dress;
+use App\Models\V1\DressColor;
+use App\Models\V1\DressSize;
 use App\Models\V1\DressTranslation;
 use App\Models\V1\Photo;
 use App\Models\V1\Size;
@@ -18,6 +20,7 @@ use App\Models\V1\User\User;
 use App\Models\V1\User\UserPermission;
 use App\Models\V1\Component;
 use App\Models\V1\BookingComponent;
+use App\Models\V2\BookingColorSize;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -38,9 +41,12 @@ class DatabaseSeeder extends Seeder
         $this->generateColor();
         $this->generateSize();
         $this->generateDress();
+        $this->generateDressColor();
+        $this->generateDressSize();
         $this->generatePhoto();
         $this->generateBooking();
         $this->generateBookingComponent();
+        $this->generateBookingColorSize();
     }
 
     public function generateDress()
@@ -48,43 +54,33 @@ class DatabaseSeeder extends Seeder
         $dresses = [
             [
                 'user_id' => 2,
-                'quantity' => 3,
+                'quantity' => 9,
                 'components' => [1],
                 'categories' => [1],
-                'colors' => [1, 2, 4],
-                'sizes' => [2, 4, 5],
             ],
             [
                 'user_id' => 2,
                 'quantity' => 0,
                 'components' => [2],
                 'categories' => [1],
-                'colors' => [2, 3],
-                'sizes' => [2, 3],
             ],
             [
                 'user_id' => 2,
                 'quantity' => 1,
                 'components' => [3],
                 'categories' => [1],
-                'colors' => [5, 2],
-                'sizes' => [4, 5],
             ],
             [
                 'user_id' => 2,
                 'quantity' => 7,
                 'components' => [4, 5],
                 'categories' => [1],
-                'colors' => [3, 1],
-                'sizes' => [2, 3],
             ],
             [
                 'user_id' => 2,
                 'quantity' => 12,
                 'components' => [1],
                 'categories' => [1],
-                'colors' => [4, 5],
-                'sizes' => [1, 5],
             ],
         ];
 
@@ -93,8 +89,6 @@ class DatabaseSeeder extends Seeder
             $photos = $dress['photos'] ?? [];
             $categories = $dress['categories'] ?? [];
             $components = $dress['components'] ?? [];
-            $colors = $dress['colors'] ?? [];
-            $sizes = $dress['sizes'] ?? [];
             unset($dress['photos']);
             unset($dress['categories']);
             unset($dress['components']);
@@ -113,8 +107,6 @@ class DatabaseSeeder extends Seeder
 
             $newDress->category()->attach($categories);
             $newDress->component()->attach($components);
-            $newDress->color()->attach($colors);
-            $newDress->size()->attach($sizes);
 
             foreach ($photos as $photo)
                 $dressesPhoto[] = [
@@ -127,6 +119,130 @@ class DatabaseSeeder extends Seeder
             Photo::insert($dressesPhoto);
 
         $this->generateDressTranslation();
+    }
+
+    public function generateDressColor()
+    {
+        $dressesColors = [
+            [
+                'dress_id' => 1,
+                'color_id' => 1,
+                'quantity' => 3,
+            ],
+            [
+                'dress_id' => 1,
+                'color_id' => 2,
+                'quantity' => 1,
+            ],
+            [
+                'dress_id' => 1,
+                'color_id' => 4,
+                'quantity' => 6,
+            ],
+            [
+                'dress_id' => 2,
+                'color_id' => 2,
+                'quantity' => 3,
+            ],
+            [
+                'dress_id' => 2,
+                'color_id' => 3,
+                'quantity' => 4,
+            ],
+            [
+                'dress_id' => 3,
+                'color_id' => 5,
+                'quantity' => 1,
+            ],
+            [
+                'dress_id' => 3,
+                'color_id' => 2,
+                'quantity' => 2,
+            ],
+            [
+                'dress_id' => 4,
+                'color_id' => 3,
+                'quantity' => 2,
+            ],
+            [
+                'dress_id' => 4,
+                'color_id' => 1,
+                'quantity' => 7,
+            ],
+            [
+                'dress_id' => 5,
+                'color_id' => 4,
+                'quantity' => 1,
+            ],
+            [
+                'dress_id' => 5,
+                'color_id' => 5,
+                'quantity' => 4,
+            ],
+        ];
+        DressColor::insert($dressesColors);
+    }
+
+    public function generateDressSize()
+    {
+        $dressesSizes = [
+            [
+                'dress_id' => 1,
+                'size_id' => 2,
+                'quantity' => 4,
+            ],
+            [
+                'dress_id' => 1,
+                'size_id' => 4,
+                'quantity' => 1,
+            ],
+            [
+                'dress_id' => 1,
+                'size_id' => 5,
+                'quantity' => 2,
+            ],
+            [
+                'dress_id' => 2,
+                'size_id' => 2,
+                'quantity' => 3,
+            ],
+            [
+                'dress_id' => 2,
+                'size_id' => 3,
+                'quantity' => 4,
+            ],
+            [
+                'dress_id' => 3,
+                'size_id' => 5,
+                'quantity' => 4,
+            ],
+            [
+                'dress_id' => 3,
+                'size_id' => 2,
+                'quantity' => 5,
+            ],
+            [
+                'dress_id' => 4,
+                'size_id' => 2,
+                'quantity' => 2,
+            ],
+            [
+                'dress_id' => 4,
+                'size_id' => 3,
+                'quantity' => 7,
+            ],
+            [
+                'dress_id' => 5,
+                'size_id' => 1,
+                'quantity' => 1,
+            ],
+            [
+                'dress_id' => 5,
+                'size_id' => 5,
+                'quantity' => 4,
+            ],
+        ];
+        DressSize::insert($dressesSizes);
     }
 
     public function generateDressTranslation()
@@ -619,11 +735,48 @@ class DatabaseSeeder extends Seeder
         Booking::insert($bookings);
     }
 
+    public function generateBookingColorSize()
+    {
+        $bokingsColorsSizes = [
+            [
+                'booking_id' => 1,
+                'color_id' => 1,
+                'size_id' => 2,
+                'date' => today(),
+            ],
+            [
+                'booking_id' => 1,
+                'color_id' => 2,
+                'size_id' => 4,
+                'date' => today(),
+            ],
+            [
+                'booking_id' => 3,
+                'color_id' => 5,
+                'size_id' => 5,
+                'date' => today(),
+            ],
+            [
+                'booking_id' => 5,
+                'color_id' => 4,
+                'size_id' => 1,
+                'date' => today(),
+            ],
+            [
+                'booking_id' => 5,
+                'color_id' => 5,
+                'size_id' => 5,
+                'date' => today(),
+            ],
+        ];
+        BookingColorSize::insert($bokingsColorsSizes);
+    }
+
     public function generateComponent()
     {
         $components = [
             [
-                'quantity' => 2,
+                'quantity' => 5,
                 'price' => 3000,
             ],
             [
