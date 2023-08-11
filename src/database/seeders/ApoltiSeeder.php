@@ -52,7 +52,7 @@ class ApoltiSeeder extends Seeder
             ['color' => 'black'],
             ['color' => 'white'],
             ['color' => '#D1C6E6'],
-            ['color' => '#E5589C'],
+            ['color' => '#E5589C'], //фуксия
             ['color' => 'purple'],
             ['color' => 'yellow'],
             ['color' => '#6CB5BC'],
@@ -60,6 +60,9 @@ class ApoltiSeeder extends Seeder
             ['color' => '#8EB1B5'],
             ['color' => '#01676C'],
             ['color' => 'red'],
+            ['color' => '#FFE7DD'], //кремовый
+            ['color' => '#19578A'], //темно-синий
+            ['color' => 'blue'], //электро-синий
         ];
         Color::insert($colors);
         $this->generateColorTranslation();
@@ -236,6 +239,36 @@ class ApoltiSeeder extends Seeder
                 'language' => 'kk',
                 'title' => 'Қызыл',
             ],
+            [
+                'color_id' => 12,
+                'language' => 'en',
+                'title' => 'cream',
+            ],
+            [
+                'color_id' => 12,
+                'language' => 'ru',
+                'title' => 'кремовый',
+            ],
+            [
+                'color_id' => 12,
+                'language' => 'kk',
+                'title' => 'крем',
+            ],
+            [
+                'color_id' => 13,
+                'language' => 'en',
+                'title' => 'темно-синий',
+            ],
+            [
+                'color_id' => 13,
+                'language' => 'ru',
+                'title' => 'navy blue',
+            ],
+            [
+                'color_id' => 13,
+                'language' => 'kk',
+                'title' => 'қара көк',
+            ],
         ];
         ColorTranslation::insert($colorsTranslations);
     }
@@ -272,7 +305,7 @@ class ApoltiSeeder extends Seeder
             [
                 'user_id' => 1,
                 'photos' => ['photosession/1-1.jpg', 'photosession/1-2.jpg', 'photosession/1-2.jpg', 'photosession/1-4.jpg', 'photosession/1-5.jpg'],
-                'categories' => [1],
+                'categories' => [2],
                 'sizes' => [1],
                 'colors' => [6],
                 'price' => 25000,
@@ -381,6 +414,77 @@ class ApoltiSeeder extends Seeder
                 'categories' => [6],
                 'sizes' => [2],
                 'colors' => [10],
+            ],
+
+            [
+                'user_id' => 1,
+                'photos' => ['evening/24-5.jpg', 'evening/24-6.jpg', 'evening/24-7.jpg', 'evening/24-12.jpg', 'evening/24-17.jpg'],
+                'categories' => [1, 7],
+                'sizes' => [2],
+                'colors' => [1],
+                'price' => 25000,
+            ],
+            [
+                'user_id' => 1,
+                'photos' => ['evening/25-4.jpg', 'evening/25-9.jpg', 'evening/25-10.jpg', 'evening/25-14.jpg', 'evening/25-15.jpg'],
+                'categories' => [1, 7],
+                'sizes' => [2],
+                'colors' => [2],
+                'price' => 35000,
+            ],
+            [
+                'user_id' => 1,
+                'photos' => ['evening/26-1.jpg', 'evening/26-2.jpg', 'evening/26-3.jpg', 'evening/26-4.jpg', 'evening/26-5.jpg'],
+                'categories' => [1, 7],
+                'sizes' => [1],
+                'colors' => [2],
+                'price' => 15000,
+                'quantity' => 2
+            ],
+            [
+                'user_id' => 1,
+                'photos' => ['evening/27-4.jpg', 'evening/27-1.jpg', 'evening/27-2.jpg', 'evening/27-7.jpg', 'evening/27-12.jpg'],
+                'categories' => [1, 7],
+                'sizes' => [2],
+                'colors' => [12],
+                'price' => 20000,
+            ],
+            [
+                'user_id' => 1,
+                'photos' => ['evening/28-9.jpg', 'evening/28-1.jpg', 'evening/28-3.jpg', 'evening/28-18.jpg', 'evening/28-20.jpg'],
+                'categories' => [1, 7],
+                'sizes' => [2],
+                'colors' => [4, 11],
+                'price' => 25000,
+                'quantity' => 2
+            ],
+            [
+                'user_id' => 1,
+                'photos' => ['muslim/29-4.jpg', 'muslim/29-3.jpg', 'muslim/29-5.jpg', 'muslim/29-6.jpg'],
+                'categories' => [8],
+                'sizes' => [2],
+                'colors' => [13],
+                'price' => 20000,
+                'quantity' => 1
+            ],
+            [
+                'user_id' => 1,
+                'photos' => ['muslim/30-3.jpg', 'muslim/30-1.jpg', 'muslim/30-2.jpg'],
+                'categories' => [8],
+                'sizes' => [2],
+                'colors' => [14],
+                'price' => 20000,
+                'quantity' => 1
+            ],
+
+            [
+                'user_id' => 1,
+                'photos' => ['uzatu/31-1.jpg', 'uzatu/31-2.jpg', 'uzatu/31-3.jpg', 'uzatu/31-4.jpg', 'uzatu/31-5.jpg'],
+                'categories' => [4, 6],
+                'sizes' => [1],
+                'colors' => [11],
+                'price' => 150000,
+                'quantity' => 1
             ],
 
         ];
@@ -733,6 +837,156 @@ class ApoltiSeeder extends Seeder
                 'title' => 'Алматыда әйелдердің ұлттық қара-жасыл этникалық костюмі жалға беріледі',
                 'description' => 'Түрлі түстердегі жеңіл әйелдер этно-жиынтықтары. Көк, қара көгілдір, фуксия және қою жасыл түсті. Негізгі көйлек, қалпақ және такия кіреді. Дизайнды ApoltiStore дүкенінен сәнгер Әлия Мұсаева жасаған. Өлшемі: 42-46. Жалдау мерзімі: күн',
             ],
+            [
+                'dress_id' => 18,
+                'language' => 'en',
+                'title' => 'Evening black dress with a slit for hire in Almaty',
+                'description' => 'Long black evening dress. Asymmetrical top, slit skirt. The dress can be worn with a white ruffle or with long gloves. The design was developed by fashion designer Aliya Musayeva from ApoltiStore. Rental period: day.',
+            ],
+            [
+                'dress_id' => 18,
+                'language' => 'ru',
+                'title' => 'Вечернее черное платье с разрезом на прокат в Алматы',
+                'description' => 'Длинное черное вечернее платье. Асимметричный верх, юбка с разрезом. Платье можно носить с белым воланом или с длинными перчатками. Дизайн разработан модельером Алией Мусаевой из ApoltiStore. Срок проката: сутки.',
+            ],
+            [
+                'dress_id' => 18,
+                'language' => 'kk',
+                'title' => 'Алматыда саңылауы бар кешкі қара көйлек жалға беріледі',
+                'description' => 'Ұзын қара кешкі көйлек. Асимметриялы үстіңгі, тігілген юбка. Көйлекті ақ бөртпемен немесе ұзын қолғаппен киюге болады. Дизайнды ApoltiStore дүкенінен сәнгер Әлия Мұсаева жасаған. Жалдау мерзімі: күн.',
+            ],
+            [
+                'dress_id' => 19,
+                'language' => 'en',
+                'title' => 'Romantic ivory dress for rent in Almaty',
+                'description' => 'Ivory dress with full skirt and detachable puffed sleeves. The dress can be worn with oxen, with sleeves or gloves. The design was developed by fashion designer Aliya Musayeva from ApoltiStore. Rental period: day.',
+            ],
+            [
+                'dress_id' => 19,
+                'language' => 'ru',
+                'title' => 'Романтичное платье цвета айвори на прокат в Алматы',
+                'description' => 'Айвори платье с пышной юбкой и съемными пышными рукавами. Платье можно надеть с волами, с рукавами или перчатками. Дизайн разработан модельером Алией Мусаевой из ApoltiStore. Срок проката: сутки.',
+            ],
+            [
+                'dress_id' => 19,
+                'language' => 'kk',
+                'title' => 'Алматыда романтикалық айвори түсті ұзын көйлек жалға беріледі',
+                'description' => 'Айвори түсті ұзын көйлек. Етегі төгіліп тұрады, жеңдері шешіледі. Дизайн ApoltiStore дүкенінің сәнгері Әлия Мұсаеванікі. Жалдау мерзімі: күн.',
+            ],
+            [
+                'dress_id' => 20,
+                'language' => 'en',
+                'title' => 'Short white dress in Jenny style for hire in Almaty',
+                'description' => 'Short white dress with black belt and black gloves. Jennie from BlackPink. Rental period: day.',
+            ],
+            [
+                'dress_id' => 20,
+                'language' => 'ru',
+                'title' => 'Короткое белое платье в стиле Дженни на прокат в Алматы',
+                'description' => 'Короткое белое платье с черным поясом и черными перчатками. Образ Дженни из BlackPink. Срок проката: сутки.',
+            ],
+            [
+                'dress_id' => 20,
+                'language' => 'kk',
+                'title' => 'Алматыда Дженни стиліндегі қысқа ақ көйлек жалға беріледі',
+                'description' => 'Қара белдік пен қара қолғапты қысқа ақ көйлек. BlackPink-тен Дженни. Жалдау мерзімі: күн.',
+            ],
+            [
+                'dress_id' => 21,
+                'language' => 'en',
+                'title' => 'Romantic pink long dress in Korean style for rent in Almaty',
+                'description' => 'Romantic pink long dress with a bow. The design was developed by fashion designer Aliya Musayeva from ApoltiStore. Rental period: day.',
+            ],
+            [
+                'dress_id' => 21,
+                'language' => 'ru',
+                'title' => 'Романтичное розовое длинное платье в корейском стиле на прокат в Алматы',
+                'description' => 'Романтичное розовое длинное платье с бантом. Дизайн разработан модельером Алией Мусаевой из ApoltiStore. Срок проката: сутки.',
+            ],
+            [
+                'dress_id' => 21,
+                'language' => 'kk',
+                'title' => 'Алматыда корей стиліндегі романтикалық қызғылт ұзын көйлек жалға беріледі',
+                'description' => 'Садақпен романтикалық қызғылт ұзын көйлек. Дизайнды ApoltiStore дүкенінен сәнгер Әлия Мұсаева жасаған. Жалдау мерзімі: күн.',
+            ],
+            [
+                'dress_id' => 22,
+                'language' => 'en',
+                'title' => 'Pink and red dress in the style of Marilyn Monroe for hire in AlmatyPink and red dress in the style of Marilyn Monroe for hire in Almaty',
+                'description' => 'Long pink dress with long gloves. The dress is also available in red. Inspired by the image of Marilyn Monroe and her song "Girls best friends are diamonds." Rental period: day.',
+            ],
+            [
+                'dress_id' => 22,
+                'language' => 'ru',
+                'title' => 'Розовое и красное платье в стиле Мэрилин Монро на прокат в Алматы',
+                'description' => 'Длинное розовое платье с длинными перчатками. Платье также есть в красном цвете. Вдохновились образом Мерилин Монро и ее песней "Лучшие друзья девушек - это бриллианты". Срок проката: сутки.',
+            ],
+            [
+                'dress_id' => 22,
+                'language' => 'kk',
+                'title' => 'Алматыда Мэрилин Монро стиліндегі қызғылт және қызыл көйлек жалға беріледі',
+                'description' => 'Ұзын қолғапты ұзын қызғылт көйлек. Көйлек қызыл түсте де бар. Мэрилин Монро бейнесі мен оның «Қыздардың ең жақсы достары - гауһар тастар» әнінен шабыттанған. Жалдау мерзімі: күн.',
+            ],
+
+            [
+                'dress_id' => 23,
+                'language' => 'en',
+                'title' => 'Muslim jumpsuit for rent in Almaty',
+                'description' => 'Muslim overalls for rent in Almaty. The original costume consists of a jumpsuit, a cape over trousers and a scarf. Color - dark turquoise. Rental period: day.',
+            ],
+            [
+                'dress_id' => 23,
+                'language' => 'ru',
+                'title' => 'Мусульманский комбинезон напрокат в Алматы',
+                'description' => 'Мусульманский комбинезон напрокат в Алматы. Оригинальный костюм состоит из комбинезона, накидки поверх брюк и платка. Цвет - темно-бирюзовый. Срок проката: сутки.',
+            ],
+            [
+                'dress_id' => 23,
+                'language' => 'kk',
+                'title' => 'Алматыда мұсылмандық комбинезон жалға беріледі',
+                'description' => 'Алматыда мұсылмандық комбинезон жалға беріледі. Түпнұсқа костюм комбинезоннан, шалбардың үстіндегі шапан мен шарфтан тұрады. Түсі - қою көгілдір. Жалдау мерзімі: күн.',
+            ],
+
+
+            [
+                'dress_id' => 24,
+                'language' => 'en',
+                'title' => 'Muslim dress with a fluffy skirt for rent in Almaty',
+                'description' => 'Elegant Muslim dress with a fluffy skirt. There is a scarf included. Color - fashionable electro. There is also a dress for a girl with a height of 86-98. Rental period: day.',
+            ],
+            [
+                'dress_id' => 24,
+                'language' => 'ru',
+                'title' => 'Мусульманское платье с пышной юбкой напрокат в Алматы',
+                'description' => 'Нарядное мусульманское платье с пышной юбкой. В комплекте есть платок. Цвет - модный электро. Также есть платье для девочки на рост 86-98. Срок проката: сутки.',
+            ],
+            [
+                'dress_id' => 24,
+                'language' => 'kk',
+                'title' => 'Алматыда үлпілдек юбкалы мұсылман көйлегі жалға беріледі',
+                'description' => 'Үлпілдек юбкасымен талғампаз мұсылман көйлегі. Шарфы бар. Түсі - сәнді электро. Бойы 86-98 болатын қызға арналған көйлек де бар. Жалдау мерзімі: күн.',
+            ],
+
+
+            [
+                'dress_id' => 25,
+                'language' => 'en',
+                'title' => 'Velvet engagement set for hire in Almaty',
+                'description' => 'Camisole with long sleeves and saukele are made of natural silk velvet. Patterns are embroidered by hand from silk thread and natural stones. The dress is made of tulle, the fluffy skirt has a train. The set includes decorations. Rental period: day.',
+            ],
+            [
+                'dress_id' => 25,
+                'language' => 'ru',
+                'title' => 'Бархатный комплект для узату напрокат в Алматы',
+                'description' => 'Камзол с длинными рукавами и саукеле сшиты из натурального шелкового бархата. Узоры вышиты вручную из шелковой нити и натуральных камней. Платье сшито из фатина, пышная юбка имеет шлейф. В комплекте есть украшения. Срок проката: сутки.',
+            ],
+            [
+                'dress_id' => 25,
+                'language' => 'kk',
+                'title' => 'Алматыда ұзартуға арналған барқыт жиынтық жалға беріледі',
+                'description' => 'Ұзын жеңді камзол және сәукеле табиғи жібек барқыттан тігіледі. Үлгілер жібек жіптен және табиғи тастардан қолмен кестеленген. Көйлек тюльден тігілген, үлпілдек белдемшеде пойыз бар. Жиынтықта декорациялар бар. Жалдау мерзімі: күн.',
+            ],
+
 
         ];
 
