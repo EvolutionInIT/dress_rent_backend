@@ -346,7 +346,7 @@ class DatabaseSeeder extends Seeder
     public function generateCategory()
     {
         $categories = [
-            [], [], [], [], [], [],
+            [], [], [], [], [], [], [], [],
         ];
 
         foreach ($categories as $category) {
@@ -474,6 +474,42 @@ class DatabaseSeeder extends Seeder
                 'language' => 'kk',
                 'title' => 'Ұлттық этникалық киімдер',
                 'description' => 'Ұлттық этникалық киімдердің әртүрлі түрлері'
+            ],
+            [
+                'category_id' => 7,
+                'language' => 'ru',
+                'title' => 'Платья на выпускной',
+                'description' => 'Разные виды платьев на выпускной'
+            ],
+            [
+                'category_id' => 7,
+                'language' => 'en',
+                'title' => 'Dresses for graduating date',
+                'description' => 'Different types of dresses for graduation'
+            ],
+            [
+                'category_id' => 7,
+                'language' => 'kk',
+                'title' => 'Құттықтау күніне арналған көйлектер',
+                'description' => 'Бітіруге арналған көйлектердің әртүрлі түрлері'
+            ],
+            [
+                'category_id' => 8,
+                'language' => 'ru',
+                'title' => 'Мусульманские платья',
+                'description' => 'Разные виды мусульманских платьев'
+            ],
+            [
+                'category_id' => 8,
+                'language' => 'en',
+                'title' => 'Muslim dresses',
+                'description' => 'Different types of Muslim dresses'
+            ],
+            [
+                'category_id' => 8,
+                'language' => 'kk',
+                'title' => 'Мұсылмандық көйлектер',
+                'description' => 'Мұсылмандық көйлектердің әртүрлі түрлері'
             ],
         ];
 

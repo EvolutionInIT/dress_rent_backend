@@ -41,6 +41,7 @@ class ListDressCatalogController
             ->with('color.translation')
             ->with('size:size_id,size')
             ->with('photo')
+            ->orderBy('dress_id', 'desc')
             ->paginate(
                 perPage: $requestData['per_page'] ?? 10,
                 page: $requestData['page'] ?? 1
