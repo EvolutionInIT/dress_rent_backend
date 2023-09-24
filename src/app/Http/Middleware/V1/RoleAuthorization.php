@@ -70,6 +70,7 @@ class RoleAuthorization
         $PERMISSIONS = array(
             'ADMIN' => [
                 'DressController@save',
+                'BookingController@status',
             ],
             'CLIENT' => []
         );

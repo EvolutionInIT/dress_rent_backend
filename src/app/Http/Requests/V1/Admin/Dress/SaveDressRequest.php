@@ -26,7 +26,9 @@ class SaveDressRequest extends CommonRequest
             'size_id.*' => 'required|integer|exists:App\Models\V1\Size,size_id',
             'photo' => 'array',
             'photo.*' => 'image:png,jpeg,jpg|min:5|max:5000',
-    
+
+            'width' => 'sometimes|array',
+            'width.*' => 'integer|min:100|max:1200',
 
             'translations' => 'sometimes|array',
             'translations.*.title' => 'present|min:0|max:255',

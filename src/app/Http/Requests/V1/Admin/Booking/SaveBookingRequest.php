@@ -39,10 +39,8 @@ class SaveBookingRequest extends CommonRequest
                             ->with('dress:dress_id,quantity')
                             ->get();
 
-                    //dd($bookingDress->toArray());
-
                     if (count($bookingDress) && count($bookingDress) >= $bookingDress[0]->quantity)
-                        $fail("booking_save_dress_quantity_less_then_needed");
+                        $fail("dress_booking_save_dress_quantity_less_then_needed");
                 },
             ],
         ];

@@ -19,8 +19,16 @@ return new class extends Migration {
                 $table->unsignedInteger('dress_id');
                 $table->foreign('dress_id')->references('dress_id')->on('dress');
 
+                $table->unsignedTinyInteger('quantity')->default(1);
+
                 $table->date('date')->default(null);
+                $table->date('date_start')->default(null);
+                $table->date('date_end')->default(null);
+
                 $table->string('status', 10)->default('new');
+
+                $table->string('email');
+                $table->string('phone_number', 12);
 
                 $table->softDeletes();
 
@@ -34,6 +42,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('booking');
     }
 };

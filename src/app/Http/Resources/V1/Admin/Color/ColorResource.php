@@ -10,11 +10,12 @@ class ColorResource extends JsonResource
     {
         return [
             'color_id' => $this->color_id,
+            'color' => $this->color,
 
             $this->mergeWhen(
                 $this->relationLoaded('translation'),
                 [
-                    'color' => $this->translation->color ?? '',
+                    'title' => $this->translation->title ?? '',
                 ]
             )
         ];

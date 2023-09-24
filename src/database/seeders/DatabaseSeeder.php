@@ -11,6 +11,8 @@ use App\Models\V1\ColorTranslation;
 use App\Models\V1\ComponentTranslation;
 use App\Models\V1\Dress;
 use App\Models\V1\DressPrice;
+use App\Models\V1\DressColor;
+use App\Models\V1\DressSize;
 use App\Models\V1\DressTranslation;
 use App\Models\V1\Photo;
 use App\Models\V1\Size;
@@ -18,6 +20,8 @@ use App\Models\V1\User\Permission;
 use App\Models\V1\User\User;
 use App\Models\V1\User\UserPermission;
 use App\Models\V1\Component;
+use App\Models\V1\BookingComponent;
+use App\Models\V2\BookingColorSize;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -40,8 +44,12 @@ class DatabaseSeeder extends Seeder
         $this->generateColor();
         $this->generateSize();
         $this->generateDress();
+        $this->generateDressColor();
+        $this->generateDressSize();
         $this->generatePhoto();
         $this->generateBooking();
+        $this->generateBookingComponent();
+        $this->generateBookingColorSize();
         //$this->generateDressPrice();
     }
 
@@ -50,48 +58,33 @@ class DatabaseSeeder extends Seeder
         $dresses = [
             [
                 'user_id' => 2,
-                'quantity' => 3,
-                'components' => [1],
+                'quantity' => 9,
+                'components' => [1, 2],
                 'categories' => [1],
-                'colors' => [1, 2, 4],
-                'sizes' => [2, 4, 5],
-                //'price' => 5000,
             ],
             [
                 'user_id' => 2,
                 'quantity' => 0,
                 'components' => [2],
                 'categories' => [1],
-                'colors' => [2, 3],
-                'sizes' => [2, 3],
-                //'price' => 6000,
             ],
             [
                 'user_id' => 2,
                 'quantity' => 1,
                 'components' => [3],
                 'categories' => [1],
-                'colors' => [5, 2],
-                'sizes' => [4, 5],
-                //'price' => 2000,
             ],
             [
                 'user_id' => 2,
                 'quantity' => 7,
-                'components' => [4],
+                'components' => [4, 5],
                 'categories' => [1],
-                'colors' => [3, 1],
-                'sizes' => [2, 3],
-                //'price' => 8000,
             ],
             [
                 'user_id' => 2,
                 'quantity' => 12,
                 'components' => [1],
                 'categories' => [1],
-                'colors' => [4, 5],
-                'sizes' => [1, 5],
-                //'price' => 15000,
             ],
         ];
 
@@ -100,15 +93,11 @@ class DatabaseSeeder extends Seeder
             $photos = $dress['photos'] ?? [];
             $categories = $dress['categories'] ?? [];
             $components = $dress['components'] ?? [];
-            $colors = $dress['colors'] ?? [];
-            $sizes = $dress['sizes'] ?? [];
-            //$prices = $dress['prices'] ?? [];
             unset($dress['photos']);
             unset($dress['categories']);
             unset($dress['components']);
             unset($dress['colors']);
             unset($dress['sizes']);
-            //unset($dress['prices']);
 
             $newDress = Dress::create(
                 [
@@ -122,9 +111,6 @@ class DatabaseSeeder extends Seeder
 
             $newDress->category()->attach($categories);
             $newDress->component()->attach($components);
-            $newDress->color()->attach($colors);
-            $newDress->size()->attach($sizes);
-            //$newDress->price()->attach($prices);
 
             foreach ($photos as $photo)
                 $dressesPhoto[] = [
@@ -137,7 +123,130 @@ class DatabaseSeeder extends Seeder
             Photo::insert($dressesPhoto);
 
         $this->generateDressTranslation();
-        $this->generateDressPrice();
+    }
+
+    public function generateDressColor()
+    {
+        $dressesColors = [
+            [
+                'dress_id' => 1,
+                'color_id' => 1,
+                'quantity' => 3,
+            ],
+            [
+                'dress_id' => 1,
+                'color_id' => 2,
+                'quantity' => 1,
+            ],
+            [
+                'dress_id' => 1,
+                'color_id' => 4,
+                'quantity' => 6,
+            ],
+            [
+                'dress_id' => 2,
+                'color_id' => 2,
+                'quantity' => 3,
+            ],
+            [
+                'dress_id' => 2,
+                'color_id' => 3,
+                'quantity' => 4,
+            ],
+            [
+                'dress_id' => 3,
+                'color_id' => 5,
+                'quantity' => 1,
+            ],
+            [
+                'dress_id' => 3,
+                'color_id' => 2,
+                'quantity' => 2,
+            ],
+            [
+                'dress_id' => 4,
+                'color_id' => 3,
+                'quantity' => 2,
+            ],
+            [
+                'dress_id' => 4,
+                'color_id' => 1,
+                'quantity' => 7,
+            ],
+            [
+                'dress_id' => 5,
+                'color_id' => 4,
+                'quantity' => 1,
+            ],
+            [
+                'dress_id' => 5,
+                'color_id' => 5,
+                'quantity' => 4,
+            ],
+        ];
+        DressColor::insert($dressesColors);
+    }
+
+    public function generateDressSize()
+    {
+        $dressesSizes = [
+            [
+                'dress_id' => 1,
+                'size_id' => 2,
+                'quantity' => 4,
+            ],
+            [
+                'dress_id' => 1,
+                'size_id' => 4,
+                'quantity' => 1,
+            ],
+            [
+                'dress_id' => 1,
+                'size_id' => 5,
+                'quantity' => 2,
+            ],
+            [
+                'dress_id' => 2,
+                'size_id' => 2,
+                'quantity' => 3,
+            ],
+            [
+                'dress_id' => 2,
+                'size_id' => 3,
+                'quantity' => 4,
+            ],
+            [
+                'dress_id' => 3,
+                'size_id' => 5,
+                'quantity' => 4,
+            ],
+            [
+                'dress_id' => 3,
+                'size_id' => 2,
+                'quantity' => 5,
+            ],
+            [
+                'dress_id' => 4,
+                'size_id' => 2,
+                'quantity' => 2,
+            ],
+            [
+                'dress_id' => 4,
+                'size_id' => 3,
+                'quantity' => 7,
+            ],
+            [
+                'dress_id' => 5,
+                'size_id' => 1,
+                'quantity' => 1,
+            ],
+            [
+                'dress_id' => 5,
+                'size_id' => 5,
+                'quantity' => 4,
+            ],
+        ];
+        DressSize::insert($dressesSizes);
     }
 
     public function generateDressTranslation()
@@ -241,7 +350,7 @@ class DatabaseSeeder extends Seeder
     public function generateCategory()
     {
         $categories = [
-            [], [], [], [], [], [],
+            [], [], [], [], [], [], [], [],
         ];
 
         foreach ($categories as $category) {
@@ -370,6 +479,42 @@ class DatabaseSeeder extends Seeder
                 'title' => 'Ұлттық этникалық киімдер',
                 'description' => 'Ұлттық этникалық киімдердің әртүрлі түрлері'
             ],
+            [
+                'category_id' => 7,
+                'language' => 'ru',
+                'title' => 'Платья на выпускной',
+                'description' => 'Разные виды платьев на выпускной'
+            ],
+            [
+                'category_id' => 7,
+                'language' => 'en',
+                'title' => 'Dresses for graduating date',
+                'description' => 'Different types of dresses for graduation'
+            ],
+            [
+                'category_id' => 7,
+                'language' => 'kk',
+                'title' => 'Құттықтау күніне арналған көйлектер',
+                'description' => 'Бітіруге арналған көйлектердің әртүрлі түрлері'
+            ],
+            [
+                'category_id' => 8,
+                'language' => 'ru',
+                'title' => 'Мусульманские платья',
+                'description' => 'Разные виды мусульманских платьев'
+            ],
+            [
+                'category_id' => 8,
+                'language' => 'en',
+                'title' => 'Muslim dresses',
+                'description' => 'Different types of Muslim dresses'
+            ],
+            [
+                'category_id' => 8,
+                'language' => 'kk',
+                'title' => 'Мұсылмандық көйлектер',
+                'description' => 'Мұсылмандық көйлектердің әртүрлі түрлері'
+            ],
         ];
 
         CategoryTranslation::insert($categoriesTransactions);
@@ -381,10 +526,12 @@ class DatabaseSeeder extends Seeder
             [
                 'firstname' => 'Admin',
                 'email' => 'admin@admin.com',
+                'phone' => '77772082140',
             ],
             [
                 'firstname' => 'user',
                 'email' => 'user@admin.com',
+                'phone' => '77772082141',
             ],
         ];
 
@@ -435,7 +582,11 @@ class DatabaseSeeder extends Seeder
     public function generateColor()
     {
         $colors = [
-            [], [], [], [], [],
+            ['color' => 'blue'],
+            ['color' => 'black'],
+            ['color' => 'red'],
+            ['color' => 'purple'],
+            ['color' => 'white'],
         ];
         Color::insert($colors);
         $this->generateColorTranslation();
@@ -447,77 +598,77 @@ class DatabaseSeeder extends Seeder
             [
                 'color_id' => 1,
                 'language' => 'en',
-                'color' => 'Blue',
+                'title' => 'Blue',
             ],
             [
                 'color_id' => 1,
                 'language' => 'ru',
-                'color' => 'Голубой',
+                'title' => 'Голубой',
             ],
             [
                 'color_id' => 1,
                 'language' => 'kk',
-                'color' => 'Көк',
+                'title' => 'Көк',
             ],
             [
                 'color_id' => 2,
                 'language' => 'en',
-                'color' => 'Black',
+                'title' => 'Black',
             ],
             [
                 'color_id' => 2,
                 'language' => 'ru',
-                'color' => 'Черный',
+                'title' => 'Черный',
             ],
             [
                 'color_id' => 2,
                 'language' => 'kk',
-                'color' => 'Қара',
+                'title' => 'Қара',
             ],
             [
                 'color_id' => 3,
                 'language' => 'en',
-                'color' => 'Red',
+                'title' => 'Red',
             ],
             [
                 'color_id' => 3,
                 'language' => 'ru',
-                'color' => 'Красный',
+                'title' => 'Красный',
             ],
             [
                 'color_id' => 3,
                 'language' => 'kk',
-                'color' => 'Қызыл',
+                'title' => 'Қызыл',
             ],
             [
                 'color_id' => 4,
                 'language' => 'en',
-                'color' => 'Purple',
+                'title' => 'Purple',
             ],
             [
                 'color_id' => 4,
                 'language' => 'ru',
-                'color' => 'Фиолетовый',
+                'title' => 'Фиолетовый',
             ],
             [
                 'color_id' => 4,
                 'language' => 'kk',
-                'color' => 'Kүлгін',
+                'title' => 'Kүлгін',
             ],
             [
                 'color_id' => 5,
                 'language' => 'en',
-                'color' => 'White',
+                'title' => 'White',
             ],
             [
                 'color_id' => 5,
                 'language' => 'ru',
-                'color' => 'Белый',
+                'title' => 'Белый',
             ],
             [
                 'color_id' => 5,
                 'language' => 'kk',
-                'color' => 'Ақ',
+                'title' => 'Ақ',
             ],
         ];
         ColorTranslation::insert($colorsTranslations);
@@ -574,43 +725,109 @@ class DatabaseSeeder extends Seeder
         $bookings = [
             [
                 'dress_id' => 1,
-                'date' => today(),
+                'date_start' => date('Y-m-d'),
+                'date_end' => date('Y-m-d', strtotime('+2 days')),
                 'status' => Booking::STATUSES['NEW'],
+                'email' => 'anastasya@test.com',
+                'phone_number' => +77052332233,
+                'quantity' => 1,
             ],
             [
                 'dress_id' => 1,
-                'date' => '2023-03-16',
+                'date_start' => date('Y-m-d'),
+                'date_end' => date('Y-m-d', strtotime('+2 days')),
                 'status' => Booking::STATUSES['APPROVED'],
+                'email' => 'anelya@test.com',
+                'phone_number' => +77052332222,
+                'quantity' => 1,
             ],
             [
                 'dress_id' => 3,
-                'date' => today(),
+                'date_start' => date('Y-m-d'),
+                'date_end' => date('Y-m-d', strtotime('+2 days')),
                 'status' => Booking::STATUSES['NEW'],
+                'email' => 'karligash@test.com',
+                'phone_number' => +77052332255,
+                'quantity' => 1,
             ],
             [
                 'dress_id' => 4,
-                'date' => today(),
+                'date_start' => date('Y-m-d'),
+                'date_end' => date('Y-m-d', strtotime('+2 days')),
                 'status' => Booking::STATUSES['NEW'],
+                'email' => 'cvetlana@test.com',
+                'phone_number' => +77052332244,
+                'quantity' => 0,
             ],
             [
                 'dress_id' => 5,
-                'date' => today(),
+                'date_start' => date('Y-m-d'),
+                'date_end' => date('Y-m-d', strtotime('+2 days')),
                 'status' => Booking::STATUSES['NEW'],
+                'email' => 'alena@test.com',
+                'phone_number' => +77052332277,
+                'quantity' => 1,
             ],
             [
                 'dress_id' => 5,
-                'date' => today(),
+                'date_start' => date('Y-m-d'),
+                'date_end' => date('Y-m-d', strtotime('+2 days')),
                 'status' => Booking::STATUSES['NEW'],
+                'email' => 'margarita@test.com',
+                'phone_number' => +77052332288,
+                'quantity' => 3,
             ],
         ];
         Booking::insert($bookings);
+    }
+
+    public function generateBookingColorSize()
+    {
+        $bokingsColorsSizes = [
+            [
+                'booking_id' => 1,
+                'color_id' => 1,
+                'size_id' => 2,
+                'date_start' => date('Y-m-d'),
+                'date_end' => date('Y-m-d', strtotime('+2 days')),
+            ],
+            [
+                'booking_id' => 1,
+                'color_id' => 2,
+                'size_id' => 4,
+                'date_start' => date('Y-m-d'),
+                'date_end' => date('Y-m-d', strtotime('+2 days')),
+            ],
+            [
+                'booking_id' => 3,
+                'color_id' => 5,
+                'size_id' => 5,
+                'date_start' => date('Y-m-d'),
+                'date_end' => date('Y-m-d', strtotime('+2 days')),
+            ],
+            [
+                'booking_id' => 5,
+                'color_id' => 4,
+                'size_id' => 1,
+                'date_start' => date('Y-m-d'),
+                'date_end' => date('Y-m-d', strtotime('+2 days')),
+            ],
+            [
+                'booking_id' => 5,
+                'color_id' => 5,
+                'size_id' => 5,
+                'date_start' => date('Y-m-d'),
+                'date_end' => date('Y-m-d', strtotime('+2 days')),
+            ],
+        ];
+        BookingColorSize::insert($bokingsColorsSizes);
     }
 
     public function generateComponent()
     {
         $components = [
             [
-                'quantity' => 2,
+                'quantity' => 5,
                 'price' => 3000,
             ],
             [
@@ -618,16 +835,51 @@ class DatabaseSeeder extends Seeder
                 'price' => 4000,
             ],
             [
-                'quantity' => 15,
+                'quantity' => 8,
                 'price' => 2000,
             ],
             [
-                'quantity' => 6,
+                'quantity' => 8,
+                'price' => 7000,
+            ],
+            [
+                'quantity' => 7,
                 'price' => 7000,
             ],
         ];
         Component::insert($components);
         $this->generateComponentTranslation();
+    }
+
+    public function generateBookingComponent()
+    {
+        $bookingsComponents = [
+            [
+                'booking_id' => 1,
+                'component_id' => 2,
+                'date_start' => date('Y-m-d'),
+                'date_end' => date('Y-m-d', strtotime('+2 days')),
+            ],
+            [
+                'booking_id' => 2,
+                'component_id' => 1,
+                'date_start' => date('Y-m-d'),
+                'date_end' => date('Y-m-d', strtotime('+2 days')),
+            ],
+            [
+                'booking_id' => 4,
+                'component_id' => 3,
+                'date_start' => date('Y-m-d'),
+                'date_end' => date('Y-m-d', strtotime('+2 days')),
+            ],
+            [
+                'booking_id' => 3,
+                'component_id' => 4,
+                'date_start' => date('Y-m-d'),
+                'date_end' => date('Y-m-d', strtotime('+2 days')),
+            ],
+        ];
+        BookingComponent::insert($bookingsComponents);
     }
 
     public function generateComponentTranslation()
@@ -704,6 +956,24 @@ class DatabaseSeeder extends Seeder
                 'language' => 'kk',
                 'title' => 'Ұзатуға арналған ұлттық ою-өрнектер',
                 'description' => 'Бізде ұлттық әшекейлер жиынтығы бар, оларды жалға алуға болады. Сырға, бесбілезік, білезік және алқа (алқа) бар.',
+            ],
+            [
+                'component_id' => 5,
+                'language' => 'en',
+                'title' => 'Handkerchief',
+                'description' => "Handkerchief with handmade author's embroidery. The design and patterns of each camisole are developed by fashion designer Aliya Musayeva from ApoltiStore, Saukele&Kamzol. Size: 42-44. Colors: purple, turquoise, black, pink.",
+            ],
+            [
+                'component_id' => 5,
+                'language' => 'ru',
+                'title' => 'Платок',
+                'description' => 'Платок с ручной авторской вышивкой. Дизайн и узоры каждого камзола разрабатываются модельером Алией Мусаевой из ApoltiStore, Saukele&Kamzol. Размер: 42-44. Цвета: фиолетовый, бирюзовый, черный, розовый.',
+            ],
+            [
+                'component_id' => 5,
+                'language' => 'kk',
+                'title' => 'Орамал',
+                'description' => 'Орамал авторлық кестелі қысқа камзолдар. Әр камзолдың дизайны мен өрнектерін ApoltiStore, Saukele&Kamzol дүкендерінің сәнгері Әлия Мұсаева әзірлеген. Өлшемі: 42-44. Түстер: күлгін, көгілдір, қара, қызғылт.',
             ],
         ];
         ComponentTranslation::insert($componentsTranslations);

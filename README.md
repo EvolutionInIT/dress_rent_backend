@@ -1,4 +1,4 @@
->git clone repository https://github.com/EvolutionInIT/dress_rent_backend.git
+>git clone https://github.com/EvolutionInIT/dress_rent_backend.git
 
 >
 > cp _install/laravel/.env src/.env
@@ -27,9 +27,6 @@
 >>>
 >>> 
 > 
->>> _or better:
+>>> //or better:
 >>>
 >>> fresh && php artisan db:seed --class=ApoltiSeeder
-> 
-> >> Когда хрень какая-то выходит там, при переносе папок и с путями, это может помочь нам
-composer du

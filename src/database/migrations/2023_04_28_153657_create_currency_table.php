@@ -15,14 +15,12 @@ return new class extends Migration
     {
         Schema::create('currency', function (Blueprint $table) {
             $table->increments('currency_id');
-            //$table->string('title');
-            $table->string('code')->unique();
-            $table->string('symbol')->nullable();
-            $table->boolean('show')->default(false);
+            $table->string('code', 4)->unique();
+            $table->string('symbol')->default('');
+            $table->string('iso', 4);
+            $table->boolean('enabled')->default(true);
             $table->timestamps();
-            $table->timestamp('deleted_at')->nullable();
         });
-
     }
 
     /**
