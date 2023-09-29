@@ -9,5 +9,5 @@ class Language extends Model
     protected $table = 'language';
     protected $primaryKey = 'language_id';
 
-    protected $fillable = ['title', 'title_native', 'code', 'position', 'status'];
+    protected $fillable = ['title', 'title_native', 'code', 'position', 'enabled'];
 }

@@ -24,14 +24,14 @@ class LangMiddleware
                 'required',
                 'string',
                 'size:2',
-                'exists:App\Models\V1\Language,code,show,1',
+                'exists:App\Models\V1\Language,code,enabled,1',
             ],
         ]);
 
         $code =
             $v->passes()
                 ? $request->input('lang')
-                : env('DEFAULT_LANGUAGE_CODE', "en");;
+                : env('DEFAULT_LANGUAGE_CODE', "en");
 
         Config::set('app.language_code', $code);
         return $next($request);

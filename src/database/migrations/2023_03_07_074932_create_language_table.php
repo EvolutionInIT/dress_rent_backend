@@ -18,11 +18,9 @@ return new class extends Migration
             $table->string('title');
             $table->string('code');
             $table->unsignedTinyInteger('position');
-            $table->boolean('show')->default(false);
+            $table->boolean('enabled')->default(true);
             $table->timestamps();
-            $table->timestamp('deleted_at')->nullable();
         });
-
     }
 
     /**
