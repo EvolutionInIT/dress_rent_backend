@@ -15,7 +15,6 @@ class LanguageSeeder extends Seeder
     public function run(): void
     {
         $this->generateLanguages();
-
     }
 
     public function generateLanguages()

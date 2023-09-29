@@ -33,9 +33,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $ls = new LanguageSeeder();
-        $ls->generateLanguages();
-        (new CurrencySeeder())->run();
+
+
+        $this->generateLanguages();
+        $this->generateCurrencies();
+
         $this->generatePermissions();
         $this->generateUser();
         $this->generateCategory();
@@ -49,7 +51,7 @@ class DatabaseSeeder extends Seeder
         $this->generateBooking();
         $this->generateBookingComponent();
         $this->generateBookingColorSize();
-        //$this->generateDressPrice();
+        $this->generateDressPrice();
     }
 
     public function generateDress()
@@ -1068,5 +1070,15 @@ class DatabaseSeeder extends Seeder
             ],
         ];
         DressPrice::insert($dressesPrices);
+    }
+
+    public function generateCurrencies()
+    {
+        (new CurrencySeeder())->run();
+    }
+
+    public function generateLanguages()
+    {
+        (new LanguageSeeder())->run();
     }
 }
