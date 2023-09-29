@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Validator;
 
-class PriceMiddleware
+class CurrencyMiddleware
 {
     /**
      * Handle an incoming request.
@@ -31,7 +31,7 @@ class PriceMiddleware
         $code =
             $v->passes()
                 ? $request->input('code')
-                : env('DEFAULT_CURRENCY_CODE', "KZT");;
+                : env('DEFAULT_CURRENCY_CODE', "USD");;
 
         Config::set('app.currency_code', $code);
         return $next($request);
