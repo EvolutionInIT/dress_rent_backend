@@ -5,7 +5,7 @@ namespace App\Models\Traits\V1;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-trait PriceTrait
+trait CurrencyTrait
 {
     /**
      * @return HasOne

@@ -17,6 +17,7 @@ class CurrencyControllerClient
         $currency =
             Currency
                 ::select('currency_id', 'code', 'symbol')
+                ->where('enabled', true)
                 ->with('translation:currency_id,title')
                 ->get();
 

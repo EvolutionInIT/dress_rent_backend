@@ -4,7 +4,7 @@ namespace App\Models\V1;
 
 use App\Models\Traits\V1\HelperTrait;
 use App\Models\Traits\V1\TranslationTrait;
-use App\Models\Traits\V1\PriceTrait;
+use App\Models\Traits\V1\CurrencyTrait;
 use App\Models\V1\User\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -19,9 +19,7 @@ class Dress extends Model
     use SoftDeletes;
 
     // Traits
-    use TranslationTrait;
-    use PriceTrait;
-    use HelperTrait;
+    use TranslationTrait, CurrencyTrait, HelperTrait;
 
 
     protected $table = 'dress';
