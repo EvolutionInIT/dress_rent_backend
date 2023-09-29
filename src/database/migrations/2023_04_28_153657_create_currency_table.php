@@ -17,7 +17,7 @@ return new class extends Migration
             $table->increments('currency_id');
             $table->string('code', 4)->unique();
             $table->string('symbol')->default('');
-            $table->string('iso', 4);
+            $table->string('iban_code', 3);
             $table->boolean('enabled')->default(true);
             $table->timestamps();
         });

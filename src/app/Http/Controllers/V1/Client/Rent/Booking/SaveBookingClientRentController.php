@@ -41,6 +41,8 @@ class SaveBookingClientRentController
                     'booking_id' => $booking->booking_id,
                     'component_id' => $component_id,
                     'date' => $requestData['date'],
+                    'date_start' => $requestData['date'],
+                    'date_end' => $requestData['date'],
                 ];
             }
 
@@ -52,6 +54,8 @@ class SaveBookingClientRentController
                     'component_id' => $component_id,
                     'quantity' => $requestData['component_quantity'][$key],
                     'date' => $requestData['date'],
+                    'date_start' => $requestData['date'],
+                    'date_end' => $requestData['date'],
                 ];
             }
         }

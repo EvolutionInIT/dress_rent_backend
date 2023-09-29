@@ -6,19 +6,13 @@ use App\Models\Traits\V1\HelperTrait;
 use App\Models\Traits\V1\TranslationTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Currency extends Model
 {
-    use HasFactory;
-    use SoftDeletes;
-
-    // Traits
-    use TranslationTrait;
-    use HelperTrait;
+    use HasFactory, TranslationTrait, HelperTrait;
 
     protected $table = 'currency';
     protected $primaryKey = 'currency_id';
 
-    protected $fillable = ['title', 'code', 'symbol'];
+    protected $fillable = ['code', 'symbol', 'iban_code', 'enabled'];
 }

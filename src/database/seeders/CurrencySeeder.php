@@ -21,41 +21,58 @@ class CurrencySeeder extends Seeder
 
     public function generateCurrency()
     {
+        //Currency::truncate();
+
         $currencies = [
             [
-                "code" => "KZT",
-                'symbol' => '₸'
+                'symbol' => '₸',
+                'code' => 'KZT',
+                'iban_code' => '398',
             ],
             [
-                "code" => "RUB",
-                'symbol' => '₽'
+                'symbol' => '₽',
+                'code' => 'RUB',
+                'iban_code' => '826',
             ],
             [
-                "code" => "USD",
-                'symbol' => '$'
+                'symbol' => '$',
+                'code' => 'USD',
+                'iban_code' => '840',
             ],
+            [
+                'symbol' => '€',
+                'code' => 'EUR',
+                'iban_code' => '978',
+            ],
+            [
+                'symbol' => '£',
+                'code' => 'GBP',
+                'iban_code' => '826',
+            ],
+
         ];
 
-        foreach ($currencies as $currency) {
-            Currency::create(
+        foreach ($currencies as &$currency)
+            $currency =
                 [
                     ...$currency,
                     ...[
                         'updated_at' => now(),
                         'created_at' => now(),
                     ]
-                ]
-            );
-        }
+                ];
 
-        $defaultCurrency =
-            env('INSTALL_CURRENCY_CODES_SHOW',)
-                ? explode(',', env('INSTALL_CURRENCY_CODES_SHOW', 'KZT'))
-                : ['KZT', 'RUB', 'USD'];
+        Currency::insert($currencies);
+
+        $defaultCurrencies =
+            explode(
+                ',',
+                env('INSTALL_CURRENCY_CODES_ENABLED', 'USD,RUB,KZT')
+            );
 
         Currency
-            ::whereIn('code', $defaultCurrency)
-            ->update(['show' => true]);
+            ::whereNotIn('code', $defaultCurrencies)
+            ->update(['enabled' => false]);
 
         $this->generateCurrencyTranslation();
     }

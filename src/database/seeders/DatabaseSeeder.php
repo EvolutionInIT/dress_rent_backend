@@ -35,8 +35,7 @@ class DatabaseSeeder extends Seeder
     {
         $ls = new LanguageSeeder();
         $ls->generateLanguages();
-        $cs = new CurrencySeeder();
-        $cs->generateCurrency();
+        (new CurrencySeeder())->run();
         $this->generatePermissions();
         $this->generateUser();
         $this->generateCategory();
@@ -725,6 +724,7 @@ class DatabaseSeeder extends Seeder
         $bookings = [
             [
                 'dress_id' => 1,
+                'date' => date('Y-m-d'),
                 'date_start' => date('Y-m-d'),
                 'date_end' => date('Y-m-d', strtotime('+2 days')),
                 'status' => Booking::STATUSES['NEW'],
@@ -734,6 +734,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'dress_id' => 1,
+                'date' => date('Y-m-d'),
                 'date_start' => date('Y-m-d'),
                 'date_end' => date('Y-m-d', strtotime('+2 days')),
                 'status' => Booking::STATUSES['APPROVED'],
@@ -743,6 +744,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'dress_id' => 3,
+                'date' => date('Y-m-d'),
                 'date_start' => date('Y-m-d'),
                 'date_end' => date('Y-m-d', strtotime('+2 days')),
                 'status' => Booking::STATUSES['NEW'],
@@ -752,6 +754,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'dress_id' => 4,
+                'date' => date('Y-m-d'),
                 'date_start' => date('Y-m-d'),
                 'date_end' => date('Y-m-d', strtotime('+2 days')),
                 'status' => Booking::STATUSES['NEW'],
@@ -761,6 +764,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'dress_id' => 5,
+                'date' => date('Y-m-d'),
                 'date_start' => date('Y-m-d'),
                 'date_end' => date('Y-m-d', strtotime('+2 days')),
                 'status' => Booking::STATUSES['NEW'],
@@ -770,6 +774,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'dress_id' => 5,
+                'date' => date('Y-m-d'),
                 'date_start' => date('Y-m-d'),
                 'date_end' => date('Y-m-d', strtotime('+2 days')),
                 'status' => Booking::STATUSES['NEW'],
@@ -857,24 +862,28 @@ class DatabaseSeeder extends Seeder
             [
                 'booking_id' => 1,
                 'component_id' => 2,
+                'date' => date('Y-m-d'),
                 'date_start' => date('Y-m-d'),
                 'date_end' => date('Y-m-d', strtotime('+2 days')),
             ],
             [
                 'booking_id' => 2,
                 'component_id' => 1,
+                'date' => date('Y-m-d'),
                 'date_start' => date('Y-m-d'),
                 'date_end' => date('Y-m-d', strtotime('+2 days')),
             ],
             [
                 'booking_id' => 4,
                 'component_id' => 3,
+                'date' => date('Y-m-d'),
                 'date_start' => date('Y-m-d'),
                 'date_end' => date('Y-m-d', strtotime('+2 days')),
             ],
             [
                 'booking_id' => 3,
                 'component_id' => 4,
+                'date' => date('Y-m-d'),
                 'date_start' => date('Y-m-d'),
                 'date_end' => date('Y-m-d', strtotime('+2 days')),
             ],
@@ -979,7 +988,8 @@ class DatabaseSeeder extends Seeder
         ComponentTranslation::insert($componentsTranslations);
     }
 
-    public function generateDressPrice() {
+    public function generateDressPrice()
+    {
         $dressesPrices = [
             [
                 'dress_id' => 1,
