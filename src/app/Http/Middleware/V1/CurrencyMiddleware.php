@@ -30,7 +30,7 @@ class CurrencyMiddleware
 
         $code =
             $v->passes()
-                ? $request->input('code')
+                ? $request->input('currency')
                 : env('DEFAULT_CURRENCY_CODE', "USD");;
 
         Config::set('app.currency_code', $code);
