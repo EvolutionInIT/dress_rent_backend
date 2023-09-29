@@ -27,9 +27,6 @@
 >>>
 >>> 
 > 
->>> _or better:
+>>> //or better:
 >>>
 >>> fresh && php artisan db:seed --class=ApoltiSeeder
-> 
-> >> Когда хрень какая-то выходит там, при переносе папок и с путями, это может помочь нам
-composer du

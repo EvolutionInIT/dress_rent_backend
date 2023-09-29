@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Validator;
 
-class LangMiddleware
+class CurrencyMiddleware
 {
     /**
      * Handle an incoming request.
@@ -20,20 +20,20 @@ class LangMiddleware
     public function handle(Request $request, Closure $next)
     {
         $v = Validator::make($request->all(), [
-            'lang' => [
+            'code' => [
                 'required',
                 'string',
-                'size:2',
-                'exists:App\Models\V1\Language,code,enabled,1',
+                'size:3',
+                'exists:App\Models\V1\DressPrice,code',
             ],
         ]);
 
         $code =
             $v->passes()
-                ? $request->input('lang')
-                : env('DEFAULT_LANGUAGE_CODE', "en");
+                ? $request->input('code')
+                : env('DEFAULT_CURRENCY_CODE', "USD");;
 
-        Config::set('app.language_code', $code);
+        Config::set('app.currency_code', $code);
         return $next($request);
     }
 }

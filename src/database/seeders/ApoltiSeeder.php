@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\V1\Color;
 use App\Models\V1\ColorTranslation;
 use App\Models\V1\Dress;
+use App\Models\V1\DressPrice;
 use App\Models\V1\DressTranslation;
 use App\Models\V1\Photo;
 use App\Models\V1\Size;
@@ -19,9 +20,9 @@ class ApoltiSeeder extends Seeder
      */
     public function run(): void
     {
-        $ls = new LanguageSeeder();
-        $ls->generateLanguages();
         $ds = new DatabaseSeeder();
+        $ds->generateLanguages();
+        $ds->generateCurrencies();
         $ds->generateCategory();
         $ds->generatePermissions();
         $ds->generateUser();
@@ -360,7 +361,6 @@ class ApoltiSeeder extends Seeder
             ],
             [
                 'user_id' => 1,
-                'price' => 10000,
                 'photos' => ['uzatu/13-3.jpg', 'uzatu/13-2.jpg', 'uzatu/13-1.jpg'],
                 'categories' => [4, 6],
                 'sizes' => [1],
@@ -495,10 +495,12 @@ class ApoltiSeeder extends Seeder
             $categories = $dress['categories'] ?? [];
             $sizes = $dress['sizes'] ?? [];
             $colors = $dress['colors'] ?? [];
+            $prices = $dress['price'];
             unset($dress['photos']);
             unset($dress['categories']);
             unset($dress['sizes']);
             unset($dress['colors']);
+            unset($dress['price']);
 
 
             $newDress = Dress::create(
@@ -514,6 +516,12 @@ class ApoltiSeeder extends Seeder
             $newDress->category()->attach($categories);
             $newDress->size()->attach($sizes);
             $newDress->color()->attach($colors);
+
+            DressPrice::create([
+                'dress_id' => $newDress->dress_id,
+                'code' => 'KZT',
+                'price' => $prices,
+            ]);
 
             foreach ($photos as $photo)
                 $dressesPhoto[] = [

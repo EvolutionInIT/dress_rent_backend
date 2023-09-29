@@ -10,6 +10,7 @@ use App\Models\V1\Color;
 use App\Models\V1\ColorTranslation;
 use App\Models\V1\ComponentTranslation;
 use App\Models\V1\Dress;
+use App\Models\V1\DressPrice;
 use App\Models\V1\DressColor;
 use App\Models\V1\DressSize;
 use App\Models\V1\DressTranslation;
@@ -32,8 +33,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $ls = new LanguageSeeder();
-        $ls->generateLanguages();
+
+
+        $this->generateLanguages();
+        $this->generateCurrencies();
+
         $this->generatePermissions();
         $this->generateUser();
         $this->generateCategory();
@@ -47,6 +51,7 @@ class DatabaseSeeder extends Seeder
         $this->generateBooking();
         $this->generateBookingComponent();
         $this->generateBookingColorSize();
+        $this->generateDressPrice();
     }
 
     public function generateDress()
@@ -721,6 +726,7 @@ class DatabaseSeeder extends Seeder
         $bookings = [
             [
                 'dress_id' => 1,
+                'date' => date('Y-m-d'),
                 'date_start' => date('Y-m-d'),
                 'date_end' => date('Y-m-d', strtotime('+2 days')),
                 'status' => Booking::STATUSES['NEW'],
@@ -730,6 +736,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'dress_id' => 1,
+                'date' => date('Y-m-d'),
                 'date_start' => date('Y-m-d'),
                 'date_end' => date('Y-m-d', strtotime('+2 days')),
                 'status' => Booking::STATUSES['APPROVED'],
@@ -739,6 +746,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'dress_id' => 3,
+                'date' => date('Y-m-d'),
                 'date_start' => date('Y-m-d'),
                 'date_end' => date('Y-m-d', strtotime('+2 days')),
                 'status' => Booking::STATUSES['NEW'],
@@ -748,6 +756,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'dress_id' => 4,
+                'date' => date('Y-m-d'),
                 'date_start' => date('Y-m-d'),
                 'date_end' => date('Y-m-d', strtotime('+2 days')),
                 'status' => Booking::STATUSES['NEW'],
@@ -757,6 +766,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'dress_id' => 5,
+                'date' => date('Y-m-d'),
                 'date_start' => date('Y-m-d'),
                 'date_end' => date('Y-m-d', strtotime('+2 days')),
                 'status' => Booking::STATUSES['NEW'],
@@ -766,6 +776,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'dress_id' => 5,
+                'date' => date('Y-m-d'),
                 'date_start' => date('Y-m-d'),
                 'date_end' => date('Y-m-d', strtotime('+2 days')),
                 'status' => Booking::STATUSES['NEW'],
@@ -853,24 +864,28 @@ class DatabaseSeeder extends Seeder
             [
                 'booking_id' => 1,
                 'component_id' => 2,
+                'date' => date('Y-m-d'),
                 'date_start' => date('Y-m-d'),
                 'date_end' => date('Y-m-d', strtotime('+2 days')),
             ],
             [
                 'booking_id' => 2,
                 'component_id' => 1,
+                'date' => date('Y-m-d'),
                 'date_start' => date('Y-m-d'),
                 'date_end' => date('Y-m-d', strtotime('+2 days')),
             ],
             [
                 'booking_id' => 4,
                 'component_id' => 3,
+                'date' => date('Y-m-d'),
                 'date_start' => date('Y-m-d'),
                 'date_end' => date('Y-m-d', strtotime('+2 days')),
             ],
             [
                 'booking_id' => 3,
                 'component_id' => 4,
+                'date' => date('Y-m-d'),
                 'date_start' => date('Y-m-d'),
                 'date_end' => date('Y-m-d', strtotime('+2 days')),
             ],
@@ -973,5 +988,97 @@ class DatabaseSeeder extends Seeder
             ],
         ];
         ComponentTranslation::insert($componentsTranslations);
+    }
+
+    public function generateDressPrice()
+    {
+        $dressesPrices = [
+            [
+                'dress_id' => 1,
+                'code' => 'KZT',
+                'price' => 3000,
+            ],
+            [
+                'dress_id' => 1,
+                'code' => 'RUB',
+                'price' => 517.55,
+            ],
+            [
+                'dress_id' => 1,
+                'code' => 'USD',
+                'price' => 6.74,
+            ],
+            [
+                'dress_id' => 2,
+                'code' => 'KZT',
+                'price' => 7000,
+            ],
+            [
+                'dress_id' => 2,
+                'code' => 'RUB',
+                'price' => 1207.63,
+            ],
+            [
+                'dress_id' => 2,
+                'code' => 'USD',
+                'price' => 15.72,
+            ],
+            [
+                'dress_id' => 3,
+                'code' => 'KZT',
+                'price' => 12000,
+            ],
+            [
+                'dress_id' => 3,
+                'code' => 'RUB',
+                'price' => 2070.22,
+            ],
+            [
+                'dress_id' => 3,
+                'code' => 'USD',
+                'price' => 26.95,
+            ],
+            [
+                'dress_id' => 4,
+                'code' => 'KZT',
+                'price' => 9800,
+            ],
+            [
+                'dress_id' => 4,
+                'code' => 'RUB',
+                'price' => 1690.68,
+            ],
+            [
+                'dress_id' => 4,
+                'code' => 'USD',
+                'price' => 22.01,
+            ],
+            [
+                'dress_id' => 5,
+                'code' => 'KZT',
+                'price' => 15000,
+            ],
+            [
+                'dress_id' => 5,
+                'code' => 'RUB',
+                'price' => 2587.77,
+            ],
+            [
+                'dress_id' => 5,
+                'code' => 'USD',
+                'price' => 33.69,
+            ],
+        ];
+        DressPrice::insert($dressesPrices);
+    }
+
+    public function generateCurrencies()
+    {
+        (new CurrencySeeder())->run();
+    }
+
+    public function generateLanguages()
+    {
+        (new LanguageSeeder())->run();
     }
 }

@@ -35,8 +35,10 @@ class DressCatalogResource extends JsonResource
             ),
 
             $this->mergeWhen(
-                isset($this->price),
-                ['price' => $this->price]
+                $this->relationLoaded('price'),
+                [
+                    'price' => $this->price->price ?? 0,
+                ]
             ),
 
             $this->mergeWhen(

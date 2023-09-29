@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('language', function (Blueprint $table) {
-            $table->increments('language_id');
-            $table->string('title');
-            $table->string('code');
-            $table->unsignedTinyInteger('position');
+        Schema::create('currency', function (Blueprint $table) {
+            $table->increments('currency_id');
+            $table->string('code', 4)->unique();
+            $table->string('symbol')->default('');
+            $table->string('iban_code', 3);
             $table->boolean('enabled')->default(true);
             $table->timestamps();
         });
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('language');
+        Schema::dropIfExists('currency');
     }
 };

@@ -16,7 +16,7 @@ return new class extends Migration {
                 $table->unsignedInteger('user_id');
                 $table->foreign('user_id')->references('user_id')->on('user');
 
-                $table->unsignedInteger('price')->default(0);
+                //$table->unsignedInteger('price')->default(0);
 
                 $table->timestamps();
                 $table->softDeletes();

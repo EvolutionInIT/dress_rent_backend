@@ -24,6 +24,7 @@ class DressCatalogController
             ->with('photo')
             ->with('size')
             ->with('color.translation')
+            ->with('price')
             ->first();
 
         return new DressCatalogResource($dress);

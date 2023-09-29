@@ -17,7 +17,7 @@ class LanguageControllerClient
         $language =
             Language
                 ::select('language_id', 'title', 'code')
-                ->where('show', true)
+                ->where('enabled', true)
                 ->get();
 
         return LanguageResource::collection($language);
