@@ -76,6 +76,8 @@ class DressCatalogResource extends JsonResource
                 ['photo' => PhotoResource::collection($this->whenLoaded('photo'))]
             ),
 
+            'updated_at' => $this->updated_at,
+
         ];
     }
 }
