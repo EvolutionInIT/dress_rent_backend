@@ -30,3 +30,6 @@
 >>> //or better:
 >>>
 >>> fresh && php artisan db:seed --class=ApoltiSeeder
+> 
+> Api Docs
+>> {{http(s)://domain_backend}}/request-docs/
