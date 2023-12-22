@@ -20,7 +20,7 @@ Route
             });
 
             Route::prefix('booking')->name('booking.')->group(function () {
-                Route::post('someSave', [SomeSaveBookingClientRentController::class, 'save'])->name('save');
+                Route::post('someSave', [SomeSaveBookingClientRentController::class, 'save'])->name('someSave');
             });
 
         });
