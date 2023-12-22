@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\V1\Auth;
 
+use App\Http\Requests\CommonRequest;
+
 class RefreshRequest extends CommonRequest
 {
 

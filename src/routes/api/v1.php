@@ -110,7 +110,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
                 Route::get('list', [CategoryController::class, 'list'])->name('list');
                 Route::post('save', [CategoryController::class, 'save'])->name('save');
                 Route::post('delete', [CategoryController::class, 'delete'])->name('delete');
-                Route::get('listClient', [CategoryController::class, 'list'])->name('list');
             });
 
 
@@ -149,7 +148,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
             ->name('photo.')
             ->group(function () {
                 Route::get('', [PhotoController::class, 'get'])->name('get');
-                Route::post('save', [PhotoController::class, 'save'])->name('save');
                 Route::get('list', [PhotoController::class, 'list'])->name('list');
                 Route::post('delete', [PhotoController::class, 'delete'])->name('delete');
             });
