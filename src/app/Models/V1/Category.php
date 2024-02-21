@@ -12,8 +12,6 @@ class Category extends Model
 {
     use HasFactory;
     use SoftDeletes;
-
-    // Traits
     use TranslationTrait;
 
     protected $table = 'category';
