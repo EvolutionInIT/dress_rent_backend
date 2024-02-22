@@ -18,7 +18,7 @@ class CategoryResourceClient extends JsonResource
                 $this->relationLoaded('translation'),
                 [
                     'title' => $this->translation->title ?? '',
-                    //'description' => $this->translation->description ?? '',
+                    'description' => $this->translation->description ?? '',
                 ]
             ),
 

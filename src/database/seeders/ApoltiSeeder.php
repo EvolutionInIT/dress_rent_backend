@@ -303,7 +303,7 @@ class ApoltiSeeder extends Seeder
         $dresses = [
             [
                 'user_id' => 1,
-                'photos' => ['evening/4-2.jpg', 'evening/4-1.jpg', 'evening/4-3.jpg', 'evening/4-4.jpg'],
+                'photos' => ['evening/4-4.jpg', 'evening/4-1.jpg', 'evening/4-2.jpg', 'evening/4-3.jpg'],
                 'categories' => [1],
                 'sizes' => [1],
                 'colors' => [1],
@@ -311,7 +311,7 @@ class ApoltiSeeder extends Seeder
             ],
             [
                 'user_id' => 1,
-                'photos' => ['evening/16-2.jpg', 'evening/16-1.jpg', 'evening/16-3.jpg', 'evening/16-4.jpg', 'evening/16-5.jpg', 'evening/16-6.jpg'],
+                'photos' => ['evening/16-1.jpg', 'evening/16-2.jpg', 'evening/16-3.jpg', 'evening/16-4.jpg', 'evening/16-5.jpg', 'evening/16-6.jpg'],
                 'categories' => [1],
                 'sizes' => [2],
                 'colors' => [1, 2, 3, 4],
@@ -483,7 +483,7 @@ class ApoltiSeeder extends Seeder
             ],
             [
                 'user_id' => 1,
-                'photos' => ['evening/27-4.jpg', 'evening/27-1.jpg', 'evening/27-2.jpg', 'evening/27-7.jpg', 'evening/27-12.jpg'],
+                'photos' => ['evening/27-7.jpg', 'evening/27-1.jpg', 'evening/27-2.jpg', 'evening/27-4.jpg', 'evening/27-12.jpg'],
                 'categories' => [1, 7],
                 'sizes' => [2],
                 'colors' => [12],
@@ -970,17 +970,17 @@ class ApoltiSeeder extends Seeder
                     [
                         'language' => 'en',
                         'title' => 'Green dress for bridesmaids for rent in Almaty',
-                        'description' => 'The hot pink style dress is made from hot pink tulle. The top is a corset, the skirt is fluffy. The size is suitable for height 145-160. Rental period: 24 hours.',
+                        'description' => 'Green dress made of luxury quality wedding satin. The belt is tied at the back. The size is adjusted to fit the figure. Rental period: 24 hours.',
                     ],
                     [
                         'language' => 'ru',
                         'title' => 'Зеленое платье для подружки невесты напрокат в Алматы',
-                        'description' => 'Ярко-розовое платье в стиле сшито из ярко-розового фатина. Верх корсет, юбка пышная. Размер подходит на рост 145-160. Срок проката: сутки.',
+                        'description' => 'Зеленое платье из свадебного атласа люкс качества. Пояс завязывается сзади. Размер подгоняется по фигуре. Срок проката: сутки.',
                     ],
                     [
                         'language' => 'kk',
                         'title' => 'Алматыда қыз ұзатуға арналған жасыл көйлек жалға беріледі',
-                        'description' => 'Ыстық қызғылт стильдегі көйлек ыстық қызғылт тюльден жасалған. Үсті – корсет, белдемше – үлпілдек. Өлшемі 145-160 биіктікке сәйкес келеді. Жалдау мерзімі: 24 сағат.',
+                        'description' => 'Сәнді сапалы үйлену тойына арналған сатиннен жасалған жасыл көйлек. Белдік артқы жағынан байланған. Өлшем фигураға сәйкес келетіндей етіп реттеледі. Жалдау мерзімі: 24 сағат.',
                     ],
                 ]
             ],
@@ -997,17 +997,17 @@ class ApoltiSeeder extends Seeder
                     [
                         'language' => 'en',
                         'title' => 'White dress for bridesmaids for rent in Almaty',
-                        'description' => 'The hot pink style dress is made from hot pink tulle. The top is a corset, the skirt is fluffy. The size is suitable for height 145-160. Rental period: 24 hours.',
+                        'description' => 'White dress made of luxury quality wedding satin. The belt is tied at the back. The size is adjusted to fit the figure. Rental period: 24 hours.',
                     ],
                     [
                         'language' => 'ru',
                         'title' => 'Белое платье для подружки невесты напрокат в Алматы',
-                        'description' => 'Ярко-розовое платье в стиле сшито из ярко-розового фатина. Верх корсет, юбка пышная. Размер подходит на рост 145-160. Срок проката: сутки.',
+                        'description' => 'Белое платье из свадебного атласа люкс качества. Пояс завязывается сзади. Размер подгоняется по фигуре. Срок проката: сутки.',
                     ],
                     [
                         'language' => 'kk',
                         'title' => 'Алматыда қыз ұзатуға арналған ақ көйлек жалға беріледі',
-                        'description' => 'Ыстық қызғылт стильдегі көйлек ыстық қызғылт тюльден жасалған. Үсті – корсет, белдемше – үлпілдек. Өлшемі 145-160 биіктікке сәйкес келеді. Жалдау мерзімі: 24 сағат.',
+                        'description' => 'Сәнді сапалы үйлену тойына арналған сатиннен жасалған ақ көйлек. Белдік артқы жағынан байланған. Өлшем фигураға сәйкес келетіндей етіп реттеледі. Жалдау мерзімі: 24 сағат.',
                     ],
                 ]
             ],
@@ -1024,7 +1024,7 @@ class ApoltiSeeder extends Seeder
                     [
                         'language' => 'en',
                         'title' => 'Pink dress for bridesmaids for rent in Almaty',
-                        'description' => 'The hot pink style dress is made from hot pink tulle. The top is a corset, the skirt is fluffy. The size is suitable for height 145-160. Rental period: 24 hours.',
+                        'description' => 'Pink dress made of luxury quality wedding satin. The belt is tied at the back. The size is adjusted to fit the figure. Rental period: 24 hours.',
                     ],
                     [
                         'language' => 'ru',
@@ -1034,7 +1034,7 @@ class ApoltiSeeder extends Seeder
                     [
                         'language' => 'kk',
                         'title' => 'Алматыда қыз ұзатуға арналған қызғылт көйлек жалға беріледі',
-                        'description' => 'Ыстық қызғылт стильдегі көйлек ыстық қызғылт тюльден жасалған. Үсті – корсет, белдемше – үлпілдек. Өлшемі 145-160 биіктікке сәйкес келеді. Жалдау мерзімі: 24 сағат.',
+                        'description' => 'Сәнді сапалы үйлену тойына арналған сатиннен жасалған қызғылт көйлек. Белдік артқы жағынан байланған. Өлшем фигураға сәйкес келетіндей етіп реттеледі. Жалдау мерзімі: 24 сағат.',
                     ],
                 ]
             ],

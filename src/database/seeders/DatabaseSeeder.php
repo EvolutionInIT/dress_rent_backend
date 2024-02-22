@@ -376,73 +376,73 @@ class DatabaseSeeder extends Seeder
                 'category_id' => 1,
                 'language' => 'ru',
                 'title' => 'Вечерние платья',
-                'description' => 'Аренда вечерних платьев для фотосессией. Аренда платьев на фотосессии, в том числе и вечерних, является одним из самых популярных видов услуг. Фотографы часто ищут для своих съемок не только одежду в прокате, но и людей с соответствующим образом, поэтому аренда платьев часто нужна. В нашей студии вы можете арендовать вечерние платья на любую тематику и для любого мероприятия. При необходимости можно даже заказать пошив вечернего платья по вашему индивидуальному эскизу.',
+                'description' => 'Аренда и прокат идеальных вечерних платьев для особого случая, мероприятия или фотосессии.',
             ],
             [
                 'category_id' => 1,
                 'language' => 'en',
                 'title' => 'Evening dresses',
-                'description' => 'Rent of evening dresses for a photo session. Renting dresses for photo shoots, including evening ones, is one of the most popular types of services. Photographers often look for not only rental clothes for their shoots, but also people with the appropriate look, so renting dresses is often needed. In our studio you can rent evening dresses for any theme and for any event. If necessary, you can even order tailoring of an evening dress according to your individual sketch.',
+                'description' => 'Rent the perfect evening dresses for your special occasion, event or photo shoot.',
             ],
             [
                 'category_id' => 1,
                 'language' => 'kk',
                 'title' => 'Кешкі көйлек',
-                'description' => 'Фотосессияға кешкі көйлектерді жалға алу. Фотосессияларға, соның ішінде кешкі көйлектерді жалға алу - ең танымал қызмет түрлерінің бірі. Фотографтар көбінесе өз түсірілімдері үшін жалдамалы киімдерді ғана емес, сонымен қатар сәйкес келбеті бар адамдарды да іздейді, сондықтан көйлектерді жалға алу жиі қажет. Біздің студияда сіз кез келген тақырыпқа және кез келген іс-шараға арналған кешкі көйлектерді жалға ала аласыз. Қажет болса, сіз өзіңіздің жеке эскизіңізге сәйкес кешкі көйлекті тігуге тапсырыс бере аласыз.',
+                'description' => 'Ерекше жағдайға, оқиғаға немесе фотосессияға тамаша кешкі көйлектерді жалға алыңыз.',
             ],
             [
                 'category_id' => 2,
                 'language' => 'ru',
-                'title' => 'Платья для фотосессий',
-                'description' => 'Шикарные и стильные платья, аксессуары и обувь в аренду для фотосессий.'
+                'title' => 'Платья для фотосессии',
+                'description' => 'Прокат платьев для фотосессий предлагает разнообразие моделей для вашего образа. Выбирайте из нашей коллекции и создайте неповторимые кадры без лишних затрат. Осуществите свои фотоидеи в стиле и элегантности!'
             ],
             [
                 'category_id' => 2,
                 'language' => 'en',
-                'title' => 'Dresses for photo shoots',
-                'description' => 'Chic and stylish dresses, accessories and shoes for rent for photo shoots.'
+                'title' => 'Dresses for photo shoot',
+                'description' => 'Rental of dresses for photo shoots offers a variety of models to suit your look. Choose from our collection and create unique shots at no extra cost. Realize your photo ideas in style and elegance!'
             ],
             [
                 'category_id' => 2,
                 'language' => 'kk',
                 'title' => 'Фотосессияға арналған көйлектер',
-                'description' => 'Сәнді және сәнді көйлектер, аксессуарлар және фотосессиялар үшін жалға берілетін аяқ киім.'
+                'description' => 'Фотосессияға арналған көйлектерді жалға беру сіздің келбетіңізге сәйкес келетін әртүрлі үлгілерді ұсынады. Біздің топтамамыздан таңдаңыз және қосымша ақысыз бірегей кадрлар жасаңыз. Фото идеяларыңызды стильде және талғампаздықта жүзеге асырыңыз!'
             ],
             [
                 'category_id' => 3,
                 'language' => 'ru',
                 'title' => 'Свадебные платья',
-                'description' => 'Свадебные платья простые, но со вкусом'
+                'description' => 'Аренда идеального свадебного платье ждет вас здесь! Широкий выбор в прокате свадебных платьев и нарядов поможет воплотить вашу мечту в реальность.'
             ],
             [
                 'category_id' => 3,
                 'language' => 'en',
                 'title' => 'Wedding Dresses',
-                'description' => 'Wedding dresses are simple but tasteful'
+                'description' => 'Rent the perfect wedding dress awaits you here! A wide selection of wedding dresses and outfits for rent will help make your dream come true.'
             ],
             [
                 'category_id' => 3,
                 'language' => 'kk',
                 'title' => 'Үйлену көйлегі',
-                'description' => 'Үйлену көйлектері қарапайым, бірақ талғампаз'
+                'description' => 'Мұнда сізді тамаша үйлену көйлегін жалға алыңыз! Үйлену көйлектері мен жалға берілетін киімдердің кең таңдауы сіздің арманыңызды жүзеге асыруға көмектеседі.'
             ],
             [
                 'category_id' => 4,
                 'language' => 'ru',
                 'title' => 'Платья на узату',
-                'description' => 'Платья на узату'
+                'description' => 'Аренда идеального платья для узату! Широкий выбор в прокате платьев для узату сделает этот особенный день самым счастливым.'
             ],
             [
                 'category_id' => 4,
                 'language' => 'en',
-                'title' => 'Dresses with knots',
-                'description' => 'Dresses with knots'
+                'title' => 'Uzatu dresses',
+                'description' => 'Rent the perfect Uzatu dress! A wide selection of Uzatu dresses for rent will make this special day the happiest.'
             ],
             [
                 'category_id' => 4,
                 'language' => 'kk',
-                'title' => 'Түйіндері бар көйлектер',
-                'description' => 'Түйіндері бар көйлектер'
+                'title' => 'Ұзату көйлектер',
+                'description' => 'Ұзату көйлегін жалға алыңыз! Ұзату көйлектерінің кең таңдауы осы ерекше күнді ең бақытты етеді.'
             ],
             [
                 'category_id' => 5,
@@ -466,73 +466,73 @@ class DatabaseSeeder extends Seeder
                 'category_id' => 6,
                 'language' => 'ru',
                 'title' => 'Национальные этно-костюмы',
-                'description' => 'Разные виды национальных этно-костюмов'
+                'description' => 'Окунитесь в культурное наследие! Казахские национальные этно-костюмы на прокат предлагают разнообразие стилей для особых событий. Откройте новые грани вашего образа в аутентичной одежде.'
             ],
             [
                 'category_id' => 6,
                 'language' => 'en',
-                'title' => 'National ethnic costumes',
-                'description' => 'Different types of national ethnic costumes'
+                'title' => 'National ethno-costumes',
+                'description' => 'Immerse yourself in cultural heritage! Kazakh national ethnic costumes for hire offer a variety of styles for special events. Discover new facets of your image in authentic clothes.'
             ],
             [
                 'category_id' => 6,
                 'language' => 'kk',
-                'title' => 'Ұлттық этникалық киімдер',
-                'description' => 'Ұлттық этникалық киімдердің әртүрлі түрлері'
+                'title' => 'Ұлттық этно-киімдер',
+                'description' => 'Мәдени мұраға еніңіз! Жалдамалы қазақтың ұлттық этникалық киімдері ерекше іс-шараларға арналған әртүрлі стильдерді ұсынады. Нағыз киімде бейнеңіздің жаңа қырларын ашыңыз.'
             ],
             [
                 'category_id' => 7,
                 'language' => 'ru',
                 'title' => 'Платья на выпускной',
-                'description' => 'Разные виды платьев на выпускной'
+                'description' => 'Прокат стильных платьев на выпускной предлагает модные варианты для вашего особого вечера. Почувствуйте себя уверенно и элегантно, не переплачивая за образ.'
             ],
             [
                 'category_id' => 7,
                 'language' => 'en',
                 'title' => 'Dresses for graduating date',
-                'description' => 'Different types of dresses for graduation'
+                'description' => 'Stylish prom dress rentals offer fashionable options for your special evening. Feel confident and elegant without overpaying for the look.'
             ],
             [
                 'category_id' => 7,
                 'language' => 'kk',
-                'title' => 'Құттықтау күніне арналған көйлектер',
-                'description' => 'Бітіруге арналған көйлектердің әртүрлі түрлері'
+                'title' => 'Выпускнойға көйлектер',
+                'description' => 'Сәнді бітіру кеші көйлектерін жалға беру арнайы кешке арналған сәнді нұсқаларды ұсынады. Сыртқы көрініс үшін артық төлем жасамай, өзіңізді сенімді және талғампаз сезініңіз.'
             ],
             [
                 'category_id' => 8,
                 'language' => 'ru',
-                'title' => 'Мусульманские платья',
-                'description' => 'Разные виды мусульманских платьев'
+                'title' => 'Мусульманские платья и кейпы',
+                'description' => 'Прокат мусульманских платьев и кейпов предлагает изысканные варианты для вашего состояния души.'
             ],
             [
                 'category_id' => 8,
                 'language' => 'en',
-                'title' => 'Muslim dresses',
-                'description' => 'Different types of Muslim dresses'
+                'title' => 'Muslim dresses and capes',
+                'description' => 'Renting Muslim dresses and capes offers exquisite options for your state of mind.'
             ],
             [
                 'category_id' => 8,
                 'language' => 'kk',
-                'title' => 'Мұсылмандық көйлектер',
-                'description' => 'Мұсылмандық көйлектердің әртүрлі түрлері'
+                'title' => 'Мұсылмандық көйлектер мен кейптер',
+                'description' => 'Мұсылман көйлектері мен кейптер жалға алу сіздің көңіл-күйіңіз үшін керемет нұсқаларды ұсынады.'
             ],
             [
                 'category_id' => 9,
                 'language' => 'ru',
                 'title' => 'Детские платья',
-                'description' => 'Разные виды детских платьев'
+                'description' => 'Воплотите мечты вашей маленькой принцессы или принца в жизнь! Прокат детских платьев предлагает множество вариантов для парздничных мероприятий. Найдите идеальное платье, чтобы ваша девочка почувствовала себя настоящей звездой.'
             ],
             [
                 'category_id' => 9,
                 'language' => 'en',
                 'title' => 'Children`s dress',
-                'description' => 'Different types of children`s dresses'
+                'description' => 'Make your little princess or prince`s dreams come true! Renting children`s dresses offers many options for special occasions. Find the perfect dress to make your little girl feel like a real star.',
             ],
             [
                 'category_id' => 9,
                 'language' => 'kk',
                 'title' => 'Балалар көйлегі',
-                'description' => 'Балалар көйлектерінің әртүрлі түрлері'
+                'description' => 'Кішкентай ханшайымыңыздың немесе ханзадаңыздың армандарын орындаңыз! Балалар көйлектерін жалға алу ерекше жағдайларда көптеген нұсқаларды ұсынады. Кішкентай қызыңызды нағыз жұлдыздай сезіну үшін тамаша көйлек табыңыз.'
             ],
         ];
 
