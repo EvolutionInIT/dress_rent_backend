@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\V1\Category;
 use App\Models\V1\Color;
 use App\Models\V1\ColorTranslation;
 use App\Models\V1\Dress;
@@ -33,6 +34,8 @@ class ApoltiSeeder extends Seeder
         $this->generateDressTranslation();
 
         //$ds->generateBooking();
+
+        $this->updateCategories();
     }
 
     public function generateSize()
@@ -300,7 +303,7 @@ class ApoltiSeeder extends Seeder
         $dresses = [
             [
                 'user_id' => 1,
-                'photos' => ['evening/4-2.jpg', 'evening/4-1.jpg', 'evening/4-3.jpg', 'evening/4-4.jpg'],
+                'photos' => ['evening/4-4.jpg', 'evening/4-1.jpg', 'evening/4-2.jpg', 'evening/4-3.jpg'],
                 'categories' => [1],
                 'sizes' => [1],
                 'colors' => [1],
@@ -308,7 +311,7 @@ class ApoltiSeeder extends Seeder
             ],
             [
                 'user_id' => 1,
-                'photos' => ['evening/16-2.jpg', 'evening/16-1.jpg', 'evening/16-3.jpg', 'evening/16-4.jpg', 'evening/16-5.jpg', 'evening/16-6.jpg'],
+                'photos' => ['evening/16-1.jpg', 'evening/16-2.jpg', 'evening/16-3.jpg', 'evening/16-4.jpg', 'evening/16-5.jpg', 'evening/16-6.jpg'],
                 'categories' => [1],
                 'sizes' => [2],
                 'colors' => [1, 2, 3, 4],
@@ -480,7 +483,7 @@ class ApoltiSeeder extends Seeder
             ],
             [
                 'user_id' => 1,
-                'photos' => ['evening/27-4.jpg', 'evening/27-1.jpg', 'evening/27-2.jpg', 'evening/27-7.jpg', 'evening/27-12.jpg'],
+                'photos' => ['evening/27-7.jpg', 'evening/27-1.jpg', 'evening/27-2.jpg', 'evening/27-4.jpg', 'evening/27-12.jpg'],
                 'categories' => [1, 7],
                 'sizes' => [2],
                 'colors' => [12],
@@ -951,6 +954,87 @@ class ApoltiSeeder extends Seeder
                         'language' => 'kk',
                         'title' => 'Алматыда Барби стиліндегі ыстық қызғылт көйлек жалға беріледі',
                         'description' => 'Ыстық қызғылт стильдегі көйлек ыстық қызғылт тюльден жасалған. Үсті – корсет, белдемше – үлпілдек. Өлшемі 145-160 биіктікке сәйкес келеді. Жалдау мерзімі: 24 сағат.',
+                    ],
+                ]
+            ],
+
+            [
+                'user_id' => 1,
+                'photos' => ['uzatu/7-2.jpg', 'uzatu/7-1.jpg', 'uzatu/7-3.jpg'],
+                'categories' => [4,3],
+                'sizes' => [2],
+                'colors' => [10],
+                'price' => 10000,
+                'quantity' => 1,
+                'translations' => [
+                    [
+                        'language' => 'en',
+                        'title' => 'Green dress for bridesmaids for rent in Almaty',
+                        'description' => 'Green dress made of luxury quality wedding satin. The belt is tied at the back. The size is adjusted to fit the figure. Rental period: 24 hours.',
+                    ],
+                    [
+                        'language' => 'ru',
+                        'title' => 'Зеленое платье для подружки невесты напрокат в Алматы',
+                        'description' => 'Зеленое платье из свадебного атласа люкс качества. Пояс завязывается сзади. Размер подгоняется по фигуре. Срок проката: сутки.',
+                    ],
+                    [
+                        'language' => 'kk',
+                        'title' => 'Алматыда қыз ұзатуға арналған жасыл көйлек жалға беріледі',
+                        'description' => 'Сәнді сапалы үйлену тойына арналған сатиннен жасалған жасыл көйлек. Белдік артқы жағынан байланған. Өлшем фигураға сәйкес келетіндей етіп реттеледі. Жалдау мерзімі: 24 сағат.',
+                    ],
+                ]
+            ],
+
+            [
+                'user_id' => 1,
+                'photos' => ['uzatu/9-3.jpg', 'uzatu/9-1.jpg', 'uzatu/9-2.jpg', 'uzatu/9-4.jpg'],
+                'categories' => [4,3],
+                'sizes' => [2],
+                'colors' => [2],
+                'price' => 10000,
+                'quantity' => 1,
+                'translations' => [
+                    [
+                        'language' => 'en',
+                        'title' => 'White dress for bridesmaids for rent in Almaty',
+                        'description' => 'White dress made of luxury quality wedding satin. The belt is tied at the back. The size is adjusted to fit the figure. Rental period: 24 hours.',
+                    ],
+                    [
+                        'language' => 'ru',
+                        'title' => 'Белое платье для подружки невесты напрокат в Алматы',
+                        'description' => 'Белое платье из свадебного атласа люкс качества. Пояс завязывается сзади. Размер подгоняется по фигуре. Срок проката: сутки.',
+                    ],
+                    [
+                        'language' => 'kk',
+                        'title' => 'Алматыда қыз ұзатуға арналған ақ көйлек жалға беріледі',
+                        'description' => 'Сәнді сапалы үйлену тойына арналған сатиннен жасалған ақ көйлек. Белдік артқы жағынан байланған. Өлшем фигураға сәйкес келетіндей етіп реттеледі. Жалдау мерзімі: 24 сағат.',
+                    ],
+                ]
+            ],
+
+            [
+                'user_id' => 1,
+                'photos' => ['uzatu/10-5.jpg', 'uzatu/10-3.jpg', 'uzatu/10-4.jpg'],
+                'categories' => [4,3],
+                'sizes' => [2],
+                'colors' => [8],
+                'price' => 10000,
+                'quantity' => 1,
+                'translations' => [
+                    [
+                        'language' => 'en',
+                        'title' => 'Pink dress for bridesmaids for rent in Almaty',
+                        'description' => 'Pink dress made of luxury quality wedding satin. The belt is tied at the back. The size is adjusted to fit the figure. Rental period: 24 hours.',
+                    ],
+                    [
+                        'language' => 'ru',
+                        'title' => 'Розовое платье для подружки невесты напрокат в Алматы',
+                        'description' => 'Ярко-розовое платье в стиле сшито из ярко-розового фатина. Верх корсет, юбка пышная. Размер подходит на рост 145-160. Срок проката: сутки.',
+                    ],
+                    [
+                        'language' => 'kk',
+                        'title' => 'Алматыда қыз ұзатуға арналған қызғылт көйлек жалға беріледі',
+                        'description' => 'Сәнді сапалы үйлену тойына арналған сатиннен жасалған қызғылт көйлек. Белдік артқы жағынан байланған. Өлшем фигураға сәйкес келетіндей етіп реттеледі. Жалдау мерзімі: 24 сағат.',
                     ],
                 ]
             ],
@@ -1458,6 +1542,22 @@ class ApoltiSeeder extends Seeder
         ];
 
         DressTranslation::insert($dressesTranslations);
+    }
+
+    /**
+     * @return void
+     */
+    public function updateCategories(): void
+    {
+        Category::where('category_id', 6)->update(['order' => 100, 'dress_id' => 16]);
+        Category::where('category_id', 1)->update(['order' => 95, 'dress_id' => 2]);
+        Category::where('category_id', 4)->update(['order' => 90, 'dress_id' => 6]);
+        Category::where('category_id', 3)->update(['order' => 80, 'dress_id' => 32]);
+        Category::where('category_id', 7)->update(['order' => 70, 'dress_id' => 22]);
+        Category::where('category_id', 5)->delete();
+        Category::where('category_id', 9)->update(['order' => 50, 'dress_id' => 29]);
+        Category::where('category_id', 8)->update(['order' => 40, 'dress_id' => 23]);
+        Category::where('category_id', 2)->update(['order' => 10, 'dress_id' => 4]);
     }
 
 

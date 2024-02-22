@@ -21,6 +21,11 @@ return new class extends Migration {
                 $table->timestamps();
                 $table->softDeletes();
             });
+
+        Schema::table('category', function (Blueprint $table) {
+            $table->unsignedInteger('dress_id')->nullable();
+            $table->foreign('dress_id')->references('dress_id')->on('dress');
+        });
     }
 
     public function down(): void

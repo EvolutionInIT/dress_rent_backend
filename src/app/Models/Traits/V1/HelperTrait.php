@@ -11,4 +11,12 @@ trait HelperTrait
     {
         return (new static)->getKeyName();
     }
+
+    /**
+     * @return mixed
+     */
+    protected static function getTableName(): mixed
+    {
+        return (new static)->getTable();
+    }
 }

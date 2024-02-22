@@ -23,7 +23,7 @@ class AvailableBookingClientRentController
         $dates = [];
         for (
             $date = Carbon::now();
-            $date->lte(Carbon::now()->addWeeks(2));
+            $date->lte(Carbon::now()->addWeeks(4));
             $date->addDay()
         ) {
             $dates[] = $date->toDateString();

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\V1\Client\Category;
 
+use App\Http\Resources\V1\Client\Rent\Photo\PhotoResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CategoryResourceClient extends JsonResource
@@ -17,8 +18,13 @@ class CategoryResourceClient extends JsonResource
                 $this->relationLoaded('translation'),
                 [
                     'title' => $this->translation->title ?? '',
-                    //'description' => $this->translation->description ?? '',
+                    'description' => $this->translation->description ?? '',
                 ]
+            ),
+
+            $this->mergeWhen(
+                $this->relationLoaded('photos'),
+                ['photos' => PhotoResource::collection($this->whenLoaded('photos'))]
             )
         ];
     }

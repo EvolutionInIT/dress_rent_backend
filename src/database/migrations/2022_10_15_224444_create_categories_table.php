@@ -11,6 +11,7 @@ return new class extends Migration {
         if (!Schema::hasTable('category'))
             Schema::create('category', function (Blueprint $table) {
                 $table->increments('category_id');
+                $table->unsignedTinyInteger('order')->default(0);
                 $table->timestamps();
                 $table->softDeletes();
             });
