@@ -18,9 +18,10 @@ class CategoryClientRentController
     {
         $categories =
             Category
-                ::select('category_id')
+                ::select(['category_id', 'dress_id'])
                 ->with('translation:category_id,title')
                 ->with('photos:image')
+                ->orderBy('order', 'desc')
                 ->get();
 
         return

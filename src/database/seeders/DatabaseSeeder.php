@@ -453,7 +453,7 @@ class DatabaseSeeder extends Seeder
             [
                 'category_id' => 5,
                 'language' => 'en',
-                'title' => 'Bridesmaid Dresses',
+                'title' => 'Bridesmaid dresses',
                 'description' => 'Different types of dresses for the bride'
             ],
             [

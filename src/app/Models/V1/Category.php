@@ -27,6 +27,7 @@ class Category extends Model
     {
         return
             $this
-                ->hasManyThrough(Photo::class,  DressCategory::class,'category_id', 'dress_id', "category_id", "dress_id");
+                //->hasManyThrough(Photo::class,  DressCategory::class,'category_id', 'dress_id', "category_id", "dress_id");
+                ->hasManyThrough(Photo::class, Dress::class, 'dress_id', 'dress_id', "dress_id", "dress_id");
     }
 }
