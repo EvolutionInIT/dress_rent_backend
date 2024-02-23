@@ -2,11 +2,11 @@
 
 namespace App\Http\Resources\V1\Client\Rent\Catalog;
 
-use App\Http\Resources\User\UserResource;
 use App\Http\Resources\V1\Admin\Color\ColorResource;
 use App\Http\Resources\V1\Admin\Photo\PhotoResource;
 use App\Http\Resources\V1\Admin\Size\SizeResource;
 use App\Http\Resources\V1\Client\Category\CategoryResourceClient;
+use App\Http\Resources\V1\Client\Rent\User\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 

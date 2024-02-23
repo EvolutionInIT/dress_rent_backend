@@ -10,6 +10,7 @@ class UserResource extends JsonResource
     {
         return [
             'phone' => $this->phone,
+            'telegram_username' => 'almamusaeva' //$this->telegram_username,
         ];
     }
 }
