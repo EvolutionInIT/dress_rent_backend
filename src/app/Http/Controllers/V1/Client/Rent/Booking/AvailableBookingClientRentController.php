@@ -22,8 +22,8 @@ class AvailableBookingClientRentController
 
         $dates = [];
         for (
-            $date = Carbon::now();
-            $date->lte(Carbon::now()->addWeeks(4));
+            $date = Carbon::now()->addDay();
+            $date->lte(Carbon::now()->addDays(env('BOOKING_DAYS_AVAILABLE', 14)));
             $date->addDay()
         ) {
             $dates[] = $date->toDateString();
@@ -46,7 +46,7 @@ class AvailableBookingClientRentController
                 ->join('booking', function ($join) {
                     $join->on('dress.dress_id', '=', 'booking.dress_id')
                         ->where('booking.date', '>=', Carbon::now()->toDateString())
-                        ->where('booking.date', '<=', Carbon::now()->addWeeks(2)->toDateString());
+                        ->where('booking.date', '<=', Carbon::now()->addDays(env('BOOKING_DAYS_AVAILABLE', 14))->toDateString());
                 })
                 ->select(['dress.dress_id', 'booking.date', DB::raw('SUM(booking.quantity) as booked')])
                 ->groupBy(['dress.dress_id', 'booking.date'])
