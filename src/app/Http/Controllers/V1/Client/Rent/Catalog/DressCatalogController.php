@@ -25,6 +25,7 @@ class DressCatalogController
             ->with('size')
             ->with('color.translation')
             ->with('price')
+            ->with('user')
             ->first();
 
         return new DressCatalogResource($dress);

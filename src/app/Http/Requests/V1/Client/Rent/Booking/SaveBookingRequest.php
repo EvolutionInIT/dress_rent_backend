@@ -38,7 +38,7 @@ class SaveBookingRequest extends CommonRequest
                     }
                 },
                 'after_or_equal:today',
-                'before_or_equal:' . now()->addWeeks(2)->toDateString(),
+                'before_or_equal:' . now()->addDays(env('BOOKING_DAYS_AVAILABLE', 14))->toDateString(),
             ],
             'quantity' => [
                 'bail', 'required', 'integer', 'between:1,100',
