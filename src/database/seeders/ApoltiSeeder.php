@@ -1526,8 +1526,6 @@ class ApoltiSeeder extends Seeder
                 'title' => 'Алматыда мұсылмандық комбинезон жалға беріледі',
                 'description' => 'Алматыда мұсылмандық комбинезон жалға беріледі. Түпнұсқа костюм комбинезоннан, шалбардың үстіндегі шапан мен шарфтан тұрады. Түсі - қою көгілдір. Жалдау мерзімі: 24 сағат.',
             ],
-
-
             [
                 'dress_id' => 24,
                 'language' => 'en',
@@ -1551,19 +1549,19 @@ class ApoltiSeeder extends Seeder
                 'dress_id' => 25,
                 'language' => 'en',
                 'title' => 'Velvet engagement set for rent in Almaty',
-                'description' => 'Camisole with long sleeves and saukele are made of natural silk velvet. Patterns are embroidered by hand from silk thread and natural stones. The dress is made of tulle, the fluffy skirt has a train. The set includes decorations. Rental period: day.',
+                'description' => 'Camisole with long sleeves and saukele are made of natural silk velvet. Patterns are embroidered by hand from silk thread and natural stones. The dress is made of tulle, the fluffy skirt has a train. The set includes decorations. Rental period: 3 days.',
             ],
             [
                 'dress_id' => 25,
                 'language' => 'ru',
                 'title' => 'Бархатный комплект для узату напрокат в Алматы',
-                'description' => 'Камзол с длинными рукавами и саукеле сшиты из натурального шелкового бархата. Узоры вышиты вручную из шелковой нити и натуральных камней. Платье сшито из фатина, пышная юбка имеет шлейф. В комплекте есть украшения. Срок проката: сутки.',
+                'description' => 'Камзол с длинными рукавами и саукеле сшиты из натурального шелкового бархата. Узоры вышиты вручную из шелковой нити и натуральных камней. Платье сшито из фатина, пышная юбка имеет шлейф. В комплекте есть украшения. Срок проката: 3 дня.',
             ],
             [
                 'dress_id' => 25,
                 'language' => 'kk',
                 'title' => 'Алматыда ұзартуға арналған барқыт жиынтық жалға беріледі',
-                'description' => 'Ұзын жеңді камзол және сәукеле табиғи жібек барқыттан тігіледі. Үлгілер жібек жіптен және табиғи тастардан қолмен кестеленген. Көйлек тюльден тігілген, үлпілдек белдемшеде пойыз бар. Жиынтықта декорациялар бар. Жалдау мерзімі: 24 сағат.',
+                'description' => 'Ұзын жеңді камзол және сәукеле табиғи жібек барқыттан тігіледі. Үлгілер жібек жіптен және табиғи тастардан қолмен кестеленген. Көйлек тюльден тігілген, үлпілдек белдемшеде пойыз бар. Жиынтықта декорациялар бар. Жалдау мерзімі: 3 күн.',
             ],
 
 
