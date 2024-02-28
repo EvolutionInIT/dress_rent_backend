@@ -970,17 +970,17 @@ class ApoltiSeeder extends Seeder
                     [
                         'language' => 'en',
                         'title' => 'Green dress for bridesmaids for rent in Almaty',
-                        'description' => 'Green dress made of luxury quality wedding satin. The belt is tied at the back. The size is adjusted to fit the figure. Rental period: 3 days.',
+                        'description' => 'Green dress made of luxury quality wedding satin. The belt is tied at the back. The size is adjusted to fit the figure. Rental period: 24 hours.',
                     ],
                     [
                         'language' => 'ru',
                         'title' => 'Зеленое платье для подружки невесты напрокат в Алматы',
-                        'description' => 'Зеленое платье из свадебного атласа люкс качества. Пояс завязывается сзади. Размер подгоняется по фигуре. Срок проката: 3 дня.',
+                        'description' => 'Зеленое платье из свадебного атласа люкс качества. Пояс завязывается сзади. Размер подгоняется по фигуре. Срок проката: сутки.',
                     ],
                     [
                         'language' => 'kk',
                         'title' => 'Алматыда қыз ұзатуға арналған жасыл көйлек жалға беріледі',
-                        'description' => 'Сәнді сапалы үйлену тойына арналған сатиннен жасалған жасыл көйлек. Белдік артқы жағынан байланған. Өлшем фигураға сәйкес келетіндей етіп реттеледі. Жалдау мерзімі: 3 күн.',
+                        'description' => 'Сәнді сапалы үйлену тойына арналған сатиннен жасалған жасыл көйлек. Белдік артқы жағынан байланған. Өлшем фигураға сәйкес келетіндей етіп реттеледі. Жалдау мерзімі: 24 сағат.',
                     ],
                 ]
             ],
@@ -997,17 +997,17 @@ class ApoltiSeeder extends Seeder
                     [
                         'language' => 'en',
                         'title' => 'White dress for bridesmaids for rent in Almaty',
-                        'description' => 'White dress made of luxury quality wedding satin. The belt is tied at the back. The size is adjusted to fit the figure. Rental period: 3 days.',
+                        'description' => 'White dress made of luxury quality wedding satin. The belt is tied at the back. The size is adjusted to fit the figure. Rental period: 24 hours.',
                     ],
                     [
                         'language' => 'ru',
                         'title' => 'Белое платье для подружки невесты напрокат в Алматы',
-                        'description' => 'Белое платье из свадебного атласа люкс качества. Пояс завязывается сзади. Размер подгоняется по фигуре. Срок проката: 3 дня.',
+                        'description' => 'Белое платье из свадебного атласа люкс качества. Пояс завязывается сзади. Размер подгоняется по фигуре. Срок проката: сутки.',
                     ],
                     [
                         'language' => 'kk',
                         'title' => 'Алматыда қыз ұзатуға арналған ақ көйлек жалға беріледі',
-                        'description' => 'Сәнді сапалы үйлену тойына арналған сатиннен жасалған ақ көйлек. Белдік артқы жағынан байланған. Өлшем фигураға сәйкес келетіндей етіп реттеледі. Жалдау мерзімі: 3 күн.',
+                        'description' => 'Сәнді сапалы үйлену тойына арналған сатиннен жасалған ақ көйлек. Белдік артқы жағынан байланған. Өлшем фигураға сәйкес келетіндей етіп реттеледі. Жалдау мерзімі: 24 сағат.',
                     ],
                 ]
             ],
@@ -1024,17 +1024,17 @@ class ApoltiSeeder extends Seeder
                     [
                         'language' => 'en',
                         'title' => 'Pink dress for bridesmaids for rent in Almaty',
-                        'description' => 'Pink dress made of luxury quality wedding satin. The belt is tied at the back. The size is adjusted to fit the figure. Rental period: 3 days.',
+                        'description' => 'Pink dress made of luxury quality wedding satin. The belt is tied at the back. The size is adjusted to fit the figure. Rental period: 24 hours.',
                     ],
                     [
                         'language' => 'ru',
                         'title' => 'Розовое платье для подружки невесты напрокат в Алматы',
-                        'description' => 'Ярко-розовое платье в стиле сшито из ярко-розового фатина. Верх корсет, юбка пышная. Размер подходит на рост 145-160. Срок проката: 3 дня.',
+                        'description' => 'Ярко-розовое платье в стиле сшито из ярко-розового фатина. Верх корсет, юбка пышная. Размер подходит на рост 145-160. Срок проката: сутки.',
                     ],
                     [
                         'language' => 'kk',
                         'title' => 'Алматыда қыз ұзатуға арналған қызғылт көйлек жалға беріледі',
-                        'description' => 'Сәнді сапалы үйлену тойына арналған сатиннен жасалған қызғылт көйлек. Белдік артқы жағынан байланған. Өлшем фигураға сәйкес келетіндей етіп реттеледі. Жалдау мерзімі: 3 күн.',
+                        'description' => 'Сәнді сапалы үйлену тойына арналған сатиннен жасалған қызғылт көйлек. Белдік артқы жағынан байланған. Өлшем фигураға сәйкес келетіндей етіп реттеледі. Жалдау мерзімі: 24 сағат.',
                     ],
                 ]
             ],
