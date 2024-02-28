@@ -538,17 +538,17 @@ class ApoltiSeeder extends Seeder
                     [
                         'language' => 'en',
                         'title' => 'White fluffy wedding dress for rent in Almaty',
-                        'description' => 'The white wedding dress is made of tulle and embroidered with beads. The skirt is fluffy and light, no ring required. The set includes a veil. Rental period: 24 hours.',
+                        'description' => 'The white wedding dress is made of tulle and embroidered with beads. The skirt is fluffy and light, no ring required. The set includes a veil. Rental period: 3 days.',
                     ],
                     [
                         'language' => 'ru',
                         'title' => 'Белое пышное свадебное платье напрокат в Алматы',
-                        'description' => 'Белое свадебное платье сшито из фатина, расшито бисером. Юбка пышная и легкая, кольцо не потребуется. В комплекте есть фата. Срок проката: сутки.',
+                        'description' => 'Белое свадебное платье сшито из фатина, расшито бисером. Юбка пышная и легкая, кольцо не потребуется. В комплекте есть фата. Срок проката: 3 дня.',
                     ],
                     [
                         'language' => 'kk',
                         'title' => 'Алматыда ақ үлпілдек той көйлегі жалға беріледі',
-                        'description' => 'Ақ той көйлегі тюльден тігілген және моншақтармен кестеленген. Юбка жұмсақ және жеңіл, сақина қажет емес. Жиынтыққа жамылғы кіреді. Жалдау мерзімі: 24 сағат.',
+                        'description' => 'Ақ той көйлегі тюльден тігілген және моншақтармен кестеленген. Юбка жұмсақ және жеңіл, сақина қажет емес. Жиынтыққа жамылғы кіреді. Жалдау мерзімі: 3 күн.',
                     ],
                 ]
             ],
@@ -592,17 +592,17 @@ class ApoltiSeeder extends Seeder
                     [
                         'language' => 'en',
                         'title' => 'Green velvet camisole for rent in Almaty',
-                        'description' => 'The set includes a velvet camisole, takiya, saukele, tulle fluffy dress and jewelry. The camisole, taqiya and saukele are made of velvet and embroidered with hand-made patterns. The dress is made of tulle, the skirt is fluffy and there is no need for a ring. The top of the dress is a corset. Rental period: 24 hours.',
+                        'description' => 'The set includes a velvet camisole, takiya, saukele, tulle fluffy dress and jewelry. The camisole, taqiya and saukele are made of velvet and embroidered with hand-made patterns. The dress is made of tulle, the skirt is fluffy and there is no need for a ring. The top of the dress is a corset. Rental period: 3 days.',
                     ],
                     [
                         'language' => 'ru',
                         'title' => 'Зеленый бархатный камзол на узату напрокат в Алматы',
-                        'description' => 'В комплект входит бархатный камзол, такия, саукеле, фатиновое пышное платье и украшения. Камзол, такия и саукеле сшиты из бархата и расшиты ручными узорами. Платье сшито из фатина, юбка пышная и не потребуется кольцо. Верх платья – корсет. Срок проката: сутки.',
+                        'description' => 'В комплект входит бархатный камзол, такия, саукеле, фатиновое пышное платье и украшения. Камзол, такия и саукеле сшиты из бархата и расшиты ручными узорами. Платье сшито из фатина, юбка пышная и не потребуется кольцо. Верх платья – корсет. Срок проката: 3 дня.',
                     ],
                     [
                         'language' => 'kk',
                         'title' => 'Алматыда жасыл барқыт камзол жалға беріледі',
-                        'description' => 'Жиынтыққа барқыт камзол, тақия, сәукеле, тюльді үлпілдек көйлек және әшекей бұйымдар кіреді. Камзол, тақия, сәукеле барқыт матадан тігілген және қолдан өрнекпен кестеленген. Көйлек тюльден тігілген, белдемше үлпілдек, сақинаның қажеті жоқ. Көйлектің үстіңгі жағы - корсет. Жалдау мерзімі: 24 сағат.',
+                        'description' => 'Жиынтыққа барқыт камзол, тақия, сәукеле, тюльді үлпілдек көйлек және әшекей бұйымдар кіреді. Камзол, тақия, сәукеле барқыт матадан тігілген және қолдан өрнекпен кестеленген. Көйлек тюльден тігілген, белдемше үлпілдек, сақинаның қажеті жоқ. Көйлектің үстіңгі жағы - корсет. Жалдау мерзімі: 3 күн.',
                     ],
                 ]
             ],
@@ -646,17 +646,17 @@ class ApoltiSeeder extends Seeder
                     [
                         'language' => 'en',
                         'title' => 'White dress for wedding for rent in Almaty',
-                        'description' => 'The white dress is made of chiffon. The tiara is completely hand-embroidered with beads, crystals and beads. Rental period: 24 hours.',
+                        'description' => 'The white dress is made of chiffon. The tiara is completely hand-embroidered with beads, crystals and beads. Rental period: 3 days.',
                     ],
                     [
                         'language' => 'ru',
                         'title' => 'Белое платье на сырга салу напрокат в Алматы',
-                        'description' => 'Белое платье сшито из шифона. Диадема полностью расшита вручную бисером, хрусталиками и бусами. Срок проката: сутки.',
+                        'description' => 'Белое платье сшито из шифона. Диадема полностью расшита вручную бисером, хрусталиками и бусами. Срок проката: 3 дня.',
                     ],
                     [
                         'language' => 'kk',
                         'title' => 'Алматыда сырға салуға арналған ақ көйлек жалға беріледі',
-                        'description' => 'Ақ көйлек шифоннан тігілген. Тиара толығымен қолмен моншақтармен, кристалдармен және моншақтармен кестеленген. Жалдау мерзімі: 24 сағат.',
+                        'description' => 'Ақ көйлек шифоннан тігілген. Тиара толығымен қолмен моншақтармен, кристалдармен және моншақтармен кестеленген. Жалдау мерзімі: 3 күн.',
                     ],
                 ]
             ],
@@ -673,17 +673,17 @@ class ApoltiSeeder extends Seeder
                     [
                         'language' => 'en',
                         'title' => 'White dress with camisole and saukele for rent in Almaty',
-                        'description' => 'The dress is made of white chiffon. Camisole and saukele made of white satin, patterns are embroidered by hand, blue stones. The general set includes a dress, tiara, camisole, saukele with uki and veil. Rental period: 24 hours.',
+                        'description' => 'The dress is made of white chiffon. Camisole and saukele made of white satin, patterns are embroidered by hand, blue stones. The general set includes a dress, tiara, camisole, saukele with uki and veil. Rental period: 3 days.',
                     ],
                     [
                         'language' => 'ru',
                         'title' => 'Белое платье с камзолом и саукеле на узату напрокат в Алматы',
-                        'description' => 'Белое платье сшито из белого шифона. Камзол и саукеле из белого атласа, узоры вышиты вручную, камни голубого цвета. В общий комплект входит платье, диадема, камзол, саукеле с үкі и фатой. Срок проката: сутки.',
+                        'description' => 'Белое платье сшито из белого шифона. Камзол и саукеле из белого атласа, узоры вышиты вручную, камни голубого цвета. В общий комплект входит платье, диадема, камзол, саукеле с үкі и фатой. Срок проката: 3 дня.',
                     ],
                     [
                         'language' => 'kk',
                         'title' => 'Алматыда камзол және сәукеле бар ақ көйлек жалға беріледі',
-                        'description' => 'Көйлек ақ шифоннан тігілген. Ақ атластан камзол мен сәукеле, ою-өрнек қолдан кестеленген, көк тастар. Жалпы жиынтыққа көйлек, тақия, камзол, үкісі бар сәукеле және жамылғы кіреді. Жалдау мерзімі: 24 сағат.',
+                        'description' => 'Көйлек ақ шифоннан тігілген. Ақ атластан камзол мен сәукеле, ою-өрнек қолдан кестеленген, көк тастар. Жалпы жиынтыққа көйлек, тақия, камзол, үкісі бар сәукеле және жамылғы кіреді. Жалдау мерзімі: 3 күн.',
                     ],
                 ]
             ],
@@ -700,17 +700,17 @@ class ApoltiSeeder extends Seeder
                     [
                         'language' => 'en',
                         'title' => 'White lace wedding dress for rent in Almaty',
-                        'description' => 'The white lace wedding dress is made of tulle and satin. The sleeves, corset and skirt are hand-embroidered with Italian lace. The set includes a veil and a fluffy, comfortable petticoat without rings. Rental period: 24 hours.',
+                        'description' => 'The white lace wedding dress is made of tulle and satin. The sleeves, corset and skirt are hand-embroidered with Italian lace. The set includes a veil and a fluffy, comfortable petticoat without rings. Rental period: 3 days.',
                     ],
                     [
                         'language' => 'ru',
                         'title' => 'Белое кружевное свадебное платье напрокат в Алматы',
-                        'description' => 'Белое кружевное свадебное платье сшито из фатина и атласа. Рукава, корсет и юбка вручную расшиты итальянским кружевом. В комплекте есть фата и пышный удобный подъюбник без колец. Срок проката: сутки.',
+                        'description' => 'Белое кружевное свадебное платье сшито из фатина и атласа. Рукава, корсет и юбка вручную расшиты итальянским кружевом. В комплекте есть фата и пышный удобный подъюбник без колец. Срок проката: 3 дня.',
                     ],
                     [
                         'language' => 'kk',
                         'title' => 'Алматыда ақ шілтерлі той көйлегі жалға беріледі',
-                        'description' => 'Ақ шілтерлі той көйлегі тюль мен атластан тігілген. Жеңдер, корсет және юбка итальяндық шілтермен қолдан кестеленген. Жиынтыққа жамылғы мен сақинасыз жұмсақ, ыңғайлы пальто кіреді. Жалдау мерзімі: 24 сағат.',
+                        'description' => 'Ақ шілтерлі той көйлегі тюль мен атластан тігілген. Жеңдер, корсет және юбка итальяндық шілтермен қолдан кестеленген. Жиынтыққа жамылғы мен сақинасыз жұмсақ, ыңғайлы пальто кіреді. Жалдау мерзімі: 3 күн.',
                     ],
                 ]
             ],
@@ -727,17 +727,17 @@ class ApoltiSeeder extends Seeder
                     [
                         'language' => 'en',
                         'title' => 'White dress with a purple camisole and saukele for rent in Almaty',
-                        'description' => 'The white dress is made of chiffon. The purple camisole is made of natural velvet and hand-embroidered with patterns. The saukele is made of satin and hand-embroidered with patterns; the set includes ukі and a veil. Rental period: 24 hours.',
+                        'description' => 'The white dress is made of chiffon. The purple camisole is made of natural velvet and hand-embroidered with patterns. The saukele is made of satin and hand-embroidered with patterns; the set includes ukі and a veil. Rental period: 3 days.',
                     ],
                     [
                         'language' => 'ru',
                         'title' => 'Белое платье с фиолетовым камзолом и саукеле напрокат в Алматы',
-                        'description' => 'Белое платье сшито из шифона. Фиолетовый камзол из натурального бархата и расшит вручную узорами. Саукеле сшито из атласа и расшито вручную узорами, в комплекте есть үкі и фата. Срок проката: сутки.',
+                        'description' => 'Белое платье сшито из шифона. Фиолетовый камзол из натурального бархата и расшит вручную узорами. Саукеле сшито из атласа и расшито вручную узорами, в комплекте есть үкі и фата. Срок проката: 3 дня.',
                     ],
                     [
                         'language' => 'kk',
                         'title' => 'Алматыда күлгін камзол және сәукеле бар ақ көйлек жалға беріледі',
-                        'description' => 'Ақ көйлек шифоннан тігілген. Күлгін камзол табиғи барқыттан тігілген, ою-өрнекпен қолдан кестеленген. Сәукеле атлас матадан тігілген және ою-өрнекпен қолдан кестеленген, жиынтықта үкі мен жамылғы бар. Жалдау мерзімі: 24 сағат.',
+                        'description' => 'Ақ көйлек шифоннан тігілген. Күлгін камзол табиғи барқыттан тігілген, ою-өрнекпен қолдан кестеленген. Сәукеле атлас матадан тігілген және ою-өрнекпен қолдан кестеленген, жиынтықта үкі мен жамылғы бар. Жалдау мерзімі: 3 күн.',
                     ],
                 ]
             ],
@@ -754,17 +754,17 @@ class ApoltiSeeder extends Seeder
                     [
                         'language' => 'en',
                         'title' => 'Blue camisole and dress for rent in Almaty',
-                        'description' => 'The blue camisole is made of satin, long sleeves in oriental style. The blue dress is made of wedding satin. Rental period: 24 hours.',
+                        'description' => 'The blue camisole is made of satin, long sleeves in oriental style. The blue dress is made of wedding satin. Rental period: 3 days.',
                     ],
                     [
                         'language' => 'ru',
                         'title' => 'Голубой камзол и платье на узату напрокат в Алматы',
-                        'description' => 'Голубой камзол сшит из атласа, рукава длинные в восточном стиле. Голубое платье сшито из свадебного атласа. Срок проката: сутки.',
+                        'description' => 'Голубой камзол сшит из атласа, рукава длинные в восточном стиле. Голубое платье сшито из свадебного атласа. Срок проката: 3 дня.',
                     ],
                     [
                         'language' => 'kk',
                         'title' => 'Алматыда көк камзол мен көйлек жалға беріледі',
-                        'description' => 'Көк камзол атласты, ұзын жеңді шығыс стилінде тігілген. Көк көйлек той атласынан тігілген. Жалдау мерзімі: 24 сағат.',
+                        'description' => 'Көк камзол атласты, ұзын жеңді шығыс стилінде тігілген. Көк көйлек той атласынан тігілген. Жалдау мерзімі: 3 күн.',
                     ],
                 ]
             ],
@@ -781,17 +781,17 @@ class ApoltiSeeder extends Seeder
                     [
                         'language' => 'en',
                         'title' => 'Modern white dress with saukele on uzatu for rent in Almaty',
-                        'description' => 'The set consists of a white dress in European style and a saukele. The headdress is low in shape and embroidered with crystals and beads. Saukele is issued with uki and veil. Rental period: 24 hours.',
+                        'description' => 'The set consists of a white dress in European style and a saukele. The headdress is low in shape and embroidered with crystals and beads. Saukele is issued with uki and veil. Rental period: 3 days.',
                     ],
                     [
                         'language' => 'ru',
                         'title' => 'Современное белое платье с саукеле на узату напрокат в Алматы',
-                        'description' => 'Комплект состоит из белого платья в европейском стиле и саукеле. Головной убор невысокой формы и расшит хрусталиками и бисером. Саукеле выдается с үкі и фатой. Срок проката: сутки.',
+                        'description' => 'Комплект состоит из белого платья в европейском стиле и саукеле. Головной убор невысокой формы и расшит хрусталиками и бисером. Саукеле выдается с үкі и фатой. Срок проката: 3 дня.',
                     ],
                     [
                         'language' => 'kk',
                         'title' => 'Алматыда ұзату үстінде сәукеле салынған заманауи ақ көйлек жалға беріледі',
-                        'description' => 'Жиынтық еуропалық стильдегі ақ көйлек пен сәукеледен тұрады. Бас киімнің пішіні аласа, кристалдар мен моншақтармен кестеленген. Сәукеле үкі мен жамылғымен беріледі. Жалдау мерзімі: 24 сағат.',
+                        'description' => 'Жиынтық еуропалық стильдегі ақ көйлек пен сәукеледен тұрады. Бас киімнің пішіні аласа, кристалдар мен моншақтармен кестеленген. Сәукеле үкі мен жамылғымен беріледі. Жалдау мерзімі: 3 күн.',
                     ],
                 ]
             ],
@@ -808,17 +808,17 @@ class ApoltiSeeder extends Seeder
                     [
                         'language' => 'en',
                         'title' => 'Pink dress for sirga salu and uzata for rent in Almaty',
-                        'description' => 'A pink dress with takiya is suitable for sirga sala. The dress is made of delicate chiffon and hand-embroidered with patterns. The white taqiya is made of satin and also embroidered with beads. The set includes a saukele, which can be worn on an uzata with a small number of guests. Rental period: 24 hours.',
+                        'description' => 'A pink dress with takiya is suitable for sirga sala. The dress is made of delicate chiffon and hand-embroidered with patterns. The white taqiya is made of satin and also embroidered with beads. The set includes a saukele, which can be worn on an uzata with a small number of guests. Rental period: 3 days.',
                     ],
                     [
                         'language' => 'ru',
                         'title' => 'Розовое платье на сырга салу и узату напрокат в Алматы',
-                        'description' => 'Розовое платье с такия подходят на сырга салу. Платье сшито из нежного шифона и расшито вручную узорами. Белая такия сшита из атласа и также расшита бисером. В комплекте идет саукеле, который можно надеть на узату в кругу небольшого количества гостей. Срок проката: сутки.',
+                        'description' => 'Розовое платье с такия подходят на сырга салу. Платье сшито из нежного шифона и расшито вручную узорами. Белая такия сшита из атласа и также расшита бисером. В комплекте идет саукеле, который можно надеть на узату в кругу небольшого количества гостей. Срок проката: 3 дня.',
                     ],
                     [
                         'language' => 'kk',
                         'title' => 'Алматыда сырға салу мен ұзартуға арналған қызғылт көйлек жалға беріледі',
-                        'description' => 'Сырға салаға тақиялы қызғылт көйлек жарасады. Көйлек нәзік шифоннан тігілген және ою-өрнекпен қолдан кестеленген. Ақ тақия атластан жасалған, сонымен қатар моншақтармен кестеленген. Жиынтықта сәукеле бар, оны қонақ саны аз болса, ұзата киюге болады. Жалдау мерзімі: 24 сағат.',
+                        'description' => 'Сырға салаға тақиялы қызғылт көйлек жарасады. Көйлек нәзік шифоннан тігілген және ою-өрнекпен қолдан кестеленген. Ақ тақия атластан жасалған, сонымен қатар моншақтармен кестеленген. Жиынтықта сәукеле бар, оны қонақ саны аз болса, ұзата киюге болады. Жалдау мерзімі: 3 күн.',
                     ],
                 ]
             ],
@@ -889,17 +889,17 @@ class ApoltiSeeder extends Seeder
                     [
                         'language' => 'en',
                         'title' => 'Pink dress with saukele and veil for rent in Almaty',
-                        'description' => 'One of the luxury kits for uzatu. The dress is made of organza and hand-embroidered with beads. The skirt has a removable fluffy train. The camisole, taqiya, and saukele are hand-embroidered with patterns. Rental period: 24 hours.',
+                        'description' => 'One of the luxury kits for uzatu. The dress is made of organza and hand-embroidered with beads. The skirt has a removable fluffy train. The camisole, taqiya, and saukele are hand-embroidered with patterns. Rental period: 3 days.',
                     ],
                     [
                         'language' => 'ru',
                         'title' => 'Розовое платье с саукеле и фатой на узату напрокат в Алматы',
-                        'description' => 'Один из люксовых комплектов для узату. Платье сшито из органзы и расшито вручную бисером. На юбке есть съемный пышный шлейф. Камзол, такия, саукеле расшиты вручную узорами. Срок проката: сутки.',
+                        'description' => 'Один из люксовых комплектов для узату. Платье сшито из органзы и расшито вручную бисером. На юбке есть съемный пышный шлейф. Камзол, такия, саукеле расшиты вручную узорами. Срок проката: 3 дня.',
                     ],
                     [
                         'language' => 'kk',
                         'title' => 'Алматыда сәукеле мен жамылғы бар қызғылт көйлек жалға беріледі',
-                        'description' => 'Ұзатуға арналған сәнді жиынтықтардың бірі. Көйлек органзадан тігілген және моншақтармен қолдан кестеленген. Юбкада алынбалы пушистый пойыз бар. Камзол, тақия, сәукеле ою-өрнекпен қолдан кестеленген. Жалдау мерзімі: 24 сағат.',
+                        'description' => 'Ұзатуға арналған сәнді жиынтықтардың бірі. Көйлек органзадан тігілген және моншақтармен қолдан кестеленген. Юбкада алынбалы пушистый пойыз бар. Камзол, тақия, сәукеле ою-өрнекпен қолдан кестеленген. Жалдау мерзімі: 3 күн.',
                     ],
                 ]
             ],
@@ -942,18 +942,18 @@ class ApoltiSeeder extends Seeder
                 'translations' => [
                     [
                         'language' => 'en',
-                        'title' => 'Hot pink Barbie style dress for rent in Almaty',
-                        'description' => 'The hot pink style dress is made from hot pink tulle. The top is a corset, the skirt is fluffy. The size is suitable for height 145-160. Rental period: 24 hours.',
+                        'title' => 'Hot pink Barbie style children`s dress for rent in Almaty',
+                        'description' => 'A hot pink Barbie style baby dress is made of hot pink tulle. The top is a corset, the skirt is fluffy. The size is suitable for height 145-160. Rental period: 24 hours.',
                     ],
                     [
                         'language' => 'ru',
-                        'title' => 'Ярко-розовое платье в стиле Барби напрокат в Алматы',
-                        'description' => 'Ярко-розовое платье в стиле сшито из ярко-розового фатина. Верх корсет, юбка пышная. Размер подходит на рост 145-160. Срок проката: сутки.',
+                        'title' => 'Ярко-розовое детское платье в стиле Барби напрокат в Алматы',
+                        'description' => 'Ярко-розовое детское платье в стиле Барби сшито из ярко-розового фатина. Верх корсет, юбка пышная. Размер подходит на рост 145-160. Срок проката: сутки.',
                     ],
                     [
                         'language' => 'kk',
-                        'title' => 'Алматыда Барби стиліндегі ыстық қызғылт көйлек жалға беріледі',
-                        'description' => 'Ыстық қызғылт стильдегі көйлек ыстық қызғылт тюльден жасалған. Үсті – корсет, белдемше – үлпілдек. Өлшемі 145-160 биіктікке сәйкес келеді. Жалдау мерзімі: 24 сағат.',
+                        'title' => 'Алматыда ыстық қызғылт Барби стиліндегі балалар көйлегі жалға беріледі',
+                        'description' => 'Ыстық қызғылт Барби стиліндегі нәресте көйлегі қызғылт түсті тюльден жасалған. Үсті – корсет, белдемше – үлпілдек. Өлшемі 145-160 биіктікке сәйкес келеді. Жалдау мерзімі: 24 сағат.',
                     ],
                 ]
             ],
@@ -970,17 +970,17 @@ class ApoltiSeeder extends Seeder
                     [
                         'language' => 'en',
                         'title' => 'Green dress for bridesmaids for rent in Almaty',
-                        'description' => 'Green dress made of luxury quality wedding satin. The belt is tied at the back. The size is adjusted to fit the figure. Rental period: 24 hours.',
+                        'description' => 'Green dress made of luxury quality wedding satin. The belt is tied at the back. The size is adjusted to fit the figure. Rental period: 3 days.',
                     ],
                     [
                         'language' => 'ru',
                         'title' => 'Зеленое платье для подружки невесты напрокат в Алматы',
-                        'description' => 'Зеленое платье из свадебного атласа люкс качества. Пояс завязывается сзади. Размер подгоняется по фигуре. Срок проката: сутки.',
+                        'description' => 'Зеленое платье из свадебного атласа люкс качества. Пояс завязывается сзади. Размер подгоняется по фигуре. Срок проката: 3 дня.',
                     ],
                     [
                         'language' => 'kk',
                         'title' => 'Алматыда қыз ұзатуға арналған жасыл көйлек жалға беріледі',
-                        'description' => 'Сәнді сапалы үйлену тойына арналған сатиннен жасалған жасыл көйлек. Белдік артқы жағынан байланған. Өлшем фигураға сәйкес келетіндей етіп реттеледі. Жалдау мерзімі: 24 сағат.',
+                        'description' => 'Сәнді сапалы үйлену тойына арналған сатиннен жасалған жасыл көйлек. Белдік артқы жағынан байланған. Өлшем фигураға сәйкес келетіндей етіп реттеледі. Жалдау мерзімі: 3 күн.',
                     ],
                 ]
             ],
@@ -997,17 +997,17 @@ class ApoltiSeeder extends Seeder
                     [
                         'language' => 'en',
                         'title' => 'White dress for bridesmaids for rent in Almaty',
-                        'description' => 'White dress made of luxury quality wedding satin. The belt is tied at the back. The size is adjusted to fit the figure. Rental period: 24 hours.',
+                        'description' => 'White dress made of luxury quality wedding satin. The belt is tied at the back. The size is adjusted to fit the figure. Rental period: 3 days.',
                     ],
                     [
                         'language' => 'ru',
                         'title' => 'Белое платье для подружки невесты напрокат в Алматы',
-                        'description' => 'Белое платье из свадебного атласа люкс качества. Пояс завязывается сзади. Размер подгоняется по фигуре. Срок проката: сутки.',
+                        'description' => 'Белое платье из свадебного атласа люкс качества. Пояс завязывается сзади. Размер подгоняется по фигуре. Срок проката: 3 дня.',
                     ],
                     [
                         'language' => 'kk',
                         'title' => 'Алматыда қыз ұзатуға арналған ақ көйлек жалға беріледі',
-                        'description' => 'Сәнді сапалы үйлену тойына арналған сатиннен жасалған ақ көйлек. Белдік артқы жағынан байланған. Өлшем фигураға сәйкес келетіндей етіп реттеледі. Жалдау мерзімі: 24 сағат.',
+                        'description' => 'Сәнді сапалы үйлену тойына арналған сатиннен жасалған ақ көйлек. Белдік артқы жағынан байланған. Өлшем фигураға сәйкес келетіндей етіп реттеледі. Жалдау мерзімі: 3 күн.',
                     ],
                 ]
             ],
@@ -1024,19 +1024,47 @@ class ApoltiSeeder extends Seeder
                     [
                         'language' => 'en',
                         'title' => 'Pink dress for bridesmaids for rent in Almaty',
-                        'description' => 'Pink dress made of luxury quality wedding satin. The belt is tied at the back. The size is adjusted to fit the figure. Rental period: 24 hours.',
+                        'description' => 'Pink dress made of luxury quality wedding satin. The belt is tied at the back. The size is adjusted to fit the figure. Rental period: 3 days.',
                     ],
                     [
                         'language' => 'ru',
                         'title' => 'Розовое платье для подружки невесты напрокат в Алматы',
-                        'description' => 'Ярко-розовое платье в стиле сшито из ярко-розового фатина. Верх корсет, юбка пышная. Размер подходит на рост 145-160. Срок проката: сутки.',
+                        'description' => 'Ярко-розовое платье в стиле сшито из ярко-розового фатина. Верх корсет, юбка пышная. Размер подходит на рост 145-160. Срок проката: 3 дня.',
                     ],
                     [
                         'language' => 'kk',
                         'title' => 'Алматыда қыз ұзатуға арналған қызғылт көйлек жалға беріледі',
-                        'description' => 'Сәнді сапалы үйлену тойына арналған сатиннен жасалған қызғылт көйлек. Белдік артқы жағынан байланған. Өлшем фигураға сәйкес келетіндей етіп реттеледі. Жалдау мерзімі: 24 сағат.',
+                        'description' => 'Сәнді сапалы үйлену тойына арналған сатиннен жасалған қызғылт көйлек. Белдік артқы жағынан байланған. Өлшем фигураға сәйкес келетіндей етіп реттеледі. Жалдау мерзімі: 3 күн.',
                     ],
                 ]
+            ],
+
+            [
+                'user_id' => 1,
+                'photos' => ['national/kazakh/48-5.jpg', 'national/kazakh/48-2.jpg', 'national/kazakh/48-3.jpg', 'national/kazakh/48-4.jpg', 'national/kazakh/48-1.jpg'],
+                'categories' => [6],
+                'sizes' => [5],
+                'colors' => [7],
+                'price' => 15000,
+                'quantity' => 1,
+                'translations' => [
+                    [
+                        'language' => 'en',
+                        'title' => 'Women`s national turquoise ethnic set for rent in Almaty',
+                        'description' => 'Turquoise (mint) national women`s ethnic set. The set includes a basic dress, shapan and taqiya. The design was developed by fashion designer Aliya Musaeva from ApoltiStore. Rental period: 24 hours.',
+                    ],
+                    [
+                        'language' => 'ru',
+                        'title' => 'Бирюзовый женский национальный этно-комплект напрокат в Алматы',
+                        'description' => 'Бирюзовый (мятный) национальный женский этно-комплект. В комплект входит базовое платье, шапан и такия. Дизайн разработан модельером Алией Мусаевой из ApoltiStore. Срок проката: сутки.',
+                    ],
+                    [
+                        'language' => 'kk',
+                        'title' => 'Алматыда әйелдерге арналған ұлттық көгілдір этникалық жиынтық жалға беріледі',
+                        'description' => 'Бірюза (жалбыз) ұлттық әйелдер этникалық жиынтығы. Жиынтықта негізгі көйлек, шапан және тақия бар. Дизайнды ApoltiStore дүкенінен сәнгер Әлия Мұсаева әзірлеген. Жалдау мерзімі: 24 сағат.',
+                    ],
+                ]
+
             ],
 
         ];
