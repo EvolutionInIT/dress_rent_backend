@@ -24,6 +24,7 @@
 >>> php artisan jwt:secret
 > 
 >>> fresh && php artisan db:seed --class=ApoltiSeeder
+>>>
 >>> //or:
 >>>
 >>> fresh --seed 
