@@ -23,13 +23,11 @@
 >>>
 >>> php artisan jwt:secret
 > 
->>> fresh --seed
->>>
->>> 
-> 
->>> //or better:
->>>
 >>> fresh && php artisan db:seed --class=ApoltiSeeder
+>>>
+>>> //or:
+>>>
+>>> fresh --seed 
 > 
 > Api Docs
 >> {{http(s)://domain_backend}}/request-docs/
