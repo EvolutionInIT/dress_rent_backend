@@ -906,7 +906,7 @@ class ApoltiSeeder extends Seeder
 
             [
                 'user_id' => 1,
-                'photos' => ['evening/46-5.jpg', 'evening/46-1.jpg', 'evening/46-2.jpg', 'evening/46-3.jpg', 'evening/46-5.jpg'],
+                'photos' => ['evening/46-5.jpg', 'evening/46-1.jpg', 'evening/46-2.jpg', 'evening/46-3.jpg'],
                 'categories' => [1],
                 'sizes' => [2],
                 'colors' => [8],

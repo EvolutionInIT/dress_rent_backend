@@ -710,28 +710,28 @@ class DatabaseSeeder extends Seeder
         $photos = [
             [
                 'dress_id' => 1,
-                'image' => 'evening-dress-panther-03.jpg',
-                'image_small' => 'evening-dress-panther-08.jpg'
+                'image' => 'evening/4-4.jpg',
+                'image_small' => 'evening/4-4.jpg'
             ],
             [
                 'dress_id' => 2,
-                'image' => 'evening-pleated-dress-penelope-powder-pink-09.jpg',
-                'image_small' => 'evening-pleated-dress-penelope-powder-pink-03.jpg'
+                'image' => 'evening/4-4.jpg',
+                'image_small' => 'evening/4-4.jpg'
             ],
             [
                 'dress_id' => 3,
-                'image' => 'shuba-cruella-coat-10.jpg',
-                'image_small' => 'shuba-cruella-coat-13.jpg'
+                'image' => 'evening/4-4.jpg',
+                'image_small' => 'evening/4-4.jpg'
             ],
             [
                 'dress_id' => 4,
-                'image' => 'prokat-platya-fashion-hunter-02.jpg',
-                'image_small' => 'prokat-platya-fashion-hunter-08.jpg'
+                'image' => 'evening/4-4.jpg',
+                'image_small' => 'evening/4-4.jpg'
             ],
             [
                 'dress_id' => 5,
-                'image' => 'feather-cape-with-train-02.jpg',
-                'image_small' => 'feather-cape-with-train-06.jpg'
+                'image' => 'evening/4-4.jpg',
+                'image_small' => 'evening/4-4.jpg'
             ],
 
         ];
