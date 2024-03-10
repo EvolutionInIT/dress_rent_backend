@@ -43,7 +43,7 @@ class AuthController
             } else
                 return response()->json(['errors' => ['password' => ['auth_login_error_incorrect_password']]], Response::HTTP_BAD_REQUEST);
         } else
-            return response()->json(['errors' => ['username' => ['auth_login_user_not_found']]], Response::HTTP_BAD_REQUEST);
+            return response()->json(['errors' => ['email' => ['auth_login_user_not_found']]], Response::HTTP_BAD_REQUEST);
     }
 
 

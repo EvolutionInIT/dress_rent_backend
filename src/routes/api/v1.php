@@ -4,7 +4,7 @@ use App\Http\Controllers\V1\Admin\BookingController;
 use App\Http\Controllers\V1\Admin\CategoryController;
 use App\Http\Controllers\V1\Admin\ColorController;
 use App\Http\Controllers\V1\Admin\ComponentController;
-use App\Http\Controllers\V1\Admin\DressController;
+use App\Http\Controllers\V1\Admin\DressCatalogControllerAdmin;
 use App\Http\Controllers\V1\Admin\PhotoController;
 use App\Http\Controllers\V1\Admin\SizeController;
 use App\Http\Controllers\V1\Admin\UserController;
@@ -85,11 +85,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
             ::prefix('dress')
             ->name('dress.')
             ->group(function () {
-                Route::get('', [DressController::class, 'get'])->name('get');
-                Route::get('list', [DressController::class, 'list'])->name('list');
-                Route::post('save', [DressController::class, 'save'])->name('save');
-                Route::post('delete', [DressController::class, 'delete'])->name('delete');
-                Route::post('update', [DressController::class, 'update'])->name('update');
+                Route::get('', [DressCatalogControllerAdmin::class, 'get'])->name('get');
+                Route::get('list', [DressCatalogControllerAdmin::class, 'list'])->name('list');
+                Route::post('save', [DressCatalogControllerAdmin::class, 'save'])->name('save');
+                Route::post('delete', [DressCatalogControllerAdmin::class, 'delete'])->name('delete');
+                Route::post('update', [DressCatalogControllerAdmin::class, 'update'])->name('update');
             });
 
         Route

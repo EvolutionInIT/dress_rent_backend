@@ -35,16 +35,17 @@ class ColorController
         return new ColorResource($color);
     }
 
-    public function list(ListColorRequest $request): ColorCollection
+    public function list(/*ListColorRequest $request*/): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
-        $requestData = $request->validated();
+        //$requestData = $request->validated();
 
         $color = Color
             ::select()
-            ->with('translation:color_id,color')
-            ->paginate(perPage: $requestData['per_page'] ?? 10, page: $requestData['page'] ?? 1);
+            ->with('translation:color_id,title')
+            ->get();
+            //->paginate(perPage: $requestData['per_page'] ?? 10, page: $requestData['page'] ?? 1);
 
-        return new ColorCollection($color);
+        return ColorResource::collection($color);
     }
 
     public function delete(DeleteColorRequest $request): JsonResponse

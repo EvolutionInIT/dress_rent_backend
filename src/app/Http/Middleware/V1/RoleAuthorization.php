@@ -69,10 +69,16 @@ class RoleAuthorization
 
         $PERMISSIONS = array(
             'ADMIN' => [
-                'DressController@save',
+                'DressCatalogControllerAdmin@list',
+                'DressCatalogControllerAdmin@get',
+                'DressCatalogControllerAdmin@save',
+                'DressCatalogControllerAdmin@update',
                 'BookingController@status',
+                'CategoryController@list',
+                'ColorController@list',
+                'SizeController@list',
             ],
-            'CLIENT' => []
+            'CLIENT' => ['DressController@list']
         );
 
         foreach ($userPermissions as $permission) {

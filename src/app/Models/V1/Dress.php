@@ -42,7 +42,7 @@ class Dress extends Model
     /**
      * @return BelongsToMany
      */
-    public function category(): BelongsToMany
+    public function categories(): BelongsToMany
     {
         return $this
             ->belongsToMany(Category::class, DressCategory::class,
@@ -64,7 +64,7 @@ class Dress extends Model
     /**
      * @return BelongsToMany
      */
-    public function color(): BelongsToMany
+    public function colors(): BelongsToMany
     {
         return $this
             ->belongsToMany(Color::class, DressColor::class,
@@ -75,7 +75,7 @@ class Dress extends Model
     /**
      * @return BelongsToMany
      */
-    public function size(): BelongsToMany
+    public function sizes(): BelongsToMany
     {
         return $this
             ->belongsToMany(Size::class, DressSize::class,
@@ -94,7 +94,7 @@ class Dress extends Model
     /**
      * @return HasMany
      */
-    public function photo(): HasMany
+    public function photos(): HasMany
     {
         return $this->hasMany(Photo::class, 'dress_id');
     }

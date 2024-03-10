@@ -62,8 +62,8 @@ class DressResource extends JsonResource
             ),
 
             $this->mergeWhen(
-                $this->relationLoaded('category'),
-                ['category' => CategoryResourceClient::collection($this->whenLoaded('category'))]
+                $this->relationLoaded('categories'),
+                ['categories' => CategoryResourceClient::collection($this->whenLoaded('categories'))]
             ),
 
             $this->mergeWhen(
@@ -72,18 +72,18 @@ class DressResource extends JsonResource
             ),
 
             $this->mergeWhen(
-                $this->relationLoaded('color'),
-                ['color' => ColorResource::collection($this->whenLoaded('color'))]
+                $this->relationLoaded('colors'),
+                ['colors' => ColorResource::collection($this->whenLoaded('colors'))]
             ),
 
             $this->mergeWhen(
-                $this->relationLoaded('size'),
-                ['size' => SizeResource::collection($this->whenLoaded('size'))]
+                $this->relationLoaded('sizes'),
+                ['sizes' => SizeResource::collection($this->whenLoaded('sizes'))]
             ),
 
             $this->mergeWhen(
-                $this->relationLoaded('photo'),
-                ['photo' => PhotoResource::collection($this->whenLoaded('photo'))]
+                $this->relationLoaded('photos'),
+                ['photos' => PhotoResource::collection($this->whenLoaded('photos'))]
             ),
 
         ];
