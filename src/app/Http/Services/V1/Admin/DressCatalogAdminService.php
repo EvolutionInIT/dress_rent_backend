@@ -1,16 +1,13 @@
 <?php
 
-namespace App\Http\Services\V1\Client;
+namespace App\Http\Services\V1\Admin;
 
 use App\Http\Services\V1\Common\CommonService;
 use App\Http\Services\V1\Common\ImageService;
 use App\Models\V1\Dress;
-use App\Models\V1\DressCategory;
-use App\Models\V1\DressColor;
-use App\Models\V1\DressSize;
 use App\Models\V1\Photo;
 
-class DressCatalogClientService extends CommonService
+class DressCatalogAdminService extends CommonService
 {
     /**
      * @param $requestData
@@ -78,9 +75,9 @@ class DressCatalogClientService extends CommonService
     public static function update($modelClass, array $requestData): Dress
     {
         $dress = parent::update($modelClass, $requestData);
-        $dress->categories()->delete();
-        $dress->sizes()->delete();
-        $dress->colors()->delete();
+        $dress->categories()->detach();
+        $dress->sizes()->detach();
+        $dress->colors()->detach();
         self::saveCategoriesColorsSizes($dress, $requestData);
         self::storeOptimizeImages($dress, $requestData);
         return $dress;
@@ -93,32 +90,9 @@ class DressCatalogClientService extends CommonService
      */
     public static function saveCategoriesColorsSizes(Dress $dress, array $requestData): void
     {
-        $arrCategory = [];
-        foreach ($requestData['categories'] as $category) {
-            $arrCategory[] = [
-                'dress_id' => $dress->dress_id,
-                'category_id' => $category
-            ];
-        }
-        DressCategory::insert($arrCategory);
-
-        $arrColor = [];
-        foreach ($requestData['colors'] as $color) {
-            $arrColor [] = [
-                'dress_id' => $dress->dress_id,
-                'color_id' => $color
-            ];
-        }
-        DressColor::insert($arrColor);
-
-        $arrSize = [];
-        foreach ($requestData['sizes'] as $size) {
-            $arrSize [] = [
-                'dress_id' => $dress->dress_id,
-                'size_id' => $size
-            ];
-        }
-        DressSize::insert($arrSize);
+        $dress->categories()->attach($requestData['categories']);
+        $dress->colors()->attach($requestData['colors']);
+        $dress->sizes()->attach($requestData['sizes']);
     }
 
     /**
@@ -133,7 +107,7 @@ class DressCatalogClientService extends CommonService
         $widthSmall = $requestData['width_small'] ?? '300';
 
         $prefixFullPath = 'public/dress/user/' . $requestData['user_id'] . '/rent/dress/' . $dress->dress_id . '/';
-        foreach ($requestData['photos'] as $photo) {
+        foreach ($requestData['photos'] ?? [] as $photo) {
 
             $photoBigName = ImageService::saveOptimizeImage($photo, $prefixFullPath, width: $widthBig);
             $photoSmallName = ImageService::saveOptimizeImage($photo, $prefixFullPath, width: $widthSmall);

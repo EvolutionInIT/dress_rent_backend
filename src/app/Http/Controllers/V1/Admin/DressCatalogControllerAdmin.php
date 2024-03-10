@@ -9,7 +9,7 @@ use App\Http\Requests\V1\Admin\Dress\SaveDressRequest;
 use App\Http\Requests\V1\Admin\Dress\UpdateDressRequest;
 use App\Http\Resources\V1\Admin\Dress\DressCollection;
 use App\Http\Resources\V1\Admin\Dress\DressResource;
-use App\Http\Services\V1\Client\DressCatalogClientService;
+use App\Http\Services\V1\Admin\DressCatalogAdminService;
 use App\Models\V1\Dress;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,7 +19,7 @@ class DressCatalogControllerAdmin
     public function get(DressRequest $request): DressResource
     {
         $requestData = $request->validated();
-        $dress = DressCatalogClientService::get($requestData);
+        $dress = DressCatalogAdminService::get($requestData);
         return new DressResource($dress);
     }
 
@@ -33,8 +33,8 @@ class DressCatalogControllerAdmin
         $requestData = $request->validated();
         $requestData['user_id'] = auth('api')->user()->user_id;
 
-        $dress = DressCatalogClientService::save(Dress::class, $requestData);
-        $dress = DressCatalogClientService::get(requestData: ['dress_id' => $dress->dress_id]);
+        $dress = DressCatalogAdminService::save(Dress::class, $requestData);
+        $dress = DressCatalogAdminService::get(requestData: ['dress_id' => $dress->dress_id]);
 
         return new DressResource($dress);
     }
@@ -48,8 +48,8 @@ class DressCatalogControllerAdmin
     {
         $requestData = $request->validated();
         $requestData['user_id'] = auth('api')->user()->user_id;
-        $dress = DressCatalogClientService::update(Dress::class, $requestData);
-        $dress = DressCatalogClientService::get(requestData: ['dress_id' => $dress->dress_id]);
+        $dress = DressCatalogAdminService::update(Dress::class, $requestData);
+        $dress = DressCatalogAdminService::get(requestData: ['dress_id' => $dress->dress_id]);
 
         return new DressResource($dress);
     }
@@ -62,7 +62,7 @@ class DressCatalogControllerAdmin
     public function list(ListDressRequest $request): DressCollection
     {
         $requestData = $request->validated();
-        $dresses = DressCatalogClientService::get(requestData: $requestData, method: 'list');
+        $dresses = DressCatalogAdminService::get(requestData: $requestData, method: 'list');
         return new DressCollection($dresses);
     }
 
