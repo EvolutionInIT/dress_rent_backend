@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Http\Services\V1\Common\ImageService;
 use App\Models\V1\Category;
 use App\Models\V1\Color;
 use App\Models\V1\ColorTranslation;
@@ -11,6 +12,10 @@ use App\Models\V1\DressTranslation;
 use App\Models\V1\Photo;
 use App\Models\V1\Size;
 use Illuminate\Database\Seeder;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+
 
 class ApoltiSeeder extends Seeder
 {
@@ -67,11 +72,11 @@ class ApoltiSeeder extends Seeder
             ['color' => 'pink'],
             ['color' => '#8EB1B5'],
             ['color' => '#01676C'], //зеленый
-            ['color' => 'red'],
+            ['color' => 'red'],     //красный
             ['color' => '#FFE7DD'], //кремовый
             ['color' => '#19578A'], //темно-синий
             ['color' => 'blue'],    //электро-синий
-            ['color' => '#AABBCF'], //голубой
+            ['color' => '#5ab1e0'], //голубой небесный
         ];
         Color::insert($colors);
         $this->generateColorTranslation();
@@ -93,7 +98,7 @@ class ApoltiSeeder extends Seeder
             [
                 'color_id' => 1,
                 'language' => 'kk',
-                'title' => 'Қара',
+                'title' => 'қара',
             ],
 
             [
@@ -104,7 +109,7 @@ class ApoltiSeeder extends Seeder
             [
                 'color_id' => 2,
                 'language' => 'ru',
-                'title' => 'Белый',
+                'title' => 'белый',
             ],
             [
                 'color_id' => 2,
@@ -211,7 +216,7 @@ class ApoltiSeeder extends Seeder
             [
                 'color_id' => 9,
                 'language' => 'ru',
-                'title' => 'светло-голубое',
+                'title' => 'светло-голубой',
             ],
             [
                 'color_id' => 9,
@@ -246,7 +251,7 @@ class ApoltiSeeder extends Seeder
             [
                 'color_id' => 11,
                 'language' => 'kk',
-                'title' => 'Қызыл',
+                'title' => 'қызыл',
             ],
             [
                 'color_id' => 12,
@@ -266,12 +271,12 @@ class ApoltiSeeder extends Seeder
             [
                 'color_id' => 13,
                 'language' => 'en',
-                'title' => 'темно-синий',
+                'title' => 'navy blue',
             ],
             [
                 'color_id' => 13,
                 'language' => 'ru',
-                'title' => 'navy blue',
+                'title' => 'темно-синий',
             ],
             [
                 'color_id' => 13,
@@ -281,17 +286,32 @@ class ApoltiSeeder extends Seeder
             [
                 'color_id' => 14,
                 'language' => 'en',
-                'title' => 'голубой',
+                'title' => 'blue',
             ],
             [
                 'color_id' => 14,
                 'language' => 'ru',
-                'title' => 'sky blue',
+                'title' => 'синий',
             ],
             [
                 'color_id' => 14,
                 'language' => 'kk',
                 'title' => 'көгілдір',
+            ],
+            [
+                'color_id' => 15,
+                'language' => 'en',
+                'title' => 'light blue',
+            ],
+            [
+                'color_id' => 15,
+                'language' => 'ru',
+                'title' => 'голубой (чистое небо)',
+            ],
+            [
+                'color_id' => 14,
+                'language' => 'kk',
+                'title' => 'көк (ашық аспан)',
             ],
         ];
         ColorTranslation::insert($colorsTranslations);
@@ -302,7 +322,7 @@ class ApoltiSeeder extends Seeder
     {
         $dresses = [
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['evening/4-4.jpg', 'evening/4-1.jpg', 'evening/4-2.jpg', 'evening/4-3.jpg'],
                 'categories' => [1],
                 'sizes' => [1],
@@ -310,7 +330,7 @@ class ApoltiSeeder extends Seeder
                 'price' => 10000,
             ],
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['evening/16-1.jpg', 'evening/16-2.jpg', 'evening/16-3.jpg', 'evening/16-4.jpg', 'evening/16-5.jpg', 'evening/16-6.jpg'],
                 'categories' => [1],
                 'sizes' => [2],
@@ -336,7 +356,7 @@ class ApoltiSeeder extends Seeder
                 ],
             ],
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['evening/5-1.jpg', 'evening/5-2.jpg', 'evening/5-3.jpg', 'evening/5-4.jpg', 'evening/5-5.jpg'],
                 'categories' => [1],
                 'sizes' => [1],
@@ -344,7 +364,7 @@ class ApoltiSeeder extends Seeder
                 'price' => 17000,
             ],
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['photosession/1-1.jpg', 'photosession/1-2.jpg', 'photosession/1-3.jpg', 'photosession/1-4.jpg', 'photosession/1-5.jpg'],
                 'categories' => [2],
                 'sizes' => [1],
@@ -352,7 +372,7 @@ class ApoltiSeeder extends Seeder
                 'price' => 25000,
             ],
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['photosession/6-1.jpg', 'photosession/6-2.jpg', 'photosession/6-3.jpeg', 'photosession/6-4.jpg', 'photosession/6-5.jpg'],
                 'categories' => [2],
                 'sizes' => [3],
@@ -360,7 +380,7 @@ class ApoltiSeeder extends Seeder
                 'price' => 35000,
             ],
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['uzatu/2-1.jpg', 'uzatu/2-2.jpg', 'uzatu/2-3.jpg', 'uzatu/2-4.jpg', 'uzatu/2-5.jpg'],
                 'categories' => [4],
                 'sizes' => [2],
@@ -368,7 +388,7 @@ class ApoltiSeeder extends Seeder
                 'price' => 80000,
             ],
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['uzatu/3-1.jpg', 'uzatu/3-2.jpg', 'uzatu/3-3.jpg', 'uzatu/3-4.jpg'],
                 'categories' => [4],
                 'sizes' => [2],
@@ -376,7 +396,7 @@ class ApoltiSeeder extends Seeder
                 'price' => 80000,
             ],
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['uzatu/8-4.jpg', 'uzatu/8-1.jpg', 'uzatu/8-2.jpg', 'uzatu/8-3.jpg', 'uzatu/8-5.jpg'],
                 'categories' => [4],
                 'sizes' => [1],
@@ -384,7 +404,7 @@ class ApoltiSeeder extends Seeder
                 'price' => 80000,
             ],
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['uzatu/11-1.jpg', 'uzatu/11-2.jpg', 'uzatu/11-3.jpg'],
                 'categories' => [4],
                 'sizes' => [2],
@@ -392,7 +412,7 @@ class ApoltiSeeder extends Seeder
                 'price' => 50000,
             ],
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['uzatu/12-1.jpg', 'uzatu/12-2.jpg', 'uzatu/12-3.jpg'],
                 'categories' => [4],
                 'sizes' => [2],
@@ -400,7 +420,7 @@ class ApoltiSeeder extends Seeder
                 'price' => 50000,
             ],
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['uzatu/13-3.jpg', 'uzatu/13-2.jpg', 'uzatu/13-1.jpg'],
                 'categories' => [4, 6],
                 'sizes' => [1],
@@ -408,7 +428,7 @@ class ApoltiSeeder extends Seeder
                 'price' => 10000,
             ],
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['uzatu/20-2.jpg', 'uzatu/19-2.jpg', 'uzatu/19-1.jpg', 'uzatu/19-3.jpg', 'uzatu/20-1.jpg', 'uzatu/20-3.jpg',],
                 'categories' => [4],
                 'sizes' => [],
@@ -416,7 +436,7 @@ class ApoltiSeeder extends Seeder
                 'price' => 4000,
             ],
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['uzatu/12-3.jpg', 'uzatu/3-4.jpg', 'uzatu/11-1.jpg',],
                 'categories' => [4],
                 'sizes' => [],
@@ -424,14 +444,14 @@ class ApoltiSeeder extends Seeder
                 'colors' => [11],
             ],
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'price' => 3000,
                 'photos' => ['uzatu/21-2.jpg', 'uzatu/21-1.jpg'],
                 'categories' => [4, 6],
                 'quantity' => 5,
             ],
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'price' => 15000,
                 'photos' => ['national/kazakh/17-1.jpg', 'national/kazakh/17-2.jpg', 'national/kazakh/17-3.jpg'],
                 'categories' => [6],
@@ -440,7 +460,7 @@ class ApoltiSeeder extends Seeder
                 'colors' => [4, 10],
             ],
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'price' => 15000,
                 'photos' => ['national/kazakh/22-1.jpg', 'national/kazakh/22-2.jpg', 'national/kazakh/22-3.jpg'],
                 'categories' => [6],
@@ -448,7 +468,7 @@ class ApoltiSeeder extends Seeder
                 'colors' => [7],
             ],
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'price' => 20000,
                 'photos' => ['national/kazakh/23-1.jpg', 'national/kazakh/23-2.jpg', 'national/kazakh/23-3.jpg'],
                 'categories' => [6],
@@ -457,7 +477,7 @@ class ApoltiSeeder extends Seeder
             ],
 
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['evening/24-5.jpg', 'evening/24-6.jpg', 'evening/24-7.jpg', 'evening/24-12.jpg', 'evening/24-17.jpg'],
                 'categories' => [1, 7],
                 'sizes' => [2],
@@ -465,7 +485,7 @@ class ApoltiSeeder extends Seeder
                 'price' => 25000,
             ],
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['evening/25-4.jpg', 'evening/25-9.jpg', 'evening/25-10.jpg', 'evening/25-14.jpg', 'evening/25-15.jpg'],
                 'categories' => [1, 7],
                 'sizes' => [2],
@@ -473,7 +493,7 @@ class ApoltiSeeder extends Seeder
                 'price' => 35000,
             ],
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['evening/26-1.jpg', 'evening/26-2.jpg', 'evening/26-3.jpg', 'evening/26-4.jpg', 'evening/26-5.jpg'],
                 'categories' => [1, 7],
                 'sizes' => [1],
@@ -482,7 +502,7 @@ class ApoltiSeeder extends Seeder
                 'quantity' => 2
             ],
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['evening/27-7.jpg', 'evening/27-1.jpg', 'evening/27-2.jpg', 'evening/27-4.jpg', 'evening/27-12.jpg'],
                 'categories' => [1, 7],
                 'sizes' => [2],
@@ -490,7 +510,7 @@ class ApoltiSeeder extends Seeder
                 'price' => 20000,
             ],
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['evening/28-9.jpg', 'evening/28-1.jpg', 'evening/28-3.jpg', 'evening/28-18.jpg', 'evening/28-20.jpg'],
                 'categories' => [1, 7],
                 'sizes' => [2],
@@ -499,7 +519,7 @@ class ApoltiSeeder extends Seeder
                 'quantity' => 2
             ],
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['muslim/29-4.jpg', 'muslim/29-3.jpg', 'muslim/29-5.jpg', 'muslim/29-6.jpg'],
                 'categories' => [8],
                 'sizes' => [2],
@@ -508,7 +528,7 @@ class ApoltiSeeder extends Seeder
                 'quantity' => 1
             ],
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['muslim/30-3.jpg', 'muslim/30-1.jpg', 'muslim/30-2.jpg'],
                 'categories' => [8],
                 'sizes' => [2],
@@ -517,7 +537,7 @@ class ApoltiSeeder extends Seeder
                 'quantity' => 1
             ],
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['uzatu/31-1.jpg', 'uzatu/31-2.jpg', 'uzatu/31-3.jpg', 'uzatu/31-4.jpg', 'uzatu/31-5.jpg'],
                 'categories' => [4, 6],
                 'sizes' => [1],
@@ -527,7 +547,7 @@ class ApoltiSeeder extends Seeder
             ],
 
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['bridal/32-1.jpg', 'bridal/32-2.jpg', 'bridal/32-3.jpg', 'bridal/32-4.jpg', 'bridal/32-5.jpg'],
                 'categories' => [3],
                 'sizes' => [1],
@@ -554,7 +574,7 @@ class ApoltiSeeder extends Seeder
             ],
 
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['children/33-1.jpg', 'children/33-2.jpg', 'children/33-3.jpg', 'children/33-4.jpg'],
                 'categories' => [9],
                 'sizes' => [7],
@@ -581,7 +601,7 @@ class ApoltiSeeder extends Seeder
             ],
 
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['uzatu/34-1.jpg', 'uzatu/34-2.jpg', 'uzatu/34-3.jpg', 'uzatu/34-4.jpg', 'uzatu/34-5.jpg'],
                 'categories' => [4],
                 'sizes' => [1],
@@ -608,7 +628,7 @@ class ApoltiSeeder extends Seeder
             ],
 
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['children/35-1.jpg', 'children/35-2.jpg', 'children/35-3.jpg'],
                 'categories' => [9],
                 'sizes' => [6],
@@ -635,7 +655,7 @@ class ApoltiSeeder extends Seeder
             ],
 
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['uzatu/36-1.jpg', 'uzatu/36-2.jpg', 'uzatu/36-3.jpg', 'uzatu/36-4.jpg'],
                 'categories' => [3, 4],
                 'sizes' => [2],
@@ -662,7 +682,7 @@ class ApoltiSeeder extends Seeder
             ],
 
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['uzatu/37-1.jpg', 'uzatu/37-2.jpg', 'uzatu/37-3.jpg', 'uzatu/37-4.jpg', 'uzatu/37-5.jpg'],
                 'categories' => [4],
                 'sizes' => [1],
@@ -689,7 +709,7 @@ class ApoltiSeeder extends Seeder
             ],
 
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['bridal/38-1.jpg', 'bridal/38-2.jpg', 'bridal/38-3.jpg'],
                 'categories' => [3],
                 'sizes' => [1],
@@ -716,7 +736,7 @@ class ApoltiSeeder extends Seeder
             ],
 
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['uzatu/39-1.jpg', 'uzatu/39-2.jpg', 'uzatu/39-3.jpg', 'uzatu/39-4.jpg', 'uzatu/39-5.jpg'],
                 'categories' => [4],
                 'sizes' => [1],
@@ -743,7 +763,7 @@ class ApoltiSeeder extends Seeder
             ],
 
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['uzatu/40-5.jpg', 'uzatu/40-1.jpg', 'uzatu/40-2.jpg', 'uzatu/40-3.jpg', 'uzatu/40-4.jpg'],
                 'categories' => [4],
                 'sizes' => [8],
@@ -770,7 +790,7 @@ class ApoltiSeeder extends Seeder
             ],
 
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['bridal/41-1.jpg', 'bridal/41-2.jpg', 'bridal/41-3.jpg', 'bridal/41-4.jpg', 'bridal/41-5.jpg'],
                 'categories' => [3, 4],
                 'sizes' => [1],
@@ -797,7 +817,7 @@ class ApoltiSeeder extends Seeder
             ],
 
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['uzatu/42-1.jpg', 'uzatu/42-2.jpg', 'uzatu/42-3.jpg', 'uzatu/42-4.jpg', 'uzatu/42-5.jpg'],
                 'categories' => [4],
                 'sizes' => [1],
@@ -824,7 +844,7 @@ class ApoltiSeeder extends Seeder
             ],
 
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['children/43-1.jpg', 'children/43-2.jpg', 'children/43-3.jpg', 'children/43-4.jpg', 'children/43-5.jpg'],
                 'categories' => [9],
                 'sizes' => [7],
@@ -851,7 +871,7 @@ class ApoltiSeeder extends Seeder
             ],
 
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['children/44-1.jpg', 'children/44-2.jpg', 'children/44-3.jpg', 'children/44-4.jpg'],
                 'categories' => [9],
                 'sizes' => [6],
@@ -878,7 +898,7 @@ class ApoltiSeeder extends Seeder
             ],
 
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['uzatu/45-1.jpg', 'uzatu/45-2.jpg', 'uzatu/45-3.jpg', 'uzatu/45-4.jpg', 'uzatu/45-5.jpg'],
                 'categories' => [3, 4],
                 'sizes' => [1],
@@ -905,7 +925,7 @@ class ApoltiSeeder extends Seeder
             ],
 
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['evening/46-5.jpg', 'evening/46-1.jpg', 'evening/46-2.jpg', 'evening/46-3.jpg'],
                 'categories' => [1],
                 'sizes' => [2],
@@ -932,7 +952,7 @@ class ApoltiSeeder extends Seeder
             ],
 
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['children/47-1.jpg', 'children/47-2.jpg', 'children/47-3.jpg', 'children/47-4.jpg'],
                 'categories' => [9],
                 'sizes' => [9],
@@ -959,9 +979,9 @@ class ApoltiSeeder extends Seeder
             ],
 
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['uzatu/7-2.jpg', 'uzatu/7-1.jpg', 'uzatu/7-3.jpg'],
-                'categories' => [4,3],
+                'categories' => [4, 3],
                 'sizes' => [2],
                 'colors' => [10],
                 'price' => 10000,
@@ -986,9 +1006,9 @@ class ApoltiSeeder extends Seeder
             ],
 
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['uzatu/9-3.jpg', 'uzatu/9-1.jpg', 'uzatu/9-2.jpg', 'uzatu/9-4.jpg'],
-                'categories' => [4,3],
+                'categories' => [4, 3],
                 'sizes' => [2],
                 'colors' => [2],
                 'price' => 10000,
@@ -1013,9 +1033,9 @@ class ApoltiSeeder extends Seeder
             ],
 
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['uzatu/10-5.jpg', 'uzatu/10-3.jpg', 'uzatu/10-4.jpg'],
-                'categories' => [4,3],
+                'categories' => [4, 3],
                 'sizes' => [2],
                 'colors' => [8],
                 'price' => 10000,
@@ -1040,7 +1060,7 @@ class ApoltiSeeder extends Seeder
             ],
 
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'photos' => ['national/kazakh/48-5.jpg', 'national/kazakh/48-2.jpg', 'national/kazakh/48-3.jpg', 'national/kazakh/48-4.jpg', 'national/kazakh/48-1.jpg'],
                 'categories' => [6],
                 'sizes' => [5],
@@ -1070,6 +1090,9 @@ class ApoltiSeeder extends Seeder
         ];
 
         $dressesPhoto = [];
+        $widthBig = env('RENT_DRESS_BIG_UPLOAD_SIZE', 800);
+        $widthSmall = env('RENT_DRESS_SMALL_UPLOAD_SIZE', 400);
+
         foreach ($dresses as $dress) {
             $photos = $dress['photos'] ?? [];
             $categories = $dress['categories'] ?? [];
@@ -1102,9 +1125,9 @@ class ApoltiSeeder extends Seeder
                 ];
             DressTranslation::insert($translations);
 
-            $newDress->category()->attach($categories);
-            $newDress->size()->attach($sizes);
-            $newDress->color()->attach($colors);
+            $newDress->categories()->attach($categories);
+            $newDress->sizes()->attach($sizes);
+            $newDress->colors()->attach($colors);
 
             DressPrice::create([
                 'dress_id' => $newDress->dress_id,
@@ -1112,12 +1135,25 @@ class ApoltiSeeder extends Seeder
                 'price' => $prices,
             ]);
 
-            foreach ($photos as $photo)
-                $dressesPhoto[] = [
-                    'dress_id' => $newDress->dress_id,
-                    'image' => $photo
-                ];
+            $prefixFullPath = 'user/' . $newDress->user_id . '/rent/dress/' . $newDress->dress_id . '/';
 
+            $storage = Storage::disk('public');
+
+
+            foreach ($photos ?? [] as $photo) {
+
+                $file = new UploadedFile($storage->path('/') . 'dress/' . $photo, Str::random(40) . '.jpg');
+                $file2 = clone $file;
+
+                $photoBigName = ImageService::saveOptimizeImage($file,  $prefixFullPath, width: $widthBig);
+                $photoSmallName = ImageService::saveOptimizeImage($file2, $prefixFullPath, width: $widthSmall);
+
+                $dressesPhoto [] = [
+                    'dress_id' => $newDress->dress_id,
+                    'image' => $photoBigName,
+                    'image_small' => $photoSmallName,
+                ];
+            }
         }
 
         if (count($dressesPhoto))
@@ -1585,6 +1621,4 @@ class ApoltiSeeder extends Seeder
         Category::where('category_id', 8)->update(['order' => 40, 'dress_id' => 23]);
         Category::where('category_id', 2)->update(['order' => 10, 'dress_id' => 4]);
     }
-
-
 }

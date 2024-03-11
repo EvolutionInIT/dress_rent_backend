@@ -15,7 +15,7 @@ class RoleAuthorization
      * Handle an incoming request.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
+     * @param \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse) $next
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
     public function handle(Request $request, Closure $next)
@@ -69,10 +69,26 @@ class RoleAuthorization
 
         $PERMISSIONS = array(
             'ADMIN' => [
-                'DressController@save',
+                'DressCatalogControllerAdmin@list',
+                'DressCatalogControllerAdmin@get',
+                'DressCatalogControllerAdmin@save',
+                'DressCatalogControllerAdmin@update',
                 'BookingController@status',
+                'CategoryController@list',
+                'ColorController@list',
+                'SizeController@list',
             ],
-            'CLIENT' => []
+            'SHOP_OWNER' => [
+                'DressCatalogControllerAdmin@list',
+                'DressCatalogControllerAdmin@get',
+                'DressCatalogControllerAdmin@save',
+                'DressCatalogControllerAdmin@update',
+                'CategoryController@list',
+                'ColorController@list',
+                'SizeController@list',
+
+                'DressController@list'
+            ]
         );
 
         foreach ($userPermissions as $permission) {

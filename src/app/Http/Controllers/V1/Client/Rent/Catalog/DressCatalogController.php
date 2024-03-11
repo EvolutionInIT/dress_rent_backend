@@ -4,7 +4,7 @@ namespace App\Http\Controllers\V1\Client\Rent\Catalog;
 
 use App\Http\Requests\V1\Client\Rent\Catalog\DressCatalogRequest;
 use App\Http\Resources\V1\Client\Rent\Catalog\DressCatalogResource;
-use App\Models\V1\Dress;
+use App\Http\Services\V1\Admin\DressCatalogAdminService;
 
 class DressCatalogController
 {
@@ -15,19 +15,7 @@ class DressCatalogController
     public function dress(DressCatalogRequest $request): DressCatalogResource
     {
         $requestData = $request->validated();
-
-        $dress = Dress
-            ::select()
-            ->where('dress_id', $requestData['dress_id'])
-            ->with('translation')
-            ->with('category.translation')
-            ->with('photo')
-            ->with('size')
-            ->with('color.translation')
-            ->with('price')
-            ->with('user')
-            ->first();
-
+        $dress = DressCatalogAdminService::get(requestData: $requestData, method: 'first');
         return new DressCatalogResource($dress);
     }
 }

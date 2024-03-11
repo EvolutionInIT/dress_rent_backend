@@ -544,12 +544,12 @@ class DatabaseSeeder extends Seeder
         $users = [
             [
                 'firstname' => 'Admin',
-                'email' => 'admin@admin.com',
+                'email' => 'admin@gatsby.kz',
                 'phone' => '77026067276',
             ],
             [
                 'firstname' => 'user',
-                'email' => 'user@admin.com',
+                'email' => 'user@gatsby.kz',
                 'phone' => '77772082141',
             ],
         ];
@@ -569,15 +569,14 @@ class DatabaseSeeder extends Seeder
 
         User::insert($resultUsers);
 
-        $user = User::where('firstname', 'Admin')->first();
+        $user = User::where('email', 'admin@gatsby.kz')->first();
         $permission = Permission::where('permission', 'ADMIN')->first();
+        $user->permissions()->attach($permission);
 
-        UserPermission::create(
-            [
-                'user_id' => $user->user_id,
-                'permission_id' => $permission->permission_id
-            ]
-        );
+        $user = User::where('email', 'user@gatsby.kz')->first();
+        $permission = Permission::where('permission', 'SHOP_OWNER')->first();
+        $user->permissions()->attach($permission);
+
     }
 
     public function generatePermissions()

@@ -15,26 +15,21 @@ class SaveDressRequest extends CommonRequest
     public function rules()
     {
         return [
-
-            'user_id' => 'required|integer|exists:App\Models\V1\User\User,user_id',
             'quantity' => 'required|integer',
-            'category_id' => 'sometimes|array',
-            'category_id.*' => 'required|integer|exists:App\Models\V1\Category,category_id',
-            'color_id' => 'sometimes|array',
-            'color_id.*' => 'required|integer|exists:App\Models\V1\Color,color_id',
-            'size_id' => 'sometimes|array',
-            'size_id.*' => 'required|integer|exists:App\Models\V1\Size,size_id',
-            'photo' => 'array',
-            'photo.*' => 'image:png,jpeg,jpg|min:5|max:5000',
-
-            'width' => 'sometimes|array',
-            'width.*' => 'integer|min:100|max:1200',
-
-            'translations' => 'sometimes|array',
+            'categories' => 'required|array',
+            'categories.*' => 'required|integer|exists:App\Models\V1\Category,category_id',
+            'colors' => 'required|array',
+            'colors.*' => 'required|integer|exists:App\Models\V1\Color,color_id',
+            'sizes' => 'required|array',
+            'sizes.*' => 'required|integer|exists:App\Models\V1\Size,size_id',
+            'width_big' => 'sometimes|integer|min:500|max:1500',
+            'width_small' => 'sometimes|integer|min:100|max:500',
+            'photos' => 'sometimes|array',
+            'photos.*' => 'image:png,jpeg,jpg|min:5|max:1000',
+            'translations' => 'present|array|required_array_keys:en,ru,kk',
+            'translations.*' => 'sometimes|array:title,description',
             'translations.*.title' => 'present|min:0|max:255',
-            'translations.*.description' => 'present|min:0|max:255',
-            'translations.*.language' => 'required|string',
-
+            'translations.*.description' => 'present|min:0|max:5000',
         ];
     }
 }

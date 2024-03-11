@@ -10,8 +10,8 @@ class PhotoResource extends JsonResource
     {
         return [
             //'photo_id' => $this->photo_id,
-            'image' => env('APP_URL') . '/storage/dress/' . $this->image,
-            //'image_small' => $this->image_small,
+            //'image' => env('APP_URL') . '/storage/user/2' . '/rent/dress/' . $this->dress_id . '/' . $this->image,
+            'image' => env('APP_URL') . '/storage/user/2' . '/rent/dress/' . $this->dress_id . '/' . $this->image_small,
         ];
     }
 }
