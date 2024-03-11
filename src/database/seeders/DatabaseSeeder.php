@@ -545,7 +545,7 @@ class DatabaseSeeder extends Seeder
             [
                 'firstname' => 'Admin',
                 'email' => 'admin@gatsby.kz',
-                'phone' => '77026067276',
+                'phone' => '77772082140',
             ],
             [
                 'firstname' => 'user',
