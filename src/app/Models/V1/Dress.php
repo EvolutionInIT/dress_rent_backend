@@ -21,13 +21,9 @@ class Dress extends Model
     // Traits
     use TranslationTrait, CurrencyTrait, HelperTrait;
 
-
     protected $table = 'dress';
     protected $primaryKey = 'dress_id';
-    protected $fillable =
-        [
-            'title', 'description', 'user_id', 'quantity', 'price'
-        ];
+    protected $fillable = ['title', 'description', 'user_id', 'quantity'];
 
     public $timestamps = false;
 
@@ -37,6 +33,16 @@ class Dress extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function prices(): belongsToMany
+    {
+        return $this
+            ->belongsToMany(Currency::class, DressPrice::class, 'dress_id', 'code', 'dress_id', 'code')
+            ->withPivot('price');
     }
 
     /**

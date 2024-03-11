@@ -5,17 +5,20 @@ namespace App\Http\Services\V1\Admin;
 use App\Http\Services\V1\Common\CommonService;
 use App\Http\Services\V1\Common\ImageService;
 use App\Models\V1\Dress;
+use App\Models\V1\DressPrice;
 use App\Models\V1\Photo;
-use Illuminate\Support\Facades\Storage;
 
 class DressCatalogAdminService extends CommonService
 {
     /**
      * @param $requestData
      * @param string $method
+     * @param string $order
+     * @param bool $withPrice
+     * @param bool $withPrices
      * @return mixed
      */
-    public static function get($requestData, string $method = 'first'): mixed
+    public static function get($requestData, string $method = 'first', string $order = 'asc', $withPrice = false, $withPrices = false): mixed
     {
         $query =
             Dress
@@ -47,7 +50,13 @@ class DressCatalogAdminService extends CommonService
                 ->with('sizes:size_id,size')
                 ->with('colors.translation')
                 ->with('component.translation:component_id,title,description')
-                ->with('price');
+                ->when($withPrice ?? false, function ($q) {
+                    $q->with('price');
+                })
+                ->when($withPrices ?? false, function ($q) {
+                    $q->with('prices.translation');
+                })
+                ->orderBy('dress_id', $order ?? 'asc');
 
         if ($method === 'first')
             return $query->first();
@@ -79,6 +88,7 @@ class DressCatalogAdminService extends CommonService
         $dress->categories()->detach();
         $dress->sizes()->detach();
         $dress->colors()->detach();
+        $dress->prices()->detach();
         self::saveCategoriesColorsSizes($dress, $requestData);
         self::storeOptimizeImages($dress, $requestData);
         return $dress;
@@ -94,6 +104,16 @@ class DressCatalogAdminService extends CommonService
         $dress->categories()->attach($requestData['categories']);
         $dress->colors()->attach($requestData['colors']);
         $dress->sizes()->attach($requestData['sizes']);
+
+        $pricesArr = [];
+        foreach ($requestData['prices'] ?? [] as $key => $item) {
+            $pricesArr[] = [
+                'dress_id' => $dress->dress_id,
+                'price' => $item,
+                'code' => $key,
+            ];
+        }
+        if (count($pricesArr)) DressPrice::insert($pricesArr);
     }
 
     /**

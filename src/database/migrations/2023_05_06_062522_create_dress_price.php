@@ -18,8 +18,9 @@ return new class extends Migration
             $table->foreign('dress_id')->references('dress_id')->on('dress');
 
             $table->char('code', 3);
+            $table->foreign('code')->references('code')->on('currency');
 
-            $table->integer('price');
+            $table->unsignedInteger('price')->default(0);
 
             $table->timestamps();
             $table->softDeletes();

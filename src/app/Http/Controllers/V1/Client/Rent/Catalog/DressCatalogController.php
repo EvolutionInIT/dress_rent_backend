@@ -15,7 +15,7 @@ class DressCatalogController
     public function dress(DressCatalogRequest $request): DressCatalogResource
     {
         $requestData = $request->validated();
-        $dress = DressCatalogAdminService::get(requestData: $requestData, method: 'first');
+        $dress = DressCatalogAdminService::get(requestData: $requestData, method: 'first', withPrice: true);
         return new DressCatalogResource($dress);
     }
 }
