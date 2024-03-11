@@ -550,7 +550,7 @@ class DatabaseSeeder extends Seeder
             [
                 'firstname' => 'user',
                 'email' => 'user@gatsby.kz',
-                'phone' => '77772082141',
+                'phone' => '77026067276',
             ],
         ];
 
