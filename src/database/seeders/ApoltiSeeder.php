@@ -72,11 +72,11 @@ class ApoltiSeeder extends Seeder
             ['color' => 'pink'],
             ['color' => '#8EB1B5'],
             ['color' => '#01676C'], //зеленый
-            ['color' => 'red'],
+            ['color' => 'red'],     //красный
             ['color' => '#FFE7DD'], //кремовый
             ['color' => '#19578A'], //темно-синий
             ['color' => 'blue'],    //электро-синий
-            ['color' => '#AABBCF'], //голубой
+            ['color' => '#5ab1e0'], //голубой небесный
         ];
         Color::insert($colors);
         $this->generateColorTranslation();
@@ -98,7 +98,7 @@ class ApoltiSeeder extends Seeder
             [
                 'color_id' => 1,
                 'language' => 'kk',
-                'title' => 'Қара',
+                'title' => 'қара',
             ],
 
             [
@@ -109,7 +109,7 @@ class ApoltiSeeder extends Seeder
             [
                 'color_id' => 2,
                 'language' => 'ru',
-                'title' => 'Белый',
+                'title' => 'белый',
             ],
             [
                 'color_id' => 2,
@@ -216,7 +216,7 @@ class ApoltiSeeder extends Seeder
             [
                 'color_id' => 9,
                 'language' => 'ru',
-                'title' => 'светло-голубое',
+                'title' => 'светло-голубой',
             ],
             [
                 'color_id' => 9,
@@ -251,7 +251,7 @@ class ApoltiSeeder extends Seeder
             [
                 'color_id' => 11,
                 'language' => 'kk',
-                'title' => 'Қызыл',
+                'title' => 'қызыл',
             ],
             [
                 'color_id' => 12,
@@ -271,12 +271,12 @@ class ApoltiSeeder extends Seeder
             [
                 'color_id' => 13,
                 'language' => 'en',
-                'title' => 'темно-синий',
+                'title' => 'navy blue',
             ],
             [
                 'color_id' => 13,
                 'language' => 'ru',
-                'title' => 'navy blue',
+                'title' => 'темно-синий',
             ],
             [
                 'color_id' => 13,
@@ -286,17 +286,32 @@ class ApoltiSeeder extends Seeder
             [
                 'color_id' => 14,
                 'language' => 'en',
-                'title' => 'голубой',
+                'title' => 'blue',
             ],
             [
                 'color_id' => 14,
                 'language' => 'ru',
-                'title' => 'sky blue',
+                'title' => 'синий',
             ],
             [
                 'color_id' => 14,
                 'language' => 'kk',
                 'title' => 'көгілдір',
+            ],
+            [
+                'color_id' => 15,
+                'language' => 'en',
+                'title' => 'light blue',
+            ],
+            [
+                'color_id' => 15,
+                'language' => 'ru',
+                'title' => 'голубой (чистое небо)',
+            ],
+            [
+                'color_id' => 14,
+                'language' => 'kk',
+                'title' => 'көк (ашық аспан)',
             ],
         ];
         ColorTranslation::insert($colorsTranslations);
