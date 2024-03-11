@@ -6,6 +6,7 @@ use App\Http\Services\V1\Common\CommonService;
 use App\Http\Services\V1\Common\ImageService;
 use App\Models\V1\Dress;
 use App\Models\V1\Photo;
+use Illuminate\Support\Facades\Storage;
 
 class DressCatalogAdminService extends CommonService
 {
@@ -103,14 +104,17 @@ class DressCatalogAdminService extends CommonService
     public static function storeOptimizeImages(Dress $dress, array $requestData): void
     {
         $arrPhoto = [];
-        $widthBig = $requestData['width_big'] ?? '800';
-        $widthSmall = $requestData['width_small'] ?? '300';
+        $widthBig = $requestData['width_big'] ?? env('RENT_DRESS_BIG_UPLOAD_SIZE', 800);
+        $widthSmall = $requestData['width_small'] ?? env('RENT_DRESS_SMALL_UPLOAD_SIZE', 400);
 
-        $prefixFullPath = 'public/dress/user/' . $requestData['user_id'] . '/rent/dress/' . $dress->dress_id . '/';
+        $prefixFullPath = 'user/' . $dress->user_id . '/rent/dress/' . $dress->dress_id . '/';
+
         foreach ($requestData['photos'] ?? [] as $photo) {
 
+            $photo2 = clone $photo;
+
             $photoBigName = ImageService::saveOptimizeImage($photo, $prefixFullPath, width: $widthBig);
-            $photoSmallName = ImageService::saveOptimizeImage($photo, $prefixFullPath, width: $widthSmall);
+            $photoSmallName = ImageService::saveOptimizeImage($photo2, $prefixFullPath, width: $widthSmall);
 
             $arrPhoto [] = [
                 'dress_id' => $dress->dress_id,

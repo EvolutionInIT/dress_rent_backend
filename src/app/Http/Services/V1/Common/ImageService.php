@@ -2,23 +2,28 @@
 
 namespace App\Http\Services\V1\Common;
 
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Laravel\Facades\Image;
 use Spatie\LaravelImageOptimizer\Facades\ImageOptimizer;
 
 class ImageService
 {
     /**
-     * @param $photo
+     * @param $file
      * @param $prefixFullPath
      * @param $width
      * @return string
      */
-    public static function saveOptimizeImage($photo, $prefixFullPath, $width): string
+    public static function saveOptimizeImage($file, $prefixFullPath, $width): string
     {
-        if (is_file($photo)) {
-            $photoPath = $photo->storeAs($prefixFullPath, Str::random(40) . '.' . $photo->extension());
-            $path = '/var/www/storage/app/' . $photoPath;
+        $width = intval($width);
+        $storage = Storage::disk('public');
+        if (!$storage->exists($prefixFullPath))
+            $storage->makeDirectory($prefixFullPath);
+
+        if (is_file($file)) {
+            $photoPath = $storage->put($prefixFullPath, $file, 'public');
+            $path = $storage->path('/') . $photoPath;
             //$pathToOptimizedImage = substr($path, 0, strlen($path) - 4) . 'optimize.jpg';
             Image
                 ::read($path)

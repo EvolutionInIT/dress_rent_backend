@@ -4,10 +4,7 @@ namespace App\Http\Controllers\V1\Client\Rent\Category;
 
 use App\Http\Resources\V1\Client\Category\CategoryResourceClient;
 use App\Models\V1\Category;
-use App\Models\V1\Dress;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use Illuminate\Support\Facades\DB;
 
 class CategoryClientRentController
 {
@@ -20,7 +17,7 @@ class CategoryClientRentController
             Category
                 ::select(['category_id', 'dress_id'])
                 ->with('translation:category_id,title,description')
-                ->with('photos:image')
+                ->with('photos')
                 ->orderBy('order', 'desc')
                 ->get();
 
