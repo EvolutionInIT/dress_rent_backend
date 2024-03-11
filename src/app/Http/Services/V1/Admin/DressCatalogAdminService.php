@@ -56,6 +56,7 @@ class DressCatalogAdminService extends CommonService
                 ->when($withPrices ?? false, function ($q) {
                     $q->with('prices.translation');
                 })
+                ->with('user')
                 ->orderBy('dress_id', $order ?? 'asc');
 
         if ($method === 'first')
