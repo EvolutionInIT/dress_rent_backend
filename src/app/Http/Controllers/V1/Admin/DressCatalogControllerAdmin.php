@@ -19,7 +19,7 @@ class DressCatalogControllerAdmin
     public function get(DressRequest $request): DressResource
     {
         $requestData = $request->validated();
-        $dress = DressCatalogAdminService::get($requestData);
+        $dress = DressCatalogAdminService::get($requestData, withPrices: true);
         return new DressResource($dress);
     }
 
@@ -34,7 +34,7 @@ class DressCatalogControllerAdmin
         $requestData['user_id'] = auth('api')->user()->user_id;
 
         $dress = DressCatalogAdminService::save(Dress::class, $requestData);
-        $dress = DressCatalogAdminService::get(requestData: ['dress_id' => $dress->dress_id]);
+        $dress = DressCatalogAdminService::get(requestData: ['dress_id' => $dress->dress_id], withPrices: true);
 
         return new DressResource($dress);
     }
@@ -49,7 +49,7 @@ class DressCatalogControllerAdmin
         $requestData = $request->validated();
         $requestData['user_id'] = auth('api')->user()->user_id;
         $dress = DressCatalogAdminService::update(Dress::class, $requestData);
-        $dress = DressCatalogAdminService::get(requestData: ['dress_id' => $dress->dress_id]);
+        $dress = DressCatalogAdminService::get(requestData: ['dress_id' => $dress->dress_id], withPrices: true);
 
         return new DressResource($dress);
     }
@@ -62,7 +62,7 @@ class DressCatalogControllerAdmin
     public function list(ListDressRequest $request): DressCollection
     {
         $requestData = $request->validated();
-        $dresses = DressCatalogAdminService::get(requestData: $requestData, method: 'list');
+        $dresses = DressCatalogAdminService::get(requestData: $requestData, method: 'list', order: 'desc', withPrices: true);
         return new DressCollection($dresses);
     }
 
@@ -70,11 +70,9 @@ class DressCatalogControllerAdmin
     public function delete(DeleteDressRequest $request): JsonResponse
     {
         $requestData = $request->validated();
-
         Dress
             ::where('dress_id', $requestData['dress_id'])
             ->delete();
-
         return response()->json(['data' => ['message' => 'success']], Response::HTTP_OK);
     }
 

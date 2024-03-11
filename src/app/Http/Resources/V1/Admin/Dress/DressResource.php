@@ -41,8 +41,8 @@ class DressResource extends JsonResource
             ),
 
             $this->mergeWhen(
-                isset($this->price),
-                ['price' => $this->price]
+                $this->relationLoaded('prices'),
+                ['prices' => DressCurrencyResource::collection($this->whenLoaded('prices'))]
             ),
 
             $this->mergeWhen(

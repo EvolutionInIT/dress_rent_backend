@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('currency', function (Blueprint $table) {
             $table->increments('currency_id');
-            $table->string('code', 4)->unique();
+            $table->char('code', 3)->unique();
             $table->string('symbol')->default('');
             $table->string('iban_code', 3);
             $table->boolean('enabled')->default(true);

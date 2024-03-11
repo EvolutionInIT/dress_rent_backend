@@ -16,6 +16,9 @@ class SaveDressRequest extends CommonRequest
     {
         return [
             'quantity' => 'required|integer',
+            //@TODO load currencies
+            'prices' => 'present|array|required_array_keys:KZT,RUB,USD',
+            'prices.*' => 'required|integer|between:0,4294967296',
             'categories' => 'required|array',
             'categories.*' => 'required|integer|exists:App\Models\V1\Category,category_id',
             'colors' => 'required|array',
@@ -26,6 +29,7 @@ class SaveDressRequest extends CommonRequest
             'width_small' => 'sometimes|integer|min:100|max:500',
             'photos' => 'sometimes|array',
             'photos.*' => 'image:png,jpeg,jpg|min:5|max:1000',
+            //@TODO load translations
             'translations' => 'present|array|required_array_keys:en,ru,kk',
             'translations.*' => 'sometimes|array:title,description',
             'translations.*.title' => 'present|min:0|max:255',
