@@ -6,10 +6,10 @@ use App\Http\Requests\V1\Admin\Size\DeleteSizeRequest;
 use App\Http\Requests\V1\Admin\Size\ListSizeRequest;
 use App\Http\Requests\V1\Admin\Size\SaveSizeRequest;
 use App\Http\Requests\V1\Admin\Size\SizeRequest;
-use App\Http\Resources\V1\Admin\Size\SizeCollection;
 use App\Http\Resources\V1\Admin\Size\SizeResource;
 use App\Models\V1\Size;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class SizeController
@@ -38,15 +38,20 @@ class SizeController
     }
 
 
-    public function list(ListSizeRequest $request): SizeCollection
+    /**
+     * @param ListSizeRequest $request
+     * @return AnonymousResourceCollection
+     */
+    public function list(ListSizeRequest $request): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
-        $requestData = $request->validated();
+        //$requestData = $request->validated();
 
         $size = Size
             ::select()
-            ->paginate(perPage: $requestData['per_page'] ?? 10, page: $requestData['page'] ?? 1);
+            ->get();
+            //->paginate(perPage: $requestData['per_page'] ?? 10, page: $requestData['page'] ?? 1);
 
-        return new SizeCollection($size);
+        return SizeResource::collection($size);
     }
 
 
