@@ -25,9 +25,11 @@ class ImageService
             $photoPath = $storage->put($prefixFullPath, $file, 'public');
             $path = $storage->path('/') . $photoPath;
             //$pathToOptimizedImage = substr($path, 0, strlen($path) - 4) . 'optimize.jpg';
-            Image
-                ::read($path)
-                ->scaleDown($width)
+            $image = Image::read($path);
+
+            $width = $image->width() > $image->height() ? $width * 2 : $width;
+
+            $image->scaleDown($width)
 //                ->toWebp(90)->save($path . '.webp');
                 ->save(quality: 100);
             ImageOptimizer::optimize($path);

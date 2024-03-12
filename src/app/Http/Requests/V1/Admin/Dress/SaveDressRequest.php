@@ -15,7 +15,7 @@ class SaveDressRequest extends CommonRequest
     public function rules()
     {
         return [
-            'quantity' => 'required|integer',
+            'quantity' => 'required|integer|between:1,255',
             //@TODO load currencies
             'prices' => 'present|array|required_array_keys:KZT,RUB,USD',
             'prices.*' => 'required|integer|between:0,4294967296',
@@ -28,12 +28,12 @@ class SaveDressRequest extends CommonRequest
             'width_big' => 'sometimes|integer|min:500|max:1500',
             'width_small' => 'sometimes|integer|min:100|max:500',
             'photos' => 'sometimes|array',
-            'photos.*' => 'image:png,jpeg,jpg|min:5|max:1000',
+            'photos.*' => 'image:png,jpeg,jpg|min:5|max:1500',
             //@TODO load translations
             'translations' => 'present|array|required_array_keys:en,ru,kk',
             'translations.*' => 'sometimes|array:title,description',
-            'translations.*.title' => 'present|min:0|max:255',
-            'translations.*.description' => 'present|min:0|max:5000',
+            'translations.*.title' => 'present|filled|min:1|max:255',
+            'translations.*.description' => 'present|filled|min:1|max:5000',
         ];
     }
 }

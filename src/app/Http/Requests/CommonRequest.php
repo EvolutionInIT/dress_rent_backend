@@ -59,6 +59,7 @@ abstract class CommonRequest extends FormRequest
             'digits' => 'validation_filed_digits',
             'digits_between' => 'validation_filed_size_:min_:max',
             'present' => 'validation_field_present',
+            'filled' => 'validation_field_required',
         ];
     }
 }
