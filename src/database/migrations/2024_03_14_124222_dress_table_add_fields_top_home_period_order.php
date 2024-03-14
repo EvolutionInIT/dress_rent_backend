@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->boolean('top')->default(false);
             $table->boolean('wide')->default(false);
             $table->unsignedTinyInteger('period')->default(1);
-            $table->unsignedSmallInteger('order')->default(0);
+            $table->unsignedSmallInteger('order')->default(10);
 
             $table->index('home');
             $table->index('top');
