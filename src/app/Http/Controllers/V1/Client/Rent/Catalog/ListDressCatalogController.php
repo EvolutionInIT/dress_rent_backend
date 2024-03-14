@@ -15,7 +15,7 @@ class ListDressCatalogController
     public function list(ListDressCatalogRequest $request): ListDressCatalogCollection
     {
         $requestData = $request->validated();
-        $dresses =  DressCatalogAdminService::get(requestData: $requestData, method: 'list', withPrice: true);
+        $dresses =  DressCatalogAdminService::get(requestData: $requestData, method: 'list', withPrice: true, orderField: 'order');
         return new ListDressCatalogCollection($dresses);
     }
 }

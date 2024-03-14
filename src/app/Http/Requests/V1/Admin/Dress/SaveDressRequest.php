@@ -34,6 +34,11 @@ class SaveDressRequest extends CommonRequest
             'translations.*' => 'sometimes|array:title,description',
             'translations.*.title' => 'present|filled|min:1|max:255',
             'translations.*.description' => 'present|filled|min:1|max:5000',
+            'top' => 'present|boolean',
+            'home' => 'present|boolean',
+            'wide' => 'present|boolean',
+            'order' => 'required|integer|between:0,65535',
+            'period' => 'required|integer|between:1,255',
         ];
     }
 }

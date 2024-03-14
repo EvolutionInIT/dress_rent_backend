@@ -23,7 +23,7 @@ class Dress extends Model
 
     protected $table = 'dress';
     protected $primaryKey = 'dress_id';
-    protected $fillable = ['title', 'description', 'user_id', 'quantity'];
+    protected $fillable = ['title', 'description', 'user_id', 'quantity', 'home', 'top', 'wide', 'order', 'period'];
 
     public $timestamps = false;
 

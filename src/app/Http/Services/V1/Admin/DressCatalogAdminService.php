@@ -16,9 +16,10 @@ class DressCatalogAdminService extends CommonService
      * @param string $order
      * @param bool $withPrice
      * @param bool $withPrices
+     * @param string $orderField
      * @return mixed
      */
-    public static function get($requestData, string $method = 'first', string $order = 'asc', $withPrice = false, $withPrices = false): mixed
+    public static function get($requestData, string $method = 'first', string $order = 'asc', bool $withPrice = false, bool $withPrices = false, string $orderField = ''): mixed
     {
         $query =
             Dress
@@ -57,6 +58,9 @@ class DressCatalogAdminService extends CommonService
                     $q->with('prices.translation');
                 })
                 ->with('user')
+                ->when($orderField, function ($q) use ($orderField) {
+                    $q->orderBy($orderField, 'desc');
+                })
                 ->orderBy('dress_id', $order ?? 'asc');
 
         if ($method === 'first')
