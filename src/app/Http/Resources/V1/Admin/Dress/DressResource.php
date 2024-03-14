@@ -51,9 +51,18 @@ class DressResource extends JsonResource
             ),
 
             $this->mergeWhen(
-                isset($this->deleted),
-                ['deleted' => $this->deleted]
+                isset($this->period),
+                ['period' => $this->period]
+            ),
 
+            $this->mergeWhen(
+                isset($this->wide),
+                ['wide' => $this->wide]
+            ),
+
+            $this->mergeWhen(
+                isset($this->deleted),
+                ['deleted' => $this->deleted_at]
             ),
 
             $this->mergeWhen(
