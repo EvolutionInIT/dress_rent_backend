@@ -43,7 +43,7 @@ class Kernel extends HttpKernel
 
         'api1' => [
             // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
-            'throttle:120:api',
+            'throttle:120,1',
             RoleAuthorization::class,
             LangMiddleware::class,
             CurrencyMiddleware::class,
