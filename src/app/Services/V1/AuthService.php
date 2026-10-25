@@ -19,8 +19,8 @@ class AuthService
     {
         $accessExpiredMinutes = env('API_AUTH_ACCESS_ALIVE', 60);
         $refreshExpiredMinutes = env('API_AUTH_REFRESH_ALIVE', 120);
-        $ttlAccess = Carbon::now()->addMinutes($accessExpiredMinutes);
-        $ttlRefresh = Carbon::now()->addMinutes($refreshExpiredMinutes);
+        $ttlAccess = Carbon::now()->addMinutes((int) $accessExpiredMinutes);
+        $ttlRefresh = Carbon::now()->addMinutes((int) $refreshExpiredMinutes);
 
         $jti = $this->generateJti($user->user_id);
         $jwt = auth('api')->claims(['jti' => $jti, 'exp' => $ttlAccess])->login($user);
